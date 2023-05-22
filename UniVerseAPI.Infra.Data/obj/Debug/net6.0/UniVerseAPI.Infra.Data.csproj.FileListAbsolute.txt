@@ -1,0 +1,5 @@
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Data\obj\Debug\net6.0\UniVerseAPI.Infra.Data.csproj.AssemblyReference.cache
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Data\obj\Debug\net6.0\UniVerseAPI.Infra.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Data\obj\Debug\net6.0\UniVerseAPI.Infra.Data.AssemblyInfoInputs.cache
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Data\obj\Debug\net6.0\UniVerseAPI.Infra.Data.AssemblyInfo.cs
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Data\obj\Debug\net6.0\UniVerseAPI.Infra.Data.csproj.CoreCompileInputs.cache

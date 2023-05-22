@@ -1,0 +1,5 @@
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\obj\Debug\net6.0\UniVerseAPI.Domain.csproj.AssemblyReference.cache
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\obj\Debug\net6.0\UniVerseAPI.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\obj\Debug\net6.0\UniVerseAPI.Domain.AssemblyInfoInputs.cache
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\obj\Debug\net6.0\UniVerseAPI.Domain.AssemblyInfo.cs
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\obj\Debug\net6.0\UniVerseAPI.Domain.csproj.CoreCompileInputs.cache
