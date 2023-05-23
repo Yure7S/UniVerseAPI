@@ -12,3 +12,10 @@ C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Ioc\obj\Debug\net6.0
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Ioc\obj\Debug\net6.0\ref\UniVerseAPI.Infra.Ioc.dll
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Ioc\bin\Debug\net6.0\UniVerseAPI.Infra.Ioc.runtimeconfig.json
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Ioc\obj\Debug\net6.0\UniVerseAPI.Infra.Ioc.genruntimeconfig.cache
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Ioc\bin\Debug\net6.0\UniVerseAPI.Application.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Ioc\bin\Debug\net6.0\UniVerseAPI.Domain.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Ioc\bin\Debug\net6.0\UniVerseAPI.Infra.Data.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Ioc\bin\Debug\net6.0\UniVerseAPI.Application.pdb
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Ioc\bin\Debug\net6.0\UniVerseAPI.Domain.pdb
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Ioc\bin\Debug\net6.0\UniVerseAPI.Infra.Data.pdb
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Ioc\obj\Debug\net6.0\UniVerseAPI.Infra.Ioc.csproj.CopyComplete

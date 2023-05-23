@@ -3,3 +3,12 @@ C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\obj\Debug\net6.0\Un
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\obj\Debug\net6.0\UniVerseAPI.Domain.AssemblyInfoInputs.cache
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\obj\Debug\net6.0\UniVerseAPI.Domain.AssemblyInfo.cs
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\obj\Debug\net6.0\UniVerseAPI.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\bin\Debug\net6.0\UniVerseAPI.Domain.deps.json
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\bin\Debug\net6.0\UniVerseAPI.Domain.runtimeconfig.json
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\bin\Debug\net6.0\UniVerseAPI.Domain.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\bin\Debug\net6.0\UniVerseAPI.Domain.pdb
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\obj\Debug\net6.0\UniVerseAPI.Domain.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\obj\Debug\net6.0\refint\UniVerseAPI.Domain.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\obj\Debug\net6.0\UniVerseAPI.Domain.pdb
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\obj\Debug\net6.0\UniVerseAPI.Domain.genruntimeconfig.cache
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Domain\obj\Debug\net6.0\ref\UniVerseAPI.Domain.dll

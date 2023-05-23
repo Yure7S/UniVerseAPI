@@ -1,3 +1,6 @@
+using UniVerseAPI.Application.Interface;
+using UniVerseAPI.Infra.Data.Repositoryes;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +10,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+#region [Config Repository]
+
+// Add Repository
+// builder.Services.AddScoped<IStudentInterface, StudentRepository>();
+
+#endregion
+    
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

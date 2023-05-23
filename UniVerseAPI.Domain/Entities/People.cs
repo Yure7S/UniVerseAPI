@@ -9,7 +9,6 @@ using IndexAttribute = System.ComponentModel.DataAnnotations.Schema.IndexAttribu
 
 namespace UniVerseAPI.Models
 {
-    [Index("Cpf", Name = "UQ__People__C1FF9309991D9366", IsUnique = true)]
     public partial class People
     {
         public People()

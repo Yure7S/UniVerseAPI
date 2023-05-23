@@ -55,6 +55,10 @@
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.5, )"
             }
           },
           "imports": [
@@ -73,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -124,6 +128,10 @@
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.5, )"
             }
           },
           "imports": [
@@ -142,18 +150,109 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj": {
+    "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj",
-        "projectName": "UniVerseAPI",
-        "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
+        "projectName": "UniVerseAPI.Infra.Data",
+        "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
         "packagesPath": "C:\\Users\\Servulo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI\\obj\\",
+        "outputPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Servulo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
+                "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite.Design": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
+            "NPOI": {
+              "target": "Package",
+              "version": "[2.6.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj",
+        "projectName": "UniVerseAPI.Infra.Ioc",
+        "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj",
+        "packagesPath": "C:\\Users\\Servulo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -179,6 +278,9 @@
               },
               "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
                 "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj"
+              },
+              "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj": {
+                "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj"
               }
             }
           }
@@ -203,7 +305,85 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.16, )"
+              "version": "[7.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj",
+        "projectName": "UniVerseAPI",
+        "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj",
+        "packagesPath": "C:\\Users\\Servulo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Servulo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj": {
+                "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.5, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -229,7 +409,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

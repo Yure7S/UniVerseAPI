@@ -22,6 +22,7 @@ namespace UniVerseAPI.Models
         public string FullName { get; set; }
         public int EnrolledStudents { get; set; }
         public int Shift { get; set; }
+
         [Required]
         [StringLength(255)]
         public string Room { get; set; }

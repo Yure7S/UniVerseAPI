@@ -19,7 +19,7 @@ namespace UniVerseAPI.Controllers
         [HttpPost("Register")]
         public IActionResult Create(Student _student)
         {
-            Task<Student> studentAdd = _IStudent.CreateStudent(_student);
+            Task<Student> studentAdd = _IStudent.Create(_student);
             return Ok(studentAdd);
         }
     }

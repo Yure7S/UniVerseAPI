@@ -3,17 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniVerseAPI", "UniVerseAPI\UniVerseAPI.csproj", "{0DCBA53E-DA02-45EE-9989-491D2D13B837}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniVerseAPI", "UniVerseAPI\UniVerseAPI.csproj", "{0DCBA53E-DA02-45EE-9989-491D2D13B837}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniVerseAPI.Domain", "UniVerseAPI.Domain\UniVerseAPI.Domain.csproj", "{B9EE5A16-EE8F-4AC0-BEC8-EBFED346486D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniVerseAPI.Domain", "UniVerseAPI.Domain\UniVerseAPI.Domain.csproj", "{B9EE5A16-EE8F-4AC0-BEC8-EBFED346486D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniVerseAPI.Application", "UniVerseAPI.Application\UniVerseAPI.Application.csproj", "{F37FCE1F-5E45-4293-BCCA-D533E5B0464A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniVerseAPI.Application", "UniVerseAPI.Application\UniVerseAPI.Application.csproj", "{F37FCE1F-5E45-4293-BCCA-D533E5B0464A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniVerseAPI.Infra.Data", "UniVerseAPI.Infra.Data\UniVerseAPI.Infra.Data.csproj", "{DD48B8E4-551D-4F6F-91BE-202737674954}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniVerseAPI.Infra.Data", "UniVerseAPI.Infra.Data\UniVerseAPI.Infra.Data.csproj", "{DD48B8E4-551D-4F6F-91BE-202737674954}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniVerseAPI.Infra.Ioc", "UniVerseAPI.Infra.Ioc\UniVerseAPI.Infra.Ioc.csproj", "{D313354B-37E1-4C8B-A72A-6B5C1B6BF357}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniVerseAPI.Infra.Ioc", "UniVerseAPI.Infra.Ioc\UniVerseAPI.Infra.Ioc.csproj", "{D313354B-37E1-4C8B-A72A-6B5C1B6BF357}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniVerseAPI.Api.Test", "UniVerseAPI.Api.Test\UniVerseAPI.Api.Test.csproj", "{EEECD245-6C55-4D10-B4AD-E9473822435B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniVerseAPI.Api.Test", "UniVerseAPI.Api.Test\UniVerseAPI.Api.Test.csproj", "{EEECD245-6C55-4D10-B4AD-E9473822435B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{64FF870C-CB72-4DA3-AF30-D2BA451F1C3B}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
