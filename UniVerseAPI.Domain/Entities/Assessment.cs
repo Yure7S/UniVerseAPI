@@ -16,13 +16,39 @@ namespace UniVerseAPI.Models
         }
 
         [Key]
-        public Guid Id { get; set; }
-        public Guid? SubjectId { get; set; }
+        public Guid Id { get; private set; }
+        public Guid? SubjectId { get; private set; }
 
         [ForeignKey("SubjectId")]
         [InverseProperty("Assessment")]
-        public virtual Subject Subject { get; set; }
+        public virtual Subject Subject { get; private set; }
         [InverseProperty("Assessment")]
-        public virtual ICollection<Grades> Grades { get; set; }
+        public virtual ICollection<Grades> Grades { get; private set; }
+
+        [Required]
+        public DateTime LastUpdate { get; private set; }
+
+        [Required]
+        public DateTime RegistrationDate { get; private set; }
+
+
+        public Assessment(Guid id, Guid? subjectId, Subject subject, ICollection<Grades> grades)
+        {
+            Id = id;
+            SubjectId = subjectId;
+            Subject = subject;
+            Grades = grades;
+            LastUpdate = DateTime.Now;
+            RegistrationDate = DateTime.Now;
+        }
+
+        public void Update(Guid id, Guid? subjectId, Subject subject, ICollection<Grades> grades)
+        {
+            Id = id;
+            SubjectId = subjectId;
+            Subject = subject;
+            Grades = grades;
+            LastUpdate = DateTime.Now;
+        }
     }
 }

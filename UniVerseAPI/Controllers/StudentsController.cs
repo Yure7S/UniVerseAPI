@@ -16,11 +16,12 @@ namespace UniVerseAPI.Controllers
             _IStudent = IStudent;
         }
 
-        [HttpPost("Register")]
-        public IActionResult Create(Student _student)
+        [HttpGet("")]
+        //[ProducesResponseType(200)]
+        //[ProducesErrorResponseType(typeof(Exception))]
+        public IActionResult GetAllStudents()
         {
-            Task<Student> studentAdd = _IStudent.Create(_student);
-            return Ok(studentAdd);
+            return Ok(_IStudent.GetAllStudents());
         }
     }
 }

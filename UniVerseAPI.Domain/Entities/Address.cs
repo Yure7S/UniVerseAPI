@@ -16,25 +16,56 @@ namespace UniVerseAPI.Models
         }
 
         [Key]
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
 
         [Required]
         [Column("Address")]
         [StringLength(255)]
-        public string Address1 { get; set; }
+        public string Address1 { get; private set; }
 
-        public int Number { get; set; }
+        public int Number { get; private set; }
 
         [Required]
         [StringLength(255)]
-        public string Neighborhood { get; set; }
+        public string Neighborhood { get; private set; }
 
         [Required]
         [StringLength(8)]
         [Unicode(false)]
-        public string Cep { get; set; }
+        public string Cep { get; private set; }
 
         [InverseProperty("Address")]
-        public virtual ICollection<People> People { get; set; }
+        public virtual ICollection<People> People { get; private set; }
+
+        [Required]
+        public DateTime LastUpdate { get; private set; }
+
+        [Required]
+        public DateTime RegistrationDate { get; private set; }
+
+        public Address(Guid id, string address1, int number, string neighborhood, string cep, ICollection<People> people)
+        {
+            Id = id;
+            Address1 = address1;
+            Number = number;
+            Neighborhood = neighborhood;
+            Cep = cep;
+            People = people;
+            LastUpdate = DateTime.Now;
+            RegistrationDate = DateTime.Now;
+        }
+
+        public void Update(Guid id, string address1, int number, string neighborhood, string cep, ICollection<People> people)
+        {
+            Id = id;
+            Address1 = address1;
+            Number = number;
+            Neighborhood = neighborhood;
+            Cep = cep;
+            People = people;
+            LastUpdate = DateTime.Now;
+        }
     }
+
+    
 }

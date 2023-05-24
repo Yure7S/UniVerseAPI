@@ -8,24 +8,30 @@ namespace UniVerseAPI.Models
     public partial class Student
     {
         [Key]
-        public Guid Id { get; set; }
-        public Guid ReportCardId { get; set; }
-        public Guid PeopleId { get; set; }
-        public Guid CourseId { get; set; }
-        public int Registration { get; set; }
-        public bool? Deleted { get; set; }
+        public Guid Id { get; private set; }
+        public Guid ReportCardId { get; private set; }
+        public Guid PeopleId { get; private set; }
+        public Guid CourseId { get; private set; }
+        public int Registration { get; private set; }
+        public bool? Deleted { get; private set; }
 
         [ForeignKey("CourseId")]
         [InverseProperty("Student")]
-        public virtual Course Course { get; set; }
+        public virtual Course Course { get; private set; }
 
         [ForeignKey("PeopleId")]
         [InverseProperty("Student")]
-        public virtual People People { get; set; }
+        public virtual People People { get; private set; }
 
         [ForeignKey("ReportCardId")]
         [InverseProperty("Student")]
-        public virtual ReportCard ReportCard { get; set; }
+        public virtual ReportCard ReportCard { get; private set; }
+
+        [Required]
+        public DateTime LastUpdate { get; private set; }
+
+        [Required]
+        public DateTime RegistrationDate { get; private set; }
 
         public Student(Guid reportCardId, Guid peopleId, Guid courseId, int registration)
         {
@@ -34,6 +40,8 @@ namespace UniVerseAPI.Models
             PeopleId = peopleId;
             CourseId = courseId;
             Registration = registration;
+            LastUpdate = DateTime.Now;
+            RegistrationDate = DateTime.Now;
         }
 
         public void Update(Guid reportCardId, Guid peopleId, Guid courseId, int registration, bool deleted)
@@ -43,6 +51,7 @@ namespace UniVerseAPI.Models
             PeopleId = peopleId;
             CourseId = courseId;
             Registration = registration;
+            LastUpdate = DateTime.Now;
         }
     }
 }

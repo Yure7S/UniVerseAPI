@@ -17,18 +17,47 @@ namespace UniVerseAPI.Models
         }
 
         [Key]
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
         [Required]
         [StringLength(255)]
-        public string FullName { get; set; }
-        public int EnrolledStudents { get; set; }
+        public string FullName { get; private set; }
+        public int EnrolledStudents { get; private set; }
         [Required]
         [StringLength(255)]
-        public string Room { get; set; }
+        public string Room { get; private set; }
 
         [InverseProperty("Period")]
-        public virtual ICollection<ReportCard> ReportCard { get; set; }
+        public virtual ICollection<ReportCard> ReportCard { get; private set; }
         [InverseProperty("Period")]
-        public virtual ICollection<Subject> Subject { get; set; }
+        public virtual ICollection<Subject> Subject { get; private set; }
+
+        [Required]
+        public DateTime LastUpdate { get; private set; }
+
+        [Required]
+        public DateTime RegistrationDate { get; private set; }
+
+        public Period(Guid id, string fullName, int enrolledStudents, string room, ICollection<ReportCard> reportCard, ICollection<Subject> subject)
+        {
+            Id = id;
+            FullName = fullName;
+            EnrolledStudents = enrolledStudents;
+            Room = room;
+            ReportCard = reportCard;
+            Subject = subject;
+            LastUpdate = DateTime.Now;
+            RegistrationDate = DateTime.Now;
+        }
+
+        public void Update(Guid id, string fullName, int enrolledStudents, string room, ICollection<ReportCard> reportCard, ICollection<Subject> subject)
+        {
+            Id = id;
+            FullName = fullName;
+            EnrolledStudents = enrolledStudents;
+            Room = room;
+            ReportCard = reportCard;
+            Subject = subject;
+            LastUpdate = DateTime.Now;
+        }
     }
 }

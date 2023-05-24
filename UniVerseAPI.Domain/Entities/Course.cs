@@ -17,32 +17,77 @@ namespace UniVerseAPI.Models
         }
 
         [Key]
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
         [Required]
         [StringLength(255)]
-        public string FullName { get; set; }
+        public string FullName { get; private set; }
         [Required]
         [StringLength(255)]
-        public string Description { get; set; }
+        public string Description { get; private set; }
         [Column(TypeName = "date")]
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; private set; }
         [Column(TypeName = "date")]
-        public DateTime EndDate { get; set; }
+        public DateTime EndDate { get; private set; }
         [Required]
         [StringLength(255)]
-        public string Instructor { get; set; }
-        public int Seats { get; set; }
-        public int SpotsAvailable { get; set; }
-        public int Price { get; set; }
+        public string Instructor { get; private set; }
+        public int Seats { get; private set; }
+        public int SpotsAvailable { get; private set; }
+        public int Price { get; private set; }
         [Required]
         [StringLength(255)]
-        public string Category { get; set; }
-        public bool Active { get; set; }
-        public bool Deleted { get; set; }
+        public string Category { get; private set; }
+        public bool Active { get; private set; }
+        public bool Deleted { get; private set; }
 
         [InverseProperty("Course")]
-        public virtual ICollection<Student> Student { get; set; }
+        public virtual ICollection<Student> Student { get; private set; }
         [InverseProperty("Course")]
-        public virtual ICollection<Subject> Subject { get; set; }
+        public virtual ICollection<Subject> Subject { get; private set; }
+
+        [Required]
+        public DateTime LastUpdate { get; private set; }
+
+        [Required]
+        public DateTime RegistrationDate { get; private set; }
+
+        public Course(Guid id, string fullName, string description, DateTime startDate, DateTime endDate, string instructor, int seats, int spotsAvailable, int price, string category, bool active, bool deleted, ICollection<Student> student, ICollection<Subject> subject)
+        {
+            Id = id;
+            FullName = fullName;
+            Description = description;
+            StartDate = startDate;
+            EndDate = endDate;
+            Instructor = instructor;
+            Seats = seats;
+            SpotsAvailable = spotsAvailable;
+            Price = price;
+            Category = category;
+            Active = active;
+            Deleted = deleted;
+            Student = student;
+            Subject = subject;
+            LastUpdate = DateTime.Now;
+            RegistrationDate = DateTime.Now;
+        }
+
+        public void Update(Guid id, string fullName, string description, DateTime startDate, DateTime endDate, string instructor, int seats, int spotsAvailable, int price, string category, bool active, bool deleted, ICollection<Student> student, ICollection<Subject> subject)
+        {
+            Id = id;
+            FullName = fullName;
+            Description = description;
+            StartDate = startDate;
+            EndDate = endDate;
+            Instructor = instructor;
+            Seats = seats;
+            SpotsAvailable = spotsAvailable;
+            Price = price;
+            Category = category;
+            Active = active;
+            Deleted = deleted;
+            Student = student;
+            Subject = subject;
+            LastUpdate = DateTime.Now;
+        }
     }
 }

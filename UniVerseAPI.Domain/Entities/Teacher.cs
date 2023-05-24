@@ -18,17 +18,47 @@ namespace UniVerseAPI.Models
         }
 
         [Key]
-        public Guid Id { get; set; }
-        public Guid PeopleId { get; set; }
+        public Guid Id { get; private set; }
+        public Guid PeopleId { get; private set; }
         [Required]
         [StringLength(255)]
-        public string Code { get; set; }
-        public bool Deleted { get; set; }
+        public string Code { get; private set; }
+        public bool Deleted { get; private set; }
 
         [ForeignKey("PeopleId")]
         [InverseProperty("Teacher")]
-        public virtual People People { get; set; }
+        public virtual People People { get; private set; }
         [InverseProperty("Teacher")]
-        public virtual ICollection<Subject> Subject { get; set; }
+        public virtual ICollection<Subject> Subject { get; private set; }
+
+        [Required]
+        public DateTime LastUpdate { get; private set; }
+
+        [Required]
+        public DateTime RegistrationDate { get; private set; }
+
+        public Teacher(Guid id, Guid peopleId, string code, bool deleted, People people, ICollection<Subject> subject)
+        {
+            Id = id;
+            PeopleId = peopleId;
+            Code = code;
+            Deleted = deleted;
+            People = people;
+            Subject = subject;
+            LastUpdate = DateTime.Now;
+            RegistrationDate = DateTime.Now;
+        }
+
+        public void Update(Guid id, Guid peopleId, string code, bool deleted, People people, ICollection<Subject> subject)
+        {
+            Id = id;
+            PeopleId = peopleId;
+            Code = code;
+            Deleted = deleted;
+            People = people;
+            Subject = subject;
+            LastUpdate = DateTime.Now;
+
+        }
     }
 }

@@ -16,15 +16,42 @@ namespace UniVerseAPI.Models
         }
 
         [Key]
-        public Guid Id { get; set; }
-        public Guid AssessmentId { get; set; }
+        public Guid Id { get; private set; }
+        public Guid AssessmentId { get; private set; }
         [Column(TypeName = "decimal(18, 0)")]
-        public decimal? Grade { get; set; }
+        public decimal? Grade { get; private set; }
 
         [ForeignKey("AssessmentId")]
         [InverseProperty("Grades")]
-        public virtual Assessment Assessment { get; set; }
+        public virtual Assessment Assessment { get; private set; }
         [InverseProperty("Grades")]
-        public virtual ICollection<ReportCard> ReportCard { get; set; }
+        public virtual ICollection<ReportCard> ReportCard { get; private set; }
+
+        [Required]
+        public DateTime LastUpdate { get; private set; }
+
+        [Required]
+        public DateTime RegistrationDate { get; private set; }
+
+        public Grades(Guid id, Guid assessmentId, decimal? grade, Assessment assessment, ICollection<ReportCard> reportCard)
+        {
+            Id = id;
+            AssessmentId = assessmentId;
+            Grade = grade;
+            Assessment = assessment;
+            ReportCard = reportCard;
+            LastUpdate = DateTime.Now;
+            RegistrationDate = DateTime.Now;
+        }
+
+        public void Update(Guid id, Guid assessmentId, decimal? grade, Assessment assessment, ICollection<ReportCard> reportCard)
+        {
+            Id = id;
+            AssessmentId = assessmentId;
+            Grade = grade;
+            Assessment = assessment;
+            ReportCard = reportCard;
+            LastUpdate = DateTime.Now;
+        }
     }
 }

@@ -15,11 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniVerseAPI.Infra.Ioc", "Un
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniVerseAPI.Api.Test", "UniVerseAPI.Api.Test\UniVerseAPI.Api.Test.csproj", "{EEECD245-6C55-4D10-B4AD-E9473822435B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{64FF870C-CB72-4DA3-AF30-D2BA451F1C3B}"
-	ProjectSection(SolutionItems) = preProject
-		Readme.md = Readme.md
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

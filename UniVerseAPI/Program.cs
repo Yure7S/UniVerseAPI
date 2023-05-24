@@ -1,22 +1,31 @@
+using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 using UniVerseAPI.Application.Interface;
 using UniVerseAPI.Infra.Data.Repositoryes;
+using UniVerseAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+#region [Config Repository]
+    
+// Add Repositorys
+builder.Services.AddScoped(typeof(IBaseInterface<>), typeof(BaseRepository<>)); // Passing base Repository typo in AddScoped
+builder.Services.AddScoped<IStudentInterface, StudentRepository>();
+
+#endregion
+
+#region [Config DbContext]
+
+builder.Services.AddDbContext<UniDBContext>(
+        options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+
+#endregion
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-#region [Config Repository]
-
-// Add Repository
-// builder.Services.AddScoped<IStudentInterface, StudentRepository>();
-
-#endregion
-    
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

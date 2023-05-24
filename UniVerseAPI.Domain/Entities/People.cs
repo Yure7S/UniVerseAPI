@@ -18,35 +18,78 @@ namespace UniVerseAPI.Models
         }
 
         [Key]
-        public Guid Id { get; set; }
-        public Guid AddressId { get; set; }
+        public Guid Id { get; private set; }
+        public Guid AddressId { get; private set; }
         [Required]
         [StringLength(255)]
-        public string FullName { get; set; }
+        public string FullName { get; private set; }
         [Column(TypeName = "date")]
-        public DateTime BirthDate { get; set; }
-        public bool Active { get; set; }
+        public DateTime BirthDate { get; private set; }
+        public bool Active { get; private set; }
         [Required]
         [StringLength(11)]
         [Unicode(false)]
-        public string Cpf { get; set; }
+        public string Cpf { get; private set; }
         [Required]
         [StringLength(255)]
-        public string Gender { get; set; }
+        public string Gender { get; private set; }
         [Required]
         [StringLength(255)]
-        public string Phone { get; set; }
+        public string Phone { get; private set; }
         [Required]
         [StringLength(255)]
-        public string Email { get; set; }
-        public bool Deleted { get; set; }
+        public string Email { get; private set; }
+        public bool Deleted { get; private set; }
 
         [ForeignKey("AddressId")]
         [InverseProperty("People")]
-        public virtual Address Address { get; set; }
+        public virtual Address Address { get; private set; }
         [InverseProperty("People")]
-        public virtual ICollection<Student> Student { get; set; }
+        public virtual ICollection<Student> Student { get; private set; }
         [InverseProperty("People")]
-        public virtual ICollection<Teacher> Teacher { get; set; }
+        public virtual ICollection<Teacher> Teacher { get; private set; }
+
+        [Required]
+        public DateTime LastUpdate { get; private set; }
+
+        [Required]
+        public DateTime RegistrationDate { get; private set; }
+
+        public People(Guid id, Guid addressId, string fullName, DateTime birthDate, bool active, string cpf, string gender, string phone, string email, bool deleted, Address address, ICollection<Student> student, ICollection<Teacher> teacher)
+        {
+            Id = id;
+            AddressId = addressId;
+            FullName = fullName;
+            BirthDate = birthDate;
+            Active = active;
+            Cpf = cpf;
+            Gender = gender;
+            Phone = phone;
+            Email = email;
+            Deleted = deleted;
+            Address = address;
+            Student = student;
+            Teacher = teacher;
+            LastUpdate = DateTime.Now;
+            RegistrationDate = DateTime.Now;
+        }
+
+        public void Update(Guid id, Guid addressId, string fullName, DateTime birthDate, bool active, string cpf, string gender, string phone, string email, bool deleted, Address address, ICollection<Student> student, ICollection<Teacher> teacher)
+        {
+            Id = id;
+            AddressId = addressId;
+            FullName = fullName;
+            BirthDate = birthDate;
+            Active = active;
+            Cpf = cpf;
+            Gender = gender;
+            Phone = phone;
+            Email = email;
+            Deleted = deleted;
+            Address = address;
+            Student = student;
+            Teacher = teacher;
+            LastUpdate = DateTime.Now;
+        }
     }
 }
