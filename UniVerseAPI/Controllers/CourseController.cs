@@ -9,7 +9,41 @@ namespace UniVerseAPI.Controllers
     {
 
         [HttpGet("")]
-        public IActionResult Principal()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetAll()
+        {
+            return Ok("Testando");
+        }
+
+        [HttpGet("")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetById()
+        {
+            return Ok("Testando");
+        }
+
+        [HttpGet("")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult CreateCourse()
+        {
+            return Ok("Testando");
+        }
+
+        [HttpGet("")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult DeleteCourse()
+        {
+            return Ok("Testando");
+        }
+
+        [HttpGet("")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult UpdateCourse()
         {
             return Ok("Testando");
         }

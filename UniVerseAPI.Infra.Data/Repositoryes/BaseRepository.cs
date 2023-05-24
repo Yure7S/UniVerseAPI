@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Crypto.Operators;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using UniVerseAPI.Application.Interface;
@@ -18,29 +21,35 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
             _db = db;
         }
 
-        public Task<T> Create(Student student)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<T> Delete(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<List<T>> GetAll()
         {
-            throw new NotImplementedException();
+            return _db.Set<T>().ToListAsync();
         }
 
-        public Task<T> GetById(Guid id)
+        public async Task<T?> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return await _db.Set<T>().FindAsync(id);
         }
 
-        public Task<T> Update(Student student)
+        public async Task<T> Create(T entity)
         {
-            throw new NotImplementedException();
+            await _db.Set<T>().AddAsync(entity);
+            _db.SaveChanges();
+            return entity;
+        }
+
+        public async Task<T> Delete(T entity)
+        {
+            _db.Set<T>().Remove(entity);
+            await _db.SaveChangesAsync();
+            return entity;
+        }
+
+        public async Task<T> Update(T entity)
+        {
+            _db.Set<T>().Update(entity);
+            await _db.SaveChangesAsync();
+            return entity;
         }
     }
 }

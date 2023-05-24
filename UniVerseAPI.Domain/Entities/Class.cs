@@ -17,6 +17,7 @@ namespace UniVerseAPI.Models
 
         [Key]
         public Guid Id { get; private set; }
+
         [Required]
         [StringLength(255)]
         public string FullName { get; private set; }

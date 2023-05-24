@@ -8,11 +8,23 @@ namespace UniVerseAPI.Models
     public partial class Student
     {
         [Key]
+
+        [Required]
         public Guid Id { get; private set; }
+
+        [Required]
         public Guid ReportCardId { get; private set; }
+
+        [Required]
         public Guid PeopleId { get; private set; }
+
+        [Required]
         public Guid CourseId { get; private set; }
+
+        [Required]
         public int Registration { get; private set; }
+
+        [Required]
         public bool? Deleted { get; private set; }
 
         [ForeignKey("CourseId")]
