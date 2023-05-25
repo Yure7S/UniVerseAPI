@@ -4,56 +4,47 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 
-namespace UniVerseAPI.Models
+namespace UniVerseAPI.Infra.Data.Context
 {
     public partial class Course
     {
-        public Course()
-        {
-            Student = new HashSet<Student>();
-            Subject = new HashSet<Subject>();
-        }
 
         [Key]
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
         [Required]
         [StringLength(255)]
-        public string FullName { get; private set; }
+        public string FullName { get; set; }
         [Required]
         [StringLength(255)]
-        public string Description { get; private set; }
+        public string Description { get; set; }
         [Column(TypeName = "date")]
-        public DateTime StartDate { get; private set; }
+        public DateTime StartDate { get; set; }
         [Column(TypeName = "date")]
-        public DateTime EndDate { get; private set; }
+        public DateTime EndDate { get; set; }
         [Required]
         [StringLength(255)]
-        public string Instructor { get; private set; }
-        public int Seats { get; private set; }
-        public int SpotsAvailable { get; private set; }
-        public int Price { get; private set; }
+        public string Instructor { get; set; }
+        public int Seats { get; set; }
+        public int SpotsAvailable { get; set; }
+        public int Price { get; set; }
         [Required]
         [StringLength(255)]
-        public string Category { get; private set; }
-        public bool Active { get; private set; }
-        public bool Deleted { get; private set; }
+        public string Category { get; set; }
+        public bool Active { get; set; }
+        public bool Deleted { get; set; }
 
         [InverseProperty("Course")]
-        public virtual ICollection<Student> Student { get; private set; }
+        public virtual ICollection<Student> Student { get; set; }
+
         [InverseProperty("Course")]
-        public virtual ICollection<Subject> Subject { get; private set; }
+        public virtual ICollection<Subject> Subject { get; set; }
 
-        [Required]
-        public DateTime LastUpdate { get; private set; }
-
-        [Required]
-        public DateTime RegistrationDate { get; private set; }
-
-        public Course(Guid id, string fullName, string description, DateTime startDate, DateTime endDate, string instructor, int seats, int spotsAvailable, int price, string category, bool active, bool deleted, ICollection<Student> student, ICollection<Subject> subject)
+        public Course(string fullName, string description, DateTime startDate, DateTime endDate, string instructor, int seats, int spotsAvailable, int price, string category)
         {
-            Id = id;
+            Id = Guid.NewGuid();
             FullName = fullName;
             Description = description;
             StartDate = startDate;
@@ -63,31 +54,10 @@ namespace UniVerseAPI.Models
             SpotsAvailable = spotsAvailable;
             Price = price;
             Category = category;
-            Active = active;
-            Deleted = deleted;
-            Student = student;
-            Subject = subject;
-            LastUpdate = DateTime.Now;
-            RegistrationDate = DateTime.Now;
-        }
-
-        public void Update(Guid id, string fullName, string description, DateTime startDate, DateTime endDate, string instructor, int seats, int spotsAvailable, int price, string category, bool active, bool deleted, ICollection<Student> student, ICollection<Subject> subject)
-        {
-            Id = id;
-            FullName = fullName;
-            Description = description;
-            StartDate = startDate;
-            EndDate = endDate;
-            Instructor = instructor;
-            Seats = seats;
-            SpotsAvailable = spotsAvailable;
-            Price = price;
-            Category = category;
-            Active = active;
-            Deleted = deleted;
-            Student = student;
-            Subject = subject;
-            LastUpdate = DateTime.Now;
+            Active = true;
+            Deleted = false;
+            Student = new HashSet<Student>();
+            Subject = new HashSet<Subject>();
         }
     }
 }

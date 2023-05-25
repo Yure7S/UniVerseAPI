@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7/sE5Xhz0/SniEddfNTVvRnjdo8EnI0eUHnmDRANm4McTA/j/wZB3IPxxxUY0XJCZcVjEDSMjS/SxLzBM91I/w==",
+  "dgSpecHash": "J4FvvlsR8UHBqlu9GJbUuuBlyMxYzLLbgWRUpi3viVSFDceLfe4DIRgi5dbgbc3EUf9RgDIZAqVgjO8iJLFsBg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
   "expectedPackageFiles": [
@@ -24,6 +24,7 @@
     "C:\\Users\\Servulo\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite\\1.1.6\\microsoft.entityframeworkcore.sqlite.1.1.6.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite.design\\1.1.6\\microsoft.entityframeworkcore.sqlite.design.1.1.6.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.5\\microsoft.entityframeworkcore.sqlserver.7.0.5.nupkg.sha512",
+    "C:\\Users\\Servulo\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.5\\microsoft.entityframeworkcore.tools.7.0.5.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",

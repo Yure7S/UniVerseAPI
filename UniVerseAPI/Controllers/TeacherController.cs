@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using UniVerseAPI.Models;
+using UniVerseAPI.Infra.Data.Context;
 
 namespace UniVerseAPI.Controllers
 {

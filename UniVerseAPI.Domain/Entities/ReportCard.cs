@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace UniVerseAPI.Models
+namespace UniVerseAPI.Infra.Data.Context
 {
     public partial class ReportCard
     {
@@ -16,54 +16,21 @@ namespace UniVerseAPI.Models
         }
 
         [Key]
-        public Guid Id { get; private set; }
-        public Guid GradesId { get; private set; }
-        public Guid SubjectId { get; private set; }
-        public Guid PeriodId { get; private set; }
+        public Guid Id { get; set; }
+        public Guid GradesId { get; set; }
+        public Guid SubjectId { get; set; }
+        public Guid PeriodId { get; set; }
 
         [ForeignKey("GradesId")]
         [InverseProperty("ReportCard")]
-        public virtual Grades Grades { get; private set; }
+        public virtual Grades Grades { get; set; }
         [ForeignKey("PeriodId")]
         [InverseProperty("ReportCard")]
-        public virtual Period Period { get; private set; }
+        public virtual Period Period { get; set; }
         [ForeignKey("SubjectId")]
         [InverseProperty("ReportCard")]
-        public virtual Subject Subject { get; private set; }
+        public virtual Subject Subject { get; set; }
         [InverseProperty("ReportCard")]
-        public virtual ICollection<Student> Student { get; private set; }
-
-        [Required]
-        public DateTime LastUpdate { get; private set; }
-
-        [Required]
-        public DateTime RegistrationDate { get; private set; }
-
-        public ReportCard(Guid id, Guid gradesId, Guid subjectId, Guid periodId, Grades grades, Period period, Subject subject, ICollection<Student> student)
-        {
-            Id = id;
-            GradesId = gradesId;
-            SubjectId = subjectId;
-            PeriodId = periodId;
-            Grades = grades;
-            Period = period;
-            Subject = subject;
-            Student = student;
-            LastUpdate = DateTime.Now;
-            RegistrationDate = DateTime.Now;
-        }
-
-        public void Update(Guid id, Guid gradesId, Guid subjectId, Guid periodId, Grades grades, Period period, Subject subject, ICollection<Student> student)
-        {
-            Id = id;
-            GradesId = gradesId;
-            SubjectId = subjectId;
-            PeriodId = periodId;
-            Grades = grades;
-            Period = period;
-            Subject = subject;
-            Student = student;
-            LastUpdate = DateTime.Now;
-        }
+        public virtual ICollection<Student> Student { get; set; }
     }
 }

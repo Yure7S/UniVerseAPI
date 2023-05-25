@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace UniVerseAPI.Models
+namespace UniVerseAPI.Infra.Data.Context
 {
     public partial class Assessment
     {
@@ -16,39 +16,13 @@ namespace UniVerseAPI.Models
         }
 
         [Key]
-        public Guid Id { get; private set; }
-        public Guid? SubjectId { get; private set; }
+        public Guid Id { get; set; }
+        public Guid? SubjectId { get; set; }
 
         [ForeignKey("SubjectId")]
         [InverseProperty("Assessment")]
-        public virtual Subject Subject { get; private set; }
+        public virtual Subject Subject { get; set; }
         [InverseProperty("Assessment")]
-        public virtual ICollection<Grades> Grades { get; private set; }
-
-        [Required]
-        public DateTime LastUpdate { get; private set; }
-
-        [Required]
-        public DateTime RegistrationDate { get; private set; }
-
-
-        public Assessment(Guid id, Guid? subjectId, Subject subject, ICollection<Grades> grades)
-        {
-            Id = id;
-            SubjectId = subjectId;
-            Subject = subject;
-            Grades = grades;
-            LastUpdate = DateTime.Now;
-            RegistrationDate = DateTime.Now;
-        }
-
-        public void Update(Guid id, Guid? subjectId, Subject subject, ICollection<Grades> grades)
-        {
-            Id = id;
-            SubjectId = subjectId;
-            Subject = subject;
-            Grades = grades;
-            LastUpdate = DateTime.Now;
-        }
+        public virtual ICollection<Grades> Grades { get; set; }
     }
 }

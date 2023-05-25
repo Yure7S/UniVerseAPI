@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 
-namespace UniVerseAPI.Models
+namespace UniVerseAPI.Infra.Data.Context
 {
     [Index("Code", Name = "UQ__Teacher__A25C5AA792072F3C", IsUnique = true)]
     public partial class Teacher
@@ -18,47 +18,17 @@ namespace UniVerseAPI.Models
         }
 
         [Key]
-        public Guid Id { get; private set; }
-        public Guid PeopleId { get; private set; }
+        public Guid Id { get; set; }
+        public Guid PeopleId { get; set; }
         [Required]
         [StringLength(255)]
-        public string Code { get; private set; }
-        public bool Deleted { get; private set; }
+        public string Code { get; set; }
+        public bool Deleted { get; set; }
 
         [ForeignKey("PeopleId")]
         [InverseProperty("Teacher")]
-        public virtual People People { get; private set; }
+        public virtual People People { get; set; }
         [InverseProperty("Teacher")]
-        public virtual ICollection<Subject> Subject { get; private set; }
-
-        [Required]
-        public DateTime LastUpdate { get; private set; }
-
-        [Required]
-        public DateTime RegistrationDate { get; private set; }
-
-        public Teacher(Guid id, Guid peopleId, string code, bool deleted, People people, ICollection<Subject> subject)
-        {
-            Id = id;
-            PeopleId = peopleId;
-            Code = code;
-            Deleted = deleted;
-            People = people;
-            Subject = subject;
-            LastUpdate = DateTime.Now;
-            RegistrationDate = DateTime.Now;
-        }
-
-        public void Update(Guid id, Guid peopleId, string code, bool deleted, People people, ICollection<Subject> subject)
-        {
-            Id = id;
-            PeopleId = peopleId;
-            Code = code;
-            Deleted = deleted;
-            People = people;
-            Subject = subject;
-            LastUpdate = DateTime.Now;
-
-        }
+        public virtual ICollection<Subject> Subject { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UniVerseAPI.Models;
+using UniVerseAPI.Infra.Data.Context;
 
 namespace UniVerseAPI.Application.Interface
 {

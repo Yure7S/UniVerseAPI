@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using IndexAttribute = System.ComponentModel.DataAnnotations.Schema.IndexAttribute;
+using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 
-namespace UniVerseAPI.Models
+namespace UniVerseAPI.Infra.Data.Context
 {
+    [Index("Cpf", Name = "UQ__People__C1FF9309991D9366", IsUnique = true)]
     public partial class People
     {
         public People()
@@ -18,78 +19,35 @@ namespace UniVerseAPI.Models
         }
 
         [Key]
-        public Guid Id { get; private set; }
-        public Guid AddressId { get; private set; }
+        public Guid Id { get; set; }
+        public Guid AddressId { get; set; }
         [Required]
         [StringLength(255)]
-        public string FullName { get; private set; }
+        public string FullName { get; set; }
         [Column(TypeName = "date")]
-        public DateTime BirthDate { get; private set; }
-        public bool Active { get; private set; }
+        public DateTime BirthDate { get; set; }
+        public bool Active { get; set; }
         [Required]
         [StringLength(11)]
         [Unicode(false)]
-        public string Cpf { get; private set; }
+        public string Cpf { get; set; }
         [Required]
         [StringLength(255)]
-        public string Gender { get; private set; }
+        public string Gender { get; set; }
         [Required]
         [StringLength(255)]
-        public string Phone { get; private set; }
+        public string Phone { get; set; }
         [Required]
         [StringLength(255)]
-        public string Email { get; private set; }
-        public bool Deleted { get; private set; }
+        public string Email { get; set; }
+        public bool Deleted { get; set; }
 
         [ForeignKey("AddressId")]
         [InverseProperty("People")]
-        public virtual Address Address { get; private set; }
+        public virtual Address Address { get; set; }
         [InverseProperty("People")]
-        public virtual ICollection<Student> Student { get; private set; }
+        public virtual ICollection<Student> Student { get; set; }
         [InverseProperty("People")]
-        public virtual ICollection<Teacher> Teacher { get; private set; }
-
-        [Required]
-        public DateTime LastUpdate { get; private set; }
-
-        [Required]
-        public DateTime RegistrationDate { get; private set; }
-
-        public People(Guid id, Guid addressId, string fullName, DateTime birthDate, bool active, string cpf, string gender, string phone, string email, bool deleted, Address address, ICollection<Student> student, ICollection<Teacher> teacher)
-        {
-            Id = id;
-            AddressId = addressId;
-            FullName = fullName;
-            BirthDate = birthDate;
-            Active = active;
-            Cpf = cpf;
-            Gender = gender;
-            Phone = phone;
-            Email = email;
-            Deleted = deleted;
-            Address = address;
-            Student = student;
-            Teacher = teacher;
-            LastUpdate = DateTime.Now;
-            RegistrationDate = DateTime.Now;
-        }
-
-        public void Update(Guid id, Guid addressId, string fullName, DateTime birthDate, bool active, string cpf, string gender, string phone, string email, bool deleted, Address address, ICollection<Student> student, ICollection<Teacher> teacher)
-        {
-            Id = id;
-            AddressId = addressId;
-            FullName = fullName;
-            BirthDate = birthDate;
-            Active = active;
-            Cpf = cpf;
-            Gender = gender;
-            Phone = phone;
-            Email = email;
-            Deleted = deleted;
-            Address = address;
-            Student = student;
-            Teacher = teacher;
-            LastUpdate = DateTime.Now;
-        }
+        public virtual ICollection<Teacher> Teacher { get; set; }
     }
 }

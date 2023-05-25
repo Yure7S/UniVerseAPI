@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace UniVerseAPI.Models
+namespace UniVerseAPI.Infra.Data.Context
 {
     public partial class Class
     {
@@ -16,50 +16,17 @@ namespace UniVerseAPI.Models
         }
 
         [Key]
-        public Guid Id { get; private set; }
-
+        public Guid Id { get; set; }
         [Required]
         [StringLength(255)]
-        public string FullName { get; private set; }
-        public int EnrolledStudents { get; private set; }
-        public int Shift { get; private set; }
-
+        public string FullName { get; set; }
+        public int EnrolledStudents { get; set; }
+        public int Shift { get; set; }
         [Required]
         [StringLength(255)]
-        public string Room { get; private set; }
+        public string Room { get; set; }
 
         [InverseProperty("Class")]
-        public virtual ICollection<Subject> Subject { get; private set; }
-
-        [Required]
-        public DateTime LastUpdate { get; private set; }
-
-        [Required]
-        public DateTime RegistrationDate { get; private set; }
-
-        public Class(Guid id, string fullName, int enrolledStudents, int shift, string room, ICollection<Subject> subject)
-        {
-            Id = id;
-            FullName = fullName;
-            EnrolledStudents = enrolledStudents;
-            Shift = shift;
-            Room = room;
-            Subject = subject;
-            LastUpdate = DateTime.Now;
-            RegistrationDate = DateTime.Now;
-        }
-
-        public void Update(Guid id, string fullName, int enrolledStudents, int shift, string room, ICollection<Subject> subject)
-        {
-            Id = id;
-            FullName = fullName;
-            EnrolledStudents = enrolledStudents;
-            Shift = shift;
-            Room = room;
-            Subject = subject;
-            LastUpdate = DateTime.Now;
-        }
+        public virtual ICollection<Subject> Subject { get; set; }
     }
-
-
 }
