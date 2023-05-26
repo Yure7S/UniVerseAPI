@@ -1,78 +1,78 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NPOI.OpenXmlFormats.Dml;
+using System.Data.Entity.Infrastructure;
 using System.Security.Cryptography.Xml;
 using UniVerseAPI.Application.DTOs;
 using UniVerseAPI.Application.DTOs.Request;
+using UniVerseAPI.Application.DTOs.Response;
+using UniVerseAPI.Application.IServices;
 using UniVerseAPI.Domain.Interface;
 using UniVerseAPI.Infra.Data.Context;
 
 namespace UniVerseAPI.Controllers
 {
-    [Route("")]
+    [Route("courses")]
     [ApiController]
     public class CourseController : ControllerBase
     {
-        private readonly ICourse _ICourse;
+        private readonly ICourseService _ICourseService;
 
-        public CourseController(ICourse course)
+        public CourseController(ICourseService course)
         {
-            _ICourse = course;  
+            _ICourseService = course;
         }
 
 
         [HttpGet("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok("Testando");
+            try
+            {
+                var response = await _ICourseService.GetAll();
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message); // StatusCode(500);
+            }
         }
 
-        [HttpGet("Find/{id}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetById(Guid id)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            return Ok("Testando");
+            if(ModelState.IsValid)
+            {
+                var response = await _ICourseService.GetById(id);
+
+                if(response.BaseResponse!.Success)
+                return Ok(response);
+                return BadRequest(response);
+            }
+            return StatusCode(500);
         }
 
-        [HttpPost("Register")]
+        [HttpPost("add")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateCourse(CourseRegisterDTO course)
         {
-
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    Course newCourse = new(
-                        fullName: course.FullName,
-                        description: course.Description,
-                        startDate: course.StartDate,
-                        endDate: course.EndDate,
-                        instructor: course.Instructor,
-                        seats: course.Seats,
-                        spotsAvailable: course.SpotsAvailable,
-                        price: course.Price,
-                        category: course.Category);
+                var response = await _ICourseService.Create(course);
 
-                    Course courseCreated = await _ICourse.Create(newCourse);
-                    return Created("Item adicionado com sucesso!", courseCreated);
-                }
-                else
-                {
-                    return BadRequest("Falha ao tentar cadastrar curso");
-                }
-            }
-            catch (Exception e)
-            {
-                BaseResponseDTO response = new(message: "Nos deparamos com erros ao tentar cadastrar um novo curso!", false, error: e.Message);
+                if (response.BaseResponse!.Success)
+                return Created("Successfully created!", response);
                 return BadRequest(response);
             }
+            return StatusCode(500);
         }
 
-        [HttpGet("Deletar/{id}")]
+        [HttpGet("delet/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult DeleteCourse(Guid id)
@@ -80,7 +80,7 @@ namespace UniVerseAPI.Controllers
             return Ok("Testando");
         }
 
-        [HttpGet("Modificar/{id}")]
+        [HttpGet("modify/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult UpdateCourse(Guid id)

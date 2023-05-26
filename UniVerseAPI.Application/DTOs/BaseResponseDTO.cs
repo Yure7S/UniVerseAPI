@@ -12,7 +12,7 @@ namespace UniVerseAPI.Application.DTOs
         public bool Success { get; set; }
         public string? Error { get; set; }
 
-        public BaseResponseDTO(string? message, bool success, string? error)
+        public BaseResponseDTO(string? message, bool success, string? error = "")
         {
             Message = message;
             Success = success;
