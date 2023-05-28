@@ -2,7 +2,6 @@
 using Org.BouncyCastle.Crypto.Operators;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -21,9 +20,9 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
             _db = db;
         }
 
-        public Task<List<T>> GetAll()
+        public async Task<List<T>> GetAll()
         {
-            return _db.Set<T>().ToListAsync();
+            return await _db.Set<T>().ToListAsync();
         }
 
         public async Task<T?> GetById(Guid id)

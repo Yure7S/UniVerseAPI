@@ -38,22 +38,20 @@ namespace UniVerseAPI.Application.Services
                 Course? courseFound =  await _ICourse.GetById(id);
                 if (courseFound == null)
                 {
-                    BaseResponseDTO baseResponse = new(
+                    BaseResponseDTO baseRespNull = new(
                         message: "We could not find this item in our database.",
                         success: false);
 
-                    CourseActionResponseDTO response = new(baseResponse: baseResponse);
-                    return response;
+                    CourseActionResponseDTO respNull = new(baseResponse: baseRespNull);
+                    return respNull;
                 }
-                else
-                {
-                    BaseResponseDTO baseResponse = new(
+
+                BaseResponseDTO baseResponse = new(
                         message: "Found successfully!",
                         success: true);
 
-                    CourseActionResponseDTO response = new(baseResponse: baseResponse, course: courseFound);
-                    return response;
-                }
+                CourseActionResponseDTO response = new(baseResponse: baseResponse, course: courseFound);
+                return response;
             }
             catch (Exception e)
             {
@@ -101,17 +99,15 @@ namespace UniVerseAPI.Application.Services
 
                 if (courseFound == null)
                 {
-                    BaseResponseDTO resp = new(message: "*** We couldn't find the course in our database!",
+                    BaseResponseDTO respNull = new(message: "*** We couldn't find the course in our database!",
                     success: false);
-                    return resp;
+                    return respNull;
                 }
-                else
-                {
-                    await _ICourse.Delete(courseFound);
-                    BaseResponseDTO response = new(message: "*** Deleted successfully!",
-                    success: true);
-                    return response;
-                }
+
+                await _ICourse.Delete(courseFound);
+                BaseResponseDTO response = new(message: "*** Deleted successfully!",
+                success: true);
+                return response;
             }
             catch (Exception e)
             {
