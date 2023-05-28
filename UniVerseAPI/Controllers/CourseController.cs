@@ -50,8 +50,8 @@ namespace UniVerseAPI.Controllers
                 var response = await _ICourseService.GetById(id);
 
                 if(response.BaseResponse!.Success)
-                return Ok(response);
-                return BadRequest(response);
+                    return Ok(response);
+                    return BadRequest(response);
             }
             return StatusCode(500);
         }
@@ -66,8 +66,8 @@ namespace UniVerseAPI.Controllers
                 var response = await _ICourseService.Create(course);
 
                 if (response.BaseResponse!.Success)
-                return Created("Successfully created!", response);
-                return BadRequest(response);
+                    return Created("Successfully created!", response);
+                    return BadRequest(response);
             }
             return StatusCode(500);
         }
@@ -75,9 +75,16 @@ namespace UniVerseAPI.Controllers
         [HttpGet("delet/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult DeleteCourse(Guid id)
+        public async Task<IActionResult> DeleteCourse(Guid id)
         {
-            return Ok("Testando");
+            if (ModelState.IsValid)
+            {
+                var response = await _ICourseService.Delete(id);
+                if (response.Success)
+                    return BadRequest(response);
+                    return Ok(response);
+            }
+            return StatusCode(500);
         }
 
         [HttpGet("modify/{id}")]

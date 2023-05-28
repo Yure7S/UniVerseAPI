@@ -36,7 +36,7 @@ namespace UniVerseAPI.Application.Services
             try
             {
                 Course? courseFound =  await _ICourse.GetById(id);
-                if (courseFound != null)
+                if (courseFound == null)
                 {
                     BaseResponseDTO baseResponse = new(
                         message: "We could not find this item in our database.",
@@ -87,20 +87,70 @@ namespace UniVerseAPI.Application.Services
             }
             catch (Exception e)
             {
-                BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to register a new course!!", success: false, error: e.Message);
+                BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to register a new course!", success: false, error: e.Message);
                 CourseActionResponseDTO responseError = new(baseResponse: baseResponse);
                 return responseError;
             }
         }
 
-        public Task<Course> Delete(Guid id)
+        public async Task<BaseResponseDTO> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Course? courseFound = await _ICourse.GetById(id);
+
+                if (courseFound == null)
+                {
+                    BaseResponseDTO resp = new(message: "*** We couldn't find the course in our database!",
+                    success: false);
+                    return resp;
+                }
+                else
+                {
+                    await _ICourse.Delete(courseFound);
+                    BaseResponseDTO response = new(message: "*** Deleted successfully!",
+                    success: true);
+                    return response;
+                }
+            }
+            catch (Exception e)
+            {
+                BaseResponseDTO response = new(message: "*** We encountered an error trying to delete the course!",
+                    success: false,
+                    error: e.Message);
+
+                return response;
+            }
         }
 
-        public Task<Course> Update(Guid id)
+        // Totamente errado
+        public async Task<BaseResponseDTO> Update(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Course? courseFound = await _ICourse.GetById(id);
+                if (courseFound != null)
+                {
+                    BaseResponseDTO response = new(message: "*** We couldn't find the course in our database!",
+                    success: false);
+                    return response;
+                }
+                else
+                {
+                    BaseResponseDTO response = new(message: "*** We couldn't find the course in our database!",
+                    success: false);
+                    return response;
+                }
+
+            }
+            catch (Exception e)
+            {
+                BaseResponseDTO response = new(message: "*** We encountered an error trying to delete the course!",
+                    success: false, 
+                    error: e.Message);
+
+                return response;
+            }
         }
     }
 }
