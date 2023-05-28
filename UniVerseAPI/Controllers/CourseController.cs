@@ -34,9 +34,9 @@ namespace UniVerseAPI.Controllers
                 var response = await _ICourseService.GetAll();
                 return Ok(response);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return BadRequest(e.Message); // StatusCode(500);
+                return StatusCode(500);
             }
         }
 
@@ -81,8 +81,8 @@ namespace UniVerseAPI.Controllers
             {
                 var response = await _ICourseService.Delete(id);
                 if (response.Success)
-                    return BadRequest(response);
                     return Ok(response);
+                    return BadRequest(response);
             }
             return StatusCode(500);
         }
@@ -92,13 +92,7 @@ namespace UniVerseAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateCourse(CourseInputDTO course, Guid id)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    _ICourseService.Update(course, id);
-            //}
-            //return StatusCode(500);
-
-            try
+            if (ModelState.IsValid)
             {
                 var response = await _ICourseService.Update(course, id);
 
@@ -106,10 +100,7 @@ namespace UniVerseAPI.Controllers
                     return Ok(response);
                     return BadRequest(response);
             }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            return StatusCode(500);
         }
     }
 }

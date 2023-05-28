@@ -39,7 +39,7 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
 
         public async Task<T> Delete(T entity)
         {
-            _db.Set<T>().Remove(entity);
+            _db.Set<T>().Update(entity);
             await _db.SaveChangesAsync();
             return entity;
         }

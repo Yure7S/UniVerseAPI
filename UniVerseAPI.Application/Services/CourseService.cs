@@ -104,6 +104,7 @@ namespace UniVerseAPI.Application.Services
                     return respNull;
                 }
 
+                courseFound.Deleted = true;
                 await _ICourse.Delete(courseFound);
                 BaseResponseDTO response = new(message: "*** Deleted successfully!",
                 success: true);
