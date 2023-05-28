@@ -59,5 +59,19 @@ namespace UniVerseAPI.Infra.Data.Context
             Student = new HashSet<Student>();
             Subject = new HashSet<Subject>();
         }
+
+
+        public void Update(string fullName, string description, DateTime startDate, DateTime endDate, string instructor, int seats, int spotsAvailable, int price, string category)
+        {
+            FullName = fullName;
+            Description = description;
+            StartDate = startDate;
+            EndDate = endDate;
+            Instructor = instructor;
+            Seats = seats;
+            SpotsAvailable = spotsAvailable;
+            Price = price;
+            Category = category;
+        }
     }
 }

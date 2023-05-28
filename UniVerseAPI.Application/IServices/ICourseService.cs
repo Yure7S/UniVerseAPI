@@ -14,8 +14,8 @@ namespace UniVerseAPI.Application.IServices
     {
         public Task<CourseActionResponseDTO> GetById(Guid id);
         public Task<List<Course>> GetAll();
-        public Task<CourseActionResponseDTO> Create(CourseRegisterDTO course);
-        public Task<BaseResponseDTO> Update(Guid id);
+        public Task<CourseActionResponseDTO> Create(CourseInputDTO course);
+        public Task<BaseResponseDTO> Update(CourseInputDTO course, Guid id);
         public Task<BaseResponseDTO> Delete(Guid id);
     }
 }

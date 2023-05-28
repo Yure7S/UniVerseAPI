@@ -59,7 +59,7 @@ namespace UniVerseAPI.Controllers
         [HttpPost("add")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateCourse(CourseRegisterDTO course)
+        public async Task<IActionResult> CreateCourse(CourseInputDTO course)
         {
             if (ModelState.IsValid)
             {
@@ -87,12 +87,29 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpGet("modify/{id}")]
+        [HttpPut("modify/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult UpdateCourse(Guid id)
+        public async Task<IActionResult> UpdateCourse(CourseInputDTO course, Guid id)
         {
-            return Ok("Testando");
+            //if (ModelState.IsValid)
+            //{
+            //    _ICourseService.Update(course, id);
+            //}
+            //return StatusCode(500);
+
+            try
+            {
+                var response = await _ICourseService.Update(course, id);
+
+                if (response.Success)
+                    return Ok(response);
+                    return BadRequest(response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

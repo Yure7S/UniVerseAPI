@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace UniVerseAPI.Application.DTOs.Request
 {
-    public class CourseRegisterDTO
+    public class CourseInputDTO
     {
         [Required]
         [StringLength(255)]
@@ -31,5 +31,6 @@ namespace UniVerseAPI.Application.DTOs.Request
         [Required]
         [StringLength(255)]
         public string? Category { get; set; }
+        public bool? Active { get; set; }
     }
 }

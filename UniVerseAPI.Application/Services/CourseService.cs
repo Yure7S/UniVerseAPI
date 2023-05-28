@@ -63,7 +63,7 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<CourseActionResponseDTO> Create(CourseRegisterDTO course)
+        public async Task<CourseActionResponseDTO> Create(CourseInputDTO course)
         {
             try
             {
@@ -124,28 +124,38 @@ namespace UniVerseAPI.Application.Services
         }
 
         // Totamente errado
-        public async Task<BaseResponseDTO> Update(Guid id)
+        public async Task<BaseResponseDTO> Update(CourseInputDTO course, Guid id)
         {
             try
             {
                 Course? courseFound = await _ICourse.GetById(id);
-                if (courseFound != null)
+                if (courseFound == null)
                 {
-                    BaseResponseDTO response = new(message: "*** We couldn't find the course in our database!",
+                    BaseResponseDTO respNull = new(message: "*** We couldn't find the course in our database!",
                     success: false);
-                    return response;
-                }
-                else
-                {
-                    BaseResponseDTO response = new(message: "*** We couldn't find the course in our database!",
-                    success: false);
-                    return response;
+                    return respNull;
                 }
 
+                courseFound.Update(
+                        fullName: course.FullName,
+                        description: course.Description,
+                        startDate: course.StartDate,
+                        endDate: course.EndDate,
+                        instructor: course.Instructor,
+                        seats: course.Seats,
+                        spotsAvailable: course.SpotsAvailable,
+                        price: course.Price,
+                        category: course.Category);
+
+                await _ICourse.Update(courseFound);
+
+                BaseResponseDTO response = new(message: "*** Course updated successfully!",
+                success: true);
+                return response;
             }
             catch (Exception e)
             {
-                BaseResponseDTO response = new(message: "*** We encountered an error trying to delete the course!",
+                BaseResponseDTO response = new(message: "*** We encountered an error trying to update the course!",
                     success: false, 
                     error: e.Message);
 
