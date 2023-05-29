@@ -36,24 +36,22 @@ namespace UniVerseAPI.Application.Services
             try
             {
                 Course? courseFound =  await _ICourse.GetById(id);
-                if (courseFound != null)
+                if (courseFound == null)
                 {
-                    BaseResponseDTO baseResponse = new(
+                    BaseResponseDTO baseRespNull = new(
                         message: "We could not find this item in our database.",
                         success: false);
 
-                    CourseActionResponseDTO response = new(baseResponse: baseResponse);
-                    return response;
+                    CourseActionResponseDTO respNull = new(baseResponse: baseRespNull);
+                    return respNull;
                 }
-                else
-                {
-                    BaseResponseDTO baseResponse = new(
+
+                BaseResponseDTO baseResponse = new(
                         message: "Found successfully!",
                         success: true);
 
-                    CourseActionResponseDTO response = new(baseResponse: baseResponse, course: courseFound);
-                    return response;
-                }
+                CourseActionResponseDTO response = new(baseResponse: baseResponse, course: courseFound);
+                return response;
             }
             catch (Exception e)
             {
@@ -63,7 +61,7 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<CourseActionResponseDTO> Create(CourseRegisterDTO course)
+        public async Task<CourseActionResponseDTO> Create(CourseInputDTO course)
         {
             try
             {
@@ -87,20 +85,79 @@ namespace UniVerseAPI.Application.Services
             }
             catch (Exception e)
             {
-                BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to register a new course!!", success: false, error: e.Message);
+                BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to register a new course!", success: false, error: e.Message);
                 CourseActionResponseDTO responseError = new(baseResponse: baseResponse);
                 return responseError;
             }
         }
 
-        public Task<Course> Delete(Guid id)
+        public async Task<BaseResponseDTO> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Course? courseFound = await _ICourse.GetById(id);
+
+                if (courseFound == null)
+                {
+                    BaseResponseDTO respNull = new(message: "*** We couldn't find the course in our database!",
+                    success: false);
+                    return respNull;
+                }
+
+                courseFound.Deleted = true;
+                await _ICourse.Delete(courseFound);
+                BaseResponseDTO response = new(message: "*** Deleted successfully!",
+                success: true);
+                return response;
+            }
+            catch (Exception e)
+            {
+                BaseResponseDTO response = new(message: "*** We encountered an error trying to delete the course!",
+                    success: false,
+                    error: e.Message);
+
+                return response;
+            }
         }
 
-        public Task<Course> Update(Guid id)
+        // Totamente errado
+        public async Task<BaseResponseDTO> Update(CourseInputDTO course, Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Course? courseFound = await _ICourse.GetById(id);
+                if (courseFound == null)
+                {
+                    BaseResponseDTO respNull = new(message: "*** We couldn't find the course in our database!",
+                    success: false);
+                    return respNull;
+                }
+
+                courseFound.Update(
+                        fullName: course.FullName,
+                        description: course.Description,
+                        startDate: course.StartDate,
+                        endDate: course.EndDate,
+                        instructor: course.Instructor,
+                        seats: course.Seats,
+                        spotsAvailable: course.SpotsAvailable,
+                        price: course.Price,
+                        category: course.Category);
+
+                await _ICourse.Update(courseFound);
+
+                BaseResponseDTO response = new(message: "*** Course updated successfully!",
+                success: true);
+                return response;
+            }
+            catch (Exception e)
+            {
+                BaseResponseDTO response = new(message: "*** We encountered an error trying to update the course!",
+                    success: false, 
+                    error: e.Message);
+
+                return response;
+            }
         }
     }
 }

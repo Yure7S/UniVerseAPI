@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {}
+    "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
+    "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj",
         "projectName": "UniVerseAPI.Domain",
-        "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj",
-        "packagesPath": "C:\\Users\\Servulo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\obj\\",
+        "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj",
+        "packagesPath": "C:\\Users\\Yure\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Servulo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Yure\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

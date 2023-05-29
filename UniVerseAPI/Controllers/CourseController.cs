@@ -34,9 +34,9 @@ namespace UniVerseAPI.Controllers
                 var response = await _ICourseService.GetAll();
                 return Ok(response);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return BadRequest(e.Message); // StatusCode(500);
+                return StatusCode(500);
             }
         }
 
@@ -50,8 +50,8 @@ namespace UniVerseAPI.Controllers
                 var response = await _ICourseService.GetById(id);
 
                 if(response.BaseResponse!.Success)
-                return Ok(response);
-                return BadRequest(response);
+                    return Ok(response);
+                    return BadRequest(response);
             }
             return StatusCode(500);
         }
@@ -59,15 +59,15 @@ namespace UniVerseAPI.Controllers
         [HttpPost("add")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateCourse(CourseRegisterDTO course)
+        public async Task<IActionResult> CreateCourse(CourseInputDTO course)
         {
             if (ModelState.IsValid)
             {
                 var response = await _ICourseService.Create(course);
 
                 if (response.BaseResponse!.Success)
-                return Created("Successfully created!", response);
-                return BadRequest(response);
+                    return Created("Successfully created!", response);
+                    return BadRequest(response);
             }
             return StatusCode(500);
         }
@@ -75,17 +75,32 @@ namespace UniVerseAPI.Controllers
         [HttpGet("delet/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult DeleteCourse(Guid id)
+        public async Task<IActionResult> DeleteCourse(Guid id)
         {
-            return Ok("Testando");
+            if (ModelState.IsValid)
+            {
+                var response = await _ICourseService.Delete(id);
+                if (response.Success)
+                    return Ok(response);
+                    return BadRequest(response);
+            }
+            return StatusCode(500);
         }
 
-        [HttpGet("modify/{id}")]
+        [HttpPut("modify/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult UpdateCourse(Guid id)
+        public async Task<IActionResult> UpdateCourse(CourseInputDTO course, Guid id)
         {
-            return Ok("Testando");
+            if (ModelState.IsValid)
+            {
+                var response = await _ICourseService.Update(course, id);
+
+                if (response.Success)
+                    return Ok(response);
+                    return BadRequest(response);
+            }
+            return StatusCode(500);
         }
     }
 }
