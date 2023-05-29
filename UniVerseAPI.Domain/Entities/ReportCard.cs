@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    public partial class ReportCard
+    public partial class ReportCard : BaseEntity
     {
         public ReportCard()
         {

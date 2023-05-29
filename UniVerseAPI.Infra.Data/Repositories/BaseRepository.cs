@@ -20,31 +20,31 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
             _db = db;
         }
 
-        public async Task<List<T>> GetAll()
+        public async Task<List<T>> GetAllAsync()
         {
             return await _db.Set<T>().ToListAsync();
         }
 
-        public async Task<T?> GetById(Guid id)
+        public async Task<T?> GetByIdAsync(Guid id)
         {
             return await _db.Set<T>().FindAsync(id);
         }
 
-        public async Task<T> Create(T entity)
+        public async Task<T> CreateAsync(T entity)
         {
             await _db.Set<T>().AddAsync(entity);
             _db.SaveChanges();
             return entity;
         }
 
-        public async Task<T> Delete(T entity)
+        public async Task<T> DeleteAsync(T entity)
         {
             _db.Set<T>().Update(entity);
             await _db.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<T> Update(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
             _db.Set<T>().Update(entity);
             await _db.SaveChangesAsync();

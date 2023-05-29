@@ -5,27 +5,31 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    public partial class Student
+    [Index("Code", Name = "UQ__Teacher__A25C5AA792072F3C", IsUnique = true)]
+    public partial class Teacher : BaseEntity
     {
+        public Teacher()
+        {
+            Subject = new HashSet<Subject>();
+        }
+
         [Key]
         public Guid Id { get; set; }
-        public Guid ReportCardId { get; set; }
-        public Guid PeopleId { get; set; }
-        public Guid CourseId { get; set; }
-        public int Registration { get; set; }
-        public bool Deleted { get; set; }
 
-        [ForeignKey("CourseId")]
-        [InverseProperty("Student")]
-        public virtual Course Course { get; set; }
+        public Guid PeopleId { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        public string Code { get; set; }
+
         [ForeignKey("PeopleId")]
-        [InverseProperty("Student")]
+        [InverseProperty("Teacher")]
         public virtual People People { get; set; }
-        [ForeignKey("ReportCardId")]
-        [InverseProperty("Student")]
-        public virtual ReportCard ReportCard { get; set; }
+        [InverseProperty("Teacher")]
+        public virtual ICollection<Subject> Subject { get; set; }
     }
 }

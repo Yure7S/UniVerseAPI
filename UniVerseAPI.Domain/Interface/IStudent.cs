@@ -7,9 +7,8 @@ using UniVerseAPI.Infra.Data.Context;
 
 namespace UniVerseAPI.Application.Interface
 {
-    public interface IStudentInterface
+    public interface IStudent : IBaseInterface<Student> 
     {
-        public Task<List<Student>> GetAllStudents();
 
     }
 }

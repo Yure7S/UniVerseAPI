@@ -5,36 +5,40 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    public partial class Course
+    public partial class Course : BaseEntity
     {
 
         [Key]
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
         [Required]
         [StringLength(255)]
-        public string FullName { get; set; }
+        public string FullName { get; private set; }
         [Required]
         [StringLength(255)]
-        public string Description { get; set; }
+        public string Description { get; private set; }
         [Column(TypeName = "date")]
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; private set; }
         [Column(TypeName = "date")]
-        public DateTime EndDate { get; set; }
+        public DateTime EndDate { get; private set; }
         [Required]
         [StringLength(255)]
-        public string Instructor { get; set; }
-        public int Seats { get; set; }
-        public int SpotsAvailable { get; set; }
-        public int Price { get; set; }
+        public string Instructor { get; private set; }
+        public int Seats { get; private set; }
+        public int SpotsAvailable { get; private set; }
+        public int Price { get; private set; }
         [Required]
         [StringLength(255)]
-        public string Category { get; set; }
-        public bool Active { get; set; }
-        public bool Deleted { get; set; }
+        public string Category { get; private set; }
+        [Required]
+        [StringLength(10, MinimumLength = 10)]
+        [Unicode(true)]
+        public string Code { get; private set; }
+
 
         [InverseProperty("Course")]
         public virtual ICollection<Student> Student { get; set; }
@@ -42,7 +46,7 @@ namespace UniVerseAPI.Infra.Data.Context
         [InverseProperty("Course")]
         public virtual ICollection<Subject> Subject { get; set; }
 
-        public Course(string fullName, string description, DateTime startDate, DateTime endDate, string instructor, int seats, int spotsAvailable, int price, string category)
+        public Course(string fullName, string description, DateTime startDate, DateTime endDate, string instructor, int seats, int spotsAvailable, int price, string category, string code)
         {
             Id = Guid.NewGuid();
             FullName = fullName;
@@ -54,14 +58,17 @@ namespace UniVerseAPI.Infra.Data.Context
             SpotsAvailable = spotsAvailable;
             Price = price;
             Category = category;
+            Code = code;
             Active = true;
             Deleted = false;
+            CreationDate = DateTime.Now;
+            LastUpdateAsync = DateTime.Now;
             Student = new HashSet<Student>();
             Subject = new HashSet<Subject>();
         }
 
 
-        public void Update(string fullName, string description, DateTime startDate, DateTime endDate, string instructor, int seats, int spotsAvailable, int price, string category)
+        public void UpdateAsync(string fullName, string description, DateTime startDate, DateTime endDate, string instructor, int seats, int spotsAvailable, int price, string category)
         {
             FullName = fullName;
             Description = description;
@@ -72,6 +79,7 @@ namespace UniVerseAPI.Infra.Data.Context
             SpotsAvailable = spotsAvailable;
             Price = price;
             Category = category;
+            LastUpdateAsync = DateTime.Now;
         }
     }
 }

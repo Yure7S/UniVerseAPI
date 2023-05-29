@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    public partial class Address
+    public partial class Address : BaseEntity
     {
         public Address()
         {
@@ -16,21 +16,41 @@ namespace UniVerseAPI.Infra.Data.Context
         }
 
         [Key]
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
         [Required]
         [Column("Address")]
         [StringLength(255)]
-        public string Address1 { get; set; }
-        public int Number { get; set; }
+        public string AddressValue { get; private set; }
+        public int Number { get; private set; }
         [Required]
         [StringLength(255)]
-        public string Neighborhood { get; set; }
+        public string Neighborhood { get; private set; }
         [Required]
         [StringLength(8)]
         [Unicode(false)]
-        public string Cep { get; set; }
+        public string Cep { get; private set; }
 
         [InverseProperty("Address")]
-        public virtual ICollection<People> People { get; set; }
+        public virtual ICollection<People> People { get; private set; }
+
+        public Address(string addressValue, int number, string neighborhood, string cep)
+        {
+            Id = Guid.NewGuid();
+            AddressValue = addressValue;
+            Number = number;
+            Neighborhood = neighborhood;
+            Cep = cep;
+            CreationDate = DateTime.Now;
+            LastUpdateAsync = DateTime.Now;
+        }
+
+        public void UpdateAsync(Guid id, string addressValue, int number, string neighborhood, string cep)
+        {
+            AddressValue = addressValue;
+            Number = number;
+            Neighborhood = neighborhood;
+            Cep = cep;
+            LastUpdateAsync = DateTime.Now;
+        }
     }
 }

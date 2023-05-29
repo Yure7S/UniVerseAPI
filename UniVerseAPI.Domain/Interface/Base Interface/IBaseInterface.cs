@@ -10,10 +10,10 @@ namespace UniVerseAPI.Application.Interface
 {
     public interface IBaseInterface<T> where T : class
     {
-        public Task<T?> GetById(Guid id);
-        public Task<List<T>> GetAll();
-        public Task<T> Create(T entity);
-        public Task<T> Update(T entity);
-        public Task<T> Delete(T entity);
+        public Task<T?> GetByIdAsync(Guid id);
+        public Task<List<T>> GetAllAsync();
+        public Task<T> CreateAsync(T entity);
+        public Task<T> UpdateAsync(T entity);
+        public Task<T> DeleteAsync(T entity);
     }
 }

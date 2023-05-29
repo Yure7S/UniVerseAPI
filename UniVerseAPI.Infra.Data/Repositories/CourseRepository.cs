@@ -20,6 +20,9 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
         {
         }
 
-
+        public async Task<Course> GetByCodeAsync(string code)
+        {
+            return await _db.Course.SingleOrDefaultAsync(c => c.Code == code);
+        }
     }
 }

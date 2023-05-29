@@ -107,7 +107,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<bool>("DeleteAsyncd")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -186,7 +186,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .HasColumnType("char(11)")
                         .IsFixedLength();
 
-                    b.Property<bool>("Deleted")
+                    b.Property<bool>("DeleteAsyncd")
                         .HasColumnType("bit");
 
                     b.Property<string>("Email")
@@ -275,7 +275,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("CourseId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<bool>("DeleteAsyncd")
                         .HasColumnType("bit");
 
                     b.Property<Guid>("PeopleId")
@@ -363,7 +363,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<bool>("DeleteAsyncd")
                         .HasColumnType("bit");
 
                     b.Property<Guid>("PeopleId")

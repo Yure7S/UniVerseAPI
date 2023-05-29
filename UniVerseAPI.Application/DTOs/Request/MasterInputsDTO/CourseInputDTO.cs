@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UniVerseAPI.Application.DTOs.Request
+namespace UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO
 {
     public class CourseInputDTO
     {
@@ -31,6 +32,9 @@ namespace UniVerseAPI.Application.DTOs.Request
         [Required]
         [StringLength(255)]
         public string? Category { get; set; }
-        public bool? Active { get; set; }
+        [Required]
+        [StringLength(10, MinimumLength = 10)]
+        [Unicode(true)]
+        public string? Code { get; private set; }
     }
 }

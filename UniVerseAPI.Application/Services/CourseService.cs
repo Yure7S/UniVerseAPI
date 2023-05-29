@@ -9,9 +9,9 @@ using System.Reflection.Metadata.Ecma335;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
-using UniVerseAPI.Application.DTOs;
-using UniVerseAPI.Application.DTOs.Request;
+using UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO;
 using UniVerseAPI.Application.DTOs.Response;
+using UniVerseAPI.Application.DTOs.Response.BaseResponse;
 using UniVerseAPI.Application.IServices;
 using UniVerseAPI.Domain.Interface;
 using UniVerseAPI.Infra.Data.Context;
@@ -26,16 +26,16 @@ namespace UniVerseAPI.Application.Services
             _ICourse = iCourse;
         }
 
-        public async Task<List<Course>> GetAll()
+        public async Task<List<Course>> GetAllAsync()
         {
-            return await _ICourse.GetAll();
+            return await _ICourse.GetAllAsync();
         }
 
-        public async Task<CourseActionResponseDTO> GetById(Guid id)
+        public async Task<CourseActionResponseDTO> GetByIdAsync(Guid id)
         {
             try
             {
-                Course? courseFound =  await _ICourse.GetById(id);
+                Course? courseFound =  await _ICourse.GetByIdAsync(id);
                 if (courseFound == null)
                 {
                     BaseResponseDTO baseRespNull = new(
@@ -61,7 +61,7 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<CourseActionResponseDTO> Create(CourseInputDTO course)
+        public async Task<CourseActionResponseDTO> CreateAsync(CourseInputDTO course)
         {
             try
             {
@@ -74,11 +74,12 @@ namespace UniVerseAPI.Application.Services
                         seats: course.Seats,
                         spotsAvailable: course.SpotsAvailable,
                         price: course.Price,
-                        category: course.Category);
+                        category: course.Category,
+                        code: course.Code);
 
-                await _ICourse.Create(newCourse);
+                await _ICourse.CreateAsync(newCourse);
 
-                BaseResponseDTO baseResponse = new(message: "*** Course created successfully!", success: true);
+                BaseResponseDTO baseResponse = new(message: "*** Course Created successfully!", success: true);
                 CourseActionResponseDTO response = new(course: newCourse, baseResponse: baseResponse);
 
                 return response;
@@ -91,11 +92,11 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<BaseResponseDTO> Delete(Guid id)
+        public async Task<BaseResponseDTO> DeleteAsync(Guid id)
         {
             try
             {
-                Course? courseFound = await _ICourse.GetById(id);
+                Course? courseFound = await _ICourse.GetByIdAsync(id);
 
                 if (courseFound == null)
                 {
@@ -104,15 +105,15 @@ namespace UniVerseAPI.Application.Services
                     return respNull;
                 }
 
-                courseFound.Deleted = true;
-                await _ICourse.Delete(courseFound);
+                courseFound.DeleteAsync(true);
+                await _ICourse.UpdateAsync(courseFound);
                 BaseResponseDTO response = new(message: "*** Deleted successfully!",
                 success: true);
                 return response;
             }
             catch (Exception e)
             {
-                BaseResponseDTO response = new(message: "*** We encountered an error trying to delete the course!",
+                BaseResponseDTO response = new(message: "*** We encountered an error trying to DeleteAsync the course!",
                     success: false,
                     error: e.Message);
 
@@ -120,12 +121,11 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        // Totamente errado
-        public async Task<BaseResponseDTO> Update(CourseInputDTO course, Guid id)
+        public async Task<BaseResponseDTO> UpdateAsync(CourseInputDTO course, Guid id)
         {
             try
             {
-                Course? courseFound = await _ICourse.GetById(id);
+                Course? courseFound = await _ICourse.GetByIdAsync(id);
                 if (courseFound == null)
                 {
                     BaseResponseDTO respNull = new(message: "*** We couldn't find the course in our database!",
@@ -133,7 +133,7 @@ namespace UniVerseAPI.Application.Services
                     return respNull;
                 }
 
-                courseFound.Update(
+                courseFound.UpdateAsync(
                         fullName: course.FullName,
                         description: course.Description,
                         startDate: course.StartDate,
@@ -144,15 +144,15 @@ namespace UniVerseAPI.Application.Services
                         price: course.Price,
                         category: course.Category);
 
-                await _ICourse.Update(courseFound);
+                await _ICourse.UpdateAsync(courseFound);
 
-                BaseResponseDTO response = new(message: "*** Course updated successfully!",
+                BaseResponseDTO response = new(message: "*** Course UpdateAsyncd successfully!",
                 success: true);
                 return response;
             }
             catch (Exception e)
             {
-                BaseResponseDTO response = new(message: "*** We encountered an error trying to update the course!",
+                BaseResponseDTO response = new(message: "*** We encountered an error trying to UpdateAsync the course!",
                     success: false, 
                     error: e.Message);
 

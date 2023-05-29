@@ -4,7 +4,7 @@ using NPOI.OpenXmlFormats.Dml;
 using System.Data.Entity.Infrastructure;
 using System.Security.Cryptography.Xml;
 using UniVerseAPI.Application.DTOs;
-using UniVerseAPI.Application.DTOs.Request;
+using UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO;
 using UniVerseAPI.Application.DTOs.Response;
 using UniVerseAPI.Application.IServices;
 using UniVerseAPI.Domain.Interface;
@@ -27,11 +27,11 @@ namespace UniVerseAPI.Controllers
         [HttpGet("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllAsync()
         {
             try
             {
-                var response = await _ICourseService.GetAll();
+                var response = await _ICourseService.GetAllAsync();
                 return Ok(response);
             }
             catch (Exception)
@@ -43,11 +43,11 @@ namespace UniVerseAPI.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             if(ModelState.IsValid)
             {
-                var response = await _ICourseService.GetById(id);
+                var response = await _ICourseService.GetByIdAsync(id);
 
                 if(response.BaseResponse!.Success)
                     return Ok(response);
@@ -59,27 +59,27 @@ namespace UniVerseAPI.Controllers
         [HttpPost("add")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateCourse(CourseInputDTO course)
+        public async Task<IActionResult> CreateAsyncCourse(CourseInputDTO course)
         {
             if (ModelState.IsValid)
             {
-                var response = await _ICourseService.Create(course);
+                var response = await _ICourseService.CreateAsync(course);
 
                 if (response.BaseResponse!.Success)
-                    return Created("Successfully created!", response);
+                    return Created("Successfully Created!", response);
                     return BadRequest(response);
             }
             return StatusCode(500);
         }
 
-        [HttpGet("delet/{id}")]
+        [HttpPut("delet/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteCourse(Guid id)
+        public async Task<IActionResult> DeleteAsyncCourse(Guid id)
         {
             if (ModelState.IsValid)
             {
-                var response = await _ICourseService.Delete(id);
+                var response = await _ICourseService.DeleteAsync(id);
                 if (response.Success)
                     return Ok(response);
                     return BadRequest(response);
@@ -90,11 +90,11 @@ namespace UniVerseAPI.Controllers
         [HttpPut("modify/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateCourse(CourseInputDTO course, Guid id)
+        public async Task<IActionResult> UpdateAsyncCourse(CourseInputDTO course, Guid id)
         {
             if (ModelState.IsValid)
             {
-                var response = await _ICourseService.Update(course, id);
+                var response = await _ICourseService.UpdateAsync(course, id);
 
                 if (response.Success)
                     return Ok(response);

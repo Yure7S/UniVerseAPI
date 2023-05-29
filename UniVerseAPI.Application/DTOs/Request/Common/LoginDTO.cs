@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UniVerseAPI.Application.DTOs.Request
+namespace UniVerseAPI.Application.DTOs.Request.Common
 {
-    public class StudentRegisterDTO
+    public class LoginDTO
     {
         [Required]
         public string? Email { get; set; }

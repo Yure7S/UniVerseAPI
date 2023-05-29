@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    public partial class Assessment
+    public partial class Assessment : BaseEntity
     {
         public Assessment()
         {

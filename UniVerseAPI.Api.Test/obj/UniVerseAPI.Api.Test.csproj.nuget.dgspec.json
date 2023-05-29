@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Api.Test\\UniVerseAPI.Api.Test.csproj": {}
+    "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Api.Test\\UniVerseAPI.Api.Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Api.Test\\UniVerseAPI.Api.Test.csproj": {
+    "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Api.Test\\UniVerseAPI.Api.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Api.Test\\UniVerseAPI.Api.Test.csproj",
+        "projectUniqueName": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Api.Test\\UniVerseAPI.Api.Test.csproj",
         "projectName": "UniVerseAPI.Api.Test",
-        "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Api.Test\\UniVerseAPI.Api.Test.csproj",
-        "packagesPath": "C:\\Users\\Yure\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Api.Test\\obj\\",
+        "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Api.Test\\UniVerseAPI.Api.Test.csproj",
+        "packagesPath": "C:\\Users\\Servulo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Api.Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Yure\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Servulo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

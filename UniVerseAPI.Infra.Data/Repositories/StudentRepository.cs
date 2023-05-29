@@ -12,27 +12,10 @@ using UniVerseAPI.Infra.Data.Context;
 
 namespace UniVerseAPI.Infra.Data.Repositoryes
 {
-    public class StudentRepository : /*BaseRepository<Student>,*/ IStudentInterface
+    public class StudentRepository : BaseRepository<Student>, IStudent
     {
-        /*
-            public StudentRepository(UniDBContext db) : base(db)
-            {
-            } 
-        */
-
-        // Injecting base repository and dbcontext
-        private readonly UniDBContext _dbContext;
-        private readonly IBaseInterface<Student> _BaseRepository;
-
-        public StudentRepository(UniDBContext dbContext, IBaseInterface<Student> baseRepository)
+        public StudentRepository(UniDBContext db) : base(db)
         {
-            _dbContext = dbContext;
-            _BaseRepository = baseRepository;   
-        }
-
-        public async Task<List<Student>> GetAllStudents()
-        {
-            return await _dbContext.Student.ToListAsync();
         }
     }
 }

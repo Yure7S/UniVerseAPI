@@ -16,11 +16,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped(typeof(IBaseInterface<>), typeof(BaseRepository<>));
 
 // Repositories
-builder.Services.AddScoped<IStudentInterface, StudentRepository>();
+builder.Services.AddScoped<IStudent, StudentRepository>();
 builder.Services.AddScoped<ICourse, CourseRepository>();
 
 // Services
 builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<IStudentService, StudentService>();
 
 #endregion
 
