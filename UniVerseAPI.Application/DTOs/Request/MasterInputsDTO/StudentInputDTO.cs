@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Core.Metadata.Edm;
 using Microsoft.EntityFrameworkCore;
 
 namespace UniVerseAPI.Infra.Data.Context
@@ -14,9 +13,9 @@ namespace UniVerseAPI.Infra.Data.Context
         [Required]
         [StringLength(20, MinimumLength = 20)]
         [Unicode(true)]
-        public int Registration { get; set; }
+        public string Registration { get; set; }
         [Required]
-        public Address Address { get; set; }
+        public AddressEntity Address { get; set; }
         [Required]
         public People People { get; set; }
         [Required]

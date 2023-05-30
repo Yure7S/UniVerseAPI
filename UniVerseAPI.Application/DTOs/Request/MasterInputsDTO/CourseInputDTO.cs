@@ -34,7 +34,6 @@ namespace UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO
         public string? Category { get; set; }
         [Required]
         [StringLength(10, MinimumLength = 10)]
-        [Unicode(true)]
-        public string? Code { get; private set; }
+        public string? Code { get; set; }
     }
 }

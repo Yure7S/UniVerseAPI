@@ -22,12 +22,16 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Address", b =>
+            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.AddressEntity", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address1")
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("AddressValue")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)")
@@ -37,8 +41,16 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(8)
                         .IsUnicode(false)
-                        .HasColumnType("char(8)")
-                        .IsFixedLength();
+                        .HasColumnType("varchar(8)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Neighborhood")
                         .IsRequired()
@@ -56,7 +68,20 @@ namespace UniVerseAPI.Infra.Data.Migrations
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Assessment", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("SubjectId")
                         .HasColumnType("uniqueidentifier");
@@ -71,7 +96,17 @@ namespace UniVerseAPI.Infra.Data.Migrations
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Class", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("EnrolledStudents")
                         .HasColumnType("int");
@@ -80,6 +115,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Room")
                         .IsRequired()
@@ -97,6 +135,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Course", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Active")
@@ -107,7 +146,16 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<bool>("DeleteAsyncd")
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -127,6 +175,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
@@ -148,15 +199,26 @@ namespace UniVerseAPI.Infra.Data.Migrations
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Grades", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("AssessmentId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
                     b.Property<decimal?>("Grade")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18, 0)")
-                        .HasDefaultValueSql("((0))");
+                        .HasColumnType("decimal(18, 0)");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -168,6 +230,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.People", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Active")
@@ -183,10 +246,12 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(11)
                         .IsUnicode(false)
-                        .HasColumnType("char(11)")
-                        .IsFixedLength();
+                        .HasColumnType("varchar(11)");
 
-                    b.Property<bool>("DeleteAsyncd")
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Email")
@@ -203,6 +268,14 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -222,7 +295,17 @@ namespace UniVerseAPI.Infra.Data.Migrations
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Period", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("EnrolledStudents")
                         .HasColumnType("int");
@@ -231,6 +314,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Room")
                         .IsRequired()
@@ -245,10 +331,23 @@ namespace UniVerseAPI.Infra.Data.Migrations
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.ReportCard", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("GradesId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("PeriodId")
                         .HasColumnType("uniqueidentifier");
@@ -270,21 +369,34 @@ namespace UniVerseAPI.Infra.Data.Migrations
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Student", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CourseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("DeleteAsyncd")
+                    b.Property<bool>("Active")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("PeopleId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Registration")
-                        .HasColumnType("int");
+                    b.Property<string>("Registration")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<Guid>("ReportCardId")
+                    b.Property<Guid?>("ReportCardId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -301,7 +413,11 @@ namespace UniVerseAPI.Infra.Data.Migrations
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Subject", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
 
                     b.Property<Guid?>("ClassId")
                         .HasColumnType("uniqueidentifier");
@@ -310,11 +426,16 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(10)
                         .IsUnicode(false)
-                        .HasColumnType("char(10)")
-                        .IsFixedLength();
+                        .HasColumnType("varchar(10)");
 
                     b.Property<Guid>("CourseId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -330,6 +451,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("PeriodId")
                         .HasColumnType("uniqueidentifier");
@@ -356,15 +480,25 @@ namespace UniVerseAPI.Infra.Data.Migrations
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Teacher", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<bool>("DeleteAsyncd")
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("PeopleId")
                         .HasColumnType("uniqueidentifier");
@@ -383,8 +517,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                 {
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Subject", "Subject")
                         .WithMany("Assessment")
-                        .HasForeignKey("SubjectId")
-                        .HasConstraintName("Assessment_fk0");
+                        .HasForeignKey("SubjectId");
 
                     b.Navigation("Subject");
                 });
@@ -394,19 +527,19 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Assessment", "Assessment")
                         .WithMany("Grades")
                         .HasForeignKey("AssessmentId")
-                        .IsRequired()
-                        .HasConstraintName("Grades_fk0");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Assessment");
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.People", b =>
                 {
-                    b.HasOne("UniVerseAPI.Infra.Data.Context.Address", "Address")
+                    b.HasOne("UniVerseAPI.Infra.Data.Context.AddressEntity", "Address")
                         .WithMany("People")
                         .HasForeignKey("AddressId")
-                        .IsRequired()
-                        .HasConstraintName("People_fk0");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Address");
                 });
@@ -416,20 +549,20 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Grades", "Grades")
                         .WithMany("ReportCard")
                         .HasForeignKey("GradesId")
-                        .IsRequired()
-                        .HasConstraintName("FK_GRADES");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Period", "Period")
                         .WithMany("ReportCard")
                         .HasForeignKey("PeriodId")
-                        .IsRequired()
-                        .HasConstraintName("FK_PERIOD");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Subject", "Subject")
                         .WithMany("ReportCard")
                         .HasForeignKey("SubjectId")
-                        .IsRequired()
-                        .HasConstraintName("FK_SUBJECT");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Grades");
 
@@ -442,21 +575,17 @@ namespace UniVerseAPI.Infra.Data.Migrations
                 {
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Course", "Course")
                         .WithMany("Student")
-                        .HasForeignKey("CourseId")
-                        .IsRequired()
-                        .HasConstraintName("Student_fk2");
+                        .HasForeignKey("CourseId");
 
                     b.HasOne("UniVerseAPI.Infra.Data.Context.People", "People")
                         .WithMany("Student")
                         .HasForeignKey("PeopleId")
-                        .IsRequired()
-                        .HasConstraintName("Student_fk1");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("UniVerseAPI.Infra.Data.Context.ReportCard", "ReportCard")
                         .WithMany("Student")
-                        .HasForeignKey("ReportCardId")
-                        .IsRequired()
-                        .HasConstraintName("Student_fk0");
+                        .HasForeignKey("ReportCardId");
 
                     b.Navigation("Course");
 
@@ -469,26 +598,25 @@ namespace UniVerseAPI.Infra.Data.Migrations
                 {
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Class", "Class")
                         .WithMany("Subject")
-                        .HasForeignKey("ClassId")
-                        .HasConstraintName("Subject_fk2");
+                        .HasForeignKey("ClassId");
 
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Course", "Course")
                         .WithMany("Subject")
                         .HasForeignKey("CourseId")
-                        .IsRequired()
-                        .HasConstraintName("Subject_fk0");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Period", "Period")
                         .WithMany("Subject")
                         .HasForeignKey("PeriodId")
-                        .IsRequired()
-                        .HasConstraintName("Subject_fk3");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Teacher", "Teacher")
                         .WithMany("Subject")
                         .HasForeignKey("TeacherId")
-                        .IsRequired()
-                        .HasConstraintName("Subject_fk1");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Class");
 
@@ -504,13 +632,13 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.HasOne("UniVerseAPI.Infra.Data.Context.People", "People")
                         .WithMany("Teacher")
                         .HasForeignKey("PeopleId")
-                        .IsRequired()
-                        .HasConstraintName("Teacher_fk0");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("People");
                 });
 
-            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Address", b =>
+            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.AddressEntity", b =>
                 {
                     b.Navigation("People");
                 });

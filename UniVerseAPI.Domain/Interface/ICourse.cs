@@ -10,6 +10,6 @@ namespace UniVerseAPI.Domain.Interface
 {
     public interface ICourse : IBaseInterface<Course>
     {
-        public Task<Course> GetByCodeAsync(string code);
+        public Task<Course?> GetByCodeAsync(string code);
     }
 }

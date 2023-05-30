@@ -45,7 +45,7 @@ namespace UniVerseAPI.Infra.Data.Context
 
         [ForeignKey("AddressId")]
         [InverseProperty("People")]
-        public virtual Address Address { get; private set; }
+        public virtual AddressEntity AddressEntity { get; private set; }
         [InverseProperty("People")]
         public virtual ICollection<Student> Student { get; private set; }
         [InverseProperty("People")]
@@ -62,10 +62,10 @@ namespace UniVerseAPI.Infra.Data.Context
             Phone = phone;
             Email = email;
             CreationDate = DateTime.Now;
-            LastUpdateAsync = DateTime.Now;
+            LastUpdate = DateTime.Now;
         }
 
-        public void UpdateAsync(Guid id, Guid addressId, string fullName, DateTime birthDate, string cpf, string gender, string phone, string email, Address address)
+        public void UpdateAsync(Guid id, Guid addressId, string fullName, DateTime birthDate, string cpf, string gender, string phone, string email, AddressEntity address)
         {
             AddressId = addressId;
             FullName = fullName;
@@ -74,8 +74,8 @@ namespace UniVerseAPI.Infra.Data.Context
             Gender = gender;
             Phone = phone;
             Email = email;
-            Address = address;
-            LastUpdateAsync = DateTime.Now;
+            AddressEntity = address;
+            LastUpdate = DateTime.Now;
         }
     }
 

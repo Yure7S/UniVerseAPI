@@ -13,14 +13,16 @@ using UniVerseAPI.Infra.Data.Context;
 
 namespace UniVerseAPI.Application.DTOs.Response
 {
-    public class CourseActionResponseDTO
+    public class StudentActionResponseDTO
     {
-        public Course? Course { get; set; }
+        public StudentInputDTO? StudentInput { get; set; }
+        public Student? Student { get; set; }
         public BaseResponseDTO? BaseResponse { get; set; }
 
-        public CourseActionResponseDTO(BaseResponseDTO? baseResponse, Course? course = null)
+        public StudentActionResponseDTO(BaseResponseDTO? baseResponse, StudentInputDTO? studentInput = null, Student? student = null)
         {
-            Course = course;
+            StudentInput = studentInput;
+            Student = student;
             BaseResponse = baseResponse;
         }
     }

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.AccessControl;
@@ -23,12 +22,15 @@ namespace UniVerseAPI.Application.Services
     {
         private readonly IStudent _IStudent;
         private readonly ICourse _ICourse;
+        private readonly IAddressEntity _IAddressEntity;
+        private readonly IPeople _IPeople;
 
-        public StudentService(IStudent iStudent, ICourse iCourse)
+        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity addressEntity, IPeople people)
         {
             _IStudent = iStudent;
             _ICourse = iCourse;
-
+            _IAddressEntity = addressEntity;
+            _IPeople = people;
         }
 
         public async Task<List<Student>> GetAllAsync()
@@ -60,7 +62,7 @@ namespace UniVerseAPI.Application.Services
             }
             catch (Exception e)
             {
-                BaseResponseDTO baseResponse = new(message: "We encountered an error trying to find the Student!", success: false, error: e.Message);
+                BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to find the Student!", success: false, error: e.Message);
                 StudentActionResponseDTO response = new(baseResponse: baseResponse);
                 return response;
             }
@@ -70,9 +72,18 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
-                Course courseFound = await _ICourse.GetByCodeAsync(student.CourseCode);
+                Course? courseFound = await _ICourse.GetByCodeAsync(student.CourseCode);
 
-                Address newAddress = new(
+                if (courseFound == null)
+                {
+                    BaseResponseDTO baseResponseNull = new(
+                        message: "*** We couldn't find any courses with the given code!",
+                        success: false);
+                    StudentActionResponseDTO responseNull = new(baseResponse: baseResponseNull);
+                    return responseNull;
+                }
+
+                AddressEntity newAddress = new(
                     addressValue: student.Address.AddressValue,
                     number: student.Address.Number,
                     neighborhood: student.Address.Neighborhood,
@@ -92,11 +103,12 @@ namespace UniVerseAPI.Application.Services
                     peopleId: newPeople.Id,
                     registration: student.Registration);
 
-
+                await _IAddressEntity.CreateAsync(newAddress);
+                await _IPeople.CreateAsync(newPeople);
                 await _IStudent.CreateAsync(newStudent);
 
                 BaseResponseDTO baseResponse = new(message: "*** Student Created successfully!", success: true);
-                StudentActionResponseDTO response = new(student: newStudent, baseResponse: baseResponse);
+                StudentActionResponseDTO response = new(studentInput: student, baseResponse: baseResponse);
 
                 return response;
             }

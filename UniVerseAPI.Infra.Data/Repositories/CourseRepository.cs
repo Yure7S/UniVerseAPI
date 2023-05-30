@@ -3,8 +3,6 @@ using NPOI.OpenXmlFormats;
 using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UniVerseAPI.Application.Interface;
@@ -20,7 +18,7 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
         {
         }
 
-        public async Task<Course> GetByCodeAsync(string code)
+        public async Task<Course?> GetByCodeAsync(string code)
         {
             return await _db.Course.SingleOrDefaultAsync(c => c.Code == code);
         }

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Core.Metadata.Edm;
 using Microsoft.EntityFrameworkCore;
 
 namespace UniVerseAPI.Infra.Data.Context
@@ -19,8 +18,7 @@ namespace UniVerseAPI.Infra.Data.Context
         [Required]
         [StringLength(20, MinimumLength = 20)]
         [Unicode(true)]
-        public int Registration { get; set; }
-
+        public string Registration { get; set; }
 
         [ForeignKey("CourseId")]
         [InverseProperty("Student")]
@@ -32,24 +30,57 @@ namespace UniVerseAPI.Infra.Data.Context
         [InverseProperty("Student")]
         public virtual ReportCard ReportCard { get; set; }
 
-        public Student(Guid peopleId, Guid courseId, int registration)
+        public Student()
+        {
+        }
+
+        public Student(Guid peopleId, Guid courseId, string registration)
         {
             Id = Guid.NewGuid();
             PeopleId = peopleId;
             CourseId = courseId;
             Registration = registration;
             CreationDate = DateTime.Now;
-            LastUpdateAsync = DateTime.Now;
+            LastUpdate = DateTime.Now;
         }
 
-        public void UpdateAsync(Guid reportCardId, Guid peopleId, Guid courseId, int registration, bool deleted)
+        public void UpdateAsync(Guid reportCardId, Guid peopleId, Guid courseId, string registration, bool deleted)
         {
             ReportCardId = reportCardId;
             PeopleId = peopleId;
             CourseId = courseId;
             Registration = registration;
             Deleted = deleted;
-            LastUpdateAsync = DateTime.Now;
+            LastUpdate = DateTime.Now;
         }
     }
 }
+
+
+//"CourseCode": [
+//      "The CourseCode field is required."
+//    ],
+//    "People.Cpf": [
+//      "The Cpf field is required."
+//    ],
+//    "People.Email": [
+//      "The Email field is required."
+//    ],
+//    "People.Phone": [
+//      "The Phone field is required."
+//    ],
+//    "People.Gender": [
+//      "The Gender field is required."
+//    ],
+//    "People.FullName": [
+//      "The FullName field is required."
+//    ],
+//    "Address.Cep": [
+//      "The Cep field is required."
+//    ],
+//    "Address.AddressValue": [
+//      "The AddressValue field is required."
+//    ],
+//    "Address.Neighborhood": [
+//      "The Neighborhood field is required."
+//    ]

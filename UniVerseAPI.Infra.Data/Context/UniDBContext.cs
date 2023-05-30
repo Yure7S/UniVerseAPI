@@ -14,7 +14,7 @@ namespace UniVerseAPI.Infra.Data.Context
         {
         }
 
-        public virtual DbSet<Address> Address { get; set; }
+        public virtual DbSet<AddressEntity> Address { get; set; }
         public virtual DbSet<Assessment> Assessment { get; set; }
         public virtual DbSet<Class> Class { get; set; }
         public virtual DbSet<Course> Course { get; set; }
@@ -36,7 +36,7 @@ namespace UniVerseAPI.Infra.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Address>(entity =>
+            modelBuilder.Entity<AddressEntity>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -82,7 +82,7 @@ namespace UniVerseAPI.Infra.Data.Context
 
                 entity.Property(e => e.Cpf).IsFixedLength();
 
-                entity.HasOne(d => d.Address)
+                entity.HasOne(d => d.AddressEntity)
                     .WithMany(p => p.People)
                     .HasForeignKey(d => d.AddressId)
                     .OnDelete(DeleteBehavior.ClientSetNull)

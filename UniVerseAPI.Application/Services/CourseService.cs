@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.AccessControl;
@@ -142,7 +141,8 @@ namespace UniVerseAPI.Application.Services
                         seats: course.Seats,
                         spotsAvailable: course.SpotsAvailable,
                         price: course.Price,
-                        category: course.Category);
+                        category: course.Category,
+                        code: course.Code);
 
                 await _ICourse.UpdateAsync(courseFound);
 

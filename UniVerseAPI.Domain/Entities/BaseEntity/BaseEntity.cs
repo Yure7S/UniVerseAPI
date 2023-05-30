@@ -13,7 +13,7 @@ namespace UniVerseAPI.Infra.Data.Context
         public bool Deleted { get; protected set; }
         public bool Active { get; protected set; }
         public DateTime CreationDate { get; protected set; }
-        public DateTime LastUpdateAsync { get; protected set; }
+        public DateTime LastUpdate { get; protected set; }
 
         public void DeleteAsync(bool deleted)
         {
@@ -22,7 +22,7 @@ namespace UniVerseAPI.Infra.Data.Context
 
         public void Activate(bool active)
         {
-            LastUpdateAsync = DateTime.Now;
+            LastUpdate = DateTime.Now;
             Active = active;
         }
     }

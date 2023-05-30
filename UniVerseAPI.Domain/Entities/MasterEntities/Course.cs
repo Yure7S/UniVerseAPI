@@ -62,13 +62,13 @@ namespace UniVerseAPI.Infra.Data.Context
             Active = true;
             Deleted = false;
             CreationDate = DateTime.Now;
-            LastUpdateAsync = DateTime.Now;
+            LastUpdate = DateTime.Now;
             Student = new HashSet<Student>();
             Subject = new HashSet<Subject>();
         }
 
 
-        public void UpdateAsync(string fullName, string description, DateTime startDate, DateTime endDate, string instructor, int seats, int spotsAvailable, int price, string category)
+        public void UpdateAsync(string fullName, string description, DateTime startDate, DateTime endDate, string instructor, int seats, int spotsAvailable, int price, string category, string code)
         {
             FullName = fullName;
             Description = description;
@@ -79,7 +79,8 @@ namespace UniVerseAPI.Infra.Data.Context
             SpotsAvailable = spotsAvailable;
             Price = price;
             Category = category;
-            LastUpdateAsync = DateTime.Now;
+            Code = code;
+            LastUpdate = DateTime.Now;
         }
     }
 }
