@@ -14,7 +14,7 @@ namespace UniVerseAPI.Infra.Data.Context
         {
         }
 
-        public virtual DbSet<AddressEntity> Address { get; set; }
+        public virtual DbSet<AddressEntity> AddressEntity { get; set; }
         public virtual DbSet<Assessment> Assessment { get; set; }
         public virtual DbSet<Class> Class { get; set; }
         public virtual DbSet<Course> Course { get; set; }

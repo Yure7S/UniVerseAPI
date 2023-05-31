@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
+    [Table("AddressEntity")]
     public partial class AddressEntity : BaseEntity
     {
         public AddressEntity()
@@ -18,7 +19,7 @@ namespace UniVerseAPI.Infra.Data.Context
         [Key]
         public Guid Id { get; private set; }
         [Required]
-        [Column("Address")]
+        [Column("AddressValue")]
         [StringLength(255)]
         public string AddressValue { get; private set; }
         public int Number { get; private set; }
@@ -30,7 +31,7 @@ namespace UniVerseAPI.Infra.Data.Context
         [Unicode(false)]
         public string Cep { get; private set; }
 
-        [InverseProperty("Address")]
+        [InverseProperty("AddressEntity")]
         public virtual ICollection<People> People { get; private set; }
 
         public AddressEntity(string addressValue, int number, string neighborhood, string cep)
