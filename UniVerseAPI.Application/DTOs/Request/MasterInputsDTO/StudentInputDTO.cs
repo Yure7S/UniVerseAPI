@@ -15,12 +15,11 @@ namespace UniVerseAPI.Infra.Data.Context
         [Unicode(true)]
         public string Registration { get; set; }
         [Required]
-        public AddressEntity Address { get; set; }
-        [Required]
-        public People People { get; set; }
-        [Required]
         [StringLength(10, MinimumLength = 10)]
-        [Unicode(true)]
-        public string CourseCode { get; private set; }
+        public string CourseCode { get; set; }
+        [Required]
+        public AddressInputDTO Address { get; set; }
+        [Required]
+        public PeopleInputDTO People { get; set; }
     }
 }

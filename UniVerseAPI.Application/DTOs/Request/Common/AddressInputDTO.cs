@@ -13,14 +13,14 @@ namespace UniVerseAPI.Infra.Data.Context
         [Required]
         [Column("Address")]
         [StringLength(255)]
-        public string AddressValue { get; private set; }
-        public int Number { get; private set; }
+        public string AddressValue { get; set; }
+        public int Number { get; set; }
         [Required]
         [StringLength(255)]
-        public string Neighborhood { get; private set; }
+        public string Neighborhood { get; set; }
         [Required]
         [StringLength(8)]
         [Unicode(false)]
-        public string Cep { get; private set; }
+        public string Cep { get; set; }
     }
 }

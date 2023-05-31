@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,6 +69,13 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
+        public void SaveStudent(AddressEntity newAddress, People newPeople, Student newStudent)
+        {
+            _IAddressEntity.CreateAsync(newAddress);
+            _IPeople.CreateAsync(newPeople);
+            _IStudent.CreateAsync(newStudent);
+        } 
+
         public async Task<StudentActionResponseDTO> CreateAsync(StudentInputDTO student)
         {
             try
@@ -103,9 +111,7 @@ namespace UniVerseAPI.Application.Services
                     peopleId: newPeople.Id,
                     registration: student.Registration);
 
-                await _IAddressEntity.CreateAsync(newAddress);
-                await _IPeople.CreateAsync(newPeople);
-                await _IStudent.CreateAsync(newStudent);
+                SaveStudent(newAddress, newPeople, newStudent);
 
                 BaseResponseDTO baseResponse = new(message: "*** Student Created successfully!", success: true);
                 StudentActionResponseDTO response = new(studentInput: student, baseResponse: baseResponse);

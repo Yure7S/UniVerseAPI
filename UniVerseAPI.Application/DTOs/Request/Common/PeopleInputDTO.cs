@@ -13,22 +13,22 @@ namespace UniVerseAPI.Infra.Data.Context
     {
         [Required]
         [StringLength(255)]
-        public string FullName { get; private set; }
+        public string FullName { get; set; }
         [Column(TypeName = "date")]
-        public DateTime BirthDate { get; private set; }
+        public DateTime BirthDate { get; set; }
         [Required]
         [StringLength(11)]
         [Unicode(false)]
-        public string Cpf { get; private set; }
+        public string Cpf { get; set; }
         [Required]
         [StringLength(255)]
-        public string Gender { get; private set; }
+        public string Gender { get; set; }
         [Required]
         [StringLength(255)]
-        public string Phone { get; private set; }
+        public string Phone { get; set; }
         [Required]
         [StringLength(255)]
-        public string Email { get; private set; }
+        public string Email { get; set; }
         [Required]
         [StringLength (500, MinimumLength = 8)]
         public string Password { get; set; }
