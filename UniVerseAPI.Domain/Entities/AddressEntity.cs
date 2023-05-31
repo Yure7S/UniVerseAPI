@@ -45,7 +45,7 @@ namespace UniVerseAPI.Infra.Data.Context
             LastUpdate = DateTime.Now;
         }
 
-        public void UpdateAsync(Guid id, string addressValue, int number, string neighborhood, string cep)
+        public void UpdateAsync(string addressValue, int number, string neighborhood, string cep)
         {
             AddressValue = addressValue;
             Number = number;

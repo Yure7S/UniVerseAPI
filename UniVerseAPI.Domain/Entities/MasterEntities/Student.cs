@@ -40,47 +40,24 @@ namespace UniVerseAPI.Infra.Data.Context
             PeopleId = peopleId;
             CourseId = courseId;
             Registration = registration;
+            Active = true;
             CreationDate = DateTime.Now;
             LastUpdate = DateTime.Now;
         }
 
-        public void UpdateAsync(Guid reportCardId, Guid peopleId, Guid courseId, string registration, bool deleted)
+        public void UpdateAsync(Guid? courseId, Guid? reportCardId)
         {
             ReportCardId = reportCardId;
-            PeopleId = peopleId;
             CourseId = courseId;
-            Registration = registration;
-            Deleted = deleted;
+            LastUpdate = DateTime.Now;
+        }
+
+        public void CourseTransfer(Guid courseId)
+        {
+            CourseId = courseId;
             LastUpdate = DateTime.Now;
         }
     }
 }
 
 
-//"CourseCode": [
-//      "The CourseCode field is required."
-//    ],
-//    "People.Cpf": [
-//      "The Cpf field is required."
-//    ],
-//    "People.Email": [
-//      "The Email field is required."
-//    ],
-//    "People.Phone": [
-//      "The Phone field is required."
-//    ],
-//    "People.Gender": [
-//      "The Gender field is required."
-//    ],
-//    "People.FullName": [
-//      "The FullName field is required."
-//    ],
-//    "Address.Cep": [
-//      "The Cep field is required."
-//    ],
-//    "Address.AddressValue": [
-//      "The AddressValue field is required."
-//    ],
-//    "Address.Neighborhood": [
-//      "The Neighborhood field is required."
-//    ]

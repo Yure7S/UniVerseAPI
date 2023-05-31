@@ -234,3 +234,4 @@ C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\refint\UniVe
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\UniVerseAPI.pdb
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\UniVerseAPI.genruntimeconfig.cache
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\ref\UniVerseAPI.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\bin\Debug\net6.0\Newtonsoft.Json.dll

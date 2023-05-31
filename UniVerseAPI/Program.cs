@@ -7,12 +7,16 @@ using UniVerseAPI.Domain.Interface;
 using UniVerseAPI.Application.IServices;
 using UniVerseAPI.Application.Services;
 using UniVerseAPI.Infra.Data.Repositories;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 #region [Config Repository]
-    
+
 // CRUD Base
 builder.Services.AddScoped(typeof(IBaseInterface<>), typeof(BaseRepository<>));
 

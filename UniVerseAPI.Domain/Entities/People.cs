@@ -51,7 +51,7 @@ namespace UniVerseAPI.Infra.Data.Context
         [InverseProperty("People")]
         public virtual ICollection<Teacher> Teacher { get; private set; }
 
-        public People(Guid addressId, string fullName, DateTime birthDate, string cpf, string gender, string phone, string email)
+        public People(Guid addressId, string fullName, DateTime birthDate, string cpf, string gender, string phone, string email, string password)
         {
             Id = Guid.NewGuid();
             AddressId = addressId;
@@ -61,20 +61,20 @@ namespace UniVerseAPI.Infra.Data.Context
             Gender = gender;
             Phone = phone;
             Email = email;
+            Password = password;
             CreationDate = DateTime.Now;
             LastUpdate = DateTime.Now;
         }
 
-        public void UpdateAsync(Guid id, Guid addressId, string fullName, DateTime birthDate, string cpf, string gender, string phone, string email, AddressEntity address)
+        public void UpdateAsync(string fullName, DateTime birthDate, string cpf, string gender, string phone, string email, string password)
         {
-            AddressId = addressId;
             FullName = fullName;
             BirthDate = birthDate;
             Cpf = cpf;
             Gender = gender;
             Phone = phone;
             Email = email;
-            AddressEntity = address;
+            Password = password;
             LastUpdate = DateTime.Now;
         }
     }

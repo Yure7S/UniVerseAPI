@@ -1,4 +1,5 @@
 ﻿using Azure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -6,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,17 +28,33 @@ namespace UniVerseAPI.Application.Services
         private readonly IAddressEntity _IAddressEntity;
         private readonly IPeople _IPeople;
 
-        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity addressEntity, IPeople people)
+        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity iAddressEntity, IPeople iPeople)
         {
             _IStudent = iStudent;
             _ICourse = iCourse;
-            _IAddressEntity = addressEntity;
-            _IPeople = people;
+            _IAddressEntity = iAddressEntity;
+            _IPeople = iPeople;
         }
 
-        public async Task<List<Student>> GetAllAsync()
+        public async Task<List<StudentListResponseDTO>> GetAllAsync()
         {
-            return await _IStudent.GetAllAsync();
+            List<Student> studentList = await _IStudent.GetAllAsync();
+            List<StudentListResponseDTO> studentResponseList = new();
+
+            foreach(Student studentItem in studentList)
+            {
+                People? peopleItem = await _IPeople.GetByIdAsync(studentItem.PeopleId); 
+                AddressEntity? addressItem = await _IAddressEntity.GetByIdAsync(peopleItem!.AddressId);
+
+                StudentListResponseDTO studentResponse = new(
+                    student: studentItem,
+                    address: addressItem,
+                    people: peopleItem);
+
+                studentResponseList.Add(studentResponse);
+            }
+
+            return studentResponseList;
         }
 
         public async Task<StudentActionResponseDTO> GetByIdAsync(Guid id)
@@ -104,7 +122,8 @@ namespace UniVerseAPI.Application.Services
                     cpf: student.People.Cpf,
                     gender: student.People.Gender,
                     phone: student.People.Phone,
-                    email: student.People.Email);
+                    email: student.People.Email,
+                    password: student.People.Password);
 
                 Student newStudent = new(
                     courseId: courseFound.Id,
@@ -141,6 +160,7 @@ namespace UniVerseAPI.Application.Services
 
                 studentFound.DeleteAsync(true);
                 await _IStudent.UpdateAsync(studentFound);
+
                 BaseResponseDTO response = new(message: "*** Deleted successfully!",
                 success: true);
                 return response;
@@ -155,11 +175,22 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<BaseResponseDTO> UpdateAsync(StudentInputDTO Student, Guid id)
+        public void UpdateStudent(Student student, People people,AddressEntity addressEntity)
+        {
+            _IAddressEntity.UpdateAsync(addressEntity);
+            _IPeople.UpdateAsync(people);
+            _IStudent.UpdateAsync(student);
+        }
+
+        public async Task<BaseResponseDTO> UpdateAsync(StudentInputDTO student, Guid id)
         {
             try
             {
+                Course? courseFound = await _ICourse.GetByCodeAsync(student.CourseCode);
                 Student? studentFound = await _IStudent.GetByIdAsync(id);
+                People? peopleFound = await _IPeople.GetByIdAsync(studentFound!.PeopleId);
+                AddressEntity? addressFound = await _IAddressEntity.GetByIdAsync(peopleFound!.AddressId);
+
                 if (studentFound == null)
                 {
                     BaseResponseDTO respNull = new(message: "*** We couldn't find the Student in our database!",
@@ -167,18 +198,25 @@ namespace UniVerseAPI.Application.Services
                     return respNull;
                 }
 
-                //studentFound.UpdateAsync(
-                //        fullName: Student.FullName,
-                //        description: Student.Description,
-                //        startDate: Student.StartDate,
-                //        endDate: Student.EndDate,
-                //        instructor: Student.Instructor,
-                //        seats: Student.Seats,
-                //        spotsAvailable: Student.SpotsAvailable, 
-                //        price: Student.Price,
-                //        category: Student.Category);
+                studentFound.CourseTransfer(
+                    courseId: courseFound!.Id);
 
-                await _IStudent.UpdateAsync(studentFound);
+                addressFound!.UpdateAsync(
+                    addressValue: student.Address.AddressValue,
+                    number: student.Address.Number,
+                    neighborhood: student.Address.Neighborhood,
+                    cep: student.Address.Cep);
+
+                peopleFound.UpdateAsync(
+                    fullName: student.People.FullName,
+                    birthDate: student.People.BirthDate,
+                    cpf: student.People.Cpf,
+                    gender: student.People.Gender,
+                    phone: student.People.Phone,
+                    email: student.People.Email,
+                    password: student.People.Password);
+
+                UpdateStudent(studentFound, peopleFound, addressFound!);
 
                 BaseResponseDTO response = new(message: "*** Student UpdateAsyncd successfully!",
                 success: true);
