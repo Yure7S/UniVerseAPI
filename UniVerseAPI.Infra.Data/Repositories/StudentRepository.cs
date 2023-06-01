@@ -16,5 +16,13 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
         public StudentRepository(UniDBContext db) : base(db)
         {
         }
+
+        public async Task<ICollection<Student>> GetStudentDetailAsync(Guid id)
+        {
+            return await _db.Student.Where(s => s.Id == id)
+                .Include(s => s.People)
+                .ThenInclude(s => s.AddressEntity)
+                .ToListAsync();
+        } 
     }
 }

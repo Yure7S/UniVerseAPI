@@ -34,18 +34,13 @@ namespace UniVerseAPI.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById(Guid id)
+        [HttpGet("details/{id}")]
+        public async Task<IActionResult> GetStudentDetailsAsync(Guid id)
         {
             if (ModelState.IsValid)
             {
-                var response = await _IStudentService.GetByIdAsync(id);
-
-                if (response.BaseResponse!.Success)
-                    return Ok(response);
-                return BadRequest(response);
+                var response = await _IStudentService.GetStudentDetailsAsync(id);
+                return Ok(response);
             }
             return StatusCode(500);
         }

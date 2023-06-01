@@ -12,6 +12,8 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Configuration to fix circular references
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
@@ -40,7 +42,6 @@ builder.Services.AddDbContext<UniDBContext>(options =>
 });
 
 #endregion
-
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

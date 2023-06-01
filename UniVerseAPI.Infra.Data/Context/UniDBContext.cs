@@ -3,15 +3,18 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
     public class UniDBContext : DbContext
     {
+        private readonly IConfiguration _configuration;
 
-        public UniDBContext(DbContextOptions<UniDBContext> options)
+        public UniDBContext(DbContextOptions<UniDBContext> options, IConfiguration configuration)
             : base(options)
         {
+            _configuration = configuration;
         }
 
         public virtual DbSet<AddressEntity> AddressEntity { get; set; }
@@ -30,7 +33,7 @@ namespace UniVerseAPI.Infra.Data.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=UniDB;Persist Security Info=True;User ID=sa;Password=1q2w3e4r@#$;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+                optionsBuilder.UseSqlServer(_configuration.GetConnectionString("Default"));
             }
         }
 

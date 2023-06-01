@@ -36,25 +36,14 @@ namespace UniVerseAPI.Application.Services
             _IPeople = iPeople;
         }
 
-        public async Task<List<StudentListResponseDTO>> GetAllAsync()
+        public async Task<List<Student>> GetAllAsync()
         {
-            List<Student> studentList = await _IStudent.GetAllAsync();
-            List<StudentListResponseDTO> studentResponseList = new();
+            return await _IStudent.GetAllAsync();
+        }
 
-            foreach(Student studentItem in studentList)
-            {
-                People? peopleItem = await _IPeople.GetByIdAsync(studentItem.PeopleId); 
-                AddressEntity? addressItem = await _IAddressEntity.GetByIdAsync(peopleItem!.AddressId);
-
-                StudentListResponseDTO studentResponse = new(
-                    student: studentItem,
-                    address: addressItem,
-                    people: peopleItem);
-
-                studentResponseList.Add(studentResponse);
-            }
-
-            return studentResponseList;
+        public async Task<ICollection<Student>> GetStudentDetailsAsync(Guid id)
+        {
+            return await _IStudent.GetStudentDetailAsync(id);
         }
 
         public async Task<StudentActionResponseDTO> GetByIdAsync(Guid id)
