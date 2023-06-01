@@ -8,22 +8,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    public partial class StudentListResponseDTO
+    public partial class TeacherInputDTO
     {
         [Required]
-        public Student Student { get; set; }
+        [StringLength(255)]
+        public string Code { get; set; }
 
         [Required]
-        public AddressEntity Address { get; set; }
+        public AddressInputDTO Address { get; set; }
 
         [Required]
-        public People People { get; set; }
+        public PeopleInputDTO People { get; set; }
 
-        public StudentListResponseDTO(Student student, AddressEntity address, People people)
-        {
-            Student = student;
-            Address = address;
-            People = people;
-        }
     }
 }

@@ -31,5 +31,23 @@ namespace UniVerseAPI.Infra.Data.Context
         public virtual People People { get; set; }
         [InverseProperty("Teacher")]
         public virtual ICollection<Subject> Subject { get; set; }
+
+        public Teacher(Guid peopleId, string code, People people)
+        {
+            Id = Guid.NewGuid();
+            PeopleId = peopleId;
+            Code = code;
+            People = people;
+            Active = true;
+            CreationDate = DateTime.Now;
+            LastUpdate = DateTime.Now;
+        }
+
+        public void Update(string code, People people)
+        {
+            Code = code;
+            People = people;
+            LastUpdate = DateTime.Now;
+        }
     }
 }
