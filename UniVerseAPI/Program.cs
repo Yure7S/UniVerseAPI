@@ -17,6 +17,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
+// AutoMapper
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 #region [Config Repository]
 
 // CRUD Base

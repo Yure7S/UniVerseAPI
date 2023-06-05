@@ -9,5 +9,6 @@ namespace UniVerseAPI.Application.Interface
 {
     public interface ITeacher : IBaseInterface<Teacher> 
     {
+        public Task<ICollection<Teacher>> GetTeacherDetailAsync(Guid id);
     }
 }

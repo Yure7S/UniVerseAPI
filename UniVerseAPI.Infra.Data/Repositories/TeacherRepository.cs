@@ -17,5 +17,12 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
         {
         }
 
+        public async Task<ICollection<Teacher>> GetTeacherDetailAsync(Guid id)
+        {
+            return await _db.Teacher.Where(s => s.Id == id)
+                .Include(s => s.People)
+                .ThenInclude(s => s.AddressEntity)
+                .ToListAsync();
+        } 
     }
 }
