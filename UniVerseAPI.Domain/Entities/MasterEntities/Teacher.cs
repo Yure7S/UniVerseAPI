@@ -9,13 +9,8 @@ using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    [Index("Code", Name = "UQ__Teacher__A25C5AA792072F3C", IsUnique = true)]
     public partial class Teacher : BaseEntity
     {
-        public Teacher()
-        {
-            Subject = new HashSet<Subject>();
-        }
 
         [Key]
         public Guid Id { get; set; }
@@ -29,8 +24,13 @@ namespace UniVerseAPI.Infra.Data.Context
         [ForeignKey("PeopleId")]
         [InverseProperty("Teacher")]
         public virtual People People { get; set; }
+
         [InverseProperty("Teacher")]
         public virtual ICollection<Subject> Subject { get; set; }
+
+        public Teacher()
+        {
+        }
 
         public Teacher(Guid peopleId, string code, People people)
         {

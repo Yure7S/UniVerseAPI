@@ -314,3 +314,5 @@ C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\obj\Debug\net6.0\ref
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\obj\Debug\net6.0\UniVerseAPI.Api.Test.pdb
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\obj\Debug\net6.0\UniVerseAPI.Api.Test.genruntimeconfig.cache
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\obj\Debug\net6.0\ref\UniVerseAPI.Api.Test.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

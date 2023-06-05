@@ -18,7 +18,7 @@ builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 // AutoMapper
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); ;
 
 #region [Config Repository]
 
@@ -29,11 +29,13 @@ builder.Services.AddScoped(typeof(IBaseInterface<>), typeof(BaseRepository<>));
 builder.Services.AddScoped<IStudent, StudentRepository>();
 builder.Services.AddScoped<ICourse, CourseRepository>();
 builder.Services.AddScoped<IPeople, PeopleRepository>();
+builder.Services.AddScoped<ITeacher, TeacherRepository>();
 builder.Services.AddScoped<IAddressEntity, AddressEntityRepository>();
 
 // Services
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<ITeacherService, TeacherService>();
 
 #endregion
 

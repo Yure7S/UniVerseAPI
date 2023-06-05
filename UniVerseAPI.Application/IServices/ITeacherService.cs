@@ -11,12 +11,12 @@ namespace UniVerseAPI.Application.IServices
 {
     public interface ITeacherService
     {
-        public Task<List<Teacher>> GetAllAsync();
-        public Task<TeacherActionResponseDTO> GetByIdAsync(Guid id);
-        public Task<ICollection<Teacher>> GetTeacherDetailsAsync(Guid id);
-        public Task<TeacherActionResponseDTO> CreateAsync(TeacherInputDTO teacher);
-        public Task<BaseResponseDTO> UpdateAsync(TeacherInputDTO teacher, Guid id);
-        public Task<BaseResponseDTO> DeleteAsync(Guid id);
+        //public Task<List<Teacher>> GetAllAsync();
+        //public Task<TeacherActionResponseDTO> GetByIdAsync(Guid id);
+        //public Task<ICollection<Teacher>> GetTeacherDetailsAsync(Guid id);
+        public TeacherActionResponseDTO CreateAsync(TeacherInputDTO teacher);
+        //public Task<BaseResponseDTO> UpdateAsync(TeacherInputDTO teacher, Guid id);
+        //public Task<BaseResponseDTO> DeleteAsync(Guid id);
 
     }
 }
