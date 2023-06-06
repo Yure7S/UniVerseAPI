@@ -51,22 +51,20 @@ namespace UniVerseAPI.Application.Services
             try
             {
                 Student? studentFound =  await _IStudent.GetByIdAsync(id);
+                BaseResponseDTO response = new();
+
                 if (studentFound == null)
                 {
-                    BaseResponseDTO baseRespNull = new(
-                        message: "We could not find this item in our database.",
-                        success: false);
-
-                    StudentActionResponseDTO respNull = new(baseResponse: baseRespNull);
+                    response.Update("We could not find this item in our database.", false);
+                    StudentActionResponseDTO respNull = new(baseResponse: response);
                     return respNull;
                 }
-
-                BaseResponseDTO baseResponse = new(
-                        message: "Found successfully!",
-                        success: true);
-
-                StudentActionResponseDTO response = new(baseResponse: baseResponse, student: studentFound);
-                return response;
+                else
+                {
+                    response.Update("Found successfully!", true);
+                    StudentActionResponseDTO studentResponse = new(baseResponse: response, student: studentFound);
+                    return studentResponse;
+                }
             }
             catch (Exception e)
             {
@@ -139,19 +137,19 @@ namespace UniVerseAPI.Application.Services
             try
             {
                 Student? studentFound = await _IStudent.GetByIdAsync(id);
+                BaseResponseDTO response = new();
 
                 if (studentFound == null)
                 {
-                    BaseResponseDTO respNull = new(message: "*** We couldn't find the Student in our database!",
-                    success: false);
-                    return respNull;
+                    response.Update("*** We couldn't find the Student in our database!", false);
+                }
+                else
+                {
+                    studentFound.DeleteAsync(true);
+                    await _IStudent.UpdateAsync(studentFound);
+                    response.Update("*** Deleted successfully!", true);
                 }
 
-                studentFound.DeleteAsync(true);
-                await _IStudent.UpdateAsync(studentFound);
-
-                BaseResponseDTO response = new(message: "*** Deleted successfully!",
-                success: true);
                 return response;
             }
             catch (Exception e)
@@ -182,8 +180,9 @@ namespace UniVerseAPI.Application.Services
 
                 if (studentFound == null)
                 {
-                    BaseResponseDTO respNull = new(message: "*** We couldn't find the Student in our database!",
-                    success: false);
+                    BaseResponseDTO respNull = new(
+                        message: "*** We couldn't find the Student in our database!",
+                        success: false);
                     return respNull;
                 }
 
@@ -207,13 +206,15 @@ namespace UniVerseAPI.Application.Services
 
                 UpdateStudent(studentFound, peopleFound, addressFound!);
 
-                BaseResponseDTO response = new(message: "*** Student UpdateAsyncd successfully!",
-                success: true);
+                BaseResponseDTO response = new(
+                    message: "*** Student UpdateAsyncd successfully!",
+                    success: true);
                 return response;
             }
             catch (Exception e)
             {
-                BaseResponseDTO response = new(message: "*** We encountered an error trying to UpdateAsync the Student!",
+                BaseResponseDTO response = new(
+                    message: "*** We encountered an error trying to UpdateAsync the Student!",
                     success: false, 
                     error: e.Message);
 

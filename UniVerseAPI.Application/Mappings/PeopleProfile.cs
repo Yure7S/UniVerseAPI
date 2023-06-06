@@ -13,7 +13,7 @@ namespace UniVerseAPI.Application.Mappings
     {
         public PeopleProfile()
         {
-            CreateMap<PeopleInputDTO, People>();
+            CreateMap<People, PeopleResponseDTO>();
         }
     }
 }

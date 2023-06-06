@@ -38,6 +38,7 @@ namespace UniVerseAPI.Application.Services
 
         public async Task<List<Teacher>> GetAllAsync()
         {
+
             return await _teacher.GetAllAsync();
         }
 
@@ -51,22 +52,18 @@ namespace UniVerseAPI.Application.Services
             try
             {
                 Teacher? teacherFound = await _teacher.GetByIdAsync(id);
+                BaseResponseDTO response = new();
+
                 if (teacherFound == null)
                 {
-                    BaseResponseDTO baseRespNull = new(
-                        message: "We could not find this item in our database.",
-                        success: false);
-
-                    TeacherActionResponseDTO respNull = new(baseResponse: baseRespNull);
+                    response.Update("We could not find this item in our database.", false);
+                    TeacherActionResponseDTO respNull = new(baseResponse: response);
                     return respNull;
                 }
 
-                BaseResponseDTO baseResponse = new(
-                        message: "Found successfully!",
-                        success: true);
-
-                TeacherActionResponseDTO response = new(baseResponse: baseResponse, teacher: teacherFound);
-                return response;
+                response.Update("Found successfully!", true);
+                TeacherActionResponseDTO teacherResponse = new(baseResponse: response, teacher: teacherFound);
+                return teacherResponse;
             }
             catch (Exception e)
             {
@@ -129,19 +126,19 @@ namespace UniVerseAPI.Application.Services
             try
             {
                 Teacher? teacherFound = await _teacher.GetByIdAsync(id);
+                BaseResponseDTO response = new();
 
                 if (teacherFound == null)
                 {
-                    BaseResponseDTO respNull = new(message: "*** We couldn't find the Teacher in our database!",
-                    success: false);
-                    return respNull;
+                    response.Update("*** We couldn't find the Teacher in our database!", false);
+                }
+                else
+                {
+                    teacherFound.DeleteAsync(true);
+                    await _teacher.UpdateAsync(teacherFound);
+                    response.Update("*** Deleted successfully!", true);
                 }
 
-                teacherFound.DeleteAsync(true);
-                await _teacher.UpdateAsync(teacherFound);
-
-                BaseResponseDTO response = new(message: "*** Deleted successfully!",
-                success: true);
                 return response;
             }
             catch (Exception e)

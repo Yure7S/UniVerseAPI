@@ -15,15 +15,15 @@ namespace UniVerseAPI.Application.DTOs.Response
 {
     public class TeacherActionResponseDTO
     {
-        public TeacherInputDTO? TeacherInput { get; set; }
-        public Teacher? Teacher { get; set; }
-        public BaseResponseDTO? BaseResponse { get; set; }
+        public TeacherInputDTO? TeacherResponse { get; set; }
+        public AddressResponseDTO? AddressResponse { get; set; }
+        public PeopleResponseDTO? PeopleResponse { get; set; }
 
-        public TeacherActionResponseDTO(BaseResponseDTO? baseResponse, TeacherInputDTO? teacherInput = null, Teacher? teacher = null)
+        public TeacherActionResponseDTO(TeacherInputDTO? teacherResponse, AddressResponseDTO? addressResponse, PeopleResponseDTO? peopleResponse)
         {
-            TeacherInput = teacherInput;
-            Teacher = teacher;
-            BaseResponse = baseResponse;
+            TeacherResponse = teacherResponse;
+            AddressResponse = addressResponse;
+            PeopleResponse = peopleResponse;
         }
     }
 }

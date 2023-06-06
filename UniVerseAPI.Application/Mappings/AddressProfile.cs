@@ -12,7 +12,7 @@ namespace UniVerseAPI.Application.Mappings
     {
         public AddressProfile()
         {
-            CreateMap<AddressInputDTO, AddressEntity>();
+            CreateMap<AddressEntity, PeopleResponseDTO>();
         }
     }
 }
