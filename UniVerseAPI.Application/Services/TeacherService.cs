@@ -27,57 +27,54 @@ namespace UniVerseAPI.Application.Services
         private readonly ITeacher _teacher;
         private readonly IAddressEntity _addressEntity;
         private readonly IPeople _people;
-        private readonly IMapper _mapper;
 
-        public TeacherService(ITeacher teacher, IAddressEntity addressEntity, IPeople people, IMapper mapper)
+        public TeacherService(ITeacher teacher, IAddressEntity addressEntity, IPeople people)
         {
             _teacher = teacher;
             _addressEntity = addressEntity;
             _people = people;
-            _mapper = mapper;
 
         }
 
-        // FIXME: Converter para automapper
-        //public async Task<List<Teacher>> GetAllAsync()
-        //{
-        //    return await _teacher.GetAllAsync();
-        //}
+        public async Task<List<Teacher>> GetAllAsync()
+        {
+            return await _teacher.GetAllAsync();
+        }
 
-        //public async Task<ICollection<Teacher>> GetTeacherDetailsAsync(Guid id)
-        //{
-        //    return await _teacher.GetTeacherDetailAsync(id);
-        //}
+        public async Task<ICollection<Teacher>> GetTeacherDetailsAsync(Guid id)
+        {
+            return await _teacher.GetTeacherDetailAsync(id);
+        }
 
-        //public async Task<TeacherActionResponseDTO> GetByIdAsync(Guid id)
-        //{
-        //    try
-        //    {
-        //        Teacher? teacherFound =  await _teacher.GetByIdAsync(id);
-        //        if (teacherFound == null)
-        //        {
-        //            BaseResponseDTO baseRespNull = new(
-        //                message: "We could not find this item in our database.",
-        //                success: false);
+        public async Task<TeacherActionResponseDTO> GetByIdAsync(Guid id)
+        {
+            try
+            {
+                Teacher? teacherFound = await _teacher.GetByIdAsync(id);
+                if (teacherFound == null)
+                {
+                    BaseResponseDTO baseRespNull = new(
+                        message: "We could not find this item in our database.",
+                        success: false);
 
-        //            TeacherActionResponseDTO respNull = new(baseResponse: baseRespNull);
-        //            return respNull;
-        //        }
+                    TeacherActionResponseDTO respNull = new(baseResponse: baseRespNull);
+                    return respNull;
+                }
 
-        //        BaseResponseDTO baseResponse = new(
-        //                message: "Found successfully!",
-        //                success: true);
+                BaseResponseDTO baseResponse = new(
+                        message: "Found successfully!",
+                        success: true);
 
-        //        TeacherActionResponseDTO response = new(baseResponse: baseResponse, teacher: teacherFound);
-        //        return response;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to find the Teacher!", success: false, error: e.Message);
-        //        TeacherActionResponseDTO response = new(baseResponse: baseResponse);
-        //        return response;
-        //    }
-        //}
+                TeacherActionResponseDTO response = new(baseResponse: baseResponse, teacher: teacherFound);
+                return response;
+            }
+            catch (Exception e)
+            {
+                BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to find the Teacher!", success: false, error: e.Message);
+                TeacherActionResponseDTO response = new(baseResponse: baseResponse);
+                return response;
+            }
+        }
 
         public void SaveTeacher(AddressEntity newAddress, People newPeople, Teacher newTeacher)
         {
@@ -91,9 +88,25 @@ namespace UniVerseAPI.Application.Services
             try
             {
 
-                AddressEntity newAddress = _mapper.Map<AddressEntity>(teacher.Address);
-                People newPeople = _mapper.Map<People>(teacher.People);
-                Teacher newTeacher = _mapper.Map<Teacher>(teacher);
+                AddressEntity newAddress = new(
+                    addressValue: teacher.Address.AddressValue,
+                    number: teacher.Address.Number,
+                    neighborhood: teacher.Address.Neighborhood,
+                    cep: teacher.Address.Cep);
+
+                People newPeople = new(
+                    addressId: newAddress.Id,
+                    fullName: teacher.People.FullName,
+                    birthDate: teacher.People.BirthDate,
+                    cpf: teacher.People.Cpf,
+                    gender: teacher.People.Gender,
+                    phone: teacher.People.Phone,
+                    email: teacher.People.Email,
+                    password: teacher.People.Password);
+
+                Teacher newTeacher = new(
+                    peopleId: newPeople.Id,
+                    code: teacher.Code);
 
                 SaveTeacher(newAddress, newPeople, newTeacher);
 
@@ -111,92 +124,121 @@ namespace UniVerseAPI.Application.Services
         }
 
 
-        // FIXME: Converter para automapper
-        //    public async Task<BaseResponseDTO> DeleteAsync(Guid id)
-        //    {
-        //        try
-        //        {
-        //            Teacher? teacherFound = await _teacher.GetByIdAsync(id);
+        public async Task<BaseResponseDTO> DeleteAsync(Guid id)
+        {
+            try
+            {
+                Teacher? teacherFound = await _teacher.GetByIdAsync(id);
 
-        //            if (teacherFound == null)
-        //            {
-        //                BaseResponseDTO respNull = new(message: "*** We couldn't find the Teacher in our database!",
-        //                success: false);
-        //                return respNull;
-        //            }
+                if (teacherFound == null)
+                {
+                    BaseResponseDTO respNull = new(message: "*** We couldn't find the Teacher in our database!",
+                    success: false);
+                    return respNull;
+                }
 
-        //            teacherFound.DeleteAsync(true);
-        //            await _teacher.UpdateAsync(teacherFound);
+                teacherFound.DeleteAsync(true);
+                await _teacher.UpdateAsync(teacherFound);
 
-        //            BaseResponseDTO response = new(message: "*** Deleted successfully!",
-        //            success: true);
-        //            return response;
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            BaseResponseDTO response = new(message: "*** We encountered an error trying to delete the Teacher!",
-        //                success: false,
-        //                error: e.Message);
+                BaseResponseDTO response = new(message: "*** Deleted successfully!",
+                success: true);
+                return response;
+            }
+            catch (Exception e)
+            {
+                BaseResponseDTO response = new(message: "*** We encountered an error trying to delete the Teacher!",
+                    success: false,
+                    error: e.Message);
 
-        //            return response;
-        //        }
-        //    }
-
-        //    public void UpdateTeacher(Teacher teacher, People people,AddressEntity addressEntity)
-        //    {
-        //        _addressEntity.UpdateAsync(addressEntity);
-        //        _people.UpdateAsync(people);
-        //        _teacher.UpdateAsync(teacher);
-        //    }
-
-        //    public async Task<BaseResponseDTO> UpdateAsync(TeacherInputDTO teacher, Guid id)
-        //    {
-        //        try
-        //        {
-        //            Course? courseFound = await _course.GetByCodeAsync(teacher.CourseCode);
-        //            Teacher? teacherFound = await _teacher.GetByIdAsync(id);
-        //            People? peopleFound = await _people.GetByIdAsync(teacherFound!.PeopleId);
-        //            AddressEntity? addressFound = await _addressEntity.GetByIdAsync(peopleFound!.AddressId);
-
-        //            if (teacherFound == null)
-        //            {
-        //                BaseResponseDTO respNull = new(message: "*** We couldn't find the Teacher in our database!",
-        //                success: false);
-        //                return respNull;
-        //            }
-
-        //            teacherFound.CourseTransfer(
-        //                courseId: courseFound!.Id);
-
-        //            addressFound!.UpdateAsync(
-        //                addressValue: teacher.Address.AddressValue,
-        //                number: teacher.Address.Number,
-        //                neighborhood: teacher.Address.Neighborhood,
-        //                cep: teacher.Address.Cep);
-
-        //            peopleFound.UpdateAsync(
-        //                fullName: teacher.People.FullName,
-        //                birthDate: teacher.People.BirthDate,
-        //                cpf: teacher.People.Cpf,
-        //                gender: teacher.People.Gender,
-        //                phone: teacher.People.Phone,
-        //                email: teacher.People.Email,
-        //                password: teacher.People.Password);
-
-        //            UpdateTeacher(teacherFound, peopleFound, addressFound!);
-
-        //            BaseResponseDTO response = new(message: "*** Teacher UpdateAsyncd successfully!",
-        //            success: true);
-        //            return response;
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            BaseResponseDTO response = new(message: "*** We encountered an error trying to UpdateAsync the Teacher!",
-        //                success: false, 
-        //                error: e.Message);
-
-        //            return response;
-        //        }
-        //    }
+                return response;
+            }
         }
+
+        public async Task<BaseResponseDTO> EnableOrDisable(Guid id, bool status)
+        {
+            try
+            {
+                Teacher? teacherFound = await _teacher.GetByIdAsync(id);
+                BaseResponseDTO response = new();
+
+                if (teacherFound == null)
+                {
+                    response.Update("*** We couldn't find the Teacher in our database!", false);
+                }
+                else if (teacherFound.Active == status)
+                {
+                    response.Update("*** This action has already been performed", false);
+                }
+                else
+                {
+                    teacherFound.Activate(status);
+                    await _teacher.UpdateAsync(teacherFound);
+                    response.Update(status ? "*** Successfully enabled" : "*** Successfully disabled", true);
+                }
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                BaseResponseDTO response = new(message: "*** We encountered an error trying to perform such an action!",
+                    success: false,
+                    error: e.Message);
+
+                return response;
+            }
+        }
+
+        public void UpdateTeacher(People people, AddressEntity addressEntity)
+        {
+            _addressEntity.UpdateAsync(addressEntity);
+            _people.UpdateAsync(people);
+        }
+
+        public async Task<BaseResponseDTO> UpdateAsync(TeacherInputDTO teacher, Guid id)
+        {
+            try
+            {
+                Teacher? teacherFound = await _teacher.GetByIdAsync(id);
+                People? peopleFound = await _people.GetByIdAsync(teacherFound!.PeopleId);
+                AddressEntity? addressFound = await _addressEntity.GetByIdAsync(peopleFound!.AddressId);
+
+                if (teacherFound == null)
+                {
+                    BaseResponseDTO respNull = new(message: "*** We couldn't find the Teacher in our database!",
+                    success: false);
+                    return respNull;
+                }
+
+
+                addressFound!.UpdateAsync(
+                    addressValue: teacher.Address.AddressValue,
+                    number: teacher.Address.Number,
+                    neighborhood: teacher.Address.Neighborhood,
+                    cep: teacher.Address.Cep);
+
+                peopleFound.UpdateAsync(
+                    fullName: teacher.People.FullName,
+                    birthDate: teacher.People.BirthDate,
+                    cpf: teacher.People.Cpf,
+                    gender: teacher.People.Gender,
+                    phone: teacher.People.Phone,
+                    email: teacher.People.Email,
+                    password: teacher.People.Password);
+
+                UpdateTeacher(peopleFound, addressFound!);
+
+                BaseResponseDTO response = new(message: "*** Teacher UpdateAsyncd successfully!",
+                success: true);
+                return response;
+            }
+            catch (Exception e)
+            {
+                BaseResponseDTO response = new(message: "*** We encountered an error trying to UpdateAsync the Teacher!",
+                    success: false,
+                    error: e.Message);
+
+                return response;
+            }
+        }
+    }
     }

@@ -501,9 +501,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.HasIndex("PeopleId");
 
-                    b.HasIndex(new[] { "Code" }, "UQ__Teacher__A25C5AA792072F3C")
-                        .IsUnique();
-
                     b.ToTable("Teacher");
                 });
 

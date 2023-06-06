@@ -12,6 +12,8 @@ namespace UniVerseAPI.Application.DTOs.Response.BaseResponse
         public bool Success { get; set; }
         public string? Error { get; set; }
 
+        public BaseResponseDTO() { }    
+
         public BaseResponseDTO(string? message, bool success, string? error = "")
         {
             Message = message;
