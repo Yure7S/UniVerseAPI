@@ -18,8 +18,10 @@ namespace UniVerseAPI.Infra.Data.Context
         public string Phone { get; private set; }
         public string Email { get; private set; }
         public string Password { get; set; }
+        public AddressResponseDTO AddressEntity { get; set; }
 
-        public PeopleResponseDTO(string fullName, DateTime birthDate, string cpf, string gender, string phone, string email, string password)
+
+        public PeopleResponseDTO(string fullName, DateTime birthDate, string cpf, string gender, string phone, string email, string password, AddressResponseDTO addressEntity)
         {
             FullName = fullName;
             BirthDate = birthDate;
@@ -28,6 +30,7 @@ namespace UniVerseAPI.Infra.Data.Context
             Phone = phone;
             Email = email;
             Password = password;
+            AddressEntity = addressEntity;
         }
     }
 

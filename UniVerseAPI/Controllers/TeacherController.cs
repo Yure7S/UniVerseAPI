@@ -19,11 +19,11 @@ namespace UniVerseAPI.Controllers
         [HttpGet("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAllAsync()
+        public IActionResult GetAllAsync()
         {
             try
             {
-                var response = await _ITeacherService.GetAllAsync();
+                var response = _ITeacherService.GetAllAsync();
                 return Ok(response);
             }
             catch (Exception)
@@ -37,8 +37,10 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _ITeacherService.GetTeacherDetailsAsync(id);
-                return Ok(response);
+                var response = await _ITeacherService.GetTeacherDetailAsync(id);
+                if (response.BaseResponse!.Success)
+                    return Ok(response);
+                return BadRequest(response);
             }
             return StatusCode(500);
         }

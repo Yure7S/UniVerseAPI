@@ -27,48 +27,66 @@ namespace UniVerseAPI.Application.Services
         private readonly ITeacher _teacher;
         private readonly IAddressEntity _addressEntity;
         private readonly IPeople _people;
+        private readonly IMapper _mapper;
 
-        public TeacherService(ITeacher teacher, IAddressEntity addressEntity, IPeople people)
+        public TeacherService(ITeacher teacher, IAddressEntity addressEntity, IPeople people, IMapper mapper)
         {
             _teacher = teacher;
             _addressEntity = addressEntity;
             _people = people;
-
+            _mapper = mapper;
         }
 
-        public async Task<List<Teacher>> GetAllAsync()
+        public List<TeacherActionResponseDTO> GetAllAsync()
         {
-
-            return await _teacher.GetAllAsync();
+            return _teacher.GetAllTeacherAsync()
+                .Result
+                .ConvertAll(tchr => new TeacherActionResponseDTO(tchr));
         }
 
-        public async Task<ICollection<Teacher>> GetTeacherDetailsAsync(Guid id)
-        {
-            return await _teacher.GetTeacherDetailAsync(id);
-        }
-
-        public async Task<TeacherActionResponseDTO> GetByIdAsync(Guid id)
+        public async Task<TeacherActionResponseDetailsDTO> GetTeacherDetailAsync(Guid id)
         {
             try
             {
-                Teacher? teacherFound = await _teacher.GetByIdAsync(id);
+                Teacher teacherFound = await _teacher.GetTeacherDetailAsync(id);
                 BaseResponseDTO response = new();
 
                 if (teacherFound == null)
                 {
                     response.Update("We could not find this item in our database.", false);
-                    TeacherActionResponseDTO respNull = new(baseResponse: response);
+                    TeacherActionResponseDetailsDTO respNull = new(baseResponse: response);
                     return respNull;
                 }
 
                 response.Update("Found successfully!", true);
-                TeacherActionResponseDTO teacherResponse = new(baseResponse: response, teacher: teacherFound);
+
+                AddressResponseDTO addressResponse = new(
+                    addressValue: teacherFound.People.AddressEntity.AddressValue,
+                    number: teacherFound.People.AddressEntity.Number,
+                    neighborhood: teacherFound.People.AddressEntity.Neighborhood,
+                    cep: teacherFound.People.AddressEntity.Cep);
+
+                PeopleResponseDTO peopleResponse = new(
+                    fullName: teacherFound.People.FullName,
+                    birthDate: teacherFound.People.BirthDate,
+                    cpf: teacherFound.People.Cpf,
+                    gender: teacherFound.People.Gender,
+                    phone: teacherFound.People.Phone,
+                    email: teacherFound.People.Email,
+                    password: teacherFound.People.Password,
+                    addressEntity: addressResponse);
+
+                TeacherActionResponseDetailsDTO teacherResponse = new(
+                    code: teacherFound.Code,
+                    people: peopleResponse,
+                    baseResponse: response);
+
                 return teacherResponse;
             }
             catch (Exception e)
             {
                 BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to find the Teacher!", success: false, error: e.Message);
-                TeacherActionResponseDTO response = new(baseResponse: baseResponse);
+                TeacherActionResponseDetailsDTO response = new(baseResponse: baseResponse);
                 return response;
             }
         }
@@ -80,7 +98,7 @@ namespace UniVerseAPI.Application.Services
             _teacher.CreateAsync(newTeacher);
         } 
 
-        public TeacherActionResponseDTO CreateAsync(TeacherInputDTO teacher)
+        public TeacherActionResponseDetailsDTO CreateAsync(TeacherInputDTO teacher)
         {
             try
             {
@@ -108,14 +126,14 @@ namespace UniVerseAPI.Application.Services
                 SaveTeacher(newAddress, newPeople, newTeacher);
 
                 BaseResponseDTO baseResponse = new(message: "*** Teacher Created successfully!", success: true);
-                TeacherActionResponseDTO response = new(teacherInput: teacher, baseResponse: baseResponse);
+                TeacherActionResponseDetailsDTO response = new(baseResponse: baseResponse);
 
                 return response;
             }
             catch (Exception e)
             {
                 BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to register a new Teacher!", success: false, error: e.Message);
-                TeacherActionResponseDTO responseError = new(baseResponse: baseResponse);
+                TeacherActionResponseDetailsDTO responseError = new(baseResponse: baseResponse);
                 return responseError;
             }
         }
