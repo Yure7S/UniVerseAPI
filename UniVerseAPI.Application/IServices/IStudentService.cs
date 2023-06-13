@@ -11,9 +11,8 @@ namespace UniVerseAPI.Application.IServices
 {
     public interface IStudentService
     {
-        public Task<List<Student>> GetAllAsync();
-        public Task<StudentActionResponseDTO> GetByIdAsync(Guid id);
-        public Task<ICollection<Student>> GetStudentDetailsAsync(Guid id);
+        public List<StudentActionResponseDTO> GetAllAsync();
+        public Task<StudentActionResponseDetailsDTO> GetByIdAsync(Guid id);
         public Task<StudentActionResponseDTO> CreateAsync(StudentInputDTO student);
         public Task<BaseResponseDTO> UpdateAsync(StudentInputDTO student, Guid id);
         public Task<BaseResponseDTO> DeleteAsync(Guid id);

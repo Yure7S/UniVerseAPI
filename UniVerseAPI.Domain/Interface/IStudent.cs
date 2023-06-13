@@ -9,6 +9,7 @@ namespace UniVerseAPI.Application.Interface
 {
     public interface IStudent : IBaseInterface<Student> 
     {
-        public Task<ICollection<Student>> GetStudentDetailAsync(Guid id);
+        public Task<List<Student>> GetAllStudentAsync();
+        public Task<Student> GetStudentDetailAsync(Guid id);
     }
 }

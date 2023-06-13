@@ -36,40 +36,54 @@ namespace UniVerseAPI.Application.Services
             _IPeople = iPeople;
         }
 
-        public async Task<List<Student>> GetAllAsync()
+        public List<StudentActionResponseDTO> GetAllAsync()
         {
-            return await _IStudent.GetAllAsync();
+            return _IStudent.GetAllStudentAsync()
+                .Result
+                .ConvertAll(std => new StudentActionResponseDTO(std));
         }
 
-        public async Task<ICollection<Student>> GetStudentDetailsAsync(Guid id)
-        {
-            return await _IStudent.GetStudentDetailAsync(id);
-        }
-
-        public async Task<StudentActionResponseDTO> GetByIdAsync(Guid id)
+        public async Task<StudentActionResponseDetailsDTO> GetByIdAsync(Guid id)
         {
             try
             {
-                Student? studentFound =  await _IStudent.GetByIdAsync(id);
+                Student? studentFound =  await _IStudent.GetStudentDetailAsync(id);
                 BaseResponseDTO response = new();
 
                 if (studentFound == null)
                 {
                     response.Update("We could not find this item in our database.", false);
-                    StudentActionResponseDTO respNull = new(baseResponse: response);
+                    StudentActionResponseDetailsDTO respNull = new(baseResponse: response);
                     return respNull;
                 }
                 else
                 {
                     response.Update("Found successfully!", true);
-                    StudentActionResponseDTO studentResponse = new(baseResponse: response, student: studentFound);
+
+                    AddressResponseDTO addressResponse = new(
+                        addressValue: studentFound.People.AddressEntity.AddressValue,
+                        number: studentFound.People.AddressEntity.Number,
+                        neighborhood: studentFound.People.AddressEntity.Neighborhood,
+                        cep: studentFound.People.AddressEntity.Cep);
+
+                    PeopleResponseDTO peopleResponse = new(
+                        fullName: studentFound.People.FullName,
+                        birthDate: studentFound.People.BirthDate,
+                        cpf: studentFound.People.Cpf,
+                        gender: studentFound.People.Gender,
+                        phone: studentFound.People.Phone,
+                        email: studentFound.People.Email,
+                        password: studentFound.People.Password,
+                        addressEntity: addressResponse);
+
+                    StudentActionResponseDetailsDTO studentResponse = new(registration: studentFound.Registration, people: peopleResponse, baseResponse: response);
                     return studentResponse;
                 }
             }
             catch (Exception e)
             {
                 BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to find the Student!", success: false, error: e.Message);
-                StudentActionResponseDTO response = new(baseResponse: baseResponse);
+                StudentActionResponseDetailsDTO response = new(baseResponse: baseResponse);
                 return response;
             }
         }
@@ -120,7 +134,7 @@ namespace UniVerseAPI.Application.Services
                 SaveStudent(newAddress, newPeople, newStudent);
 
                 BaseResponseDTO baseResponse = new(message: "*** Student Created successfully!", success: true);
-                StudentActionResponseDTO response = new(studentInput: student, baseResponse: baseResponse);
+                StudentActionResponseDTO response = new(baseResponse: baseResponse);
 
                 return response;
             }
