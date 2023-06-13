@@ -25,9 +25,6 @@ namespace UniVerseAPI.Infra.Data.Context
         public DateTime StartDate { get; private set; }
         [Column(TypeName = "date")]
         public DateTime EndDate { get; private set; }
-        [Required]
-        [StringLength(255)]
-        public string Instructor { get; private set; }
         public int Seats { get; private set; }
         public int SpotsAvailable { get; private set; }
         public int Price { get; private set; }
@@ -46,14 +43,13 @@ namespace UniVerseAPI.Infra.Data.Context
         [InverseProperty("Course")]
         public virtual ICollection<Subject> Subject { get; set; }
 
-        public Course(string fullName, string description, DateTime startDate, DateTime endDate, string instructor, int seats, int spotsAvailable, int price, string category, string code)
+        public Course(string fullName, string description, DateTime startDate, DateTime endDate, int seats, int spotsAvailable, int price, string category, string code)
         {
             Id = Guid.NewGuid();
             FullName = fullName;
             Description = description;
             StartDate = startDate;
             EndDate = endDate;
-            Instructor = instructor;
             Seats = seats;
             SpotsAvailable = spotsAvailable;
             Price = price;
@@ -68,13 +64,12 @@ namespace UniVerseAPI.Infra.Data.Context
         }
 
 
-        public void UpdateAsync(string fullName, string description, DateTime startDate, DateTime endDate, string instructor, int seats, int spotsAvailable, int price, string category, string code)
+        public void UpdateAsync(string fullName, string description, DateTime startDate, DateTime endDate, int seats, int spotsAvailable, int price, string category, string code)
         {
             FullName = fullName;
             Description = description;
             StartDate = startDate;
             EndDate = endDate;
-            Instructor = instructor;
             Seats = seats;
             SpotsAvailable = spotsAvailable;
             Price = price;

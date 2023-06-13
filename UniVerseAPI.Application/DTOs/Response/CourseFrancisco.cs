@@ -13,25 +13,17 @@ using UniVerseAPI.Infra.Data.Context;
 
 namespace UniVerseAPI.Application.DTOs.Response
 {
-    public class CourseActionResponseDTO
+    public class CourseFrancisco
     {
         public string? FullName { get; set; }
+        public string? Description { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public string? Instructor { get; set; }
         public int? Seats { get; set; }
         public int? SpotsAvailable { get; set; }
-        public string? Category { get; set; }
-        public string? Code { get; set; }
-        public BaseResponseDTO? BaseResponse { get; set; }
-
-        public CourseActionResponseDTO(string? fullName, string? instructor, int? seats, int? spotsAvailable, string? category, string? code, BaseResponseDTO? baseResponse)
-        {
-            FullName = fullName;
-            Instructor = instructor;
-            Seats = seats;
-            SpotsAvailable = spotsAvailable;
-            Category = category;
-            Code = code;
-            BaseResponse = baseResponse;
-        }
+        public int? Price { get; set; }
+        public string? Category { get; private set; }
+        public string? Code { get; private set; }
     }
 }

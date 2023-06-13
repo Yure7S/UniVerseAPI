@@ -48,7 +48,7 @@ namespace UniVerseAPI.Controllers
             {
                 var response = await _ICourseService.GetByCodeAsync(code);
 
-                if(response.BaseResponse!.Success)
+                if(response.Success)
                     return Ok(response);
                     return BadRequest(response);
             }
@@ -64,7 +64,7 @@ namespace UniVerseAPI.Controllers
             {
                 var response = await _ICourseService.CreateAsync(course);
 
-                if (response.BaseResponse!.Success)
+                if (response.Success)
                     return Created("Successfully Created!", response);
                     return BadRequest(response);
             }

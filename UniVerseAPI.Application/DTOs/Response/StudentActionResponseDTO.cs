@@ -25,7 +25,7 @@ namespace UniVerseAPI.Application.DTOs.Response
             FullName = fullName;
             Email = email;
         }
-
+        
         public StudentActionResponseDTO(Student student)
         {
             Registration = student.Registration;

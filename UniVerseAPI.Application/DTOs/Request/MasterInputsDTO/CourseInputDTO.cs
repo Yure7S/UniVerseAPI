@@ -25,7 +25,6 @@ namespace UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO
         public DateTime EndDate { get; set; }
         [Required]
         [StringLength(255)]
-        public string? Instructor { get; set; }
         public int Seats { get; set; }
         public int SpotsAvailable { get; set; }
         public int Price { get; set; }

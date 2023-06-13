@@ -11,9 +11,9 @@ namespace UniVerseAPI.Application.IServices
 {
     public interface ICourseService
     {
-        public Task<CourseActionResponseDTO> GetByCodeAsync(string code);
+        public Task<CourseActionResponseDetailsDTO> GetByCodeAsync(string code);
         public Task<List<Course>> GetAllAsync();
-        public Task<CourseActionResponseDTO> CreateAsync(CourseInputDTO course);
+        public Task<CourseActionResponseDetailsDTO> CreateAsync(CourseInputDTO course);
         public Task<BaseResponseDTO> UpdateAsync(CourseInputDTO course, string code);
         public Task<BaseResponseDTO> DeleteAsync(string code);
     }
