@@ -44,11 +44,11 @@ namespace UniVerseAPI.Application.Services
                 .ConvertAll(tchr => new TeacherActionResponseDTO(tchr));
         }
 
-        public async Task<TeacherActionResponseDetailsDTO> GetTeacherDetailAsync(Guid id)
+        public async Task<TeacherActionResponseDetailsDTO> GetTeacherDetailAsync(string code)
         {
             try
             {
-                Teacher teacherFound = await _teacher.GetTeacherDetailAsync(id);
+                Teacher teacherFound = await _teacher.GetTeacherDetailAsync(code);
                 BaseResponseDTO response = new();
 
                 if (teacherFound == null)
@@ -139,11 +139,11 @@ namespace UniVerseAPI.Application.Services
         }
 
 
-        public async Task<BaseResponseDTO> DeleteAsync(Guid id)
+        public async Task<BaseResponseDTO> DeleteAsync(string code)
         {
             try
             {
-                Teacher? teacherFound = await _teacher.GetByIdAsync(id);
+                Teacher? teacherFound = await _teacher.GetTeacherDetailAsync(code);
                 BaseResponseDTO response = new();
 
                 if (teacherFound == null)
@@ -169,11 +169,11 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<BaseResponseDTO> EnableOrDisable(Guid id, bool status)
+        public async Task<BaseResponseDTO> EnableOrDisable(string code, bool status)
         {
             try
             {
-                Teacher? teacherFound = await _teacher.GetByIdAsync(id);
+                Teacher? teacherFound = await _teacher.GetTeacherDetailAsync(code);
                 BaseResponseDTO response = new();
 
                 if (teacherFound == null)
@@ -209,11 +209,11 @@ namespace UniVerseAPI.Application.Services
             _people.UpdateAsync(people);
         }
 
-        public async Task<BaseResponseDTO> UpdateAsync(TeacherInputDTO teacher, Guid id)
+        public async Task<BaseResponseDTO> UpdateAsync(TeacherInputDTO teacher, string code)
         {
             try
             {
-                Teacher? teacherFound = await _teacher.GetByIdAsync(id);
+                Teacher? teacherFound = await _teacher.GetTeacherDetailAsync(code);
                 People? peopleFound = await _people.GetByIdAsync(teacherFound!.PeopleId);
                 AddressEntity? addressFound = await _addressEntity.GetByIdAsync(peopleFound!.AddressId);
 

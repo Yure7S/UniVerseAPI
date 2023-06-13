@@ -30,11 +30,11 @@ namespace UniVerseAPI.Application.Services
             return await _ICourse.GetAllAsync();
         }
 
-        public async Task<CourseActionResponseDTO> GetByIdAsync(Guid id)
+        public async Task<CourseActionResponseDTO> GetByCodeAsync(string code)
         {
             try
             {
-                Course? courseFound =  await _ICourse.GetByIdAsync(id);
+                Course? courseFound =  await _ICourse.GetByCodeAsync(code);
                 if (courseFound == null)
                 {
                     BaseResponseDTO baseRespNull = new(
@@ -91,11 +91,11 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<BaseResponseDTO> DeleteAsync(Guid id)
+        public async Task<BaseResponseDTO> DeleteAsync(string code)
         {
             try
             {
-                Course? courseFound = await _ICourse.GetByIdAsync(id);
+                Course? courseFound = await _ICourse.GetByCodeAsync(code);
 
                 if (courseFound == null)
                 {
@@ -120,11 +120,11 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<BaseResponseDTO> UpdateAsync(CourseInputDTO course, Guid id)
+        public async Task<BaseResponseDTO> UpdateAsync(CourseInputDTO course, string code)
         {
             try
             {
-                Course? courseFound = await _ICourse.GetByIdAsync(id);
+                Course? courseFound = await _ICourse.GetByCodeAsync(code);
                 if (courseFound == null)
                 {
                     BaseResponseDTO respNull = new(message: "*** We couldn't find the course in our database!",

@@ -32,12 +32,12 @@ namespace UniVerseAPI.Controllers
             }
         }
 
-        [HttpGet("details/{id}")]
-        public async Task<IActionResult> GetTeacherDetailsAsync(Guid id)
+        [HttpGet("details/{code}")]
+        public async Task<IActionResult> GetTeacherDetailsAsync(string code)
         {
             if (ModelState.IsValid)
             {
-                var response = await _ITeacherService.GetTeacherDetailAsync(id);
+                var response = await _ITeacherService.GetTeacherDetailAsync(code);
                 if (response.BaseResponse!.Success)
                     return Ok(response);
                 return BadRequest(response);
@@ -61,14 +61,14 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("enableordisable/{id}")]
+        [HttpPut("enableordisable/{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> EnableOrDisable(Guid id, bool status)
+        public async Task<IActionResult> EnableOrDisable(string code, bool status)
         {
             if (ModelState.IsValid)
             {
-                var response = await _ITeacherService.EnableOrDisable(id, status);
+                var response = await _ITeacherService.EnableOrDisable(code, status);
                 if (response.Success)
                     return Ok(response);
                 return BadRequest(response);
@@ -76,14 +76,14 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("delet/{id}")]
+        [HttpPut("delet/{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteCourse(Guid id)
+        public async Task<IActionResult> DeleteCourse(string code)
         {
             if (ModelState.IsValid)
             {
-                var response = await _ITeacherService.DeleteAsync(id);
+                var response = await _ITeacherService.DeleteAsync(code);
                 if (response.Success)
                     return Ok(response);
                 return BadRequest(response);
@@ -91,14 +91,14 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("modify/{id}")]
+        [HttpPut("modify/{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateCourse(TeacherInputDTO teacher, Guid id)
+        public async Task<IActionResult> UpdateCourse(TeacherInputDTO teacher, string code)
         {
             if (ModelState.IsValid)
             {
-                var response = await _ITeacherService.UpdateAsync(teacher, id);
+                var response = await _ITeacherService.UpdateAsync(teacher, code);
 
                 if (response.Success)
                     return Ok(response);

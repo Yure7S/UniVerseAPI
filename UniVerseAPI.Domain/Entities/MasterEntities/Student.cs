@@ -32,6 +32,9 @@ namespace UniVerseAPI.Infra.Data.Context
 
         public Student()
         {
+            Id = Guid.NewGuid();
+            CreationDate = DateTime.Now;
+            LastUpdate = DateTime.Now;
         }
 
         public Student(Guid peopleId, Guid courseId, string registration)

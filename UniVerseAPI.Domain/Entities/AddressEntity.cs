@@ -30,6 +30,13 @@ namespace UniVerseAPI.Infra.Data.Context
         [InverseProperty("AddressEntity")]
         public virtual ICollection<People> People { get; private set; }
 
+        public AddressEntity()
+        {
+            Id = Guid.NewGuid();
+            CreationDate = DateTime.Now;
+            LastUpdate = DateTime.Now;
+        }
+
         public AddressEntity(string addressValue, int number, string neighborhood, string cep)
         {
             Id = Guid.NewGuid();
@@ -40,8 +47,6 @@ namespace UniVerseAPI.Infra.Data.Context
             CreationDate = DateTime.Now;
             LastUpdate = DateTime.Now;
         }
-
-
 
         public void UpdateAsync(string addressValue, int number, string neighborhood, string cep)
         {

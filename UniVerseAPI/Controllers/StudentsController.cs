@@ -34,12 +34,12 @@ namespace UniVerseAPI.Controllers
             }
         }
 
-        [HttpGet("details/{id}")]
-        public async Task<IActionResult> GetStudentDetailsAsync(Guid id)
+        [HttpGet("details/{registration}")]
+        public async Task<IActionResult> GetStudentDetailsAsync(string registration)
         {
             if (ModelState.IsValid)
             {
-                var response = await _IStudentService.GetByIdAsync(id);
+                var response = await _IStudentService.GetByRegistrationAsync(registration);
                 return Ok(response);
             }
             return StatusCode(500);
@@ -61,14 +61,14 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("delet/{id}")]
+        [HttpPut("delet/{registration}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteCourse(Guid id)
+        public async Task<IActionResult> DeleteCourse(string registration)
         {
             if (ModelState.IsValid)
             {
-                var response = await _IStudentService.DeleteAsync(id);
+                var response = await _IStudentService.DeleteAsync(registration);
                 if (response.Success)
                     return Ok(response);
                 return BadRequest(response);
@@ -76,14 +76,14 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("modify/{id}")]
+        [HttpPut("modify/{registration}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateCourse(StudentInputDTO student, Guid id)
+        public async Task<IActionResult> UpdateCourse(StudentInputDTO student, string registration)
         {
             if (ModelState.IsValid)
             {
-                var response = await _IStudentService.UpdateAsync(student, id);
+                var response = await _IStudentService.UpdateAsync(student, registration);
 
                 if (response.Success)
                     return Ok(response);

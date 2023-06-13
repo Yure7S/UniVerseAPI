@@ -46,32 +46,32 @@ namespace UniVerseAPI.Application.Services
                 .ConvertAll(std => new StudentActionResponseDTO(std));
         }
 
-        public async Task<StudentActionResponseDetailsDTO> GetByIdAsync(Guid id)
+        public async Task<StudentActionResponseDetailsDTO> GetByRegistrationAsync(string registration)
         {
             try
             {
-                Student? studentFound =  await _IStudent.GetStudentDetailAsync(id);
-                BaseResponseDTO response = new();
+                Student? studentFound =  await _IStudent.GetStudentDetailAsync(registration);
+                StudentActionResponseDetailsDTO response = new();
+                BaseResponseDTO baseResponsse = new();
 
                 if (studentFound == null)
                 {
-                    response.Update("We could not find this item in our database.", false);
-                    StudentActionResponseDetailsDTO respNull = new(baseResponse: response);
-                    return respNull;
+                    baseResponsse.Update("We could not find this item in our database.", false);
+                    response.Update(baseResponse: baseResponsse);
                 }
                 else
                 {
-                    response.Update("Found successfully!", true);
                     AddressResponseDTO addressResponse = _mapper.Map<AddressResponseDTO>(studentFound.People.AddressEntity);
                     PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(studentFound.People);
                     
-                    StudentActionResponseDetailsDTO studentResponse = new(
+                    baseResponsse.Update("Found successfully!", true);
+                    response.Update(
                         registration: studentFound.Registration, 
                         people: peopleResponse, 
-                        baseResponse: response);
-
-                    return studentResponse;
+                        baseResponse: baseResponsse);
                 }
+                
+                return response;
             }
             catch (Exception e)
             {
@@ -93,46 +93,33 @@ namespace UniVerseAPI.Application.Services
             try
             {
                 Course? courseFound = await _ICourse.GetByCodeAsync(student.CourseCode);
+                BaseResponseDTO baseResponse = new();
+                StudentActionResponseDetailsDTO response = new();
 
                 if (courseFound == null)
                 {
-                    BaseResponseDTO baseResponseNull = new(
-                        message: "*** We couldn't find any courses with the given code!",
-                        success: false);
-                    StudentActionResponseDetailsDTO responseNull = new(baseResponse: baseResponseNull);
-                    return responseNull;
+                    baseResponse.Update(message: "*** We couldn't find any courses with the given code!", success: false);
+                    response.Update(baseResponse: baseResponse);
                 }
+                else
+                {
+                    AddressEntity newAddress = _mapper.Map<AddressEntity>(student.Address);
+                    People newPeople = _mapper.Map<People>(student.People);
+                    Student newStudent = new();
+                    newPeople.AddressId = newAddress.Id;
+                    newStudent.PeopleId = newPeople.Id;
+                    newStudent.CourseId = courseFound.Id;
 
-                AddressEntity newAddress = new(
-                    addressValue: student.Address.AddressValue,
-                    number: student.Address.Number,
-                    neighborhood: student.Address.Neighborhood,
-                    cep: student.Address.Cep);
+                    AddressResponseDTO addressResponse = _mapper.Map<AddressResponseDTO>(newAddress);
+                    PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(newPeople);
+                    peopleResponse.AddressEntity = addressResponse;
 
-                People newPeople = new(
-                    addressId: newAddress.Id,
-                    fullName: student.People.FullName,
-                    birthDate: student.People.BirthDate,
-                    cpf: student.People.Cpf,
-                    gender: student.People.Gender,
-                    phone: student.People.Phone,
-                    email: student.People.Email,
-                    password: student.People.Password);
+                    SaveStudent(newAddress, newPeople, newStudent);
 
-                Student newStudent = new(
-                    courseId: courseFound.Id,
-                    peopleId: newPeople.Id,
-                    registration: student.Registration);
-
-                AddressResponseDTO addressResponse = _mapper.Map<AddressResponseDTO>(newAddress);
-                PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(newPeople);
-                peopleResponse.AddressEntity = addressResponse;
-
-                SaveStudent(newAddress, newPeople, newStudent);
-
-                BaseResponseDTO baseResponse = new(message: "*** Student Created successfully!", success: true);
-                StudentActionResponseDetailsDTO response = new(registration: newStudent.Registration, people: peopleResponse, baseResponse: baseResponse);
-
+                    baseResponse.Update(message: "*** Student Created successfully!", success: true);
+                    response.Update(registration: newStudent.Registration, people: peopleResponse, baseResponse: baseResponse);
+                }
+                
                 return response;
             }
             catch (Exception e)
@@ -143,11 +130,11 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<BaseResponseDTO> DeleteAsync(Guid id)
+        public async Task<BaseResponseDTO> DeleteAsync(string registration)
         {
             try
             {
-                Student? studentFound = await _IStudent.GetByIdAsync(id);
+                Student? studentFound = await _IStudent.GetStudentDetailAsync(registration);
                 BaseResponseDTO response = new();
 
                 if (studentFound == null)
@@ -180,14 +167,11 @@ namespace UniVerseAPI.Application.Services
             _IStudent.UpdateAsync(student);
         }
 
-        public async Task<BaseResponseDTO> UpdateAsync(StudentInputDTO student, Guid id)
+        public async Task<BaseResponseDTO> UpdateAsync(StudentInputDTO student, string registration)
         {
             try
             {
-                Course? courseFound = await _ICourse.GetByCodeAsync(student.CourseCode);
-                Student? studentFound = await _IStudent.GetByIdAsync(id);
-                People? peopleFound = await _IPeople.GetByIdAsync(studentFound!.PeopleId);
-                AddressEntity? addressFound = await _IAddressEntity.GetByIdAsync(peopleFound!.AddressId);
+                Student studentFound = await _IStudent.GetStudentDetailAsync(registration);
                 BaseResponseDTO response = new();
 
                 if (studentFound == null)
@@ -196,16 +180,17 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    addressFound = _mapper.Map<AddressEntity>(addressFound);
-                    peopleFound = _mapper.Map<People>(peopleFound);
-                    studentFound!.CourseTransfer(
-                        courseId: courseFound!.Id);
+                    studentFound.People.AddressEntity = _mapper.Map<AddressEntity>(student.Address);
+                    studentFound.People = _mapper.Map<People>(student.People);
+                    studentFound = _mapper.Map<Student>(student);
 
-                    UpdateStudent(studentFound, peopleFound, addressFound!);
+                    UpdateStudent(
+                        studentFound,
+                        studentFound.People,
+                        studentFound.People.AddressEntity);
 
-                    response.Update(message: )
+                    response.Update(message: "*** Student UpdateAsyncd successfully!", success: true);
                 }
-
 
                 return response;
             }

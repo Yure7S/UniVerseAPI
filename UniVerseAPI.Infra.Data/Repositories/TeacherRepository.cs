@@ -25,9 +25,9 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
                 .ToListAsync();
         }
 
-        public async Task<Teacher> GetTeacherDetailAsync(Guid id)
+        public async Task<Teacher> GetTeacherDetailAsync(string code)
         {
-            return await _db.Teacher.Where(s => s.Id == id)
+            return await _db.Teacher.Where(s => s.Code == code)
                 .Include(s => s.People)
                 .ThenInclude(s => s.AddressEntity)
                 .FirstAsync();

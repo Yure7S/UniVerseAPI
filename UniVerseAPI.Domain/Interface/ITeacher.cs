@@ -10,7 +10,7 @@ namespace UniVerseAPI.Application.Interface
     public interface ITeacher : IBaseInterface<Teacher> 
     {
         public Task<List<Teacher>> GetAllTeacherAsync();
-        public Task<Teacher> GetTeacherDetailAsync(Guid id);
+        public Task<Teacher> GetTeacherDetailAsync(string code);
     }
 
 }

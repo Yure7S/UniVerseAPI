@@ -13,10 +13,10 @@ namespace UniVerseAPI.Application.IServices
     {
         public List<TeacherActionResponseDTO> GetAllAsync();
         public TeacherActionResponseDetailsDTO CreateAsync(TeacherInputDTO teacher);
-        public Task<TeacherActionResponseDetailsDTO> GetTeacherDetailAsync(Guid id);
-        public Task<BaseResponseDTO> EnableOrDisable(Guid id, bool status);
-        public Task<BaseResponseDTO> UpdateAsync(TeacherInputDTO teacher, Guid id);
-        public Task<BaseResponseDTO> DeleteAsync(Guid id);
+        public Task<TeacherActionResponseDetailsDTO> GetTeacherDetailAsync(string code);
+        public Task<BaseResponseDTO> EnableOrDisable(string code, bool status);
+        public Task<BaseResponseDTO> UpdateAsync(TeacherInputDTO teacher, string code);
+        public Task<BaseResponseDTO> DeleteAsync(string code);
 
     }
 }

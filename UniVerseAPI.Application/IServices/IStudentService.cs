@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Primitives;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,10 @@ namespace UniVerseAPI.Application.IServices
     public interface IStudentService
     {
         public List<StudentActionResponseDTO> GetAllAsync();
-        public Task<StudentActionResponseDetailsDTO> GetByIdAsync(Guid id);
+        public Task<StudentActionResponseDetailsDTO> GetByRegistrationAsync(string registration);
         public Task<StudentActionResponseDetailsDTO> CreateAsync(StudentInputDTO student);
-        public Task<BaseResponseDTO> UpdateAsync(StudentInputDTO student, Guid id);
-        public Task<BaseResponseDTO> DeleteAsync(Guid id);
+        public Task<BaseResponseDTO> UpdateAsync(StudentInputDTO student, string registration);
+        public Task<BaseResponseDTO> DeleteAsync(string registration);
 
     }
 }

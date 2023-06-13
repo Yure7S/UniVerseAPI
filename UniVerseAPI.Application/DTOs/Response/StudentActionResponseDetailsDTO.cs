@@ -25,5 +25,12 @@ namespace UniVerseAPI.Application.DTOs.Response
             People = people;
             BaseResponse = baseResponse;
         }
+
+        public void Update(string? registration = null, BaseResponseDTO? baseResponse = null, PeopleResponseDTO? people = null)
+        {
+            Registration = registration;
+            People = people;
+            BaseResponse = baseResponse;
+        }
     }
 }

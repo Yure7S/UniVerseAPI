@@ -39,14 +39,14 @@ namespace UniVerseAPI.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetByIdAsync(Guid id)
+        public async Task<IActionResult> GetByIdAsync(string code)
         {
             if(ModelState.IsValid)
             {
-                var response = await _ICourseService.GetByIdAsync(id);
+                var response = await _ICourseService.GetByCodeAsync(code);
 
                 if(response.BaseResponse!.Success)
                     return Ok(response);
@@ -71,14 +71,14 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("delet/{id}")]
+        [HttpPut("delet/{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteAsyncCourse(Guid id)
+        public async Task<IActionResult> DeleteAsyncCourse(string code)
         {
             if (ModelState.IsValid)
             {
-                var response = await _ICourseService.DeleteAsync(id);
+                var response = await _ICourseService.DeleteAsync(code);
                 if (response.Success)
                     return Ok(response);
                     return BadRequest(response);
@@ -86,14 +86,14 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("modify/{id}")]
+        [HttpPut("modify/{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateAsyncCourse(CourseInputDTO course, Guid id)
+        public async Task<IActionResult> UpdateAsyncCourse(CourseInputDTO course, string code)
         {
             if (ModelState.IsValid)
             {
-                var response = await _ICourseService.UpdateAsync(course, id);
+                var response = await _ICourseService.UpdateAsync(course, code);
 
                 if (response.Success)
                     return Ok(response);

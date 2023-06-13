@@ -19,37 +19,37 @@ namespace UniVerseAPI.Infra.Data.Context
         }
 
         [Key]
-        public Guid Id { get; private set; }
-        public Guid AddressId { get; private set; }
+        public Guid Id { get; set; }
+        public Guid AddressId { get; set; }
         [Required]
         [StringLength(255)]
-        public string FullName { get; private set; }
+        public string FullName { get; set; }
         [Column(TypeName = "date")]
-        public DateTime BirthDate { get; private set; }
+        public DateTime BirthDate { get; set; }
         [Required]
         [StringLength(11)]
         [Unicode(false)]
-        public string Cpf { get; private set; }
+        public string Cpf { get; set; }
         [Required]
         [StringLength(255)]
-        public string Gender { get; private set; }
+        public string Gender { get; set; }
         [Required]
         [StringLength(255)]
-        public string Phone { get; private set; }
+        public string Phone { get; set; }
         [Required]
         [StringLength(255)]
-        public string Email { get; private set; }
+        public string Email { get; set; }
         [Required]
         [StringLength(500, MinimumLength = 8)]
         public string Password { get; set; }
 
         [ForeignKey("AddressId")]
         [InverseProperty("People")]
-        public virtual AddressEntity AddressEntity { get; private set; }
+        public virtual AddressEntity AddressEntity { get; set; }
         [InverseProperty("People")]
-        public virtual ICollection<Student> Student { get; private set; }
+        public virtual ICollection<Student> Student { get; set; }
         [InverseProperty("People")]
-        public virtual ICollection<Teacher> Teacher { get; private set; }
+        public virtual ICollection<Teacher> Teacher { get; set; }
 
         public People(Guid addressId, string fullName, DateTime birthDate, string cpf, string gender, string phone, string email, string password)
         {
