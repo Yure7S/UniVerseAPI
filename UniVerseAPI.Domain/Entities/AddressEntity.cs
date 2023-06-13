@@ -11,10 +11,6 @@ namespace UniVerseAPI.Infra.Data.Context
     [Table("AddressEntity")]
     public partial class AddressEntity : BaseEntity
     {
-        public AddressEntity()
-        {
-            People = new HashSet<People>();
-        }
 
         [Key]
         public Guid Id { get; private set; }
@@ -44,6 +40,8 @@ namespace UniVerseAPI.Infra.Data.Context
             CreationDate = DateTime.Now;
             LastUpdate = DateTime.Now;
         }
+
+
 
         public void UpdateAsync(string addressValue, int number, string neighborhood, string cep)
         {

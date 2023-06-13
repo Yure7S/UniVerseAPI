@@ -18,14 +18,12 @@ namespace UniVerseAPI.Application.DTOs.Response
         public string? Registration { get; set; }
         public string? FullName { get; set; }
         public string? Email { get; set; }
-        public BaseResponseDTO? BaseResponse{ get; set; }
 
-        public StudentActionResponseDTO(string? registration = null, string? fullName = null, string? email = null, BaseResponseDTO? baseResponse = null)
+        public StudentActionResponseDTO(string? registration = null, string? fullName = null, string? email = null)
         {
             Registration = registration;
             FullName = fullName;
             Email = email;
-            BaseResponse = baseResponse;
         }
 
         public StudentActionResponseDTO(Student student)

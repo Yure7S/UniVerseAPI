@@ -17,11 +17,13 @@ namespace UniVerseAPI.Application.DTOs.Response
     {
         public string? Registration { get; set; }
         public PeopleResponseDTO? People { get; set; }
+        public BaseResponseDTO? BaseResponse { get; set; }
 
         public StudentActionResponseDetailsDTO(string? registration = null, BaseResponseDTO? baseResponse = null, PeopleResponseDTO? people = null)
         {
             Registration = registration;
             People = people;
+            BaseResponse = baseResponse;
         }
     }
 }

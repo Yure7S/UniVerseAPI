@@ -14,6 +14,7 @@ namespace UniVerseAPI.Application.Mappings
         public PeopleProfile()
         {
             CreateMap<People, PeopleResponseDTO>();
+            CreateMap<People, People>();
         }
     }
 }

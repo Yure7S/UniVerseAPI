@@ -13,7 +13,7 @@ namespace UniVerseAPI.Application.IServices
     {
         public List<StudentActionResponseDTO> GetAllAsync();
         public Task<StudentActionResponseDetailsDTO> GetByIdAsync(Guid id);
-        public Task<StudentActionResponseDTO> CreateAsync(StudentInputDTO student);
+        public Task<StudentActionResponseDetailsDTO> CreateAsync(StudentInputDTO student);
         public Task<BaseResponseDTO> UpdateAsync(StudentInputDTO student, Guid id);
         public Task<BaseResponseDTO> DeleteAsync(Guid id);
 

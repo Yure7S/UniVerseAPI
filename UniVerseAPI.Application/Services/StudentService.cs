@@ -1,4 +1,5 @@
-﻿using Azure;
+﻿using AutoMapper;
+using Azure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
@@ -27,13 +28,15 @@ namespace UniVerseAPI.Application.Services
         private readonly ICourse _ICourse;
         private readonly IAddressEntity _IAddressEntity;
         private readonly IPeople _IPeople;
+        private readonly IMapper _mapper;
 
-        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity iAddressEntity, IPeople iPeople)
+        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity iAddressEntity, IPeople iPeople, IMapper mapper)
         {
             _IStudent = iStudent;
             _ICourse = iCourse;
             _IAddressEntity = iAddressEntity;
             _IPeople = iPeople;
+            _mapper = mapper;
         }
 
         public List<StudentActionResponseDTO> GetAllAsync()
@@ -59,24 +62,14 @@ namespace UniVerseAPI.Application.Services
                 else
                 {
                     response.Update("Found successfully!", true);
+                    AddressResponseDTO addressResponse = _mapper.Map<AddressResponseDTO>(studentFound.People.AddressEntity);
+                    PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(studentFound.People);
+                    
+                    StudentActionResponseDetailsDTO studentResponse = new(
+                        registration: studentFound.Registration, 
+                        people: peopleResponse, 
+                        baseResponse: response);
 
-                    AddressResponseDTO addressResponse = new(
-                        addressValue: studentFound.People.AddressEntity.AddressValue,
-                        number: studentFound.People.AddressEntity.Number,
-                        neighborhood: studentFound.People.AddressEntity.Neighborhood,
-                        cep: studentFound.People.AddressEntity.Cep);
-
-                    PeopleResponseDTO peopleResponse = new(
-                        fullName: studentFound.People.FullName,
-                        birthDate: studentFound.People.BirthDate,
-                        cpf: studentFound.People.Cpf,
-                        gender: studentFound.People.Gender,
-                        phone: studentFound.People.Phone,
-                        email: studentFound.People.Email,
-                        password: studentFound.People.Password,
-                        addressEntity: addressResponse);
-
-                    StudentActionResponseDetailsDTO studentResponse = new(registration: studentFound.Registration, people: peopleResponse, baseResponse: response);
                     return studentResponse;
                 }
             }
@@ -95,7 +88,7 @@ namespace UniVerseAPI.Application.Services
             _IStudent.CreateAsync(newStudent);
         } 
 
-        public async Task<StudentActionResponseDTO> CreateAsync(StudentInputDTO student)
+        public async Task<StudentActionResponseDetailsDTO> CreateAsync(StudentInputDTO student)
         {
             try
             {
@@ -106,7 +99,7 @@ namespace UniVerseAPI.Application.Services
                     BaseResponseDTO baseResponseNull = new(
                         message: "*** We couldn't find any courses with the given code!",
                         success: false);
-                    StudentActionResponseDTO responseNull = new(baseResponse: baseResponseNull);
+                    StudentActionResponseDetailsDTO responseNull = new(baseResponse: baseResponseNull);
                     return responseNull;
                 }
 
@@ -131,17 +124,21 @@ namespace UniVerseAPI.Application.Services
                     peopleId: newPeople.Id,
                     registration: student.Registration);
 
+                AddressResponseDTO addressResponse = _mapper.Map<AddressResponseDTO>(newAddress);
+                PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(newPeople);
+                peopleResponse.AddressEntity = addressResponse;
+
                 SaveStudent(newAddress, newPeople, newStudent);
 
                 BaseResponseDTO baseResponse = new(message: "*** Student Created successfully!", success: true);
-                StudentActionResponseDTO response = new(baseResponse: baseResponse);
+                StudentActionResponseDetailsDTO response = new(registration: newStudent.Registration, people: peopleResponse, baseResponse: baseResponse);
 
                 return response;
             }
             catch (Exception e)
             {
                 BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to register a new Student!", success: false, error: e.Message);
-                StudentActionResponseDTO responseError = new(baseResponse: baseResponse);
+                StudentActionResponseDetailsDTO responseError = new(baseResponse: baseResponse);
                 return responseError;
             }
         }
@@ -191,38 +188,25 @@ namespace UniVerseAPI.Application.Services
                 Student? studentFound = await _IStudent.GetByIdAsync(id);
                 People? peopleFound = await _IPeople.GetByIdAsync(studentFound!.PeopleId);
                 AddressEntity? addressFound = await _IAddressEntity.GetByIdAsync(peopleFound!.AddressId);
+                BaseResponseDTO response = new();
 
                 if (studentFound == null)
                 {
-                    BaseResponseDTO respNull = new(
-                        message: "*** We couldn't find the Student in our database!",
-                        success: false);
-                    return respNull;
+                    response.Update(message: "*** We couldn't find the Student in our database!", success: false);
+                }
+                else
+                {
+                    addressFound = _mapper.Map<AddressEntity>(addressFound);
+                    peopleFound = _mapper.Map<People>(peopleFound);
+                    studentFound!.CourseTransfer(
+                        courseId: courseFound!.Id);
+
+                    UpdateStudent(studentFound, peopleFound, addressFound!);
+
+                    response.Update(message: )
                 }
 
-                studentFound.CourseTransfer(
-                    courseId: courseFound!.Id);
 
-                addressFound!.UpdateAsync(
-                    addressValue: student.Address.AddressValue,
-                    number: student.Address.Number,
-                    neighborhood: student.Address.Neighborhood,
-                    cep: student.Address.Cep);
-
-                peopleFound.UpdateAsync(
-                    fullName: student.People.FullName,
-                    birthDate: student.People.BirthDate,
-                    cpf: student.People.Cpf,
-                    gender: student.People.Gender,
-                    phone: student.People.Phone,
-                    email: student.People.Email,
-                    password: student.People.Password);
-
-                UpdateStudent(studentFound, peopleFound, addressFound!);
-
-                BaseResponseDTO response = new(
-                    message: "*** Student UpdateAsyncd successfully!",
-                    success: true);
                 return response;
             }
             catch (Exception e)

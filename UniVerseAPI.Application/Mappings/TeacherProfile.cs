@@ -15,6 +15,7 @@ namespace UniVerseAPI.Application.Mappings
         {
             CreateMap<TeacherInputDTO, Teacher>();
             CreateMap<ICollection<Teacher>, TeacherActionResponseDetailsDTO>();
+            CreateMap<Teacher, Teacher>();
         }
     }
 }

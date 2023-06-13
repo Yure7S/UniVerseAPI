@@ -12,7 +12,8 @@ namespace UniVerseAPI.Application.Mappings
     {
         public AddressProfile()
         {
-            CreateMap<AddressEntity, PeopleResponseDTO>();
+            CreateMap<AddressEntity, AddressResponseDTO>();
+            CreateMap<AddressEntity, AddressEntity>();
         }
     }
 }
