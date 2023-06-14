@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO;
-using UniVerseAPI.Application.DTOs.Response;
+using UniVerseAPI.Application.DTOs.Response.CoursesDTO;
 using UniVerseAPI.Infra.Data.Context;
 
 namespace UniVerseAPI.Application.Mappings
@@ -14,7 +14,8 @@ namespace UniVerseAPI.Application.Mappings
     {
         public CourseProfile()
         {
-            CreateMap<Course, CourseFrancisco>();
+            CreateMap<Course, CourseDetailsDTO>();
+            CreateMap<CourseInputDTO, CourseDetailsDTO>();
             CreateMap<CourseInputDTO, Course>();
 
         }

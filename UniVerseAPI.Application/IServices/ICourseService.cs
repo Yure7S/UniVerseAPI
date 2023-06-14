@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO;
-using UniVerseAPI.Application.DTOs.Response;
 using UniVerseAPI.Application.DTOs.Response.BaseResponse;
+using UniVerseAPI.Application.DTOs.Response.CoursesDTO;
 using UniVerseAPI.Infra.Data.Context;
 namespace UniVerseAPI.Application.IServices
 {
     public interface ICourseService
     {
-        public Task<CourseActionResponseDetailsDTO> GetByCodeAsync(string code);
-        public Task<List<Course>> GetAllAsync();
-        public Task<CourseActionResponseDetailsDTO> CreateAsync(CourseInputDTO course);
+        public Task<CourseResponseDetailsDTO> GetByCodeAsync(string code);
+        public List<CourseResponseDTO> GetAllAsync();
+        public Task<CourseResponseDetailsDTO> CreateAsync(CourseInputDTO course);
         public Task<BaseResponseDTO> UpdateAsync(CourseInputDTO course, string code);
         public Task<BaseResponseDTO> DeleteAsync(string code);
     }

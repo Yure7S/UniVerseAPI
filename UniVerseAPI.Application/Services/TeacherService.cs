@@ -13,8 +13,8 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using UniVerseAPI.Application.DTOs.Request;
-using UniVerseAPI.Application.DTOs.Response;
 using UniVerseAPI.Application.DTOs.Response.BaseResponse;
+using UniVerseAPI.Application.DTOs.Response.TeachersDTO;
 using UniVerseAPI.Application.Interface;
 using UniVerseAPI.Application.IServices;
 using UniVerseAPI.Domain.Interface;
@@ -37,56 +37,47 @@ namespace UniVerseAPI.Application.Services
             _mapper = mapper;
         }
 
-        public List<TeacherActionResponseDTO> GetAllAsync()
+        public List<TeacherResponseDTO> GetAllAsync()
         {
             return _teacher.GetAllTeacherAsync()
                 .Result
-                .ConvertAll(tchr => new TeacherActionResponseDTO(tchr));
+                .ConvertAll(tchr => new TeacherResponseDTO(tchr));
         }
 
-        public async Task<TeacherActionResponseDetailsDTO> GetTeacherDetailAsync(string code)
+        public async Task<TeacherResponseDetailsDTO> GetTeacherDetailAsync(string code)
         {
             try
             {
                 Teacher teacherFound = await _teacher.GetTeacherDetailAsync(code);
-                BaseResponseDTO response = new();
+                TeacherResponseDetailsDTO response = new();
 
                 if (teacherFound == null)
                 {
-                    response.Update("We could not find this item in our database.", false);
-                    TeacherActionResponseDetailsDTO respNull = new(baseResponse: response);
-                    return respNull;
+                    response.Message = "We could not find this item in our database.";
+                    response.Success = false;
+                }
+                else
+                {
+                    response.Update("Found successfully!", true);
+
+                    AddressResponseDTO addressResponse = _mapper.Map<AddressResponseDTO>(teacherFound);
+                    PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(teacherFound.People);
+                    response = _mapper.Map<TeacherResponseDetailsDTO>(teacherFound);
+                    response.People = peopleResponse;
+                    response.Message = "Found successfully!";
+                    response.Success = true;
                 }
 
-                response.Update("Found successfully!", true);
-
-                AddressResponseDTO addressResponse = new(
-                    addressValue: teacherFound.People.AddressEntity.AddressValue,
-                    number: teacherFound.People.AddressEntity.Number,
-                    neighborhood: teacherFound.People.AddressEntity.Neighborhood,
-                    cep: teacherFound.People.AddressEntity.Cep);
-
-                PeopleResponseDTO peopleResponse = new(
-                    fullName: teacherFound.People.FullName,
-                    birthDate: teacherFound.People.BirthDate,
-                    cpf: teacherFound.People.Cpf,
-                    gender: teacherFound.People.Gender,
-                    phone: teacherFound.People.Phone,
-                    email: teacherFound.People.Email,
-                    password: teacherFound.People.Password,
-                    addressEntity: addressResponse);
-
-                TeacherActionResponseDetailsDTO teacherResponse = new(
-                    code: teacherFound.Code,
-                    people: peopleResponse,
-                    baseResponse: response);
-
-                return teacherResponse;
+                return response;
             }
             catch (Exception e)
             {
-                BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to find the Teacher!", success: false, error: e.Message);
-                TeacherActionResponseDetailsDTO response = new(baseResponse: baseResponse);
+                TeacherResponseDetailsDTO response = new()
+                {
+                    Message = "*** We encountered an error trying to find the Teacher!",
+                    Success = false,
+                    Error = e.Message
+                };
                 return response;
             }
         }
@@ -98,43 +89,33 @@ namespace UniVerseAPI.Application.Services
             _teacher.CreateAsync(newTeacher);
         } 
 
-        public TeacherActionResponseDetailsDTO CreateAsync(TeacherInputDTO teacher)
+        public TeacherResponseDetailsDTO Create(TeacherInputDTO teacher)
         {
             try
             {
-
-                AddressEntity newAddress = new(
-                    addressValue: teacher.Address.AddressValue,
-                    number: teacher.Address.Number,
-                    neighborhood: teacher.Address.Neighborhood,
-                    cep: teacher.Address.Cep);
-
-                People newPeople = new(
-                    addressId: newAddress.Id,
-                    fullName: teacher.People.FullName,
-                    birthDate: teacher.People.BirthDate,
-                    cpf: teacher.People.Cpf,
-                    gender: teacher.People.Gender,
-                    phone: teacher.People.Phone,
-                    email: teacher.People.Email,
-                    password: teacher.People.Password);
-
-                Teacher newTeacher = new(
-                    peopleId: newPeople.Id,
-                    code: teacher.Code);
+                AddressEntity newAddress = _mapper.Map<AddressEntity>(teacher.Address);
+                People newPeople = _mapper.Map<People>(teacher.People);
+                Teacher newTeacher = _mapper.Map<Teacher>(teacher);
+                newPeople.AddressId = newAddress.Id;
+                newTeacher.PeopleId = newPeople.Id;
 
                 SaveTeacher(newAddress, newPeople, newTeacher);
 
-                BaseResponseDTO baseResponse = new(message: "*** Teacher Created successfully!", success: true);
-                TeacherActionResponseDetailsDTO response = new(baseResponse: baseResponse);
+                TeacherResponseDetailsDTO teacherResponse = _mapper.Map<TeacherResponseDetailsDTO>(teacher);
+                teacherResponse.Message = "*** Teacher Created successfully!";
+                teacherResponse.Success = true;
 
-                return response;
+                return teacherResponse;
             }
             catch (Exception e)
             {
-                BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to register a new Teacher!", success: false, error: e.Message);
-                TeacherActionResponseDetailsDTO responseError = new(baseResponse: baseResponse);
-                return responseError;
+                TeacherResponseDetailsDTO response = new()
+                {
+                    Message = "*** We encountered an error trying to register a new Teacher!",
+                    Success = false,
+                    Error = e.Message
+                };
+                return response;
             }
         }
 
@@ -169,7 +150,7 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<BaseResponseDTO> EnableOrDisable(string code, bool status)
+        public async Task<BaseResponseDTO> EnableOrDisableAsync(string code, bool status)
         {
             try
             {
@@ -216,39 +197,27 @@ namespace UniVerseAPI.Application.Services
                 Teacher? teacherFound = await _teacher.GetTeacherDetailAsync(code);
                 People? peopleFound = await _people.GetByIdAsync(teacherFound!.PeopleId);
                 AddressEntity? addressFound = await _addressEntity.GetByIdAsync(peopleFound!.AddressId);
+                BaseResponseDTO response = new();
 
                 if (teacherFound == null)
                 {
-                    BaseResponseDTO respNull = new(message: "*** We couldn't find the Teacher in our database!",
-                    success: false);
-                    return respNull;
+                    response.Update(message: "*** We couldn't find the Teacher in our database!", success: false);
+                }
+                else
+                {
+                    addressFound = _mapper.Map<AddressEntity>(teacher.Address);
+                    peopleFound = _mapper.Map<People>(teacher.People);
+                    UpdateTeacher(peopleFound, addressFound!);
+
+                    response.Update(message: "*** Teacher UpdateAsyncd successfully!", success: true);
                 }
 
-
-                addressFound!.UpdateAsync(
-                    addressValue: teacher.Address.AddressValue,
-                    number: teacher.Address.Number,
-                    neighborhood: teacher.Address.Neighborhood,
-                    cep: teacher.Address.Cep);
-
-                peopleFound.UpdateAsync(
-                    fullName: teacher.People.FullName,
-                    birthDate: teacher.People.BirthDate,
-                    cpf: teacher.People.Cpf,
-                    gender: teacher.People.Gender,
-                    phone: teacher.People.Phone,
-                    email: teacher.People.Email,
-                    password: teacher.People.Password);
-
-                UpdateTeacher(peopleFound, addressFound!);
-
-                BaseResponseDTO response = new(message: "*** Teacher UpdateAsyncd successfully!",
-                success: true);
                 return response;
             }
             catch (Exception e)
             {
-                BaseResponseDTO response = new(message: "*** We encountered an error trying to UpdateAsync the Teacher!",
+                BaseResponseDTO response = new(
+                    message: "*** We encountered an error trying to UpdateAsync the Teacher!",
                     success: false,
                     error: e.Message);
 

@@ -6,12 +6,13 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.ConstrainedExecution;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO;
-using UniVerseAPI.Application.DTOs.Response;
 using UniVerseAPI.Application.DTOs.Response.BaseResponse;
+using UniVerseAPI.Application.DTOs.Response.CoursesDTO;
 using UniVerseAPI.Application.IServices;
 using UniVerseAPI.Domain.Interface;
 using UniVerseAPI.Infra.Data.Context;
@@ -29,12 +30,14 @@ namespace UniVerseAPI.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<List<Course>> GetAllAsync()
+        public List<CourseResponseDTO> GetAllAsync()
         {
-            return await _ICourse.GetAllAsync();
+            return _ICourse.GetAllAsync()
+                .Result
+                .ConvertAll(crs => new CourseResponseDTO(crs));
         }
 
-        public async Task<CourseActionResponseDetailsDTO> GetByCodeAsync(string code)
+        public async Task<CourseResponseDetailsDTO> GetByCodeAsync(string code)
         {
             try
             {
@@ -42,7 +45,7 @@ namespace UniVerseAPI.Application.Services
 
                 if (courseFound == null)
                 {
-                    CourseActionResponseDetailsDTO respNull = new()
+                    CourseResponseDetailsDTO respNull = new()
                     {
                         Message = "We could not find this item in our database.",
                         Success = true
@@ -51,8 +54,8 @@ namespace UniVerseAPI.Application.Services
                     return respNull;
                 }
 
-                CourseFrancisco newCourse = _mapper.Map<CourseFrancisco>(courseFound);
-                CourseActionResponseDetailsDTO response = new()
+                CourseDetailsDTO newCourse = _mapper.Map<CourseDetailsDTO>(courseFound);
+                CourseResponseDetailsDTO response = new()
                 {
                     Course = newCourse,
                     Message = "Found successfully!",
@@ -63,7 +66,7 @@ namespace UniVerseAPI.Application.Services
             }
             catch (Exception e)
             {
-                CourseActionResponseDetailsDTO response = new()
+                CourseResponseDetailsDTO response = new()
                 {
                     Message = "We encountered an error trying to find the course!",
                     Success = false,
@@ -74,28 +77,27 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<CourseActionResponseDetailsDTO> CreateAsync(CourseInputDTO course)
+        public async Task<CourseResponseDetailsDTO> CreateAsync(CourseInputDTO course)
         {
             try
             {
                 Course newCourse = _mapper.Map<Course>(course);
 
-                CourseFrancisco courseResponse = _mapper.Map<CourseFrancisco>(course);
+                CourseDetailsDTO courseDetailsResponse = _mapper.Map<CourseDetailsDTO>(newCourse);
 
-                CourseActionResponseDetailsDTO courseGeneralResponse = new()
+                CourseResponseDetailsDTO response = new()
                 {
-                    Course = courseResponse, 
-                    Message = "Ok",
+                    Course = courseDetailsResponse,
+                    Message = "*** Successfully registered course",
                     Success = true
                 };
-
                 await _ICourse.CreateAsync(newCourse);
 
-                return courseGeneralResponse;
+                return response;
             }
             catch (Exception e)
             {
-                CourseActionResponseDetailsDTO responseError = new()
+                CourseResponseDetailsDTO responseError = new()
                 {
                     Message= "*** We encountered an error trying to register a new course!",
                     Success = false,
@@ -110,18 +112,19 @@ namespace UniVerseAPI.Application.Services
             try
             {
                 Course? courseFound = await _ICourse.GetByCodeAsync(code);
+                BaseResponseDTO response = new();
 
                 if (courseFound == null)
                 {
-                    BaseResponseDTO respNull = new(message: "*** We couldn't find the course in our database!",
-                    success: false);
-                    return respNull;
+                    response.Update(message: "*** We couldn't find the course in our database!", success: false);
+                }
+                else
+                {
+                    courseFound!.DeleteAsync(true);
+                    await _ICourse.UpdateAsync(courseFound);
+                    response.Update(message: "*** Deleted successfully!", success: true);
                 }
 
-                courseFound.DeleteAsync(true);
-                await _ICourse.UpdateAsync(courseFound);
-                BaseResponseDTO response = new(message: "*** Deleted successfully!",
-                success: true);
                 return response;
             }
             catch (Exception e)
@@ -139,28 +142,19 @@ namespace UniVerseAPI.Application.Services
             try
             {
                 Course? courseFound = await _ICourse.GetByCodeAsync(code);
+                BaseResponseDTO response = new();
+
                 if (courseFound == null)
                 {
-                    BaseResponseDTO respNull = new(message: "*** We couldn't find the course in our database!",
-                    success: false);
-                    return respNull;
+                    response.Update(message: "*** We couldn't find the course in our database!", success: false);
                 }
-
-                courseFound.UpdateAsync(
-                        fullName: course.FullName,
-                        description: course.Description,
-                        startDate: course.StartDate,
-                        endDate: course.EndDate,
-                        seats: course.Seats,
-                        spotsAvailable: course.SpotsAvailable,
-                        price: course.Price,
-                        category: course.Category,
-                        code: course.Code);
-
-                await _ICourse.UpdateAsync(courseFound);
-
-                BaseResponseDTO response = new(message: "*** Course UpdateAsyncd successfully!",
-                success: true);
+                else
+                {
+                    courseFound = _mapper.Map<Course>(course);
+                    await _ICourse.UpdateAsync(courseFound);
+                    response.Update(message: "*** Course UpdateAsyncd successfully!", success: true);
+                }
+                
                 return response;
             }
             catch (Exception e)

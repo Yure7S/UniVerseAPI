@@ -13,8 +13,8 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using UniVerseAPI.Application.DTOs.Request;
-using UniVerseAPI.Application.DTOs.Response;
 using UniVerseAPI.Application.DTOs.Response.BaseResponse;
+using UniVerseAPI.Application.DTOs.Response.StudentsDTO;
 using UniVerseAPI.Application.Interface;
 using UniVerseAPI.Application.IServices;
 using UniVerseAPI.Domain.Interface;
@@ -39,44 +39,46 @@ namespace UniVerseAPI.Application.Services
             _mapper = mapper;
         }
 
-        public List<StudentActionResponseDTO> GetAllAsync()
+        public List<StudentResponseDTO> GetAllAsync()
         {
             return _IStudent.GetAllStudentAsync()
                 .Result
-                .ConvertAll(std => new StudentActionResponseDTO(std));
+                .ConvertAll(std => new StudentResponseDTO(std));
         }
 
-        public async Task<StudentActionResponseDetailsDTO> GetByRegistrationAsync(string registration)
+        public async Task<StudentResponseDetailsDTO> GetByRegistrationAsync(string registration)
         {
             try
             {
                 Student? studentFound =  await _IStudent.GetStudentDetailAsync(registration);
-                StudentActionResponseDetailsDTO response = new();
-                BaseResponseDTO baseResponsse = new();
+                StudentResponseDetailsDTO response = new();
 
                 if (studentFound == null)
                 {
-                    baseResponsse.Update("We could not find this item in our database.", false);
-                    response.Update(baseResponse: baseResponsse);
+                    response.Message = "*** We couldn't find the Student in our database!";
+                    response.Success = false;
                 }
                 else
                 {
                     AddressResponseDTO addressResponse = _mapper.Map<AddressResponseDTO>(studentFound.People.AddressEntity);
                     PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(studentFound.People);
-                    
-                    baseResponsse.Update("Found successfully!", true);
-                    response.Update(
-                        registration: studentFound.Registration, 
-                        people: peopleResponse, 
-                        baseResponse: baseResponsse);
+
+                    response.Registration = registration;
+                    response.People = peopleResponse;
+                    response.Message = "Found successfully!";
+                    response.Success = true;
                 }
                 
                 return response;
             }
             catch (Exception e)
             {
-                BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to find the Student!", success: false, error: e.Message);
-                StudentActionResponseDetailsDTO response = new(baseResponse: baseResponse);
+                StudentResponseDetailsDTO response = new()
+                {
+                    Message = "*** We encountered an error trying to find the Student!",
+                    Success = false,
+                    Error = e.Message
+                };
                 return response;
             }
         }
@@ -88,18 +90,17 @@ namespace UniVerseAPI.Application.Services
             _IStudent.CreateAsync(newStudent);
         } 
 
-        public async Task<StudentActionResponseDetailsDTO> CreateAsync(StudentInputDTO student)
+        public async Task<StudentResponseDetailsDTO> CreateAsync(StudentInputDTO student)
         {
             try
             {
                 Course? courseFound = await _ICourse.GetByCodeAsync(student.CourseCode);
-                BaseResponseDTO baseResponse = new();
-                StudentActionResponseDetailsDTO response = new();
+                StudentResponseDetailsDTO response = new();
 
                 if (courseFound == null)
                 {
-                    baseResponse.Update(message: "*** We couldn't find any courses with the given code!", success: false);
-                    response.Update(baseResponse: baseResponse);
+                    response.Message = "*** We couldn't find any courses with the given code!";
+                    response.Success = false;
                 }
                 else
                 {
@@ -109,6 +110,7 @@ namespace UniVerseAPI.Application.Services
                     newPeople.AddressId = newAddress.Id;
                     newStudent.PeopleId = newPeople.Id;
                     newStudent.CourseId = courseFound.Id;
+                    newStudent.Registration = student.Registration;
 
                     AddressResponseDTO addressResponse = _mapper.Map<AddressResponseDTO>(newAddress);
                     PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(newPeople);
@@ -116,16 +118,22 @@ namespace UniVerseAPI.Application.Services
 
                     SaveStudent(newAddress, newPeople, newStudent);
 
-                    baseResponse.Update(message: "*** Student Created successfully!", success: true);
-                    response.Update(registration: newStudent.Registration, people: peopleResponse, baseResponse: baseResponse);
+                    response.Registration = student.Registration;
+                    response.People = peopleResponse;
+                    response.Message = "*** Student Created successfully!";
+                    response.Success = true;
                 }
                 
                 return response;
             }
             catch (Exception e)
             {
-                BaseResponseDTO baseResponse = new(message: "*** We encountered an error trying to register a new Student!", success: false, error: e.Message);
-                StudentActionResponseDetailsDTO responseError = new(baseResponse: baseResponse);
+                StudentResponseDetailsDTO responseError = new()
+                {
+                    Message = "*** We encountered an error trying to register a new Student!",
+                    Success = false,
+                    Error = e.Message
+                };
                 return responseError;
             }
         }

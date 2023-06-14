@@ -54,7 +54,7 @@ namespace UniVerseAPI.Controllers
             {
                 var response = await _IStudentService.CreateAsync(student);
 
-                if (response.BaseResponse!.Success)
+                if (response.Success)
                     return Created("Successfully created!", response);
                 return BadRequest(response);
             }

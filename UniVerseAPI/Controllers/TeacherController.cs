@@ -38,7 +38,7 @@ namespace UniVerseAPI.Controllers
             if (ModelState.IsValid)
             {
                 var response = await _ITeacherService.GetTeacherDetailAsync(code);
-                if (response.BaseResponse!.Success)
+                if (response.Success)
                     return Ok(response);
                 return BadRequest(response);
             }
@@ -52,9 +52,9 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = _ITeacherService.CreateAsync(teacher);
+                var response = _ITeacherService.Create(teacher);
 
-                if (response.BaseResponse!.Success)
+                if (response.Success)
                     return Created("Successfully created!", response);
                 return BadRequest(response);
             }
@@ -68,7 +68,7 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _ITeacherService.EnableOrDisable(code, status);
+                var response = await _ITeacherService.EnableOrDisableAsync(code, status);
                 if (response.Success)
                     return Ok(response);
                 return BadRequest(response);

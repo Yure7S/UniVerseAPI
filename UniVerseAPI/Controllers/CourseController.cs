@@ -26,11 +26,11 @@ namespace UniVerseAPI.Controllers
         [HttpGet("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAllAsync()
+        public IActionResult GetAllAsync()
         {
             try
             {
-                var response = await _ICourseService.GetAllAsync();
+                var response = _ICourseService.GetAllAsync();
                 return Ok(response);
             }
             catch (Exception)

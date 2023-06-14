@@ -36,25 +36,5 @@ namespace UniVerseAPI.Infra.Data.Context
             CreationDate = DateTime.Now;
             LastUpdate = DateTime.Now;
         }
-
-        public AddressEntity(string addressValue, int number, string neighborhood, string cep)
-        {
-            Id = Guid.NewGuid();
-            AddressValue = addressValue;
-            Number = number;
-            Neighborhood = neighborhood;
-            Cep = cep;
-            CreationDate = DateTime.Now;
-            LastUpdate = DateTime.Now;
-        }
-
-        public void UpdateAsync(string addressValue, int number, string neighborhood, string cep)
-        {
-            AddressValue = addressValue;
-            Number = number;
-            Neighborhood = neighborhood;
-            Cep = cep;
-            LastUpdate = DateTime.Now;
-        }
     }
 }

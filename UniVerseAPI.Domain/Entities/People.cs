@@ -12,12 +12,6 @@ namespace UniVerseAPI.Infra.Data.Context
     [Index("Cpf", Name = "UQ__People__C1FF9309991D9366", IsUnique = true)]
     public partial class People : BaseEntity
     {
-        public People()
-        {
-            Student = new HashSet<Student>();
-            Teacher = new HashSet<Teacher>();
-        }
-
         [Key]
         public Guid Id { get; set; }
         public Guid AddressId { get; set; }
@@ -51,30 +45,10 @@ namespace UniVerseAPI.Infra.Data.Context
         [InverseProperty("People")]
         public virtual ICollection<Teacher> Teacher { get; set; }
 
-        public People(Guid addressId, string fullName, DateTime birthDate, string cpf, string gender, string phone, string email, string password)
+        public People()
         {
             Id = Guid.NewGuid();
-            AddressId = addressId;
-            FullName = fullName;
-            BirthDate = birthDate;
-            Cpf = cpf;
-            Gender = gender;
-            Phone = phone;
-            Email = email;
-            Password = password;
             CreationDate = DateTime.Now;
-            LastUpdate = DateTime.Now;
-        }
-
-        public void UpdateAsync(string fullName, DateTime birthDate, string cpf, string gender, string phone, string email, string password)
-        {
-            FullName = fullName;
-            BirthDate = birthDate;
-            Cpf = cpf;
-            Gender = gender;
-            Phone = phone;
-            Email = email;
-            Password = password;
             LastUpdate = DateTime.Now;
         }
     }

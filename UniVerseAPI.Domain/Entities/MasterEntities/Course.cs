@@ -43,39 +43,5 @@ namespace UniVerseAPI.Infra.Data.Context
         [InverseProperty("Course")]
         public virtual ICollection<Subject> Subject { get; set; }
 
-        public Course(string fullName, string description, DateTime startDate, DateTime endDate, int seats, int spotsAvailable, int price, string category, string code)
-        {
-            Id = Guid.NewGuid();
-            FullName = fullName;
-            Description = description;
-            StartDate = startDate;
-            EndDate = endDate;
-            Seats = seats;
-            SpotsAvailable = spotsAvailable;
-            Price = price;
-            Category = category;
-            Code = code;
-            Active = true;
-            Deleted = false;
-            CreationDate = DateTime.Now;
-            LastUpdate = DateTime.Now;
-            Student = new HashSet<Student>();
-            Subject = new HashSet<Subject>();
-        }
-
-
-        public void UpdateAsync(string fullName, string description, DateTime startDate, DateTime endDate, int seats, int spotsAvailable, int price, string category, string code)
-        {
-            FullName = fullName;
-            Description = description;
-            StartDate = startDate;
-            EndDate = endDate;
-            Seats = seats;
-            SpotsAvailable = spotsAvailable;
-            Price = price;
-            Category = category;
-            Code = code;
-            LastUpdate = DateTime.Now;
-        }
     }
 }
