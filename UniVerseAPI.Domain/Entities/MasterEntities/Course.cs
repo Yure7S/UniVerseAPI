@@ -43,5 +43,11 @@ namespace UniVerseAPI.Infra.Data.Context
         [InverseProperty("Course")]
         public virtual ICollection<Subject> Subject { get; set; }
 
+        public Course()
+        {
+            Id = Guid.NewGuid();
+            CreationDate = DateTime.Now;
+            LastUpdate = DateTime.Now;
+        }
     }
 }

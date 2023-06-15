@@ -28,19 +28,10 @@ namespace UniVerseAPI.Infra.Data.Context
         [InverseProperty("Teacher")]
         public virtual ICollection<Subject> Subject { get; set; }
 
-        public Teacher(Guid peopleId, string code)
+        public Teacher()
         {
             Id = Guid.NewGuid();
-            PeopleId = peopleId;
-            Code = code;
-            Active = true;
             CreationDate = DateTime.Now;
-            LastUpdate = DateTime.Now;
-        }
-
-        public void Update(string code)
-        {
-            Code = code;
             LastUpdate = DateTime.Now;
         }
     }

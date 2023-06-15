@@ -15,6 +15,8 @@ namespace UniVerseAPI.Application.Mappings
         {
             CreateMap<People, PeopleResponseDTO>();
             CreateMap<PeopleInputDTO, People>();
+            CreateMap<PeopleUpdateDTO, People>();
+
         }
     }
 }

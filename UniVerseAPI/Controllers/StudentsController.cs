@@ -79,7 +79,7 @@ namespace UniVerseAPI.Controllers
         [HttpPut("modify/{registration}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateCourse(StudentInputDTO student, string registration)
+        public async Task<IActionResult> UpdateCourse(StudentUpdateDTO student, string registration)
         {
             if (ModelState.IsValid)
             {

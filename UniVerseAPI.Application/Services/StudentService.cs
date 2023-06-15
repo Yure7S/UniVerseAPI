@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Azure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
@@ -94,6 +96,7 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
+                Student? studentFoundEmail = await _IStudent.GetStudentByEmailAsync(student.People.Email);
                 Course? courseFound = await _ICourse.GetByCodeAsync(student.CourseCode);
                 StudentResponseDetailsDTO response = new();
 
@@ -102,15 +105,21 @@ namespace UniVerseAPI.Application.Services
                     response.Message = "*** We couldn't find any courses with the given code!";
                     response.Success = false;
                 }
+                else if (studentFoundEmail?.People.Email != null)
+                {
+                    response.Message = "*** This email has already been registered!";
+                    response.Success = false;
+                }
                 else
                 {
+                    string code = DateTime.Now.Year + courseFound!.FullName[..3].ToUpper() + new Random().Next(100, 999);
                     AddressEntity newAddress = _mapper.Map<AddressEntity>(student.Address);
                     People newPeople = _mapper.Map<People>(student.People);
                     Student newStudent = new();
                     newPeople.AddressId = newAddress.Id;
                     newStudent.PeopleId = newPeople.Id;
                     newStudent.CourseId = courseFound.Id;
-                    newStudent.Registration = student.Registration;
+                    newStudent.Registration = code;
 
                     AddressResponseDTO addressResponse = _mapper.Map<AddressResponseDTO>(newAddress);
                     PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(newPeople);
@@ -118,7 +127,7 @@ namespace UniVerseAPI.Application.Services
 
                     SaveStudent(newAddress, newPeople, newStudent);
 
-                    response.Registration = student.Registration;
+                    response.Registration = code;
                     response.People = peopleResponse;
                     response.Message = "*** Student Created successfully!";
                     response.Success = true;
@@ -168,18 +177,18 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public void UpdateStudent(Student student, People people,AddressEntity addressEntity)
+        public async Task UpdateStudent(People people, AddressEntity addressEntity)
         {
-            _IAddressEntity.UpdateAsync(addressEntity);
-            _IPeople.UpdateAsync(people);
-            _IStudent.UpdateAsync(student);
+            await _IAddressEntity.UpdateAsync(addressEntity);
+            await _IPeople.UpdateAsync(people);
         }
 
-        public async Task<BaseResponseDTO> UpdateAsync(StudentInputDTO student, string registration)
+        public async Task<BaseResponseDTO> UpdateAsync(StudentUpdateDTO student, string registration)
         {
             try
             {
                 Student studentFound = await _IStudent.GetStudentDetailAsync(registration);
+
                 BaseResponseDTO response = new();
 
                 if (studentFound == null)
@@ -188,14 +197,13 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    studentFound.People.AddressEntity = _mapper.Map<AddressEntity>(student.Address);
-                    studentFound.People = _mapper.Map<People>(student.People);
-                    studentFound = _mapper.Map<Student>(student);
+                    People? peopleFound = await _IPeople.GetByIdAsync(studentFound.PeopleId);
+                    AddressEntity? addressFound = await _IAddressEntity.GetByIdAsync(studentFound.People.AddressId);
 
-                    UpdateStudent(
-                        studentFound,
-                        studentFound.People,
-                        studentFound.People.AddressEntity);
+                    peopleFound = _mapper.Map<People>(student.People);
+                    addressFound = _mapper.Map<AddressEntity>(student.Address);
+
+                    await UpdateStudent(peopleFound!, addressFound!);
 
                     response.Update(message: "*** Student UpdateAsyncd successfully!", success: true);
                 }

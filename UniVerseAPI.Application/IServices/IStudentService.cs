@@ -15,7 +15,7 @@ namespace UniVerseAPI.Application.IServices
         public List<StudentResponseDTO> GetAllAsync();
         public Task<StudentResponseDetailsDTO> GetByRegistrationAsync(string registration);
         public Task<StudentResponseDetailsDTO> CreateAsync(StudentInputDTO student);
-        public Task<BaseResponseDTO> UpdateAsync(StudentInputDTO student, string registration);
+        public Task<BaseResponseDTO> UpdateAsync(StudentUpdateDTO student, string registration);
         public Task<BaseResponseDTO> DeleteAsync(string registration);
 
     }

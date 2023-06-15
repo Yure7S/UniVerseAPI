@@ -382,9 +382,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.Property<string>("Registration")
                         .IsRequired()
-                        .HasMaxLength(20)
+                        .HasMaxLength(10)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<Guid?>("ReportCardId")
                         .HasColumnType("uniqueidentifier");

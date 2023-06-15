@@ -31,6 +31,13 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
                 .Include(s => s.People)
                 .ThenInclude(s => s.AddressEntity)
                 .FirstAsync();
-        } 
+        }
+
+        public async Task<Student?> GetStudentByEmailAsync(string email)
+        {
+            return await _db.Student.Where(std => true)
+                .Include(s => s.People)
+                .FirstOrDefaultAsync(p => p.People.Email == email);
+        }
     }
 }

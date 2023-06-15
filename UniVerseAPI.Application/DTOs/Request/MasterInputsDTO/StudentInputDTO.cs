@@ -11,10 +11,6 @@ namespace UniVerseAPI.Infra.Data.Context
     public partial class StudentInputDTO
     {
         [Required]
-        [StringLength(20, MinimumLength = 20)]
-        [Unicode(true)]
-        public string Registration { get; set; }
-        [Required]
         [StringLength(10, MinimumLength = 10)]
         public string CourseCode { get; set; }
         [Required]

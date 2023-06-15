@@ -20,7 +20,7 @@ namespace UniVerseAPI.Infra.Data.Context
         public string Neighborhood { get; set; }
         [Required]
         [StringLength(8)]
-        [Unicode(false)]
+        [Unicode(true)]
         public string Cep { get; set; }
     }
 }

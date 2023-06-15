@@ -11,5 +11,7 @@ namespace UniVerseAPI.Application.Interface
     {
         public Task<List<Student>> GetAllStudentAsync();
         public Task<Student> GetStudentDetailAsync(string registration);
+        public Task<Student?> GetStudentByEmailAsync(string email);
+
     }
 }

@@ -17,14 +17,14 @@ namespace UniVerseAPI.Infra.Data.Context
         [Column(TypeName = "date")]
         public DateTime BirthDate { get; set; }
         [Required]
-        [StringLength(11)]
-        [Unicode(false)]
+        [StringLength(11, MinimumLength = 11)]
+        [Unicode(true)]
         public string Cpf { get; set; }
         [Required]
         [StringLength(255)]
         public string Gender { get; set; }
         [Required]
-        [StringLength(255)]
+        [StringLength(11, MinimumLength = 11)]
         public string Phone { get; set; }
         [Required]
         [StringLength(255)]

@@ -22,7 +22,7 @@ namespace UniVerseAPI.Infra.Data.Context
         public DateTime BirthDate { get; set; }
         [Required]
         [StringLength(11)]
-        [Unicode(false)]
+        [Unicode(true)]
         public string Cpf { get; set; }
         [Required]
         [StringLength(255)]

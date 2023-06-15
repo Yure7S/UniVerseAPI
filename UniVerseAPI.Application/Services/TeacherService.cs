@@ -93,6 +93,7 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
+
                 AddressEntity newAddress = _mapper.Map<AddressEntity>(teacher.Address);
                 People newPeople = _mapper.Map<People>(teacher.People);
                 Teacher newTeacher = _mapper.Map<Teacher>(teacher);
@@ -142,7 +143,8 @@ namespace UniVerseAPI.Application.Services
             }
             catch (Exception e)
             {
-                BaseResponseDTO response = new(message: "*** We encountered an error trying to delete the Teacher!",
+                BaseResponseDTO response = new(
+                    message: "*** We encountered an error trying to delete the Teacher!",
                     success: false,
                     error: e.Message);
 
@@ -176,7 +178,8 @@ namespace UniVerseAPI.Application.Services
             }
             catch (Exception e)
             {
-                BaseResponseDTO response = new(message: "*** We encountered an error trying to perform such an action!",
+                BaseResponseDTO response = new(
+                    message: "*** We encountered an error trying to perform such an action!",
                     success: false,
                     error: e.Message);
 
