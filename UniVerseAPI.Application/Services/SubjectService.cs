@@ -89,7 +89,7 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
-                Teacher teacherFound = await _ITeacher.GetByCodeAsync(subject.TeacherCode!);
+                Teacher? teacherFound = await _ITeacher.GetByCodeAsync(subject.TeacherCode!);
                 Course? courseFound = await _ICourse.GetByCodeAsync(subject.CourseCode!);
 
                 Subject newSubject = _mapper.Map<Subject>(subject);
