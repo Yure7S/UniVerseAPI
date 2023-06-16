@@ -61,7 +61,7 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("delet/{registration}")]
+        [HttpDelete("delet/{registration}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteCourse(string registration)

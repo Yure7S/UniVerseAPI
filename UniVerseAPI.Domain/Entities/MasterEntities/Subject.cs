@@ -21,22 +21,23 @@ namespace UniVerseAPI.Infra.Data.Context
         public Guid CourseId { get; set; }
         public Guid TeacherId { get; set; }
         public Guid? ClassId { get; set; }
-        public Guid PeriodId { get; set; }
+        public Guid? PeriodId { get; set; }
+
         [Required]
         [StringLength(255)]
         public string FullName { get; set; }
+
         [Required]
         [StringLength(255)]
         public string Description { get; set; }
+
         [Required]
-        [StringLength(10)]
-        [Unicode(false)]
+        [StringLength(10, MinimumLength = 10)]
+        [Unicode(true)]
         public string Code { get; set; }
+
         [Column(TypeName = "date")]
         public DateTime Workload { get; set; }
-        [Required]
-        [StringLength(255)]
-        public string Instructor { get; set; }
 
         [ForeignKey("ClassId")]
         [InverseProperty("Subject")]

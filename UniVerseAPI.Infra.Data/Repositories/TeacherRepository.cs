@@ -17,6 +17,11 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
         {
         }
 
+        public async Task<Teacher?> GetByCodeAsync(string code)
+        {
+            return await _db.Teacher.FirstOrDefaultAsync(tchr => tchr.Code == code);
+        }
+
         public async Task<List<Teacher>> GetAllTeacherAsync()
         {
             return await _db.Teacher.Where(tchr => true)

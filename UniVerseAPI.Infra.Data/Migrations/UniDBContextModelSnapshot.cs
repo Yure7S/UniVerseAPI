@@ -237,8 +237,8 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasMaxLength(11)
-                        .IsUnicode(false)
-                        .HasColumnType("char(11)")
+                        .IsUnicode(true)
+                        .HasColumnType("nchar(11)")
                         .IsFixedLength();
 
                     b.Property<DateTime>("CreationDate")
@@ -414,8 +414,8 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("char(10)")
+                        .IsUnicode(true)
+                        .HasColumnType("nchar(10)")
                         .IsFixedLength();
 
                     b.Property<Guid>("CourseId")
@@ -437,15 +437,10 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("Instructor")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("PeriodId")
+                    b.Property<Guid?>("PeriodId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("TeacherId")
@@ -599,7 +594,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Period", "Period")
                         .WithMany("Subject")
                         .HasForeignKey("PeriodId")
-                        .IsRequired()
                         .HasConstraintName("Subject_fk3");
 
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Teacher", "Teacher")

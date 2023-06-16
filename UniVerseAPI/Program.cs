@@ -28,12 +28,14 @@ builder.Services.AddScoped(typeof(IBaseInterface<>), typeof(BaseRepository<>));
 // Repositories
 builder.Services.AddScoped<IStudent, StudentRepository>();
 builder.Services.AddScoped<ICourse, CourseRepository>();
+builder.Services.AddScoped<ISubject, SubjectRepository>();
 builder.Services.AddScoped<IPeople, PeopleRepository>();
 builder.Services.AddScoped<ITeacher, TeacherRepository>();
 builder.Services.AddScoped<IAddressEntity, AddressEntityRepository>();
 
 // Services
 builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<ISubjectService, SubjectService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ITeacherService, TeacherService>();
 

@@ -11,6 +11,7 @@ namespace UniVerseAPI.Application.Interface
     {
         public Task<List<Teacher>> GetAllTeacherAsync();
         public Task<Teacher> GetTeacherDetailAsync(string code);
+        public Task<Teacher?> GetByCodeAsync(string code);
 
     }
 
