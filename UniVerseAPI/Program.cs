@@ -32,12 +32,14 @@ builder.Services.AddScoped<ISubject, SubjectRepository>();
 builder.Services.AddScoped<IPeople, PeopleRepository>();
 builder.Services.AddScoped<ITeacher, TeacherRepository>();
 builder.Services.AddScoped<IAddressEntity, AddressEntityRepository>();
+builder.Services.AddScoped<IClass, ClassRepository>();
 
 // Services
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<ISubjectService, SubjectService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ITeacherService, TeacherService>();
+builder.Services.AddScoped<IClassService, ClassService>();
 
 #endregion
 
