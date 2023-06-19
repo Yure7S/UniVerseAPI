@@ -15,6 +15,8 @@ namespace UniVerseAPI.Application.Mappings
         public ClassProfile()
         {
             CreateMap<Class, ClassResponseDTO>();
+            CreateMap<Class, ClassDetailsDTO>();
+            CreateMap<ClassInputDTO, ClassResponseDTO>();
             CreateMap<ClassInputDTO, Class>();
 
         }

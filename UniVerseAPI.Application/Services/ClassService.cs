@@ -26,6 +26,13 @@ namespace UniVerseAPI.Application.Services
             _mapper = mapper;
         }
 
+        public List<ClassResponseDTO> GetAllAsync()
+        {
+            return _class.GetAllAsync()
+                .Result
+                .ConvertAll(cls => _mapper.Map<ClassResponseDTO>(cls));
+        }
+
         public async Task<ClassResponseDetailsDTO> CreateAsync(ClassInputDTO classDTO)
         {
 
@@ -86,13 +93,6 @@ namespace UniVerseAPI.Application.Services
                 return response;
             }
         }
-
-        public List<ClassResponseDTO> GetAllAsync()
-        {
-            return _class.GetAllAsync()
-                .Result
-                .ConvertAll(cls => _mapper.Map<ClassResponseDTO>(cls));
-        } 
 
         public async Task<ClassResponseDetailsDTO> GetByIdAsync(Guid id)
         {

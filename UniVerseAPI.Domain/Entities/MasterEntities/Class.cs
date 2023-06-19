@@ -20,8 +20,12 @@ namespace UniVerseAPI.Infra.Data.Context
         [Required]
         [StringLength(255)]
         public string FullName { get; set; }
-        public int EnrolledStudents { get; set; }
-        public int Shift { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string code { get; set; }
+        [Required]
+        [StringLength(35)]
+        public string Shift { get; set; }
         [Required]
         [StringLength(255)]
         public string Room { get; set; }

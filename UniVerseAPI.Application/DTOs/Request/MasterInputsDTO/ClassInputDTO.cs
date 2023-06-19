@@ -11,9 +11,8 @@ namespace UniVerseAPI.Application.DTOs.Request.MasterInputsDTO
 {
     public class ClassInputDTO
     {
-        public string FullName { get; set; }
-        public int EnrolledStudents { get; set; }
+        public string? FullName { get; set; }
         public int Shift { get; set; }
-        public string Room { get; set; }
+        public string? Room { get; set; }
     }
 }
