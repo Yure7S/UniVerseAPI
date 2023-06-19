@@ -91,20 +91,31 @@ namespace UniVerseAPI.Application.Services
             {
                 Teacher? teacherFound = await _ITeacher.GetByCodeAsync(subject.TeacherCode!);
                 Course? courseFound = await _ICourse.GetByCodeAsync(subject.CourseCode!);
+                SubjectResponseDetailsDTO response = new();
 
-                Subject newSubject = _mapper.Map<Subject>(subject);
-                newSubject.CourseId = courseFound!.Id;
-                newSubject.TeacherId = teacherFound.Id;
-
-                await _ISubject.CreateAsync(newSubject);
-
-                SubjectDetailsDTO subjectDetailsResponse = _mapper.Map<SubjectDetailsDTO>(newSubject);
-                SubjectResponseDetailsDTO response = new()
+                if (courseFound == null)
                 {
-                    Subject = subjectDetailsResponse,
-                    Message = "*** Successfully registered subject",
-                    Success = true
-                };
+                    response.Message = "*** We couldn't find any course in our database that has the given code.";
+                    response.Success = false;
+                }
+                else if(teacherFound == null)
+                {
+                    response.Message = "*** We couldn't find any teacher in our database that has the given code.";
+                    response.Success = false;
+                }
+                else
+                {
+                    Subject newSubject = _mapper.Map<Subject>(subject);
+                    newSubject.CourseId = courseFound!.Id;
+                    newSubject.TeacherId = teacherFound.Id;
+
+                    await _ISubject.CreateAsync(newSubject);
+
+                    SubjectDetailsDTO subjectDetailsResponse = _mapper.Map<SubjectDetailsDTO>(newSubject);
+                    response.Subject = subjectDetailsResponse;
+                    response.Message = "*** Successfully registered subject";
+                    response.Success = true;
+                }
 
                 return response;
             }
