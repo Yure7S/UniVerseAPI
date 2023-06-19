@@ -12,7 +12,7 @@ namespace UniVerseAPI.Infra.Data.Context
     {
         public Class()
         {
-            Subject = new HashSet<Subject>();
+            Id = Guid.NewGuid();
         }
 
         [Key]
@@ -28,5 +28,7 @@ namespace UniVerseAPI.Infra.Data.Context
 
         [InverseProperty("Class")]
         public virtual ICollection<Subject> Subject { get; set; }
+
+
     }
 }
