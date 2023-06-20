@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
+using UniVerseAPI.Domain.Entities.MasterEntities;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
@@ -59,6 +60,24 @@ namespace UniVerseAPI.Infra.Data.Context
             modelBuilder.Entity<Class>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
+
+            });
+
+            modelBuilder.Entity<GroupStudentClass>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasOne(d => d.Student)
+                    .WithMany(p => p.GroupStudentClass)
+                    .HasForeignKey(d => d.StudentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("GroupStudentClass_fk0");
+
+                entity.HasOne(d => d.Class)
+                    .WithMany(p => p.GroupStudentClass)
+                    .HasForeignKey(d => d.StudentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("GroupStudentClass_fk2");
             });
 
             modelBuilder.Entity<Course>(entity =>

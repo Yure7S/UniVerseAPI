@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using UniVerseAPI.Domain.Entities.MasterEntities;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
@@ -13,19 +14,25 @@ namespace UniVerseAPI.Infra.Data.Context
         public Class()
         {
             Id = Guid.NewGuid();
+            CreationDate = DateTime.Now;
+            LastUpdate = DateTime.Now;
         }
 
         [Key]
         public Guid Id { get; set; }
+
         [Required]
         [StringLength(255)]
         public string FullName { get; set; }
+
         [Required]
         [StringLength(10)]
-        public string code { get; set; }
+        public string Code { get; set; }
+
         [Required]
         [StringLength(35)]
         public string Shift { get; set; }
+
         [Required]
         [StringLength(255)]
         public string Room { get; set; }
@@ -33,6 +40,8 @@ namespace UniVerseAPI.Infra.Data.Context
         [InverseProperty("Class")]
         public virtual ICollection<Subject> Subject { get; set; }
 
+        [InverseProperty("Class")]
+        public virtual ICollection<GroupStudentClass> GroupStudentClass { get; set; }
 
     }
 }

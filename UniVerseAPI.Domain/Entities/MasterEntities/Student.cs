@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using UniVerseAPI.Domain.Entities.MasterEntities;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
@@ -15,48 +16,32 @@ namespace UniVerseAPI.Infra.Data.Context
         public Guid? ReportCardId { get; set; }
         public Guid PeopleId { get; set; }
         public Guid? CourseId { get; set; }
+        
+
         [Required]
         [StringLength(10, MinimumLength = 10)]
         [Unicode(true)]
         public string Registration { get; set; }
+
         [ForeignKey("CourseId")]
         [InverseProperty("Student")]
         public virtual Course Course { get; set; }
+
         [ForeignKey("PeopleId")]
         [InverseProperty("Student")]
         public virtual People People { get; set; }
+
         [ForeignKey("ReportCardId")]
         [InverseProperty("Student")]
         public virtual ReportCard ReportCard { get; set; }
+
+        [InverseProperty("Student")]
+        public virtual ICollection<GroupStudentClass> GroupStudentClass { get; set; }
 
         public Student()
         {
             Id = Guid.NewGuid();
             CreationDate = DateTime.Now;
-            LastUpdate = DateTime.Now;
-        }
-
-        public Student(Guid peopleId, Guid courseId, string registration)
-        {
-            Id = Guid.NewGuid();
-            PeopleId = peopleId;
-            CourseId = courseId;
-            Registration = registration;
-            Active = true;
-            CreationDate = DateTime.Now;
-            LastUpdate = DateTime.Now;
-        }
-
-        public void UpdateAsync(Guid? courseId, Guid? reportCardId)
-        {
-            ReportCardId = reportCardId;
-            CourseId = courseId;
-            LastUpdate = DateTime.Now;
-        }
-
-        public void CourseTransfer(Guid courseId)
-        {
-            CourseId = courseId;
             LastUpdate = DateTime.Now;
         }
     }

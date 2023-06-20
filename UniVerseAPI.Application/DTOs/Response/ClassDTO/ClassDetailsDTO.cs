@@ -18,7 +18,7 @@ namespace UniVerseAPI.Application.DTOs.Response.ClassDTO
         public string? FullName { get; set; }
         public string? Code { get; set; }
         public int EnrolledStudents { get; set; }
-        public int Shift { get; set; }
+        public string? Shift { get; set; }
         public string? Room { get; set; }
     }
 }
