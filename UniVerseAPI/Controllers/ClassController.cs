@@ -10,11 +10,11 @@ namespace UniVerseAPI.Controllers
     public class ClassController : ControllerBase
     {
 
-        private readonly IClassService _classService;
+        private readonly IClassService _IClassService;
 
         public ClassController(IClassService classInjection)
         {
-            _classService = classInjection;
+            _IClassService = classInjection;
         }
 
 
@@ -25,7 +25,7 @@ namespace UniVerseAPI.Controllers
         {
             try
             {
-                var response = _classService.GetAllAsync();
+                var response = _IClassService.GetAllAsync();
                 return Ok(response);
             }
             catch (Exception)
@@ -34,14 +34,14 @@ namespace UniVerseAPI.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetByIdAsync(Guid id)
+        public async Task<IActionResult> GetByIdAsync(int code)
         {
             if (ModelState.IsValid)
             {
-                var response = await _classService.GetByIdAsync(id);
+                var response = await _IClassService.GetByCodeAsync(code);
 
                 if (response.Success)
                     return Ok(response);
@@ -57,7 +57,7 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _classService.CreateAsync(classInput);
+                var response = await _IClassService.CreateAsync(classInput);
 
                 if (response.Success)
                     return Created("Successfully Created!", response);
@@ -73,7 +73,7 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _classService.DeleteAsync(id);
+                var response = await _IClassService.DeleteAsync(id);
                 if (response.Success)
                     return Ok(response);
                 return BadRequest(response);
@@ -88,7 +88,7 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _classService.UpdateAsync(classInput, id);
+                var response = await _IClassService.UpdateAsync(classInput, id);
 
                 if (response.Success)
                     return Ok(response);

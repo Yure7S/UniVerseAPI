@@ -19,6 +19,7 @@ using UniVerseAPI.Application.DTOs.Response.BaseResponse;
 using UniVerseAPI.Application.DTOs.Response.StudentsDTO;
 using UniVerseAPI.Application.Interface;
 using UniVerseAPI.Application.IServices;
+using UniVerseAPI.Domain.Entities.MasterEntities;
 using UniVerseAPI.Domain.Interface;
 using UniVerseAPI.Infra.Data.Context;
 
@@ -31,14 +32,19 @@ namespace UniVerseAPI.Application.Services
         private readonly IAddressEntity _IAddressEntity;
         private readonly IPeople _IPeople;
         private readonly IMapper _mapper;
+        private readonly IGroupStudentClass _IGroupStudentClass;
+        private readonly IClass _IClass;
 
-        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity iAddressEntity, IPeople iPeople, IMapper mapper)
+
+        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity iAddressEntity, IPeople iPeople, IMapper mapper, IGroupStudentClass groupStudentClass, IClass iClass)
         {
             _IStudent = iStudent;
             _ICourse = iCourse;
+            _IClass = iClass;
             _IAddressEntity = iAddressEntity;
             _IPeople = iPeople;
             _mapper = mapper;
+            _IGroupStudentClass = groupStudentClass;
         }
 
         public List<StudentResponseDTO> GetAllAsync()
@@ -193,7 +199,7 @@ namespace UniVerseAPI.Application.Services
 
                 if (studentFound == null)
                 {
-                    response.Update(message: "*** We couldn't find the Student in our database!", success: false);
+                    response.Update(message: "*** We couldn't find the student in our database!", success: false);
                 }
                 else
                 {
@@ -205,7 +211,7 @@ namespace UniVerseAPI.Application.Services
 
                     await UpdateStudent(peopleFound!, addressFound!);
 
-                    response.Update(message: "*** Student UpdateAsyncd successfully!", success: true);
+                    response.Update(message: "*** Student updated successfully!", success: true);
                 }
 
                 return response;
@@ -213,8 +219,47 @@ namespace UniVerseAPI.Application.Services
             catch (Exception e)
             {
                 BaseResponseDTO response = new(
-                    message: "*** We encountered an error trying to UpdateAsync the Student!",
+                    message: "*** We encountered an error trying to update the student!",
                     success: false, 
+                    error: e.Message);
+
+                return response;
+            }
+        }
+
+        public async Task<BaseResponseDTO> AddStudentInClass(GroupStudentClassInputDTO gscInput)
+        {
+            try
+            {
+                BaseResponseDTO response = new();
+
+                Student studentFound = await _IStudent.GetStudentDetailAsync(gscInput.StudentRegistration);
+                Class? classFound = await _IClass.GetByCodeAsync(gscInput.ClassCode);
+                GroupStudentClass? gscFound = await _IGroupStudentClass.GetByClassIdAndStudentId(studentId: studentFound.Id, classId: classFound!.Id);
+
+                if (studentFound == null || !studentFound.Deleted || classFound == null || !studentFound.Deleted)
+                    response.Update(message: "*** We couldn't find the information you entered in our database!", success: false);
+                else if(gscFound != null)
+                    response.Update(message: "*** The student is already included in this class!", success: false);
+                else
+                {
+                    GroupStudentClass gsc = new()
+                    {
+                        StudentId = studentFound.Id,
+                        ClassId = classFound.Id
+                    };
+                    await _IGroupStudentClass.CreateAsync(gsc);
+
+                    response.Update(message: $"*** The student has been entered into the class that contains the code: {gscInput.ClassCode}", success: true);
+                }
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                BaseResponseDTO response = new(
+                    message: "*** We encountered an error trying to insert the student with into the class!",
+                    success: false,
                     error: e.Message);
 
                 return response;

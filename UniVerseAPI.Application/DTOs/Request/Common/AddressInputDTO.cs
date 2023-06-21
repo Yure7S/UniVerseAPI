@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    public partial class AddressInputDTO : BaseEntity
+    public partial class AddressInputDTO
     {
         [Required]
         [Column("Address")]

@@ -26,8 +26,8 @@ namespace UniVerseAPI.Infra.Data.Context
         public string FullName { get; set; }
 
         [Required]
-        [StringLength(10)]
-        public string Code { get; set; }
+        [StringLength(5)]
+        public int Code { get; set; }
 
         [Required]
         [StringLength(35)]

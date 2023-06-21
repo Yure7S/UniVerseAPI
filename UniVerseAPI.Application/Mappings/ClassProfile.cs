@@ -18,7 +18,6 @@ namespace UniVerseAPI.Application.Mappings
             CreateMap<Class, ClassDetailsDTO>();
             CreateMap<ClassInputDTO, ClassResponseDTO>();
             CreateMap<ClassInputDTO, Class>();
-
         }
     }
 }

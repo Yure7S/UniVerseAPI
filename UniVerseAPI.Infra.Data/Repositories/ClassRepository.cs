@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,11 @@ namespace UniVerseAPI.Infra.Data.Repositories
     {
         public ClassRepository(UniDBContext db) : base(db)
         {
+        }
+
+        public async Task<Class?> GetByCodeAsync(int code)
+        {
+            return await _db.Class.FirstOrDefaultAsync(clss => clss.Code == code);
         }
     }
 }

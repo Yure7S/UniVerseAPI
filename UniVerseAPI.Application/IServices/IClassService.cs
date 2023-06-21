@@ -15,7 +15,7 @@ namespace UniVerseAPI.Application.IServices
 {
     public interface IClassService
     {
-        public Task<ClassResponseDetailsDTO> GetByIdAsync(Guid id);
+        public Task<ClassResponseDetailsDTO> GetByCodeAsync(int code);
         public List<ClassResponseDTO> GetAllAsync();
         public Task<ClassResponseDetailsDTO> CreateAsync(ClassInputDTO classDTO);
         public Task<BaseResponseDTO> UpdateAsync(ClassInputDTO classDTO, Guid id);

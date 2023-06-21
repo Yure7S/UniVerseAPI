@@ -33,6 +33,7 @@ builder.Services.AddScoped<IPeople, PeopleRepository>();
 builder.Services.AddScoped<ITeacher, TeacherRepository>();
 builder.Services.AddScoped<IAddressEntity, AddressEntityRepository>();
 builder.Services.AddScoped<IClass, ClassRepository>();
+builder.Services.AddScoped<IGroupStudentClass, GroupStudentClassRepository>();
 
 // Services
 builder.Services.AddScoped<ICourseService, CourseService>();

@@ -27,8 +27,20 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
                     b.Property<Guid>("ClassId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("StudentId")
                         .HasColumnType("uniqueidentifier");
@@ -118,10 +130,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<int>("Code")
+                        .HasMaxLength(5)
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
@@ -522,13 +533,13 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .WithMany("GroupStudentClass")
                         .HasForeignKey("StudentId")
                         .IsRequired()
-                        .HasConstraintName("Class_fk0");
+                        .HasConstraintName("GroupStudentClass_fk2");
 
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Student", "Student")
                         .WithMany("GroupStudentClass")
                         .HasForeignKey("StudentId")
                         .IsRequired()
-                        .HasConstraintName("Student_fk0");
+                        .HasConstraintName("GroupStudentClass_fk0");
 
                     b.Navigation("Class");
 

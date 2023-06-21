@@ -39,6 +39,7 @@ namespace UniVerseAPI.Application.Services
             try
             {
                 Class newClass = _mapper.Map<Class>(classDTO);
+                newClass.Code = new Random().Next(10000, 99999);
 
                 ClassDetailsDTO classDetailsResponse = _mapper.Map<ClassDetailsDTO>(newClass);
 
@@ -94,11 +95,11 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<ClassResponseDetailsDTO> GetByIdAsync(Guid id)
+        public async Task<ClassResponseDetailsDTO> GetByCodeAsync(int code)
         {
             try
             {
-                Class? classFound = await _class.GetByIdAsync(id);
+                Class? classFound = await _class.GetByCodeAsync(code);
 
                 if (classFound == null)
                 {
