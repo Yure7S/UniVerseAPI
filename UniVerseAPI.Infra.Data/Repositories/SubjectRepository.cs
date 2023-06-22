@@ -23,12 +23,23 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
             return await _db.Subject.SingleOrDefaultAsync(c => c.Code == code);
         }
 
+        public async Task<List<Subject>> GetAllSubjects()
+        {
+            return await _db.Subject.Where(s => true)
+                .Include(s => s.Teacher)
+                .Include(s => s.Course)
+                .Include(s => s.Class)
+                .ToListAsync();
+        }
+
         public async Task<Subject> GetSubjectDetailAsync(string code)
         {
             return await _db.Subject.Where(s => s.Code == code)
                 .Include(s => s.Teacher)
                 .Include(s => s.Course)
+                .Include(s => s.Class)
                 .FirstAsync();
         }
+
     }
 }

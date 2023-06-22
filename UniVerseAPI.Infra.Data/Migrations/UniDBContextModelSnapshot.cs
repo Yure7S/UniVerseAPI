@@ -47,6 +47,8 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClassId");
+
                     b.HasIndex("StudentId");
 
                     b.ToTable("GroupStudentClass");
@@ -441,7 +443,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("ClassId")
+                    b.Property<Guid>("ClassId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
@@ -531,7 +533,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                 {
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Class", "Class")
                         .WithMany("GroupStudentClass")
-                        .HasForeignKey("StudentId")
+                        .HasForeignKey("ClassId")
                         .IsRequired()
                         .HasConstraintName("GroupStudentClass_fk2");
 
@@ -635,6 +637,8 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Class", "Class")
                         .WithMany("Subject")
                         .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("Subject_fk2");
 
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Course", "Course")

@@ -18,8 +18,8 @@ namespace UniVerseAPI.Application.DTOs.Response.TeachersDTO
 {
     public class TeacherResponseDTO
     {
-        public string? FullName { get; set; }
         public string? Code { get; set; }
+        public string? FullName { get; set; }
         public string? Email { get; set; }
 
         public TeacherResponseDTO(Teacher teacher)

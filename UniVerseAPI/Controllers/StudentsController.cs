@@ -92,7 +92,7 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("addInClass")]
+        [HttpPost("addInClass")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddStudentInClass(GroupStudentClassInputDTO gscInput)
@@ -104,6 +104,24 @@ namespace UniVerseAPI.Controllers
                 if (response.Success)
                     return Ok(response);
                 return BadRequest(response);
+            }
+            return StatusCode(500);
+        }
+
+        [HttpGet("subjectsDone")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SubjectsDone(string registration)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _IStudentService.GetSubjectsDone(registration);
+
+                return Ok(response);
+
+                //if (response.Success)
+                //    return Ok(response);
+                //return BadRequest(response);
             }
             return StatusCode(500);
         }

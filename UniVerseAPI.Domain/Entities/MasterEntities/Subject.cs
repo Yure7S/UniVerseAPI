@@ -14,7 +14,7 @@ namespace UniVerseAPI.Infra.Data.Context
         public Guid Id { get; set; }
         public Guid CourseId { get; set; }
         public Guid TeacherId { get; set; }
-        public Guid? ClassId { get; set; }
+        public Guid ClassId { get; set; }
         public Guid? PeriodId { get; set; }
 
         [Required]

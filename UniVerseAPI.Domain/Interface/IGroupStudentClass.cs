@@ -12,5 +12,8 @@ namespace UniVerseAPI.Domain.Interface
     public interface IGroupStudentClass : IBaseInterface<GroupStudentClass>
     {
         public Task<GroupStudentClass?> GetByClassIdAndStudentId(Guid? studentId, Guid? classId);
+
+        public Task<List<GroupStudentClass>> GetByStudentId(Guid studentId);
+
     }
 }
