@@ -10,12 +10,6 @@ namespace UniVerseAPI.Infra.Data.Context
 {
     public partial class Subject : BaseEntity
     {
-        public Subject()
-        {
-            Assessment = new HashSet<Assessment>();
-            ReportCard = new HashSet<ReportCard>();
-        }
-
         [Key]
         public Guid Id { get; set; }
         public Guid CourseId { get; set; }

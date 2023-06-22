@@ -36,8 +36,8 @@ namespace UniVerseAPI.Infra.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    EnrolledStudents = table.Column<int>(type: "int", nullable: false),
-                    Shift = table.Column<int>(type: "int", nullable: false),
+                    Code = table.Column<int>(type: "int", maxLength: 10, nullable: false),
+                    Shift = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false),
                     Room = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
                     Active = table.Column<bool>(type: "bit", nullable: false),
@@ -58,7 +58,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     StartDate = table.Column<DateTime>(type: "date", nullable: false),
                     EndDate = table.Column<DateTime>(type: "date", nullable: false),
-                    Instructor = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Seats = table.Column<int>(type: "int", nullable: false),
                     SpotsAvailable = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<int>(type: "int", nullable: false),
@@ -100,7 +99,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     BirthDate = table.Column<DateTime>(type: "date", nullable: false),
-                    Cpf = table.Column<string>(type: "char(11)", unicode: false, fixedLength: true, maxLength: 11, nullable: false),
+                    Cpf = table.Column<string>(type: "nchar(11)", fixedLength: true, maxLength: 11, nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
@@ -150,12 +149,11 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TeacherId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClassId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    PeriodId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PeriodId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     FullName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Code = table.Column<string>(type: "char(10)", unicode: false, fixedLength: true, maxLength: 10, nullable: false),
+                    Code = table.Column<string>(type: "nchar(10)", fixedLength: true, maxLength: 10, nullable: false),
                     Workload = table.Column<DateTime>(type: "date", nullable: false),
-                    Instructor = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
                     Active = table.Column<bool>(type: "bit", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -270,7 +268,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     ReportCardId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     PeopleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Registration = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Registration = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
                     Active = table.Column<bool>(type: "bit", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -296,6 +294,33 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "GroupStudentClass",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StudentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ClassId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GroupStudentClass", x => x.Id);
+                    table.ForeignKey(
+                        name: "GroupStudentClass_fk0",
+                        column: x => x.StudentId,
+                        principalTable: "Student",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "GroupStudentClass_fk2",
+                        column: x => x.StudentId,
+                        principalTable: "Class",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Assessment_SubjectId",
                 table: "Assessment",
@@ -305,6 +330,11 @@ namespace UniVerseAPI.Infra.Data.Migrations
                 name: "IX_Grades_AssessmentId",
                 table: "Grades",
                 column: "AssessmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GroupStudentClass_StudentId",
+                table: "GroupStudentClass",
+                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_People_AddressId",
@@ -371,17 +401,14 @@ namespace UniVerseAPI.Infra.Data.Migrations
                 name: "IX_Teacher_PeopleId",
                 table: "Teacher",
                 column: "PeopleId");
-
-            migrationBuilder.CreateIndex(
-                name: "UQ__Teacher__A25C5AA792072F3C",
-                table: "Teacher",
-                column: "Code",
-                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "GroupStudentClass");
+
             migrationBuilder.DropTable(
                 name: "Student");
 

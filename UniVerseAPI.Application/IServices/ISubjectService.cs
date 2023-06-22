@@ -16,5 +16,6 @@ namespace UniVerseAPI.Application.IServices
         public Task<SubjectResponseDetailsDTO> CreateAsync(SubjectInputDTO subject);
         public Task<BaseResponseDTO> UpdateAsync(SubjectInputDTO subject, string code);
         public Task<BaseResponseDTO> DeleteAsync(string code);
+
     }
 }

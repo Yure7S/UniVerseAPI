@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using UniVerseAPI.Domain.Entities.MasterEntities;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
@@ -12,21 +13,35 @@ namespace UniVerseAPI.Infra.Data.Context
     {
         public Class()
         {
-            Subject = new HashSet<Subject>();
+            Id = Guid.NewGuid();
+            CreationDate = DateTime.Now;
+            LastUpdate = DateTime.Now;
         }
 
         [Key]
         public Guid Id { get; set; }
+
         [Required]
         [StringLength(255)]
         public string FullName { get; set; }
-        public int EnrolledStudents { get; set; }
-        public int Shift { get; set; }
+
+        [Required]
+        [StringLength(5)]
+        public int Code { get; set; }
+
+        [Required]
+        [StringLength(35)]
+        public string Shift { get; set; }
+
         [Required]
         [StringLength(255)]
         public string Room { get; set; }
 
         [InverseProperty("Class")]
         public virtual ICollection<Subject> Subject { get; set; }
+
+        [InverseProperty("Class")]
+        public virtual ICollection<GroupStudentClass> GroupStudentClass { get; set; }
+
     }
 }

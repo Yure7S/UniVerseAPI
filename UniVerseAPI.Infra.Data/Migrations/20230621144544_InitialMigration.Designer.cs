@@ -12,8 +12,8 @@ using UniVerseAPI.Infra.Data.Context;
 namespace UniVerseAPI.Infra.Data.Migrations
 {
     [DbContext(typeof(UniDBContext))]
-    [Migration("20230614183157_ModificandoModelos")]
-    partial class ModificandoModelos
+    [Migration("20230621144544_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,36 @@ namespace UniVerseAPI.Infra.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("UniVerseAPI.Domain.Entities.MasterEntities.GroupStudentClass", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ClassId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("GroupStudentClass");
+                });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.AddressEntity", b =>
                 {
@@ -103,14 +133,15 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Code")
+                        .HasMaxLength(10)
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
-
-                    b.Property<int>("EnrolledStudents")
-                        .HasColumnType("int");
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -125,8 +156,10 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("Shift")
-                        .HasColumnType("int");
+                    b.Property<string>("Shift")
+                        .IsRequired()
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
 
                     b.HasKey("Id");
 
@@ -240,8 +273,8 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasMaxLength(11)
-                        .IsUnicode(false)
-                        .HasColumnType("char(11)")
+                        .IsUnicode(true)
+                        .HasColumnType("nchar(11)")
                         .IsFixedLength();
 
                     b.Property<DateTime>("CreationDate")
@@ -385,9 +418,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.Property<string>("Registration")
                         .IsRequired()
-                        .HasMaxLength(20)
+                        .HasMaxLength(10)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<Guid?>("ReportCardId")
                         .HasColumnType("uniqueidentifier");
@@ -417,8 +450,8 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("char(10)")
+                        .IsUnicode(true)
+                        .HasColumnType("nchar(10)")
                         .IsFixedLength();
 
                     b.Property<Guid>("CourseId")
@@ -440,15 +473,10 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("Instructor")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("PeriodId")
+                    b.Property<Guid?>("PeriodId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("TeacherId")
@@ -500,6 +528,25 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.HasIndex("PeopleId");
 
                     b.ToTable("Teacher");
+                });
+
+            modelBuilder.Entity("UniVerseAPI.Domain.Entities.MasterEntities.GroupStudentClass", b =>
+                {
+                    b.HasOne("UniVerseAPI.Infra.Data.Context.Class", "Class")
+                        .WithMany("GroupStudentClass")
+                        .HasForeignKey("StudentId")
+                        .IsRequired()
+                        .HasConstraintName("GroupStudentClass_fk2");
+
+                    b.HasOne("UniVerseAPI.Infra.Data.Context.Student", "Student")
+                        .WithMany("GroupStudentClass")
+                        .HasForeignKey("StudentId")
+                        .IsRequired()
+                        .HasConstraintName("GroupStudentClass_fk0");
+
+                    b.Navigation("Class");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Assessment", b =>
@@ -602,7 +649,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Period", "Period")
                         .WithMany("Subject")
                         .HasForeignKey("PeriodId")
-                        .IsRequired()
                         .HasConstraintName("Subject_fk3");
 
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Teacher", "Teacher")
@@ -643,6 +689,8 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Class", b =>
                 {
+                    b.Navigation("GroupStudentClass");
+
                     b.Navigation("Subject");
                 });
 
@@ -675,6 +723,11 @@ namespace UniVerseAPI.Infra.Data.Migrations
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.ReportCard", b =>
                 {
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Student", b =>
+                {
+                    b.Navigation("GroupStudentClass");
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Subject", b =>

@@ -17,6 +17,7 @@ namespace UniVerseAPI.Application.IServices
         public Task<StudentResponseDetailsDTO> CreateAsync(StudentInputDTO student);
         public Task<BaseResponseDTO> UpdateAsync(StudentUpdateDTO student, string registration);
         public Task<BaseResponseDTO> DeleteAsync(string registration);
+        public Task<BaseResponseDTO> AddStudentInClass(GroupStudentClassInputDTO gscInput);
 
     }
 }
