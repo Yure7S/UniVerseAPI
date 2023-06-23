@@ -49,5 +49,12 @@ namespace UniVerseAPI.Infra.Data.Context
         public virtual ICollection<Assessment> Assessment { get; set; }
         [InverseProperty("Subject")]
         public virtual ICollection<ReportCard> ReportCard { get; set; }
+
+        public Subject()
+        {
+            Id = Guid.NewGuid();
+            CreationDate = DateTime.Now;
+            LastUpdate = DateTime.Now;
+        }
     }
 }

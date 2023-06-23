@@ -13,7 +13,7 @@ namespace UniVerseAPI.Domain.Interface
     {
         public Task<GroupStudentClass?> GetByClassIdAndStudentId(Guid? studentId, Guid? classId);
 
-        public Task<List<GroupStudentClass>> GetByStudentId(Guid studentId);
+        public Task<List<GroupStudentClass>> GetAllByStudentId(Guid studentId);
 
     }
 }
