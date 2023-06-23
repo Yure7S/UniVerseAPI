@@ -27,9 +27,7 @@ namespace UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO
 
         public DateTime Workload { get; set; }
 
-        [Required]
-        [StringLength(5, MinimumLength = 5)]
-        public string? ClassCode { get; set; }
+        public int ClassCode { get; set; }
 
         [Required]
         [StringLength(10, MinimumLength = 10)]

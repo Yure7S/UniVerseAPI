@@ -171,11 +171,18 @@ namespace UniVerseAPI.Infra.Data.Context
 
                 entity.Property(e => e.Code).IsFixedLength();
 
+
                 entity.HasOne(d => d.Course)
                     .WithMany(p => p.Subject)
                     .HasForeignKey(d => d.CourseId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Subject_fk0");
+               
+                entity.HasOne(d => d.Teacher)
+                    .WithMany(p => p.Subject)
+                    .HasForeignKey(d => d.TeacherId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Subject_fk1");
                 
                 entity.HasOne(d => d.Class)
                     .WithMany(p => p.Subject)
@@ -189,11 +196,6 @@ namespace UniVerseAPI.Infra.Data.Context
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Subject_fk3");
 
-                entity.HasOne(d => d.Teacher)
-                    .WithMany(p => p.Subject)
-                    .HasForeignKey(d => d.TeacherId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Subject_fk1");
             });
 
             modelBuilder.Entity<Teacher>(entity =>

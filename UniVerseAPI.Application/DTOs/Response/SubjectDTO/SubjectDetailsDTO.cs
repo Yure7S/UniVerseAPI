@@ -25,6 +25,8 @@ namespace UniVerseAPI.Application.DTOs.Response.SubjectDTO
 
         public string? CourseCode { get; set; }
 
+        public int ClassCode { get; set; }
+
         public string? TeacherCode { get; set; }
     }
 }

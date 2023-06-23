@@ -637,7 +637,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Class", "Class")
                         .WithMany("Subject")
                         .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("Subject_fk2");
 
