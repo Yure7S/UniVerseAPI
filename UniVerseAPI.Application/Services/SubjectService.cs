@@ -39,7 +39,7 @@ namespace UniVerseAPI.Application.Services
 
         public List<SubjectResponseDTO> GetAllAsync()
         {
-            return _ISubject.GetAllAsync()
+            return _ISubject.GetAllSubjects()
                 .Result
                 .ConvertAll(subj => new SubjectResponseDTO(subj));
         }

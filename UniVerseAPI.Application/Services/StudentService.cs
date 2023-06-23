@@ -268,15 +268,16 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<List<GroupStudentClass>> GetSubjectsDone(string registration)
+        public async Task<List<SubjectResponseDTO>> GetSubjectsDone(string registration)
         {
             try
             {
                 
                 Student studentFound = await _IStudent.GetStudentDetailAsync(registration);
-                List<GroupStudentClass> studentAllClass = await _IGroupStudentClass.GetByStudentId(studentFound.Id);
+                return _IGroupStudentClass.GetAllByStudentId(studentFound.Id)
+                    .Result
+                    .ConvertAll(std => new SubjectResponseDTO(std));
 
-                return studentAllClass;
             }
             catch (Exception)
             {
@@ -287,7 +288,7 @@ namespace UniVerseAPI.Application.Services
                 //    Success = false,
                 //    Error = e.Message
                 //};
-                List<GroupStudentClass> response = new();
+                List<SubjectResponseDTO> response = new();
 
                 return response;
             }
