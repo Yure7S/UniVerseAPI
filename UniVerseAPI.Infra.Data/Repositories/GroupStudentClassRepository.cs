@@ -23,7 +23,7 @@ namespace UniVerseAPI.Infra.Data.Repositories
             return await _db.GroupStudentClass.FirstOrDefaultAsync(gsc => gsc.ClassId == classId && gsc.StudentId == studentId);
         }
 
-        public async Task<List<GroupStudentClass>> GetByStudentId(Guid studentId)
+        public async Task<List<GroupStudentClass>> GetAllByStudentId(Guid studentId)
         {
             return await _db.GroupStudentClass.Where(gsc => gsc.StudentId == studentId)
                 .Include(e => e.Student)
@@ -33,3 +33,5 @@ namespace UniVerseAPI.Infra.Data.Repositories
         }
     }
 }
+
+
