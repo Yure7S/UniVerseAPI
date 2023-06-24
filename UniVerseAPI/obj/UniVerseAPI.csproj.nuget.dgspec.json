@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj": {}
+    "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Application\\UniVerseAPI.Application.csproj": {
+    "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Application\\UniVerseAPI.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Application\\UniVerseAPI.Application.csproj",
+        "projectUniqueName": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Application\\UniVerseAPI.Application.csproj",
         "projectName": "UniVerseAPI.Application",
-        "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Application\\UniVerseAPI.Application.csproj",
-        "packagesPath": "C:\\Users\\Servulo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Application\\obj\\",
+        "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Application\\UniVerseAPI.Application.csproj",
+        "packagesPath": "C:\\Users\\Yure\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Servulo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Yure\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,8 +32,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
-                "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj"
+              "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
+                "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj"
               }
             }
           }
@@ -97,20 +97,20 @@
         }
       }
     },
-    "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
+    "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj",
         "projectName": "UniVerseAPI.Domain",
-        "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj",
-        "packagesPath": "C:\\Users\\Servulo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\obj\\",
+        "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj",
+        "packagesPath": "C:\\Users\\Yure\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Servulo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Yure\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -186,20 +186,20 @@
         }
       }
     },
-    "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj": {
+    "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
+        "projectUniqueName": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
         "projectName": "UniVerseAPI.Infra.Data",
-        "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
-        "packagesPath": "C:\\Users\\Servulo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\obj\\",
+        "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
+        "packagesPath": "C:\\Users\\Yure\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Servulo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Yure\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -214,8 +214,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
-                "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj"
+              "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
+                "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj"
               }
             }
           }
@@ -283,20 +283,20 @@
         }
       }
     },
-    "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj": {
+    "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj",
+        "projectUniqueName": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj",
         "projectName": "UniVerseAPI.Infra.Ioc",
-        "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj",
-        "packagesPath": "C:\\Users\\Servulo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\obj\\",
+        "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj",
+        "packagesPath": "C:\\Users\\Yure\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Servulo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Yure\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -311,14 +311,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Application\\UniVerseAPI.Application.csproj": {
-                "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Application\\UniVerseAPI.Application.csproj"
+              "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Application\\UniVerseAPI.Application.csproj": {
+                "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Application\\UniVerseAPI.Application.csproj"
               },
-              "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
-                "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj"
+              "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
+                "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj"
               },
-              "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj": {
-                "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj"
+              "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj": {
+                "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj"
               }
             }
           }
@@ -382,20 +382,20 @@
         }
       }
     },
-    "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj": {
+    "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj",
         "projectName": "UniVerseAPI",
-        "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj",
-        "packagesPath": "C:\\Users\\Servulo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI\\obj\\",
+        "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj",
+        "packagesPath": "C:\\Users\\Yure\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Servulo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Yure\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -411,8 +411,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj": {
-                "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj"
+              "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj": {
+                "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Ioc\\UniVerseAPI.Infra.Ioc.csproj"
               }
             }
           }
