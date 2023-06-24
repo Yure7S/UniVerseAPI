@@ -14,7 +14,7 @@ namespace UniVerseAPI.Infra.Data.Context
         public Guid Id { get; set; }
         public Guid CourseId { get; set; }
         public Guid TeacherId { get; set; }
-        public Guid? ClassId { get; set; }
+        public Guid ClassId { get; set; }
         public Guid? PeriodId { get; set; }
 
         [Required]
@@ -49,5 +49,12 @@ namespace UniVerseAPI.Infra.Data.Context
         public virtual ICollection<Assessment> Assessment { get; set; }
         [InverseProperty("Subject")]
         public virtual ICollection<ReportCard> ReportCard { get; set; }
+
+        public Subject()
+        {
+            Id = Guid.NewGuid();
+            CreationDate = DateTime.Now;
+            LastUpdate = DateTime.Now;
+        }
     }
 }

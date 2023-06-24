@@ -25,19 +25,21 @@ namespace UniVerseAPI.Application.Services
         private readonly ISubject _ISubject;
         private readonly ITeacher _ITeacher;
         private readonly ICourse _ICourse;
+        private readonly IClass _IClass;
         private readonly IMapper _mapper;
 
-        public SubjectService(ISubject iSubject, IMapper mapper, ITeacher teacher, ICourse course)
+        public SubjectService(ISubject iSubject, IMapper mapper, ITeacher teacher, ICourse course, IClass iClass)
         {
             _ISubject = iSubject;
             _mapper = mapper;
             _ITeacher = teacher;
             _ICourse = course;
+            _IClass = iClass;
         }
 
         public List<SubjectResponseDTO> GetAllAsync()
         {
-            return _ISubject.GetAllAsync()
+            return _ISubject.GetAllSubjects()
                 .Result
                 .ConvertAll(subj => new SubjectResponseDTO(subj));
         }
@@ -91,6 +93,7 @@ namespace UniVerseAPI.Application.Services
             {
                 Teacher? teacherFound = await _ITeacher.GetByCodeAsync(subject.TeacherCode!);
                 Course? courseFound = await _ICourse.GetByCodeAsync(subject.CourseCode!);
+                Class? classFound = await _IClass.GetByCodeAsync(subject.ClassCode);
                 SubjectResponseDetailsDTO response = new();
 
                 if (courseFound == null)
@@ -108,10 +111,11 @@ namespace UniVerseAPI.Application.Services
                     Subject newSubject = _mapper.Map<Subject>(subject);
                     newSubject.CourseId = courseFound!.Id;
                     newSubject.TeacherId = teacherFound.Id;
+                    newSubject.ClassId = classFound!.Id;
 
                     await _ISubject.CreateAsync(newSubject);
 
-                    SubjectDetailsDTO subjectDetailsResponse = _mapper.Map<SubjectDetailsDTO>(newSubject);
+                    SubjectDetailsDTO subjectDetailsResponse = _mapper.Map<SubjectDetailsDTO>(subject);
                     response.Subject = subjectDetailsResponse;
                     response.Message = "*** Successfully registered subject";
                     response.Success = true;

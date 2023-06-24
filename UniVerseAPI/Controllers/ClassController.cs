@@ -50,6 +50,23 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
+        // TO DO
+        [HttpDelete("all-students-this-class")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public /*async Task<IActionResult>*/ IActionResult AllStudentsThisClasse(string code)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = "to-do";
+                return Ok(response);
+                //if (response.Success)
+                //    return Ok(response);
+                //return BadRequest(response);
+            }
+            return StatusCode(500);
+        }
+
         [HttpPost("add")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -61,21 +78,6 @@ namespace UniVerseAPI.Controllers
 
                 if (response.Success)
                     return Created("Successfully Created!", response);
-                return BadRequest(response);
-            }
-            return StatusCode(500);
-        }
-
-        [HttpDelete("delet/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteAsyncCourse(Guid id)
-        {
-            if (ModelState.IsValid)
-            {
-                var response = await _IClassService.DeleteAsync(id);
-                if (response.Success)
-                    return Ok(response);
                 return BadRequest(response);
             }
             return StatusCode(500);
@@ -96,5 +98,21 @@ namespace UniVerseAPI.Controllers
             }
             return StatusCode(500);
         }
+
+        [HttpDelete("delet/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteAsyncCourse(Guid id)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _IClassService.DeleteAsync(id);
+                if (response.Success)
+                    return Ok(response);
+                return BadRequest(response);
+            }
+            return StatusCode(500);
+        }
+
     }
 }

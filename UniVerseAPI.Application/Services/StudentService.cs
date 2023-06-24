@@ -8,6 +8,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -17,6 +18,7 @@ using System.Threading.Tasks;
 using UniVerseAPI.Application.DTOs.Request;
 using UniVerseAPI.Application.DTOs.Response.BaseResponse;
 using UniVerseAPI.Application.DTOs.Response.StudentsDTO;
+using UniVerseAPI.Application.DTOs.Response.SubjectDTO;
 using UniVerseAPI.Application.Interface;
 using UniVerseAPI.Application.IServices;
 using UniVerseAPI.Domain.Entities.MasterEntities;
@@ -237,7 +239,7 @@ namespace UniVerseAPI.Application.Services
                 Class? classFound = await _IClass.GetByCodeAsync(gscInput.ClassCode);
                 GroupStudentClass? gscFound = await _IGroupStudentClass.GetByClassIdAndStudentId(studentId: studentFound.Id, classId: classFound!.Id);
 
-                if (studentFound == null || !studentFound.Deleted || classFound == null || !studentFound.Deleted)
+                if (studentFound == null || classFound == null)
                     response.Update(message: "*** We couldn't find the information you entered in our database!", success: false);
                 else if(gscFound != null)
                     response.Update(message: "*** The student is already included in this class!", success: false);
@@ -261,6 +263,32 @@ namespace UniVerseAPI.Application.Services
                     message: "*** We encountered an error trying to insert the student with into the class!",
                     success: false,
                     error: e.Message);
+
+                return response;
+            }
+        }
+
+        public async Task<List<SubjectResponseDTO>> GetSubjectsDone(string registration)
+        {
+            try
+            {
+                
+                Student studentFound = await _IStudent.GetStudentDetailAsync(registration);
+                return _IGroupStudentClass.GetAllByStudentId(studentFound.Id)
+                    .Result
+                    .ConvertAll(std => new SubjectResponseDTO(std));
+
+            }
+            catch (Exception)
+            {
+
+                //BaseResponseDTO response = new()
+                //{
+                //    Message = "*** We came across errors when trying to fetch the materials made by the student.",
+                //    Success = false,
+                //    Error = e.Message
+                //};
+                List<SubjectResponseDTO> response = new();
 
                 return response;
             }

@@ -93,16 +93,18 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
-
+                // Inputs do banco
                 AddressEntity newAddress = _mapper.Map<AddressEntity>(teacher.Address);
                 People newPeople = _mapper.Map<People>(teacher.People);
-                Teacher newTeacher = _mapper.Map<Teacher>(teacher);
+                Teacher newTeacher = new() { Code = teacher.Code };
+
                 newPeople.AddressId = newAddress.Id;
                 newTeacher.PeopleId = newPeople.Id;
 
                 SaveTeacher(newAddress, newPeople, newTeacher);
 
-                TeacherResponseDetailsDTO teacherResponse = _mapper.Map<TeacherResponseDetailsDTO>(teacher);
+                // Response do cliente
+                TeacherResponseDetailsDTO teacherResponse = new() { Code = teacher.Code };
                 teacherResponse.Message = "*** Teacher Created successfully!";
                 teacherResponse.Success = true;
 

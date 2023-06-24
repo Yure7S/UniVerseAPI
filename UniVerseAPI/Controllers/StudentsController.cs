@@ -45,6 +45,24 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
+        [HttpGet("subjects-done")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> SubjectsDone(string registration)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _IStudentService.GetSubjectsDone(registration);
+
+                return Ok(response);
+
+                //if (response.Success)
+                //    return Ok(response);
+                //return BadRequest(response);
+            }
+            return StatusCode(500);
+        }
+
         [HttpPost("add")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -61,14 +79,15 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpDelete("delet/{registration}")]
+        [HttpPost("add-student-in-class")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteCourse(string registration)
+        public async Task<IActionResult> AddStudentInClass(GroupStudentClassInputDTO gscInput)
         {
             if (ModelState.IsValid)
             {
-                var response = await _IStudentService.DeleteAsync(registration);
+                var response = await _IStudentService.AddStudentInClass(gscInput);
+
                 if (response.Success)
                     return Ok(response);
                 return BadRequest(response);
@@ -92,18 +111,33 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("addInClass")]
+        [HttpDelete("delet/{registration}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AddStudentInClass(GroupStudentClassInputDTO gscInput)
+        public async Task<IActionResult> DeleteCourse(string registration)
         {
             if (ModelState.IsValid)
             {
-                var response = await _IStudentService.AddStudentInClass(gscInput);
-
+                var response = await _IStudentService.DeleteAsync(registration);
                 if (response.Success)
                     return Ok(response);
                 return BadRequest(response);
+            }
+            return StatusCode(500);
+        }
+
+        [HttpDelete("remove-student-from-class")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public /*async Task<IActionResult>*/ IActionResult RemoveStudentFromClass()
+        {
+            if (ModelState.IsValid)
+            {
+                var response = "to-do";
+                return Ok(response);
+                //if (response.Success)
+                //    return Ok(response);
+                //return BadRequest(response);
             }
             return StatusCode(500);
         }

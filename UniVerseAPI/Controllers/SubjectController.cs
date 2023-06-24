@@ -71,21 +71,6 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpDelete("delet/{code}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteAsyncSubject(string code)
-        {
-            if (ModelState.IsValid)
-            {
-                var response = await _ISubjectService.DeleteAsync(code);
-                if (response.Success)
-                    return Ok(response);
-                    return BadRequest(response);
-            }
-            return StatusCode(500);
-        }
-
         [HttpPut("modify/{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -101,5 +86,21 @@ namespace UniVerseAPI.Controllers
             }
             return StatusCode(500);
         }
+
+        [HttpDelete("delet/{code}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteAsyncSubject(string code)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = await _ISubjectService.DeleteAsync(code);
+                if (response.Success)
+                    return Ok(response);
+                    return BadRequest(response);
+            }
+            return StatusCode(500);
+        }
+
     }
 }
