@@ -20,6 +20,7 @@ namespace UniVerseAPI.Application.IServices
         public Task<ClassResponseDetailsDTO> CreateAsync(ClassInputDTO classDTO);
         public Task<BaseResponseDTO> UpdateAsync(ClassInputDTO classDTO, Guid id);
         public Task<BaseResponseDTO> DeleteAsync(Guid id);
+        public List<StudentResponseDTO> AllStudentsThisClass(int code);
 
     }
 }

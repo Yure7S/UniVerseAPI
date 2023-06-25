@@ -164,5 +164,12 @@ namespace UniVerseAPI.Application.Services
                 return response;
             }
         }
+
+        public List<StudentResponseDTO> AllStudentsThisClass(int code)
+        {
+            return _class.GetAllStudentsThisClassAsync(code)
+                .Result
+                .ConvertAll(clss => new StudentResponseDTO(clss));
+        }
     }
 }

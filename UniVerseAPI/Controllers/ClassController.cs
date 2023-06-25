@@ -50,19 +50,15 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        // TO DO
-        [HttpDelete("all-students-this-class")]
+        [HttpGet("all-students-this-class")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public /*async Task<IActionResult>*/ IActionResult AllStudentsThisClasse(string code)
+        public IActionResult AllStudentsThisClass(int code)
         {
             if (ModelState.IsValid)
             {
-                var response = "to-do";
+                var response = _IClassService.AllStudentsThisClass(code);
                 return Ok(response);
-                //if (response.Success)
-                //    return Ok(response);
-                //return BadRequest(response);
             }
             return StatusCode(500);
         }

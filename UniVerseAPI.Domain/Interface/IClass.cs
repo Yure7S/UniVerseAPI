@@ -11,5 +11,6 @@ namespace UniVerseAPI.Domain.Interface
     public interface IClass : IBaseInterface<Class>
     {
         public Task<Class?> GetByCodeAsync(int code);
+        public Task<List<Class>> GetAllStudentsThisClassAsync(int code);
     }
 }

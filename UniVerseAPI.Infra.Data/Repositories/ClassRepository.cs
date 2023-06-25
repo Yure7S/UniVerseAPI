@@ -20,5 +20,15 @@ namespace UniVerseAPI.Infra.Data.Repositories
         {
             return await _db.Class.FirstOrDefaultAsync(clss => clss.Code == code);
         }
+
+        public async Task<List<Class>> GetAllStudentsThisClassAsync(int code)
+        {
+            return await _db.Class.Where(clss => clss.Code == code)
+                .Include(clss => clss.GroupStudentClass)
+                .ThenInclude(gsc => gsc.Student)
+                .ThenInclude(std => std!.People)
+                .ToListAsync();
+        }
+
     }
 }
