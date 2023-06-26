@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -165,11 +166,38 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public List<StudentResponseDTO> AllStudentsThisClass(int code)
+        public StudentResponseListDTO AllStudentsThisClass(int code)
         {
-            return _class.GetAllStudentsThisClassAsync(code)
-                .Result
-                .ConvertAll(clss => new StudentResponseDTO(clss));
+            try
+            {
+                StudentResponseListDTO response = new();
+
+                List<StudentResponseDTO>? StudentList = _class.GetByCodeAsync(code)
+                .Result?
+                .Students
+                .ConvertAll(std => new StudentResponseDTO(std));
+
+                if(StudentList == null)
+                {
+                    response.Message = $"*** We couldn't find any class with the code: {code}";
+                    response.Success = true;
+                }
+                else response.StudentList = StudentList;
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                StudentResponseListDTO response = new()
+                {
+                    Message = "*** We encountered errors when trying to search for students in this class",
+                    Success = false,
+                    Error = e.Message
+                };
+                return response;
+            }
+
+
         }
     }
 }

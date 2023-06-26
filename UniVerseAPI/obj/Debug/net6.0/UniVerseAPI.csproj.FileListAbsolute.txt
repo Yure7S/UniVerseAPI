@@ -92,7 +92,6 @@ C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\UniVerseA
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\UniVerseAPI.AssemblyInfoInputs.cache
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\UniVerseAPI.AssemblyInfo.cs
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\UniVerseAPI.csproj.CoreCompileInputs.cache
-C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\UniVerseAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\UniVerseAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\staticwebassets\msbuild.UniVerseAPI.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.UniVerseAPI.props
@@ -337,3 +336,4 @@ C:\Users\SEDUC-SUDS\Desktop\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\ref\UniVers
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\UniVerseAPI.MvcApplicationPartsAssemblyInfo.cs

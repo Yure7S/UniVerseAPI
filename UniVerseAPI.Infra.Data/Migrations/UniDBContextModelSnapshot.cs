@@ -22,16 +22,29 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ClassStudent", b =>
+                {
+                    b.Property<Guid>("ClassesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("StudentsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ClassesId", "StudentsId");
+
+                    b.HasIndex("StudentsId");
+
+                    b.ToTable("ClassStudent");
+                });
+
             modelBuilder.Entity("UniVerseAPI.Domain.Entities.MasterEntities.GroupStudentClass", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
-
-                    b.Property<Guid>("ClassId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
@@ -42,14 +55,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ClassId");
-
-                    b.HasIndex("StudentId");
 
                     b.ToTable("GroupStudentClass");
                 });
@@ -529,23 +535,19 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.ToTable("Teacher");
                 });
 
-            modelBuilder.Entity("UniVerseAPI.Domain.Entities.MasterEntities.GroupStudentClass", b =>
+            modelBuilder.Entity("ClassStudent", b =>
                 {
-                    b.HasOne("UniVerseAPI.Infra.Data.Context.Class", "Class")
-                        .WithMany("GroupStudentClass")
-                        .HasForeignKey("ClassId")
-                        .IsRequired()
-                        .HasConstraintName("GroupStudentClass_fk2");
+                    b.HasOne("UniVerseAPI.Infra.Data.Context.Class", null)
+                        .WithMany()
+                        .HasForeignKey("ClassesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("UniVerseAPI.Infra.Data.Context.Student", "Student")
-                        .WithMany("GroupStudentClass")
-                        .HasForeignKey("StudentId")
-                        .IsRequired()
-                        .HasConstraintName("GroupStudentClass_fk0");
-
-                    b.Navigation("Class");
-
-                    b.Navigation("Student");
+                    b.HasOne("UniVerseAPI.Infra.Data.Context.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Assessment", b =>
@@ -689,8 +691,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Class", b =>
                 {
-                    b.Navigation("GroupStudentClass");
-
                     b.Navigation("Subject");
                 });
 
@@ -723,11 +723,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.ReportCard", b =>
                 {
                     b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Student", b =>
-                {
-                    b.Navigation("GroupStudentClass");
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Subject", b =>

@@ -82,11 +82,11 @@ namespace UniVerseAPI.Controllers
         [HttpPost("add-student-in-class")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AddStudentInClass(GroupStudentClassInputDTO gscInput)
+        public async Task<IActionResult> AddStudentInClass(int codeClass,  string registrationStudent)
         {
             if (ModelState.IsValid)
             {
-                var response = await _IStudentService.AddStudentInClass(gscInput);
+                var response = await _IStudentService.AddStudentInClass(codeClass, registrationStudent);
 
                 if (response.Success)
                     return Ok(response);

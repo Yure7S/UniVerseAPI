@@ -229,30 +229,24 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<BaseResponseDTO> AddStudentInClass(GroupStudentClassInputDTO gscInput)
+        public async Task<BaseResponseDTO> AddStudentInClass(int codeClass, string registrationStudent )
         {
             try
             {
                 BaseResponseDTO response = new();
 
-                Student studentFound = await _IStudent.GetStudentDetailAsync(gscInput.StudentRegistration);
-                Class? classFound = await _IClass.GetByCodeAsync(gscInput.ClassCode);
-                GroupStudentClass? gscFound = await _IGroupStudentClass.GetByClassIdAndStudentId(studentId: studentFound.Id, classId: classFound!.Id);
+                Student studentFound = await _IStudent.GetStudentDetailAsync(registrationStudent);
+                Class? classFound = await _IClass.GetByCodeAsync(codeClass);
 
                 if (studentFound == null || classFound == null)
                     response.Update(message: "*** We couldn't find the information you entered in our database!", success: false);
-                else if(gscFound != null)
-                    response.Update(message: "*** The student is already included in this class!", success: false);
                 else
                 {
-                    GroupStudentClass gsc = new()
-                    {
-                        StudentId = studentFound.Id,
-                        ClassId = classFound.Id
-                    };
-                    await _IGroupStudentClass.CreateAsync(gsc);
 
-                    response.Update(message: $"*** The student has been entered into the class that contains the code: {gscInput.ClassCode}", success: true);
+                    classFound.Students.Add(studentFound);
+                    await _IClass.UpdateAsync(classFound);
+
+                    response.Update(message: $"*** The student has been entered into the class that contains the code: {codeClass}", success: true);
                 }
 
                 return response;
@@ -274,10 +268,10 @@ namespace UniVerseAPI.Application.Services
             {
                 
                 Student studentFound = await _IStudent.GetStudentDetailAsync(registration);
-                return _IGroupStudentClass.GetAllByStudentId(studentFound.Id)
-                    .Result
-                    .ConvertAll(std => new SubjectResponseDTO(std));
-
+                //return _IGroupStudentClass.GetAllByStudentId(studentFound.Id)
+                //    .Result
+                //    .ConvertAll(std => new SubjectResponseDTO(std));
+                return null;
             }
             catch (Exception)
             {

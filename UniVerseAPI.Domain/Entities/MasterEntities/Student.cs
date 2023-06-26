@@ -35,8 +35,8 @@ namespace UniVerseAPI.Infra.Data.Context
         [InverseProperty("Student")]
         public virtual ReportCard ReportCard { get; set; }
 
-        [InverseProperty("Student")]
-        public virtual ICollection<GroupStudentClass> GroupStudentClass { get; set; }
+        [InverseProperty("Students")]
+        public virtual ICollection<Class> Classes{ get; set; }
 
         public Student()
         {

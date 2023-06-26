@@ -18,19 +18,19 @@ namespace UniVerseAPI.Infra.Data.Repositories
         {
         }
 
-        public async Task<GroupStudentClass?> GetByClassIdAndStudentId(Guid? studentId, Guid? classId)
-        {
-            return await _db.GroupStudentClass.FirstOrDefaultAsync(gsc => gsc.ClassId == classId && gsc.StudentId == studentId);
-        }
+        //public async Task<GroupStudentClass?> GetByClassIdAndStudentId(Guid? studentId, Guid? classId)
+        //{
+        //    return await _db.GroupStudentClass.FirstOrDefaultAsync(gsc => gsc.ClassId == classId && gsc.StudentId == studentId);
+        //}
 
-        public async Task<List<GroupStudentClass>> GetAllByStudentId(Guid studentId)
-        {
-            return await _db.GroupStudentClass.Where(gsc => gsc.StudentId == studentId)
-                .Include(e => e.Student)
-                .Include(e => e.Class)
-                .ThenInclude(e => e!.Subject)
-                .ToListAsync();
-        }
+        //public async Task<List<GroupStudentClass>> GetAllByStudentId(Guid studentId)
+        //{
+        //    return await _db.GroupStudentClass.Where(gsc => gsc.StudentId == studentId)
+        //        .Include(e => e.Student)
+        //        .Include(e => e.Class)
+        //        .ThenInclude(e => e!.Subject)
+        //        .ToListAsync();
+        //}
     }
 }
 

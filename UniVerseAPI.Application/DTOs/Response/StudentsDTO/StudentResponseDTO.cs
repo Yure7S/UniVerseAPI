@@ -20,11 +20,5 @@ namespace UniVerseAPI.Application.DTOs.Response.StudentsDTO
             Email = student.People.Email;
         }
 
-        public StudentResponseDTO(Class classVar)
-        {
-            Registration = classVar.GroupStudentClass.First().Student!.Registration;
-            Registration = classVar.GroupStudentClass.First().Student!.People.FullName;
-            Registration = classVar.GroupStudentClass.First().Student!.People.Email;
-        }
     }
 }

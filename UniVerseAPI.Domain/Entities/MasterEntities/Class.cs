@@ -16,6 +16,7 @@ namespace UniVerseAPI.Infra.Data.Context
             Id = Guid.NewGuid();
             CreationDate = DateTime.Now;
             LastUpdate = DateTime.Now;
+            Students = new List<Student>();
         }
 
         [Key]
@@ -40,8 +41,8 @@ namespace UniVerseAPI.Infra.Data.Context
         [InverseProperty("Class")]
         public virtual ICollection<Subject> Subject { get; set; }
 
-        [InverseProperty("Class")]
-        public virtual ICollection<GroupStudentClass> GroupStudentClass { get; set; }
+        [InverseProperty("Classes")]
+        public virtual List<Student> Students { get; set; }
 
     }
 }

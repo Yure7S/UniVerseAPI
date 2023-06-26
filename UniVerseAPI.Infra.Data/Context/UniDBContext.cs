@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
+using NPOI.SS.Formula.Functions;
 using UniVerseAPI.Domain.Entities.MasterEntities;
 using UniVerseAPI.Infra.Data.Repositories;
 
@@ -64,24 +65,26 @@ namespace UniVerseAPI.Infra.Data.Context
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
+                entity.HasMany(p => p.Students)
+                  .WithMany(c => c.Classes);
             });
 
-            modelBuilder.Entity<GroupStudentClass>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+            //modelBuilder.Entity<GroupStudentClass>(entity =>
+            //{
+            //    entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.HasOne(d => d.Student)
-                    .WithMany(p => p.GroupStudentClass)
-                    .HasForeignKey(d => d.StudentId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("GroupStudentClass_fk0");
+            //    entity.HasOne(d => d.Student)
+            //        .WithMany(p => p.GroupStudentClass)
+            //        .HasForeignKey(d => d.StudentId)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("GroupStudentClass_fk0");
 
-                entity.HasOne(d => d.Class)
-                    .WithMany(p => p.GroupStudentClass)
-                    .HasForeignKey(d => d.ClassId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("GroupStudentClass_fk2");
-            });
+            //    entity.HasOne(d => d.Class)
+            //        .WithMany(p => p.GroupStudentClass)
+            //        .HasForeignKey(d => d.ClassId)
+            //        .OnDelete(DeleteBehavior.ClientSetNull)
+            //        .HasConstraintName("GroupStudentClass_fk2");
+            //});
 
             modelBuilder.Entity<Course>(entity =>
             {
