@@ -13,6 +13,7 @@ namespace UniVerseAPI.Domain.Interface
         public Task<Subject?> GetByCodeAsync(string code);
         public Task<Subject> GetSubjectDetailAsync(string code);
         public Task<List<Subject>> GetAllSubjects();
+        public Task<List<Subject>> AllSubjectsThisCourseAsync(string code);
 
     }
 }

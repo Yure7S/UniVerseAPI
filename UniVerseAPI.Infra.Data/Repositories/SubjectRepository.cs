@@ -25,7 +25,7 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
 
         public async Task<List<Subject>> GetAllSubjects()
         {
-            return await _db.Subject.Where(s => true)
+            return await _db.Subject
                 .Include(s => s.Teacher)
                 .Include(s => s.Course)
                 .Include(s => s.Class)
@@ -39,6 +39,15 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
                 .Include(s => s.Course)
                 .Include(s => s.Class)
                 .FirstAsync();
+        }
+
+        public async Task<List<Subject>> AllSubjectsThisCourseAsync(string code)
+        {
+            return await _db.Subject
+                .Include(s => s.Course)
+                .Include(s => s.Teacher)
+                .Where(c => c.Course.Code == code)
+                .ToListAsync();
         }
 
     }

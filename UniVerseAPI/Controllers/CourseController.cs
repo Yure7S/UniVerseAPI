@@ -55,6 +55,20 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
+        [HttpGet("all-subjects-this-course/{code}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult AllSubjectsThisCourseAsync(string code)
+        {
+            if (ModelState.IsValid)
+            {
+                var response = _ICourseService.AllSubjectsThisCourseAsync(code);
+
+                return Ok(response);
+            }
+            return StatusCode(500);
+        }
+
         [HttpPost("add")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

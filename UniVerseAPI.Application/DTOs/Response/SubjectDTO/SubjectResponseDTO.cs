@@ -29,11 +29,5 @@ namespace UniVerseAPI.Application.DTOs.Response.SubjectDTO
             Code = subject.Code;
             Course = subject.Course.FullName;
         }
-
-        public SubjectResponseDTO(GroupStudentClass groupStudentClass)
-        {
-        //    FullName = groupStudentClass.Class?.Subject.First().FullName;
-        //    Code = groupStudentClass.Class?.Subject.First().Code;
-        }
     }
 }
