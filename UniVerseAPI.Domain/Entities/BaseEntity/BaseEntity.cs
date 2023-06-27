@@ -10,8 +10,8 @@ namespace UniVerseAPI.Infra.Data.Context
 {
     public partial class BaseEntity
     {
-        public bool Deleted { get; protected set; }
-        public bool Active { get; protected set; }
+        public bool? Deleted { get; protected set; }
+        public bool? Active { get; protected set; }
         public DateTime CreationDate { get; protected set; }
         public DateTime LastUpdate { get; protected set; }
 

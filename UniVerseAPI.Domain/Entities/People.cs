@@ -15,26 +15,13 @@ namespace UniVerseAPI.Infra.Data.Context
         [Key]
         public Guid Id { get; set; }
         public Guid AddressId { get; set; }
-        [Required]
-        [StringLength(255)]
         public string FullName { get; set; }
-        [Column(TypeName = "date")]
         public DateTime BirthDate { get; set; }
-        [Required]
-        [StringLength(11)]
-        [Unicode(true)]
         public string Cpf { get; set; }
-        [Required]
-        [StringLength(255)]
         public string Gender { get; set; }
-        [Required]
-        [StringLength(255)]
         public string Phone { get; set; }
-        [Required]
-        [StringLength(255)]
+
         public string Email { get; set; }
-        [Required]
-        [StringLength(500, MinimumLength = 8)]
         public string Password { get; set; }
 
         [ForeignKey("AddressId")]

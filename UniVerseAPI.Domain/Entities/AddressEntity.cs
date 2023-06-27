@@ -11,20 +11,10 @@ namespace UniVerseAPI.Infra.Data.Context
     [Table("AddressEntity")]
     public partial class AddressEntity : BaseEntity
     {
-
-        [Key]
         public Guid Id { get; private set; }
-        [Required]
-        [Column("AddressValue")]
-        [StringLength(255)]
         public string AddressValue { get; private set; }
         public int Number { get; private set; }
-        [Required]
-        [StringLength(255)]
         public string Neighborhood { get; private set; }
-        [Required]
-        [StringLength(8)]
-        [Unicode(false)]
         public string Cep { get; private set; }
 
         [InverseProperty("AddressEntity")]

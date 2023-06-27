@@ -43,13 +43,13 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
+                    b.Property<bool?>("Active")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("LastUpdate")
@@ -65,42 +65,44 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("Active")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("1");
 
                     b.Property<string>("AddressValue")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("AddressValue");
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("Cep")
                         .IsRequired()
-                        .HasMaxLength(8)
-                        .IsUnicode(false)
-                        .HasColumnType("char(8)")
+                        .HasColumnType("CHAR(8)")
                         .IsFixedLength();
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("Deleted")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("0");
 
                     b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME");
 
                     b.Property<string>("Neighborhood")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("VARCHAR(255)");
 
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AddressEntity");
+                    b.ToTable("AddressEntity", (string)null);
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Assessment", b =>
@@ -108,13 +110,13 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
+                    b.Property<bool?>("Active")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("LastUpdate")
@@ -135,40 +137,43 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("Active")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("1");
 
                     b.Property<int>("Code")
-                        .HasMaxLength(5)
-                        .HasColumnType("int");
+                        .IsUnicode(true)
+                        .HasColumnType("CHA(5)");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("Deleted")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("0");
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME");
 
                     b.Property<string>("Room")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("Shift")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasColumnType("VARCHAR(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Class");
+                    b.ToTable("Class", (string)null);
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Course", b =>
@@ -176,57 +181,58 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("Active")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("1");
 
                     b.Property<string>("Category")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("VARCHAR(100)");
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("CHAR(10)");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("Deleted")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("0");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<DateTime>("EndDate")
-                        .HasColumnType("date");
+                        .HasColumnType("DATETIME");
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME");
 
                     b.Property<int>("Price")
-                        .HasColumnType("int");
+                        .HasColumnType("INT");
 
                     b.Property<int>("Seats")
                         .HasColumnType("int");
 
                     b.Property<int>("SpotsAvailable")
-                        .HasColumnType("int");
+                        .HasColumnType("INT");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("date");
+                        .HasColumnType("DATETIME");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Course");
+                    b.ToTable("Course", (string)null);
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Grades", b =>
@@ -234,7 +240,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
+                    b.Property<bool?>("Active")
                         .HasColumnType("bit");
 
                     b.Property<Guid>("AssessmentId")
@@ -243,13 +249,13 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<decimal?>("Grade")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("decimal(18, 0)")
-                        .HasDefaultValueSql("((0))");
+                        .HasDefaultValueSql("0");
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
@@ -266,55 +272,54 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("Active")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("1");
 
                     b.Property<Guid>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("BirthDate")
-                        .HasColumnType("date");
+                        .HasColumnType("DATETIME");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasMaxLength(11)
                         .IsUnicode(true)
-                        .HasColumnType("nchar(11)")
+                        .HasColumnType("CHAR(11)")
                         .IsFixedLength();
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("Deleted")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("0");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("VARCHAR(100)");
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("Gender")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("CHAR(11)");
 
                     b.HasKey("Id");
 
@@ -323,21 +328,22 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.HasIndex(new[] { "Cpf" }, "UQ__People__C1FF9309991D9366")
                         .IsUnique();
 
-                    b.ToTable("People");
+                    b.ToTable("People", (string)null);
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Period", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
+                    b.Property<bool?>("Active")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<int>("EnrolledStudents")
@@ -366,13 +372,13 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
+                    b.Property<bool?>("Active")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<Guid>("GradesId")
@@ -403,29 +409,34 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("Active")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("1");
 
                     b.Property<Guid?>("CourseId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("Deleted")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("0");
 
                     b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME");
 
                     b.Property<Guid>("PeopleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Registration")
                         .IsRequired()
-                        .HasMaxLength(10)
                         .IsUnicode(true)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("CHAR(10)");
 
                     b.Property<Guid?>("ReportCardId")
                         .HasColumnType("uniqueidentifier");
@@ -438,7 +449,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.HasIndex("ReportCardId");
 
-                    b.ToTable("Student");
+                    b.ToTable("Student", (string)null);
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Subject", b =>
@@ -446,40 +457,43 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("Active")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("1");
 
                     b.Property<Guid>("ClassId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasMaxLength(10)
                         .IsUnicode(true)
-                        .HasColumnType("nchar(10)")
+                        .HasColumnType("CHAR(10)")
                         .IsFixedLength();
 
                     b.Property<Guid>("CourseId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("Deleted")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("0");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME");
 
                     b.Property<Guid?>("PeriodId")
                         .HasColumnType("uniqueidentifier");
@@ -488,7 +502,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Workload")
-                        .HasColumnType("date");
+                        .HasColumnType("DATE");
 
                     b.HasKey("Id");
 
@@ -500,7 +514,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Subject");
+                    b.ToTable("Subject", (string)null);
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Teacher", b =>
@@ -508,22 +522,28 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("Active")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("1");
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .IsUnicode(true)
+                        .HasColumnType("CHAR(10)");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("Deleted")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("0");
 
                     b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME");
 
                     b.Property<Guid>("PeopleId")
                         .HasColumnType("uniqueidentifier");
@@ -532,7 +552,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.HasIndex("PeopleId");
 
-                    b.ToTable("Teacher");
+                    b.ToTable("Teacher", (string)null);
                 });
 
             modelBuilder.Entity("ClassStudent", b =>

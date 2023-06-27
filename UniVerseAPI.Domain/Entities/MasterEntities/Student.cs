@@ -17,10 +17,6 @@ namespace UniVerseAPI.Infra.Data.Context
         public Guid PeopleId { get; set; }
         public Guid? CourseId { get; set; }
         
-
-        [Required]
-        [StringLength(10, MinimumLength = 10)]
-        [Unicode(true)]
         public string Registration { get; set; }
 
         [ForeignKey("CourseId")]

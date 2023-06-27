@@ -19,23 +19,10 @@ namespace UniVerseAPI.Infra.Data.Context
             Students = new List<Student>();
         }
 
-        [Key]
         public Guid Id { get; set; }
-
-        [Required]
-        [StringLength(255)]
         public string FullName { get; set; }
-
-        [Required]
-        [StringLength(5)]
         public int Code { get; set; }
-
-        [Required]
-        [StringLength(35)]
         public string Shift { get; set; }
-
-        [Required]
-        [StringLength(255)]
         public string Room { get; set; }
 
         [InverseProperty("Class")]

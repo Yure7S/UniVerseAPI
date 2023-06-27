@@ -26,7 +26,6 @@ namespace UniVerseAPI.Infra.Data.Context
         public virtual DbSet<Course> Course { get; set; }
         public virtual DbSet<Grades> Grades { get; set; }
         public virtual DbSet<People> People { get; set; }
-        public virtual DbSet<Period> Period { get; set; }
         public virtual DbSet<ReportCard> ReportCard { get; set; }
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<Subject> Subject { get; set; }
@@ -49,6 +48,17 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Cep).IsFixedLength();
+
+                entity.ToTable("AddressEntity");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.AddressValue).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.Number).HasColumnType("VARCHAR(50)").IsRequired();
+                entity.Property(e => e.Neighborhood).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.Cep).HasColumnType("CHAR(8)").IsRequired();
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
+                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
             });
 
             modelBuilder.Entity<Assessment>(entity =>
@@ -59,6 +69,7 @@ namespace UniVerseAPI.Infra.Data.Context
                     .WithMany(p => p.Assessment)
                     .HasForeignKey(d => d.SubjectId)
                     .HasConstraintName("Assessment_fk0");
+
             });
 
             modelBuilder.Entity<Class>(entity =>
@@ -67,35 +78,44 @@ namespace UniVerseAPI.Infra.Data.Context
 
                 entity.HasMany(p => p.Students)
                   .WithMany(c => c.Classes);
+
+                entity.ToTable("Class");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.FullName).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.Code).HasColumnType("CHA(5)").IsUnicode(true).IsRequired();
+                entity.Property(e => e.Shift).HasColumnType("VARCHAR(50)").IsRequired();
+                entity.Property(e => e.Room).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
+                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
             });
-
-            //modelBuilder.Entity<GroupStudentClass>(entity =>
-            //{
-            //    entity.Property(e => e.Id).ValueGeneratedNever();
-
-            //    entity.HasOne(d => d.Student)
-            //        .WithMany(p => p.GroupStudentClass)
-            //        .HasForeignKey(d => d.StudentId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("GroupStudentClass_fk0");
-
-            //    entity.HasOne(d => d.Class)
-            //        .WithMany(p => p.GroupStudentClass)
-            //        .HasForeignKey(d => d.ClassId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("GroupStudentClass_fk2");
-            //});
 
             modelBuilder.Entity<Course>(entity =>
             {
+                entity.ToTable("Course");
+                entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.FullName).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.Description).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.StartDate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.EndDate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.SpotsAvailable).HasColumnType("INT").IsRequired();
+                entity.Property(e => e.Price).HasColumnType("INT").IsRequired();
+                entity.Property(e => e.Category).HasColumnType("VARCHAR(100)").IsRequired();
+                entity.Property(e => e.Code).HasColumnType("CHAR(10)").IsRequired();
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
+                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
+
             });
 
             modelBuilder.Entity<Grades>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Grade).HasDefaultValueSql("((0))");
+                entity.Property(e => e.Grade).HasDefaultValueSql("0");
 
                 entity.HasOne(d => d.Assessment)
                     .WithMany(p => p.Grades)
@@ -115,11 +135,21 @@ namespace UniVerseAPI.Infra.Data.Context
                     .HasForeignKey(d => d.AddressId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("People_fk0");
-            });
 
-            modelBuilder.Entity<Period>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.ToTable("People");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.FullName).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.BirthDate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.Cpf).HasColumnType("CHAR(11)").IsUnicode(true).IsRequired();
+                entity.Property(e => e.Gender).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.Phone).HasColumnType("CHAR(11)").IsRequired();
+                entity.Property(e => e.Email).HasColumnType("VARCHAR(100)");
+                entity.Property(e => e.Password).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
+                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
+
             });
 
             modelBuilder.Entity<ReportCard>(entity =>
@@ -166,6 +196,14 @@ namespace UniVerseAPI.Infra.Data.Context
                     .HasForeignKey(d => d.ReportCardId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Student_fk0");
+
+                entity.ToTable("Student");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Registration).HasColumnType("CHAR(10)").IsUnicode(true).IsRequired();
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
+                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
             });
 
             modelBuilder.Entity<Subject>(entity =>
@@ -199,6 +237,16 @@ namespace UniVerseAPI.Infra.Data.Context
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Subject_fk3");
 
+                entity.ToTable("Subject");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.FullName).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.Description).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.Code).HasColumnType("CHAR(10)").IsUnicode(true).IsRequired();
+                entity.Property(e => e.Workload).HasColumnType("DATE").IsRequired();
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
+                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
             });
 
             modelBuilder.Entity<Teacher>(entity =>
@@ -210,6 +258,14 @@ namespace UniVerseAPI.Infra.Data.Context
                     .HasForeignKey(d => d.PeopleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Teacher_fk0");
+
+                entity.ToTable("Teacher");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Code).HasColumnType("CHAR(10)").IsUnicode(true).IsRequired();
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME").IsRequired();
+                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
+                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
             });
 
         }

@@ -17,20 +17,9 @@ namespace UniVerseAPI.Infra.Data.Context
         public Guid ClassId { get; set; }
         public Guid? PeriodId { get; set; }
 
-        [Required]
-        [StringLength(255)]
         public string FullName { get; set; }
-
-        [Required]
-        [StringLength(255)]
         public string Description { get; set; }
-
-        [Required]
-        [StringLength(10, MinimumLength = 10)]
-        [Unicode(true)]
         public string Code { get; set; }
-
-        [Column(TypeName = "date")]
         public DateTime Workload { get; set; }
 
         [ForeignKey("ClassId")]
