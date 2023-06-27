@@ -19,7 +19,7 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
 
         public async Task<List<Student>> GetAllStudentAsync()
         {
-            return await _db.Student.Where(std => true)
+            return await _db.Student
                 .Include(s => s.People)
                 .ThenInclude(s => s.AddressEntity)
                 .ToListAsync();
@@ -35,7 +35,7 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
 
         public async Task<Student?> GetStudentByEmailAsync(string email)
         {
-            return await _db.Student.Where(std => true)
+            return await _db.Student
                 .Include(s => s.People)
                 .FirstOrDefaultAsync(p => p.People.Email == email);
         }

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO;
 using UniVerseAPI.Application.DTOs.Response.BaseResponse;
 using UniVerseAPI.Application.DTOs.Response.CoursesDTO;
+using UniVerseAPI.Application.DTOs.Response.SubjectDTO;
 using UniVerseAPI.Application.IServices;
 using UniVerseAPI.Domain.Interface;
 using UniVerseAPI.Infra.Data.Context;
@@ -22,11 +23,13 @@ namespace UniVerseAPI.Application.Services
     public class CourseService : ICourseService
     {
         private readonly ICourse _ICourse;
+        private readonly ISubject _ISubject;
         private readonly IMapper _mapper;
 
-        public CourseService(ICourse iCourse, IMapper mapper)
+        public CourseService(ICourse iCourse, IMapper mapper, ISubject subject)
         {
             _ICourse = iCourse;
+            _ISubject = subject;
             _mapper = mapper;
         }
 
@@ -166,5 +169,13 @@ namespace UniVerseAPI.Application.Services
                 return response;
             }
         }
+
+        public List<SubjectResponseDTO> AllSubjectsThisCourseAsync(string code)
+        {
+            return _ISubject.AllSubjectsThisCourseAsync(code)
+                .Result
+                .ConvertAll(subj => new SubjectResponseDTO(subj));
+        }
+
     }
 }
