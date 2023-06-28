@@ -28,16 +28,12 @@ namespace UniVerseAPI.Infra.Data.Context
         [ForeignKey("CourseId")]
         [InverseProperty("Subject")]
         public virtual Course Course { get; set; }
-        [ForeignKey("PeriodId")]
-        [InverseProperty("Subject")]
-        public virtual Period Period { get; set; }
         [ForeignKey("TeacherId")]
         [InverseProperty("Subject")]
         public virtual Teacher Teacher { get; set; }
+
         [InverseProperty("Subject")]
-        public virtual ICollection<Assessment> Assessment { get; set; }
-        [InverseProperty("Subject")]
-        public virtual ICollection<ReportCard> ReportCard { get; set; }
+        public virtual ICollection<Grades> Grades { get; }
 
         public Subject()
         {

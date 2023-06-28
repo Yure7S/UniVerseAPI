@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using UniVerseAPI.Domain.Entities.MasterEntities;
+using UniVerseAPI.Domain;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
@@ -27,12 +27,11 @@ namespace UniVerseAPI.Infra.Data.Context
         [InverseProperty("Student")]
         public virtual People People { get; set; }
 
-        [ForeignKey("ReportCardId")]
-        [InverseProperty("Student")]
-        public virtual ReportCard ReportCard { get; set; }
-
         [InverseProperty("Students")]
-        public virtual ICollection<Class> Classes{ get; set; }
+        public virtual ICollection<Class> Classes { get; set; }
+
+        [InverseProperty("Student")]
+        public virtual ICollection<Grades> Grades { get; }
 
         public Student()
         {

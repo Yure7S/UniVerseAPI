@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 using NPOI.SS.Formula.Functions;
-using UniVerseAPI.Domain.Entities.MasterEntities;
 using UniVerseAPI.Infra.Data.Repositories;
 
 namespace UniVerseAPI.Infra.Data.Context
@@ -21,17 +20,13 @@ namespace UniVerseAPI.Infra.Data.Context
         }
 
         public virtual DbSet<AddressEntity> AddressEntity { get; set; }
-        public virtual DbSet<Assessment> Assessment { get; set; }
         public virtual DbSet<Class> Class { get; set; }
         public virtual DbSet<Course> Course { get; set; }
         public virtual DbSet<Grades> Grades { get; set; }
         public virtual DbSet<People> People { get; set; }
-        public virtual DbSet<ReportCard> ReportCard { get; set; }
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<Subject> Subject { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }
-        public virtual DbSet<GroupStudentClass> GroupStudentClass { get; set; }
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -59,17 +54,6 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME").IsRequired();
                 entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
                 entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
-            });
-
-            modelBuilder.Entity<Assessment>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.HasOne(d => d.Subject)
-                    .WithMany(p => p.Assessment)
-                    .HasForeignKey(d => d.SubjectId)
-                    .HasConstraintName("Assessment_fk0");
-
             });
 
             modelBuilder.Entity<Class>(entity =>
@@ -107,7 +91,7 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME").IsRequired();
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME").IsRequired();
                 entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
-                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
+                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();   
 
             });
 
@@ -115,13 +99,24 @@ namespace UniVerseAPI.Infra.Data.Context
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Grade).HasDefaultValueSql("0");
+                entity.ToTable("Grades");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.FirstNote).HasColumnType("DECIMAL").HasDefaultValueSql("0");
+                entity.Property(e => e.SecondNote).HasColumnType("DECIMAL").HasDefaultValueSql("0");
+                entity.Property(e => e.TookFinalExame).HasColumnType("BIT").HasDefaultValueSql("0");
+                entity.Property(e => e.FinalExameGrade).HasColumnType("DECIMAL").HasDefaultValueSql("0");
 
-                entity.HasOne(d => d.Assessment)
-                    .WithMany(p => p.Grades)
-                    .HasForeignKey(d => d.AssessmentId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                entity.HasOne(e => e.Student)
+                    .WithMany(e => e.Grades)
+                    .HasForeignKey(e => e.StudentId)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("Grades_fk0");
+
+                entity.HasOne(e => e.Subject)
+                    .WithMany(e => e.Grades)
+                    .HasForeignKey(e => e.SubjectId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("Grades_fk1");
             });
 
             modelBuilder.Entity<People>(entity =>
@@ -152,29 +147,6 @@ namespace UniVerseAPI.Infra.Data.Context
 
             });
 
-            modelBuilder.Entity<ReportCard>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.HasOne(d => d.Grades)
-                    .WithMany(p => p.ReportCard)
-                    .HasForeignKey(d => d.GradesId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_GRADES");
-
-                entity.HasOne(d => d.Period)
-                    .WithMany(p => p.ReportCard)
-                    .HasForeignKey(d => d.PeriodId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PERIOD");
-
-                entity.HasOne(d => d.Subject)
-                    .WithMany(p => p.ReportCard)
-                    .HasForeignKey(d => d.SubjectId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SUBJECT");
-            });
-
             modelBuilder.Entity<Student>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -190,12 +162,6 @@ namespace UniVerseAPI.Infra.Data.Context
                     .HasForeignKey(d => d.PeopleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Student_fk1");
-
-                entity.HasOne(d => d.ReportCard)
-                    .WithMany(p => p.Student)
-                    .HasForeignKey(d => d.ReportCardId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Student_fk0");
 
                 entity.ToTable("Student");
                 entity.HasKey(e => e.Id);
@@ -230,12 +196,6 @@ namespace UniVerseAPI.Infra.Data.Context
                     .HasForeignKey(d => d.ClassId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Subject_fk2");
-
-                entity.HasOne(d => d.Period)
-                    .WithMany(p => p.Subject)
-                    .HasForeignKey(d => d.PeriodId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Subject_fk3");
 
                 entity.ToTable("Subject");
                 entity.HasKey(e => e.Id);
