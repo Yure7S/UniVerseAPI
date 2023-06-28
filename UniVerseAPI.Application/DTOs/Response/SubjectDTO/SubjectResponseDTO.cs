@@ -10,7 +10,6 @@ using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UniVerseAPI.Application.DTOs.Response.BaseResponse;
-using UniVerseAPI.Domain.Entities.MasterEntities;
 using UniVerseAPI.Domain.Interface;
 using UniVerseAPI.Infra.Data.Context;
 

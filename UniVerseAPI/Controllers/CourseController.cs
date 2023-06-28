@@ -63,7 +63,6 @@ namespace UniVerseAPI.Controllers
             if (ModelState.IsValid)
             {
                 var response = _ICourseService.AllSubjectsThisCourseAsync(code);
-
                 return Ok(response);
             }
             return StatusCode(500);

@@ -21,7 +21,6 @@ using UniVerseAPI.Application.DTOs.Response.StudentsDTO;
 using UniVerseAPI.Application.DTOs.Response.SubjectDTO;
 using UniVerseAPI.Application.Interface;
 using UniVerseAPI.Application.IServices;
-using UniVerseAPI.Domain.Entities.MasterEntities;
 using UniVerseAPI.Domain.Interface;
 using UniVerseAPI.Infra.Data.Context;
 
@@ -34,11 +33,10 @@ namespace UniVerseAPI.Application.Services
         private readonly IAddressEntity _IAddressEntity;
         private readonly IPeople _IPeople;
         private readonly IMapper _mapper;
-        private readonly IGroupStudentClass _IGroupStudentClass;
         private readonly IClass _IClass;
 
 
-        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity iAddressEntity, IPeople iPeople, IMapper mapper, IGroupStudentClass groupStudentClass, IClass iClass)
+        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity iAddressEntity, IPeople iPeople, IMapper mapper, IClass iClass)
         {
             _IStudent = iStudent;
             _ICourse = iCourse;
@@ -46,7 +44,6 @@ namespace UniVerseAPI.Application.Services
             _IAddressEntity = iAddressEntity;
             _IPeople = iPeople;
             _mapper = mapper;
-            _IGroupStudentClass = groupStudentClass;
         }
 
         public List<StudentResponseDTO> GetAllAsync()

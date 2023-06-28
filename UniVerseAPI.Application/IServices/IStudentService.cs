@@ -8,7 +8,6 @@ using UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO;
 using UniVerseAPI.Application.DTOs.Response.BaseResponse;
 using UniVerseAPI.Application.DTOs.Response.StudentsDTO;
 using UniVerseAPI.Application.DTOs.Response.SubjectDTO;
-using UniVerseAPI.Domain.Entities.MasterEntities;
 using UniVerseAPI.Infra.Data.Context;
 namespace UniVerseAPI.Application.IServices
 {

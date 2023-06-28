@@ -37,29 +37,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.ToTable("ClassStudent");
                 });
 
-            modelBuilder.Entity("UniVerseAPI.Domain.Entities.MasterEntities.GroupStudentClass", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool?>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GroupStudentClass");
-                });
-
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.AddressEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -103,33 +80,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AddressEntity", (string)null);
-                });
-
-            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Assessment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool?>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("SubjectId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("Assessment");
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Class", b =>
@@ -243,28 +193,48 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<bool?>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("AssessmentId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<decimal?>("Grade")
+                    b.Property<decimal?>("FinalExameGrade")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18, 0)")
+                        .HasColumnType("DECIMAL")
+                        .HasDefaultValueSql("0");
+
+                    b.Property<decimal?>("FirstNote")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("DECIMAL")
                         .HasDefaultValueSql("0");
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal?>("SecondNote")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("DECIMAL")
+                        .HasDefaultValueSql("0");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool?>("TookFinalExame")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("0");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AssessmentId");
+                    b.HasIndex("StudentId");
 
-                    b.ToTable("Grades");
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Grades", (string)null);
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.People", b =>
@@ -331,79 +301,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.ToTable("People", (string)null);
                 });
 
-            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Period", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool?>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("EnrolledStudents")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Room")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Period");
-                });
-
-            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.ReportCard", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool?>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("GradesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("PeriodId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SubjectId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GradesId");
-
-                    b.HasIndex("PeriodId");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("ReportCard");
-                });
-
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Student", b =>
                 {
                     b.Property<Guid>("Id")
@@ -446,8 +343,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.HasIndex("CourseId");
 
                     b.HasIndex("PeopleId");
-
-                    b.HasIndex("ReportCardId");
 
                     b.ToTable("Student", (string)null);
                 });
@@ -510,8 +405,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("PeriodId");
-
                     b.HasIndex("TeacherId");
 
                     b.ToTable("Subject", (string)null);
@@ -570,25 +463,25 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Assessment", b =>
-                {
-                    b.HasOne("UniVerseAPI.Infra.Data.Context.Subject", "Subject")
-                        .WithMany("Assessment")
-                        .HasForeignKey("SubjectId")
-                        .HasConstraintName("Assessment_fk0");
-
-                    b.Navigation("Subject");
-                });
-
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Grades", b =>
                 {
-                    b.HasOne("UniVerseAPI.Infra.Data.Context.Assessment", "Assessment")
+                    b.HasOne("UniVerseAPI.Infra.Data.Context.Student", "Student")
                         .WithMany("Grades")
-                        .HasForeignKey("AssessmentId")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("Grades_fk0");
 
-                    b.Navigation("Assessment");
+                    b.HasOne("UniVerseAPI.Infra.Data.Context.Subject", "Subject")
+                        .WithMany("Grades")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("Grades_fk1");
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.People", b =>
@@ -600,33 +493,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .HasConstraintName("People_fk0");
 
                     b.Navigation("AddressEntity");
-                });
-
-            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.ReportCard", b =>
-                {
-                    b.HasOne("UniVerseAPI.Infra.Data.Context.Grades", "Grades")
-                        .WithMany("ReportCard")
-                        .HasForeignKey("GradesId")
-                        .IsRequired()
-                        .HasConstraintName("FK_GRADES");
-
-                    b.HasOne("UniVerseAPI.Infra.Data.Context.Period", "Period")
-                        .WithMany("ReportCard")
-                        .HasForeignKey("PeriodId")
-                        .IsRequired()
-                        .HasConstraintName("FK_PERIOD");
-
-                    b.HasOne("UniVerseAPI.Infra.Data.Context.Subject", "Subject")
-                        .WithMany("ReportCard")
-                        .HasForeignKey("SubjectId")
-                        .IsRequired()
-                        .HasConstraintName("FK_SUBJECT");
-
-                    b.Navigation("Grades");
-
-                    b.Navigation("Period");
-
-                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Student", b =>
@@ -642,16 +508,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .IsRequired()
                         .HasConstraintName("Student_fk1");
 
-                    b.HasOne("UniVerseAPI.Infra.Data.Context.ReportCard", "ReportCard")
-                        .WithMany("Student")
-                        .HasForeignKey("ReportCardId")
-                        .HasConstraintName("Student_fk0");
-
                     b.Navigation("Course");
 
                     b.Navigation("People");
-
-                    b.Navigation("ReportCard");
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Subject", b =>
@@ -668,11 +527,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .IsRequired()
                         .HasConstraintName("Subject_fk0");
 
-                    b.HasOne("UniVerseAPI.Infra.Data.Context.Period", "Period")
-                        .WithMany("Subject")
-                        .HasForeignKey("PeriodId")
-                        .HasConstraintName("Subject_fk3");
-
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Teacher", "Teacher")
                         .WithMany("Subject")
                         .HasForeignKey("TeacherId")
@@ -682,8 +536,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Navigation("Class");
 
                     b.Navigation("Course");
-
-                    b.Navigation("Period");
 
                     b.Navigation("Teacher");
                 });
@@ -704,11 +556,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Navigation("People");
                 });
 
-            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Assessment", b =>
-                {
-                    b.Navigation("Grades");
-                });
-
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Class", b =>
                 {
                     b.Navigation("Subject");
@@ -721,11 +568,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Grades", b =>
-                {
-                    b.Navigation("ReportCard");
-                });
-
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.People", b =>
                 {
                     b.Navigation("Student");
@@ -733,23 +575,14 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Period", b =>
+            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Student", b =>
                 {
-                    b.Navigation("ReportCard");
-
-                    b.Navigation("Subject");
-                });
-
-            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.ReportCard", b =>
-                {
-                    b.Navigation("Student");
+                    b.Navigation("Grades");
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Subject", b =>
                 {
-                    b.Navigation("Assessment");
-
-                    b.Navigation("ReportCard");
+                    b.Navigation("Grades");
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Teacher", b =>

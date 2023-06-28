@@ -10,21 +10,20 @@ namespace UniVerseAPI.Infra.Data.Context
 {
     public partial class Grades : BaseEntity
     {
-        public Grades()
-        {
-            ReportCard = new HashSet<ReportCard>();
-        }
-
-        [Key]
         public Guid Id { get; set; }
-        public Guid AssessmentId { get; set; }
-        [Column(TypeName = "decimal(18, 0)")]
-        public decimal? Grade { get; set; }
+        public Guid StudentId { get; set; }
+        public Guid SubjectId { get; set; }
+        public decimal? FirstNote { get; set; }
+        public decimal? SecondNote { get; set; }
+        public bool? TookFinalExame { get; set; }
+        public decimal? FinalExameGrade { get; set; }
 
-        [ForeignKey("AssessmentId")]
+        [ForeignKey("SubjectId")]
         [InverseProperty("Grades")]
-        public virtual Assessment Assessment { get; set; }
+        public virtual Subject Subject { get; set; }
+
+        [ForeignKey("StudentId")]
         [InverseProperty("Grades")]
-        public virtual ICollection<ReportCard> ReportCard { get; set; }
+        public virtual Student Student { get; set; }
     }
 }
