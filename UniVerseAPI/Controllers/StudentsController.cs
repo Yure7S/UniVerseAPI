@@ -7,7 +7,7 @@ using UniVerseAPI.Infra.Data.Context;
 
 namespace UniVerseAPI.Controllers
 {
-    [Route("Students")]
+    [Route("students")]
     [ApiController]
     public class StudentsController : ControllerBase
     {
@@ -138,6 +138,18 @@ namespace UniVerseAPI.Controllers
                 //if (response.Success)
                 //    return Ok(response);
                 //return BadRequest(response);
+            }
+            return StatusCode(500);
+        }
+
+        [HttpPost("grades/{registration}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult AllGradesForThisStudent(string registration)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Ok("to do");
             }
             return StatusCode(500);
         }

@@ -193,6 +193,11 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<bool?>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("Approved")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("0");
+
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 

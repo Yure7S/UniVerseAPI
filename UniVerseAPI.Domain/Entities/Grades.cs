@@ -17,6 +17,7 @@ namespace UniVerseAPI.Infra.Data.Context
         public decimal? SecondNote { get; set; }
         public bool? TookFinalExame { get; set; }
         public decimal? FinalExameGrade { get; set; }
+        public bool Approved { get; set; }
 
         [ForeignKey("SubjectId")]
         [InverseProperty("Grades")]

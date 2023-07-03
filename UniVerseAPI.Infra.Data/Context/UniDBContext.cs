@@ -105,6 +105,7 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.SecondNote).HasColumnType("DECIMAL").HasDefaultValueSql("0");
                 entity.Property(e => e.TookFinalExame).HasColumnType("BIT").HasDefaultValueSql("0");
                 entity.Property(e => e.FinalExameGrade).HasColumnType("DECIMAL").HasDefaultValueSql("0");
+                entity.Property(e => e.Approved).HasColumnType("BIT").HasDefaultValueSql("0");
 
                 entity.HasOne(e => e.Student)
                     .WithMany(e => e.Grades)

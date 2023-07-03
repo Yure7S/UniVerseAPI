@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UniVerseAPI.Application.DTOs.Request;
 using UniVerseAPI.Application.DTOs.Response.BaseResponse;
+using UniVerseAPI.Application.DTOs.Response.GradesDTO;
 using UniVerseAPI.Application.DTOs.Response.StudentsDTO;
 using UniVerseAPI.Application.DTOs.Response.SubjectDTO;
 using UniVerseAPI.Application.Interface;
@@ -34,9 +35,9 @@ namespace UniVerseAPI.Application.Services
         private readonly IPeople _IPeople;
         private readonly IMapper _mapper;
         private readonly IClass _IClass;
+        private readonly IGrades _IGrades;
 
-
-        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity iAddressEntity, IPeople iPeople, IMapper mapper, IClass iClass)
+        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity iAddressEntity, IPeople iPeople, IMapper mapper, IClass iClass, IGrades grades)
         {
             _IStudent = iStudent;
             _ICourse = iCourse;
@@ -44,6 +45,7 @@ namespace UniVerseAPI.Application.Services
             _IAddressEntity = iAddressEntity;
             _IPeople = iPeople;
             _mapper = mapper;
+            _IGrades = grades;
         }
 
         public List<StudentResponseDTO> GetAllAsync()
@@ -280,6 +282,28 @@ namespace UniVerseAPI.Application.Services
                 //    Error = e.Message
                 //};
                 List<SubjectResponseDTO> response = new();
+
+                return response;
+            }
+        }
+
+        public async Task<GradesResponseDTO> AllGradesForThisStudent(string registration)
+        {
+            try
+            {
+                Student studentFound = await _IStudent.GetStudentDetailAsync(registration);
+                List<GradesResponseDTO> response = await _IGrades.AllGradesForThisStudent(registration)
+                    .Result
+                    .ConvertAll(grades => new GradesResponseDTO(grades));
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                BaseResponseDTO response = new(
+                    message: "*** We encountered an error trying to insert the student with into the class!",
+                    success: false,
+                    error: e.Message);
 
                 return response;
             }
