@@ -9,7 +9,6 @@ using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    [Index("Cpf", Name = "UQ__People__C1FF9309991D9366", IsUnique = true)]
     public partial class People : BaseEntity
     {
         [Key]
@@ -27,8 +26,10 @@ namespace UniVerseAPI.Infra.Data.Context
         [ForeignKey("AddressId")]
         [InverseProperty("People")]
         public virtual AddressEntity AddressEntity { get; set; }
+
         [InverseProperty("People")]
         public virtual ICollection<Student> Student { get; set; }
+
         [InverseProperty("People")]
         public virtual ICollection<Teacher> Teacher { get; set; }
 

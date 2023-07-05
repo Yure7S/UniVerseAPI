@@ -7,7 +7,7 @@ using UniVerseAPI.Infra.Data.Context;
 
 namespace UniVerseAPI.Controllers
 {
-    [Route("Students")]
+    [Route("students")]
     [ApiController]
     public class StudentsController : ControllerBase
     {
@@ -23,16 +23,20 @@ namespace UniVerseAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllAsync()
         {
-            try
-            {
-                var response = _IStudentService.GetAllAsync();
-                return Ok(response);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500);
-            }
-        }
+            //try
+            //{
+            //    var response = _IStudentService.GetAllAsync();
+            //    return Ok(response);
+            //}
+            //catch (Exception)
+            //{
+            //    return StatusCode(500);
+            //}
+
+
+            var response = _IStudentService.GetAllAsync();
+            return Ok(response);
+        } 
 
         [HttpGet("details/{registration}")]
         public async Task<IActionResult> GetStudentDetailsAsync(string registration)
@@ -59,6 +63,36 @@ namespace UniVerseAPI.Controllers
                 //if (response.Success)
                 //    return Ok(response);
                 //return BadRequest(response);
+            }
+            return StatusCode(500);
+        }
+
+        [HttpGet("grades/{registration}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AllGradesForThisStudent(string registration)
+        {
+            if (!ModelState.IsValid)
+            {
+                var response = await _IStudentService.AllGradesForThisStudent(registration);
+                if (response.Success)
+                    return Ok(response);
+                return BadRequest(response);
+            }
+            return StatusCode(500);
+        }
+
+        [HttpPost("grades/add")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> RegisterNote(GradeInputDTO grade)
+        {
+            if (!ModelState.IsValid)
+            {
+                var response = await _IStudentService.RegisterGrade(grade);
+                if (response.Success)
+                    return Ok(response);
+                return BadRequest(response);
             }
             return StatusCode(500);
         }

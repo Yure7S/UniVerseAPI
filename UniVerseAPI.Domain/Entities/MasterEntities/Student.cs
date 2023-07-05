@@ -11,12 +11,10 @@ namespace UniVerseAPI.Infra.Data.Context
 {
     public partial class Student : BaseEntity
     {
-        [Key]
         public Guid Id { get; set; }
         public Guid? ReportCardId { get; set; }
         public Guid PeopleId { get; set; }
         public Guid? CourseId { get; set; }
-        
         public string Registration { get; set; }
 
         [ForeignKey("CourseId")]

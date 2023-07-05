@@ -47,7 +47,7 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.ToTable("AddressEntity");
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.AddressValue).HasColumnType("VARCHAR(255)").IsRequired();
-                entity.Property(e => e.Number).HasColumnType("VARCHAR(50)").IsRequired();
+                entity.Property(e => e.Number).HasColumnType("INT").IsRequired();
                 entity.Property(e => e.Neighborhood).HasColumnType("VARCHAR(255)").IsRequired();
                 entity.Property(e => e.Cep).HasColumnType("CHAR(8)").IsRequired();
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME").IsRequired();
@@ -105,6 +105,7 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.SecondNote).HasColumnType("DECIMAL").HasDefaultValueSql("0");
                 entity.Property(e => e.TookFinalExame).HasColumnType("BIT").HasDefaultValueSql("0");
                 entity.Property(e => e.FinalExameGrade).HasColumnType("DECIMAL").HasDefaultValueSql("0");
+                entity.Property(e => e.Approved).HasColumnType("BIT").HasDefaultValueSql("0");
 
                 entity.HasOne(e => e.Student)
                     .WithMany(e => e.Grades)

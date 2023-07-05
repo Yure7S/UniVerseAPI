@@ -17,6 +17,7 @@ namespace UniVerseAPI.Infra.Data.Context
         public decimal? SecondNote { get; set; }
         public bool? TookFinalExame { get; set; }
         public decimal? FinalExameGrade { get; set; }
+        public bool Approved { get; set; }
 
         [ForeignKey("SubjectId")]
         [InverseProperty("Grades")]
@@ -25,5 +26,12 @@ namespace UniVerseAPI.Infra.Data.Context
         [ForeignKey("StudentId")]
         [InverseProperty("Grades")]
         public virtual Student Student { get; set; }
+
+        public Grades()
+        {
+            Id = Guid.NewGuid();
+            CreationDate = DateTime.Now;
+            LastUpdate = DateTime.Now;
+        }
     }
 }

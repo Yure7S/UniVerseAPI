@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UniVerseAPI.Application.DTOs.Request;
 using UniVerseAPI.Application.DTOs.Response.BaseResponse;
+using UniVerseAPI.Application.DTOs.Response.GradesDTO;
 using UniVerseAPI.Application.DTOs.Response.StudentsDTO;
 using UniVerseAPI.Application.DTOs.Response.SubjectDTO;
 using UniVerseAPI.Application.Interface;
@@ -34,9 +35,9 @@ namespace UniVerseAPI.Application.Services
         private readonly IPeople _IPeople;
         private readonly IMapper _mapper;
         private readonly IClass _IClass;
+        private readonly IGrades _IGrades;
 
-
-        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity iAddressEntity, IPeople iPeople, IMapper mapper, IClass iClass)
+        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity iAddressEntity, IPeople iPeople, IMapper mapper, IClass iClass, IGrades grades)
         {
             _IStudent = iStudent;
             _ICourse = iCourse;
@@ -44,6 +45,7 @@ namespace UniVerseAPI.Application.Services
             _IAddressEntity = iAddressEntity;
             _IPeople = iPeople;
             _mapper = mapper;
+            _IGrades = grades;
         }
 
         public List<StudentResponseDTO> GetAllAsync()
@@ -279,7 +281,74 @@ namespace UniVerseAPI.Application.Services
                 //    Success = false,
                 //    Error = e.Message
                 //};
+
                 List<SubjectResponseDTO> response = new();
+
+                return response;
+            }
+        }
+
+        public async Task<GradesResponseDTO> RegisterGrade(GradeInputDTO grade)
+        {
+            try
+            {
+                Student? studentFound = await _IStudent.GetStudentDetailAsync(grade.StudentRegistration);
+                GradesResponseDTO response = new();
+
+                if (studentFound == null)
+                {
+                    response.Message = $"*** We did not find this student in our database.";
+                    response.Success = false;
+                }
+                else
+                {
+                    Grades newGrade = _mapper.Map<Grades>(grade);
+                    await _IGrades.CreateAsync(newGrade);
+                    response = _mapper.Map<GradesResponseDTO>(newGrade);
+                }
+
+                return response;
+            }
+            catch (Exception)
+            {
+                GradesResponseDTO response = new()
+                {
+                    Message = "*** We encountered an error trying to fetch this student's grades",
+                    Success = false
+                };
+
+                return response;
+            }
+        }
+
+        public async Task<GradesResponseListsDTO> AllGradesForThisStudent(string registration)
+        {
+            try
+            {
+                Student? studentFound = await _IStudent.GetStudentDetailAsync(registration);
+                GradesResponseListsDTO response = new();
+
+                if (studentFound == null)
+                {
+                    response.Message = $"*** We did not find any students with the registration {studentFound!.Registration} in our database";
+                    response.Success = false;
+                }
+                else
+                {
+                    response.Grade = _IGrades.AllGradesForThisStudent(studentFound.Registration)
+                        .Result
+                        .ConvertAll(grades => new GradesResponseDTO(grades));
+                }
+
+                return response;
+            }
+            catch (Exception) 
+            {
+                GradesResponseListsDTO response = new()
+                {
+                    Message = "*** We encountered an error trying to fetch this student's grades",
+                    Success = false
+                };
 
                 return response;
             }

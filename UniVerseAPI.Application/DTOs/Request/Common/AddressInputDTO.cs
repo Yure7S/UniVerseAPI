@@ -13,14 +13,22 @@ namespace UniVerseAPI.Infra.Data.Context
         [Required]
         [Column("Address")]
         [StringLength(255)]
+        [Display(Name = "Address", Description = "Complete address")]
         public string AddressValue { get; set; }
+
+        [Required]
+        [Display(Name = "Number", Description = "House number")]
         public int Number { get; set; }
+
         [Required]
         [StringLength(255)]
+        [Display(Name = "Neighborhood")]
         public string Neighborhood { get; set; }
+
         [Required]
         [StringLength(8)]
         [Unicode(true)]
+        [Display(Name = "Cep", Description = "Enter the zip code for your region")]
         public string Cep { get; set; }
     }
 }

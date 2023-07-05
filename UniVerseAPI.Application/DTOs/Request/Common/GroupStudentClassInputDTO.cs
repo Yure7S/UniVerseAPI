@@ -10,7 +10,12 @@ namespace UniVerseAPI.Infra.Data.Context
 {
     public partial class GroupStudentClassInputDTO
     {
+        [Required]
+        [Display(Name = "Registration", Description = "Inform the student's registration")]
         public string StudentRegistration { get; set; }
+
+        [Required]
+        [Display(Name = "Class code", Description = "Enter the class code")]
         public int ClassCode { get; set; }
     }
 }
