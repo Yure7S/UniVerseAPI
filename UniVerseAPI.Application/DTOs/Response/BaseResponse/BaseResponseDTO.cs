@@ -12,7 +12,7 @@ namespace UniVerseAPI.Application.DTOs.Response.BaseResponse
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Message { get; set; }
 
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool Success { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
