@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using UniVerseAPI.Infra.Data.Context;
 using Microsoft.Identity.Client;
+using UniVerseAPI.Application.DTOs.Response.BaseResponse;
 
 namespace UniVerseAPI.Application.DTOs.Response.GradesDTO
 {
-    public class GradesResponseDTO
+    public class GradesResponseDTO : BaseResponseDTO
     {
         public string? Subject { get; set; }
         public decimal? FirstNote { get; set; }
@@ -27,6 +28,10 @@ namespace UniVerseAPI.Application.DTOs.Response.GradesDTO
             TookFinalExame = grades?.TookFinalExame;
             FinalExameGrade = grades?.FinalExameGrade;
             Approved = grades!.Approved;
+        }
+
+        public GradesResponseDTO()
+        {
         }
     }
 }

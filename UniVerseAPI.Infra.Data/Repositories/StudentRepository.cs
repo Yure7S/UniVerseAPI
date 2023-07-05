@@ -17,9 +17,9 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
         {
         }
 
-        public async Task<List<Student>> GetAllStudentAsync()
+        public Task<List<Student>> GetAllStudentAsync()
         {
-            return await _db.Student
+            return _db.Student
                 .Include(s => s.People)
                 .ThenInclude(s => s.AddressEntity)
                 .ToListAsync();

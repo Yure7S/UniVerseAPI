@@ -73,9 +73,8 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(255)");
 
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(50)");
+                    b.Property<int>("Number")
+                        .HasColumnType("INT");
 
                     b.HasKey("Id");
 
@@ -299,9 +298,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
-
-                    b.HasIndex(new[] { "Cpf" }, "UQ__People__C1FF9309991D9366")
-                        .IsUnique();
 
                     b.ToTable("People", (string)null);
                 });

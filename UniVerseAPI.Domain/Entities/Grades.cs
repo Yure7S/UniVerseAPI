@@ -26,5 +26,12 @@ namespace UniVerseAPI.Infra.Data.Context
         [ForeignKey("StudentId")]
         [InverseProperty("Grades")]
         public virtual Student Student { get; set; }
+
+        public Grades()
+        {
+            Id = Guid.NewGuid();
+            CreationDate = DateTime.Now;
+            LastUpdate = DateTime.Now;
+        }
     }
 }

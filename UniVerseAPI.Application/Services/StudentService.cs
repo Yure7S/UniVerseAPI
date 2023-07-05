@@ -281,29 +281,74 @@ namespace UniVerseAPI.Application.Services
                 //    Success = false,
                 //    Error = e.Message
                 //};
+
                 List<SubjectResponseDTO> response = new();
 
                 return response;
             }
         }
 
-        public async Task<GradesResponseDTO> AllGradesForThisStudent(string registration)
+        public async Task<GradesResponseDTO> RegisterGrade(GradeInputDTO grade)
         {
             try
             {
-                Student studentFound = await _IStudent.GetStudentDetailAsync(registration);
-                List<GradesResponseDTO> response = await _IGrades.AllGradesForThisStudent(registration)
-                    .Result
-                    .ConvertAll(grades => new GradesResponseDTO(grades));
+                Student? studentFound = await _IStudent.GetStudentDetailAsync(grade.StudentRegistration);
+                GradesResponseDTO response = new();
+
+                if (studentFound == null)
+                {
+                    response.Message = $"*** We did not find this student in our database.";
+                    response.Success = false;
+                }
+                else
+                {
+                    Grades newGrade = _mapper.Map<Grades>(grade);
+                    await _IGrades.CreateAsync(newGrade);
+                    response = _mapper.Map<GradesResponseDTO>(newGrade);
+                }
 
                 return response;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                BaseResponseDTO response = new(
-                    message: "*** We encountered an error trying to insert the student with into the class!",
-                    success: false,
-                    error: e.Message);
+                GradesResponseDTO response = new()
+                {
+                    Message = "*** We encountered an error trying to fetch this student's grades",
+                    Success = false
+                };
+
+                return response;
+            }
+        }
+
+        public async Task<GradesResponseListsDTO> AllGradesForThisStudent(string registration)
+        {
+            try
+            {
+                Student? studentFound = await _IStudent.GetStudentDetailAsync(registration);
+                GradesResponseListsDTO response = new();
+
+                if (studentFound == null)
+                {
+                    response.Message = $"*** We did not find any students with the registration {studentFound!.Registration} in our database";
+                    response.Success = false;
+                }
+                else
+                {
+                    response.Grade = _IGrades.AllGradesForThisStudent(studentFound.Registration)
+                        .Result
+                        .ConvertAll(grades => new GradesResponseDTO(grades));
+                }
+
+                return response;
+            }
+            catch (Exception) 
+            {
+                GradesResponseListsDTO response = new()
+                {
+                    Message = "*** We encountered an error trying to fetch this student's grades",
+                    Success = false
+                };
 
                 return response;
             }

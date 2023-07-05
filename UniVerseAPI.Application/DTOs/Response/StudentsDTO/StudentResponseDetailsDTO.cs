@@ -18,6 +18,7 @@ namespace UniVerseAPI.Application.DTOs.Response.StudentsDTO
     {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Registration { get; set; }
+
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public PeopleResponseDTO? People { get; set; }
     }
