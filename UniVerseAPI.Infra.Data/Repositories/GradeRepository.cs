@@ -20,6 +20,7 @@ namespace UniVerseAPI.Infra.Data.Repositories
             return await _db.Grades
                 .Include(grade => grade.Student)
                 .Where(grade => grade.Student.Registration == registration)
+                .Include(grade => grade.Subject)
                 .ToListAsync();
         }
     }

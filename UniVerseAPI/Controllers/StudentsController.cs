@@ -72,14 +72,19 @@ namespace UniVerseAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AllGradesForThisStudent(string registration)
         {
-            if (!ModelState.IsValid)
-            {
-                var response = await _IStudentService.AllGradesForThisStudent(registration);
-                if (response.Success)
-                    return Ok(response);
-                return BadRequest(response);
-            }
-            return StatusCode(500);
+            //if (!ModelState.IsValid)
+            //{
+            //    var response = await _IStudentService.AllGradesForThisStudent(registration);
+            //    if (response.Success)
+            //        return Ok(response);
+            //    return BadRequest(response);
+            //}
+            //return StatusCode(500);
+
+            var response = await _IStudentService.AllGradesForThisStudent(registration);
+            if (response.Success)
+                return Ok(response);
+            return BadRequest(response);
         }
 
         [HttpPost("grades/add")]

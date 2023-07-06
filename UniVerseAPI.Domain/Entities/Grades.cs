@@ -30,6 +30,8 @@ namespace UniVerseAPI.Infra.Data.Context
         public Grades()
         {
             Id = Guid.NewGuid();
+            Active = true;
+            Deleted = false;
             CreationDate = DateTime.Now;
             LastUpdate = DateTime.Now;
         }
