@@ -92,14 +92,12 @@ namespace UniVerseAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RegisterNote(GradeInputDTO grade)
         {
-
-            var response = await _IStudentService.RegisterGrade(grade);
-            if (response.Success)
-                return Ok(response);
-            return BadRequest(response);
             if (!ModelState.IsValid)
             {
-                
+                var response = await _IStudentService.RegisterGrade(grade);
+                if (response.Success)
+                    return Ok(response);
+                return BadRequest(response);
             }
             return StatusCode(500);
         }

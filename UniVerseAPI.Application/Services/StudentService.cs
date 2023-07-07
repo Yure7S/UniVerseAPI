@@ -169,7 +169,7 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    studentFound.DeleteAsync(true);
+                    studentFound.DeleteAsync();
                     await _IStudent.UpdateAsync(studentFound);
                     response.Update("*** Deleted successfully!", true);
                 }

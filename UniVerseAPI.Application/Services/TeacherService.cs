@@ -136,7 +136,7 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    teacherFound.DeleteAsync(true);
+                    teacherFound.DeleteAsync();
                     await _teacher.UpdateAsync(teacherFound);
                     response.Update("*** Deleted successfully!", true);
                 }

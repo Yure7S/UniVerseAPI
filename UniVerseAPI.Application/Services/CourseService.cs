@@ -123,7 +123,7 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    courseFound!.DeleteAsync(true);
+                    courseFound!.DeleteAsync();
                     await _ICourse.UpdateAsync(courseFound);
                     response.Update(message: "*** Deleted successfully!", success: true);
                 }
