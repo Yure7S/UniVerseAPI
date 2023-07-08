@@ -148,7 +148,7 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    subjectFound!.DeleteAsync(true);
+                    subjectFound!.DeleteAsync();
                     await _ISubject.UpdateAsync(subjectFound);
                     response.Update(message: "*** Deleted successfully!", success: true);
                 }

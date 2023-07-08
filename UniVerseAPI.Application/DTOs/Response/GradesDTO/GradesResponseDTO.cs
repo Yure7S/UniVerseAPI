@@ -13,7 +13,8 @@ namespace UniVerseAPI.Application.DTOs.Response.GradesDTO
 {
     public class GradesResponseDTO : BaseResponseDTO
     {
-        public string? Subject { get; set; }
+        public string? StudentRegistration { get; set; }
+        public string? SubjectCode { get; set; }
         public decimal? FirstNote { get; set; }
         public decimal? SecondNote { get; set; }
         public bool? TookFinalExame { get; set; }
@@ -22,7 +23,7 @@ namespace UniVerseAPI.Application.DTOs.Response.GradesDTO
 
         public GradesResponseDTO(Grades grades)
         {
-            Subject = grades.Subject.FullName;
+            SubjectCode = grades.Subject.Code;
             FirstNote = grades?.FirstNote;
             SecondNote = grades?.SecondNote;
             TookFinalExame = grades?.TookFinalExame;

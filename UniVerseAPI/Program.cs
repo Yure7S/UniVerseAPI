@@ -8,8 +8,12 @@ using UniVerseAPI.Application.IServices;
 using UniVerseAPI.Application.Services;
 using UniVerseAPI.Infra.Data.Repositories;
 using System.Text.Json.Serialization;
+using System.Text;
+using System.Configuration;
+using UniVerseAPI;
 
 var builder = WebApplication.CreateBuilder(args);
+var key = Encoding.ASCII.GetBytes(Settings.Secret);
 
 // Add services to the container.
 

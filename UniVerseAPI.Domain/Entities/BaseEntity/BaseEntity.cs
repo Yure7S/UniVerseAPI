@@ -15,9 +15,10 @@ namespace UniVerseAPI.Infra.Data.Context
         public DateTime CreationDate { get; protected set; }
         public DateTime LastUpdate { get; protected set; }
 
-        public void DeleteAsync(bool deleted)
+        public void DeleteAsync()
         {
-            Deleted = deleted;
+            Deleted = true;
+            LastUpdate = DateTime.Now;
         }
 
         public void Activate(bool active)

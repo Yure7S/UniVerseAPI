@@ -13,8 +13,9 @@ namespace UniVerseAPI.Application.Mappings
     {
         public GradesProfile()
         {
+
+            CreateMap<GradeInputDTO, GradesResponseDTO>();
             CreateMap<GradeInputDTO, Grades>();
-            CreateMap<Grades, GradesResponseDTO>();
         }
     }
 }

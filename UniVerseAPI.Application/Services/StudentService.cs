@@ -36,8 +36,9 @@ namespace UniVerseAPI.Application.Services
         private readonly IMapper _mapper;
         private readonly IClass _IClass;
         private readonly IGrades _IGrades;
+        private readonly ISubject _ISubject;
 
-        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity iAddressEntity, IPeople iPeople, IMapper mapper, IClass iClass, IGrades grades)
+        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity iAddressEntity, IPeople iPeople, IMapper mapper, IClass iClass, IGrades grades, ISubject subject)
         {
             _IStudent = iStudent;
             _ICourse = iCourse;
@@ -46,6 +47,7 @@ namespace UniVerseAPI.Application.Services
             _IPeople = iPeople;
             _mapper = mapper;
             _IGrades = grades;
+            _ISubject = subject;
         }
 
         public List<StudentResponseDTO> GetAllAsync()
@@ -167,7 +169,7 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    studentFound.DeleteAsync(true);
+                    studentFound.DeleteAsync();
                     await _IStudent.UpdateAsync(studentFound);
                     response.Update("*** Deleted successfully!", true);
                 }
@@ -293,6 +295,7 @@ namespace UniVerseAPI.Application.Services
             try
             {
                 Student? studentFound = await _IStudent.GetStudentDetailAsync(grade.StudentRegistration);
+                Subject? subjectFound = await _ISubject.GetSubjectDetailAsync(grade.SubjectCode);
                 GradesResponseDTO response = new();
 
                 if (studentFound == null)
@@ -303,8 +306,14 @@ namespace UniVerseAPI.Application.Services
                 else
                 {
                     Grades newGrade = _mapper.Map<Grades>(grade);
+                    newGrade.SubjectId = subjectFound.Id;
+                    newGrade.StudentId = studentFound.Id;
+
                     await _IGrades.CreateAsync(newGrade);
-                    response = _mapper.Map<GradesResponseDTO>(newGrade);
+                    response = _mapper.Map<GradesResponseDTO>(grade);
+
+                    response.Message = "*** Note registered successfully";
+                    response.Success = true;
                 }
 
                 return response;
