@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using UniVerseAPI.Application.DTOs.Request.Common;
 using UniVerseAPI.Application.IServices;
 
@@ -16,6 +17,7 @@ namespace UniVerseAPI.Controllers
         }
 
         [HttpPost("")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginInputDTO login)
         {
             //if(!ModelState.IsValid)
