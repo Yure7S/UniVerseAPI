@@ -11,6 +11,8 @@ using System.Text.Json.Serialization;
 using System.Text;
 using System.Configuration;
 using UniVerseAPI;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 var key = Encoding.ASCII.GetBytes(Settings.Secret);
@@ -27,8 +29,21 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); ;
 #region [Autentication]
 
 builder.Services.AddAuthentication(x =>
-    x.DefaultAuthenticateScheme = JwtBearerDefaults
-);
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true, // Valida se contém uma chave
+        IssuerSigningKey = new SymmetricSecurityKey(key), // Setando a chave de verificação do token
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
 
 #endregion
 
