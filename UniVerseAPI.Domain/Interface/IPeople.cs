@@ -10,5 +10,6 @@ namespace UniVerseAPI.Domain.Interface
 {
     public interface IPeople : IBaseInterface<People>
     {
+        public Task<People?> GetByEmailAndPassword(string email, string password);
     }
 }

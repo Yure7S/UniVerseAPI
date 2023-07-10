@@ -8,17 +8,31 @@ namespace UniVerseAPI.Controllers
     [ApiController]
     public class AuthenticationController : Controller
     {
-        //private readonly IClassService _IClassService;
+        private readonly IAuthenticationService _IAuthenticationService;
 
-        //public AuthenticationController(IClassService classInjection)
-        //{
-        //    _IClassService = classInjection;
-        //}
+        public AuthenticationController(IAuthenticationService autentication)
+        {
+            _IAuthenticationService = autentication;
+        }
 
         [HttpPost("")]
-        public IActionResult Login(LoginInputDTO login)
+        public async Task<IActionResult> Login(LoginInputDTO login)
         {
-            return Ok(login);
+            //if(!ModelState.IsValid)
+            //{
+            //    var response = await _IAuthenticationService.Login(login);
+
+            //    if (response.Success)
+            //        return Ok(response);
+            //    return BadRequest(response);
+            //}
+            //return StatusCode(500);
+
+            var response = await _IAuthenticationService.Login(login);
+
+            if (response.Success)
+                return Ok(response);
+            return BadRequest(response);
         }
     }
 }

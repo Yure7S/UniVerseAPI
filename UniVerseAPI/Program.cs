@@ -69,6 +69,7 @@ builder.Services.AddScoped<ISubjectService, SubjectService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ITeacherService, TeacherService>();
 builder.Services.AddScoped<IClassService, ClassService>();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 #endregion
 
