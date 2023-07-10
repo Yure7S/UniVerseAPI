@@ -114,6 +114,25 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.19": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.10.0"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
         "type": "package",
         "compile": {
@@ -1403,6 +1422,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.19",
           "Microsoft.EntityFrameworkCore": "7.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
           "Newtonsoft.Json": "13.0.3"
@@ -1552,6 +1572,21 @@
         "lib/netstandard2.0/MathNet.Numerics.xml",
         "mathnet.numerics.signed.4.15.0.nupkg.sha512",
         "mathnet.numerics.signed.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.19": {
+      "sha512": "gdSF/N7ETakCeVONpiqHivv1aUY8DYXn/9CAi9UJuauSeRK0l0AM7kG5gB+e2zkl4o9zxrS6oVfkWT4lYLxCZw==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/6.0.19",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll",
+        "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.xml",
+        "microsoft.aspnetcore.authentication.jwtbearer.6.0.19.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.jwtbearer.nuspec"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
@@ -4070,6 +4105,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
+      "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.19",
       "Microsoft.EntityFrameworkCore >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.5",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.5",
@@ -4080,23 +4116,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Servulo\\.nuget\\packages\\": {},
+    "C:\\Users\\Yure\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
+      "projectUniqueName": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
       "projectName": "UniVerseAPI.Infra.Data",
-      "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
-      "packagesPath": "C:\\Users\\Servulo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\obj\\",
+      "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
+      "packagesPath": "C:\\Users\\Yure\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Servulo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Yure\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4111,8 +4147,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
-              "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj"
+            "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
+              "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj"
             }
           }
         }
@@ -4130,6 +4166,10 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
             "version": "[12.0.1, )"
+          },
+          "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "target": "Package",
+            "version": "[6.0.19, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",

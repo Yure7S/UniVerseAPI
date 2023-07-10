@@ -11,6 +11,8 @@ using System.Text.Json.Serialization;
 using System.Text;
 using System.Configuration;
 using UniVerseAPI;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 var key = Encoding.ASCII.GetBytes(Settings.Secret);
@@ -24,7 +26,28 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 // AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); ;
 
-#region [Config Repository]
+#region [Autentication]
+
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true, // Valida se contém uma chave
+        IssuerSigningKey = new SymmetricSecurityKey(key), // Setando a chave de verificação do token
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+
+#endregion
+
+#region [Scope]
 
 // CRUD Base
 builder.Services.AddScoped(typeof(IBaseInterface<>), typeof(BaseRepository<>));
@@ -49,7 +72,7 @@ builder.Services.AddScoped<IClassService, ClassService>();
 
 #endregion
 
-#region [Config DbContext]
+#region [DbContext]
 
 builder.Services.AddDbContext<UniDBContext>(options =>
 {
@@ -73,6 +96,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
