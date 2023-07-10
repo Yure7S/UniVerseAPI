@@ -20,13 +20,14 @@ namespace UniVerseAPI.Application.Services.Utils
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, people.FullName),
+                    new Claim(ClaimTypes.Name, people.Cpf),
                     new Claim(ClaimTypes.Role, people.Email)
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(5),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key))
-                
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature) // Criptografia das informações
             };
+            var token = tokenHandler.CreateToken(tockenDrecriptor); // Criando o token se baseando no tockenDrecriptor
+            return tokenHandler.WriteToken(token); // Retornando a string do token
         }
     }
 }
