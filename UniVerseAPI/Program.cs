@@ -24,7 +24,15 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 // AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); ;
 
-#region [Config Repository]
+#region [Autentication]
+
+builder.Services.AddAuthentication(x =>
+    x.DefaultAuthenticateScheme = JwtBearerDefaults
+);
+
+#endregion
+
+#region [Scope]
 
 // CRUD Base
 builder.Services.AddScoped(typeof(IBaseInterface<>), typeof(BaseRepository<>));
@@ -49,7 +57,7 @@ builder.Services.AddScoped<IClassService, ClassService>();
 
 #endregion
 
-#region [Config DbContext]
+#region [DbContext]
 
 builder.Services.AddDbContext<UniDBContext>(options =>
 {
@@ -73,6 +81,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
