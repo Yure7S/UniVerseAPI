@@ -83,9 +83,17 @@ builder.Services.AddDbContext<UniDBContext>(options =>
 
 #endregion
 
+#region Swagger Authentication
+
+// https://dev.to/eduardstefanescu/aspnet-core-swagger-documentation-with-bearer-authentication-40l6
 builder.Services.AddSwaggerGen(option =>
 {
-    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
+    option.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "UniVerseAPI",
+        Description = "API in C# for academic systems, with resources for managing students, courses and professors. The API offers features such as enrollment, enrollment in courses and secure authentication.\r\n\r\n",
+    });
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -110,6 +118,8 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
+
+#endregion
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
