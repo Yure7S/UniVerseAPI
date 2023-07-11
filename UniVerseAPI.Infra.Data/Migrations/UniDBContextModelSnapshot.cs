@@ -92,9 +92,10 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .HasColumnType("BIT")
                         .HasDefaultValueSql("1");
 
-                    b.Property<int>("Code")
+                    b.Property<string>("Code")
+                        .IsRequired()
                         .IsUnicode(true)
-                        .HasColumnType("CHA(5)");
+                        .HasColumnType("CHAR(5)");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("DATETIME2");
@@ -282,7 +283,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.Property<string>("Gender")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(255)");
+                        .HasColumnType("VARCHAR(50)");
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("DATETIME2");
@@ -294,6 +295,10 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("CHAR(11)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(50)");
 
                     b.HasKey("Id");
 

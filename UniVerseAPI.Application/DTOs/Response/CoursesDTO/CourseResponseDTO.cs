@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UniVerseAPI.Application.DTOs.Response.BaseResponse;
+using UniVerseAPI.Domain.Enums;
 using UniVerseAPI.Domain.Interface;
 using UniVerseAPI.Infra.Data.Context;
 
@@ -19,7 +20,7 @@ namespace UniVerseAPI.Application.DTOs.Response.CoursesDTO
         public string? Instructor { get; set; }
         public int? Seats { get; set; }
         public int? SpotsAvailable { get; set; }
-        public string? Category { get; set; }
+        public CourseCategory? Category { get; set; }
         public string? Code { get; set; }
 
         public CourseResponseDTO(Course course)

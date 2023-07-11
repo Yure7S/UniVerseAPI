@@ -66,7 +66,7 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.ToTable("Class");
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.FullName).HasColumnType("VARCHAR(255)").IsRequired();
-                entity.Property(e => e.Code).HasColumnType("CHA(5)").IsUnicode(true).IsRequired();
+                entity.Property(e => e.Code).HasColumnType("CHAR(5)").IsUnicode(true).IsRequired();
                 entity.Property(e => e.Shift).HasColumnType("VARCHAR(50)").IsRequired();
                 entity.Property(e => e.Room).HasColumnType("VARCHAR(255)").IsRequired();
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
@@ -137,10 +137,11 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.FullName).HasColumnType("VARCHAR(255)").IsRequired();
                 entity.Property(e => e.BirthDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.Cpf).HasColumnType("CHAR(11)").IsUnicode(true).IsRequired();
-                entity.Property(e => e.Gender).HasColumnType("VARCHAR(255)").IsRequired();
                 entity.Property(e => e.Phone).HasColumnType("CHAR(11)").IsRequired();
                 entity.Property(e => e.Email).HasColumnType("VARCHAR(100)");
                 entity.Property(e => e.Password).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.Role).HasColumnType("VARCHAR(50)").IsRequired();
+                entity.Property(e => e.Gender).HasColumnType("VARCHAR(50)").IsRequired();
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();

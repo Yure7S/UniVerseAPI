@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using UniVerseAPI.Domain.Enums;
 using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 
 namespace UniVerseAPI.Infra.Data.Context
@@ -19,9 +20,9 @@ namespace UniVerseAPI.Infra.Data.Context
         public string Cpf { get; set; }
         public string Gender { get; set; }
         public string Phone { get; set; }
-
         public string Email { get; set; }
         public string Password { get; set; }
+        public Roles Role { get; set; }
 
         [ForeignKey("AddressId")]
         [InverseProperty("People")]

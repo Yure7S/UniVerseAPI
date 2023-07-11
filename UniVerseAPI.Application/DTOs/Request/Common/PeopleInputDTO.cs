@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using UniVerseAPI.Domain.Enums;
 using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 
 namespace UniVerseAPI.Infra.Data.Context
@@ -32,6 +33,8 @@ namespace UniVerseAPI.Infra.Data.Context
         [Required]
         [StringLength (500, MinimumLength = 8)]
         public string Password { get; set; }
+        [Required]
+        public Roles Role { get; set; }
     }
 
 

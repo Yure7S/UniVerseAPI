@@ -125,6 +125,7 @@ namespace UniVerseAPI.Application.Services
                     AddressEntity newAddress = _mapper.Map<AddressEntity>(student.Address);
                     People newPeople = _mapper.Map<People>(student.People);
                     Student newStudent = new();
+
                     newPeople.AddressId = newAddress.Id;
                     newStudent.PeopleId = newPeople.Id;
                     newStudent.CourseId = courseFound.Id;
