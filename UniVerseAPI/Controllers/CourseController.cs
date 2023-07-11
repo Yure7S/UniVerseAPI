@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NPOI.OpenXmlFormats.Dml;
 using System.Security.Cryptography.Xml;
@@ -22,7 +23,7 @@ namespace UniVerseAPI.Controllers
             _ICourseService = course;
         }
 
-
+        [Authorize]
         [HttpGet("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

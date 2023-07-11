@@ -466,3 +466,4 @@ C:\Users\SEDUC-SUDS\Desktop\UniVerseAPI\UniVerseAPI.Api.Test\obj\Debug\net6.0\Un
 C:\Users\SEDUC-SUDS\Desktop\UniVerseAPI\UniVerseAPI.Api.Test\obj\Debug\net6.0\ref\UniVerseAPI.Api.Test.dll
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
