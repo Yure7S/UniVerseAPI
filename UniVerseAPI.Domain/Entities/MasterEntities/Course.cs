@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
+using UniVerseAPI.Domain.Enums;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
@@ -20,7 +21,7 @@ namespace UniVerseAPI.Infra.Data.Context
         public int Seats { get; private set; }
         public int SpotsAvailable { get; private set; }
         public int Price { get; private set; }
-        public string Category { get; private set; }
+        public CourseCategory Category { get; private set; }
         public string Code { get; private set; }
 
         [InverseProperty("Course")]
