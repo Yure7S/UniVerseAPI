@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NPOI.OpenXmlFormats.Dml;
 using System.Security.Cryptography.Xml;
@@ -13,6 +14,7 @@ namespace UniVerseAPI.Controllers
 {
     [Route("subject")]
     [ApiController]
+    [Authorize(Roles = "Director, Administrator")]
     public class SubjectController : ControllerBase
     {
         private readonly ISubjectService _ISubjectService;

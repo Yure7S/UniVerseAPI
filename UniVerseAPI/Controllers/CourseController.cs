@@ -14,6 +14,7 @@ namespace UniVerseAPI.Controllers
 {
     [Route("courses")]
     [ApiController]
+    [Authorize(Roles = "Teacher, Director, Administrator")]
     public class CourseController : ControllerBase
     {
         private readonly ICourseService _ICourseService;
@@ -70,6 +71,7 @@ namespace UniVerseAPI.Controllers
         }
 
         [HttpPost("add")]
+        [Authorize(Roles = "Director, Administrator")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateAsyncCourse(CourseInputDTO course)
@@ -86,6 +88,7 @@ namespace UniVerseAPI.Controllers
         }
 
         [HttpPut("modify/{code}")]
+        [Authorize(Roles = "Director, Administrator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateAsyncCourse(CourseInputDTO course, string code)
@@ -102,6 +105,7 @@ namespace UniVerseAPI.Controllers
         }
 
         [HttpDelete("delet/{code}")]
+        [Authorize(Roles = "Director, Administrator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteAsyncCourse(string code)

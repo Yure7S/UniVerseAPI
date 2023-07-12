@@ -13,9 +13,6 @@ namespace UniVerseAPI.Application.DTOs.Request.Common
     public class LoginResponseDTO : BaseResponseDTO
     {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? Email { get; set; }
-
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Token { get; set; }
 
         public LoginResponseDTO()

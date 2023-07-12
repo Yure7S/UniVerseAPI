@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO;
 using UniVerseAPI.Application.DTOs.Request.MasterInputsDTO;
 using UniVerseAPI.Application.IServices;
@@ -7,6 +8,7 @@ namespace UniVerseAPI.Controllers
 {
     [Route("class")]
     [ApiController]
+    [Authorize(Roles = "Director, Administrator")]
     public class ClassController : ControllerBase
     {
 
@@ -66,7 +68,7 @@ namespace UniVerseAPI.Controllers
         [HttpPost("add")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateAsyncCourse(ClassInputDTO classInput)
+        public async Task<IActionResult> CreateAsyncClass(ClassInputDTO classInput)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +84,7 @@ namespace UniVerseAPI.Controllers
         [HttpPut("modify/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateAsyncCourse(ClassInputDTO classInput, Guid id)
+        public async Task<IActionResult> UpdateAsyncClass(ClassInputDTO classInput, Guid id)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +100,7 @@ namespace UniVerseAPI.Controllers
         [HttpDelete("delet/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteAsyncCourse(Guid id)
+        public async Task<IActionResult> DeleteAsyncClass(Guid id)
         {
             if (ModelState.IsValid)
             {

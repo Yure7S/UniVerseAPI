@@ -12,7 +12,7 @@ namespace UniVerseAPI.Application.Services.Utils
 {
     public static class TokenService
     {
-        public static string GeneratedToken(People people)
+        public static string GeneratedToken(UserTokenDTO user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
@@ -20,8 +20,8 @@ namespace UniVerseAPI.Application.Services.Utils
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, people.Cpf),
-                    new Claim(ClaimTypes.Role, people.Email)
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.Role, user.Role)
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(5),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature) // Criptografia das informações

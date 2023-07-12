@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UniVerseAPI.Application.IServices;
 using UniVerseAPI.Infra.Data.Context;
@@ -7,6 +8,7 @@ namespace UniVerseAPI.Controllers
 {
     [Route("Teacher")]
     [ApiController]
+    [Authorize(Roles = "Director, Administrator")]
     public class TeacherController : ControllerBase
     {
         public readonly ITeacherService _ITeacherService;
@@ -46,6 +48,7 @@ namespace UniVerseAPI.Controllers
         }
 
         [HttpPost("add")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult CreateTeacher(TeacherInputDTO teacher)

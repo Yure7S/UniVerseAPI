@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
@@ -23,27 +24,51 @@ namespace UniVerseAPI.Application.Services
     {
 
         private readonly IPeople _people;
-        public AuthenticationService(IPeople people) 
+        private readonly IConfiguration _Configuration;
+
+        public AuthenticationService(IPeople people, IConfiguration configuration) 
         {
             _people = people;
+            _Configuration = configuration;
         }
 
         public async Task<LoginResponseDTO> Login(LoginInputDTO login)
         {
             try
             {
-                People? people = await _people.GetByEmailAndPassword(email: login.Email!, password: login.Password!);
                 LoginResponseDTO response = new();
+                People? peopleFound = await _people.GetByEmailAndPassword(email: login.Email!, password: login.Password!);
 
-                if(people == null)
+                string userMaster = _Configuration["Administrator:Username"]!;
+                string passwordMaster = _Configuration["Administrator:Password"]!;
+                string roleMaster = _Configuration["Administrator:Role"]!;
+
+                if (userMaster == login.Email && passwordMaster == login.Password)
+                {
+                    UserTokenDTO user = new()
+                    {
+                        Username = "SuperUser",
+                        Role = roleMaster
+                    };
+
+                    string token = TokenService.GeneratedToken(user);
+                    response.Token = token;
+                    response.Success = true;
+                }
+                else if (peopleFound == null)
                 {
                     response.Message = "*** *** Invalid email or password";
                     response.Success = false;
                 }
                 else
                 {
-                    string token = TokenService.GeneratedToken(people);
-                    response.Email = people.Email;
+                    UserTokenDTO user = new()
+                    {
+                        Username = peopleFound.Cpf,
+                        Role = peopleFound.Role.ToString()
+                    };
+
+                    string token = TokenService.GeneratedToken(user);
                     response.Token = token;
                     response.Success = true;
                 }
