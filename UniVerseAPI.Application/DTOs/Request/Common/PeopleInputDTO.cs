@@ -33,8 +33,6 @@ namespace UniVerseAPI.Infra.Data.Context
         [Required]
         [StringLength (500, MinimumLength = 8)]
         public string Password { get; set; }
-        [Required]
-        public Roles Role { get; set; }
     }
 
 

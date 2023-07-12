@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UniVerseAPI.Domain.Enums;
 
 namespace UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO
 {
@@ -28,8 +29,7 @@ namespace UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO
         public int SpotsAvailable { get; set; }
         public int Price { get; set; }
         [Required]
-        [StringLength(255)]
-        public string? Category { get; set; }
+        public CourseCategory Category { get; set; }
         [Required]
         [StringLength(10, MinimumLength = 10)]
         public string? Code { get; set; }

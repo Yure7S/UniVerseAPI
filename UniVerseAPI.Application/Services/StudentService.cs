@@ -22,6 +22,7 @@ using UniVerseAPI.Application.DTOs.Response.StudentsDTO;
 using UniVerseAPI.Application.DTOs.Response.SubjectDTO;
 using UniVerseAPI.Application.Interface;
 using UniVerseAPI.Application.IServices;
+using UniVerseAPI.Domain.Enums;
 using UniVerseAPI.Domain.Interface;
 using UniVerseAPI.Infra.Data.Context;
 
@@ -127,6 +128,7 @@ namespace UniVerseAPI.Application.Services
                     Student newStudent = new();
 
                     newPeople.AddressId = newAddress.Id;
+                    newPeople.Role = Roles.Student;
                     newStudent.PeopleId = newPeople.Id;
                     newStudent.CourseId = courseFound.Id;
                     newStudent.Registration = code;

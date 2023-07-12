@@ -18,13 +18,9 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 var key = Encoding.ASCII.GetBytes(Settings.Secret);
 
-// Add services to the container.
-
-// Configuration to fix circular references
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
-// AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); ;
 
 #region [Autentication]

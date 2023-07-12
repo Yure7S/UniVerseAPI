@@ -17,6 +17,7 @@ using UniVerseAPI.Application.DTOs.Response.BaseResponse;
 using UniVerseAPI.Application.DTOs.Response.TeachersDTO;
 using UniVerseAPI.Application.Interface;
 using UniVerseAPI.Application.IServices;
+using UniVerseAPI.Domain.Enums;
 using UniVerseAPI.Domain.Interface;
 using UniVerseAPI.Infra.Data.Context;
 
@@ -99,6 +100,7 @@ namespace UniVerseAPI.Application.Services
                 Teacher newTeacher = new() { Code = teacher.Code };
 
                 newPeople.AddressId = newAddress.Id;
+                newPeople.Role = Roles.Teacher;
                 newTeacher.PeopleId = newPeople.Id;
 
                 SaveTeacher(newAddress, newPeople, newTeacher);
@@ -121,7 +123,6 @@ namespace UniVerseAPI.Application.Services
                 return response;
             }
         }
-
 
         public async Task<BaseResponseDTO> DeleteAsync(string code)
         {
