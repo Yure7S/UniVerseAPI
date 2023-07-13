@@ -37,8 +37,6 @@ namespace UniVerseAPI.Application.Services
             try
             {
                 LoginResponseDTO response = new();
-                People? peopleFound = await _people.GetByEmailAndPassword(email: login.Email!, password: login.Password!);
-
                 string userMaster = _Configuration["Administrator:Username"]!;
                 string passwordMaster = _Configuration["Administrator:Password"]!;
                 string roleMaster = _Configuration["Administrator:Role"]!;
@@ -54,8 +52,12 @@ namespace UniVerseAPI.Application.Services
                     string token = TokenService.GeneratedToken(user);
                     response.Token = token;
                     response.Success = true;
+
+                    return response;
                 }
-                else if (peopleFound == null)
+                People? peopleFound = await _people.GetByEmailAndPassword(email: login.Email!, password: login.Password!);
+
+                if (peopleFound == null)
                 {
                     response.Message = "*** *** Invalid email or password";
                     response.Success = false;

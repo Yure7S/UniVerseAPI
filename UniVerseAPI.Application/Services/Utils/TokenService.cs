@@ -29,5 +29,10 @@ namespace UniVerseAPI.Application.Services.Utils
             var token = tokenHandler.CreateToken(tockenDrecriptor); // Criando o token se baseando no tockenDrecriptor
             return tokenHandler.WriteToken(token); // Retornando a string do token
         }
+
+        public static string GenerateRefreshToken()
+        {
+            return "Em desenvolvimento";
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
 using UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO;
 using UniVerseAPI.Application.Interface;
 using UniVerseAPI.Application.IServices;
@@ -171,11 +172,10 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = "TO-DO";
-                return Ok(response);
-                //if (response.Success)
-                //    return Ok(response);
-                //return BadRequest(response);
+                byte[] resp = new byte[32];
+                var random = RandomNumberGenerator.Create();
+                random.GetBytes(resp);
+                return Ok(Convert.ToBase64String(resp));
             }
             return StatusCode(500);
         }
