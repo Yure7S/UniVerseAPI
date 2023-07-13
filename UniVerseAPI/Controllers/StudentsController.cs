@@ -172,10 +172,7 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                byte[] resp = new byte[32];
-                var random = RandomNumberGenerator.Create();
-                random.GetBytes(resp);
-                return Ok(Convert.ToBase64String(resp));
+                return Ok("TO-DO");
             }
             return StatusCode(500);
         }

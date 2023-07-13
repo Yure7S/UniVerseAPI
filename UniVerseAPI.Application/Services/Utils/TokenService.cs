@@ -1,6 +1,8 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Azure.Core;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -14,9 +16,9 @@ namespace UniVerseAPI.Application.Services.Utils
     {
         public static string GeneratedToken(UserTokenDTO user)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(Settings.Secret);
-            var tockenDrecriptor = new SecurityTokenDescriptor
+            JwtSecurityTokenHandler tokenHandler = new();
+            byte[] key = Encoding.ASCII.GetBytes(Settings.Secret);
+            SecurityTokenDescriptor tockenDrecriptor = new()
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
@@ -33,6 +35,20 @@ namespace UniVerseAPI.Application.Services.Utils
         public static string GenerateRefreshToken()
         {
             return "Em desenvolvimento";
+        }
+
+        public static string GetClaimsFromExpiredToken(string token)
+        {
+            TokenValidationParameters tokenValidationParameters = new()
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false, 
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Settings.Secret)),
+                ValidateLifetime = false
+            };
+
+            JwtSecurityTokenHandler tokenHandler = new();
         }
     }
 }
