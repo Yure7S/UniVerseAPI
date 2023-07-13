@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
 using UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO;
 using UniVerseAPI.Application.Interface;
 using UniVerseAPI.Application.IServices;
@@ -171,11 +172,7 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = "TO-DO";
-                return Ok(response);
-                //if (response.Success)
-                //    return Ok(response);
-                //return BadRequest(response);
+                return Ok("TO-DO");
             }
             return StatusCode(500);
         }

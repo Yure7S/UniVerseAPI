@@ -127,8 +127,8 @@ namespace UniVerseAPI.Application.Services
                     People newPeople = _mapper.Map<People>(student.People);
                     Student newStudent = new();
 
-                    newPeople.AddressId = newAddress.Id;
                     newPeople.Role = Roles.Student;
+                    newPeople.AddressId = newAddress.Id;
                     newStudent.PeopleId = newPeople.Id;
                     newStudent.CourseId = courseFound.Id;
                     newStudent.Registration = code;
