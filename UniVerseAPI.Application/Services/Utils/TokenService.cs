@@ -1,4 +1,6 @@
 ﻿using Azure.Core;
+using Microsoft.EntityFrameworkCore.Scaffolding;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -8,16 +10,24 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using UniVerseAPI.Application.IServices;
 using UniVerseAPI.Infra.Data.Context;
 
 namespace UniVerseAPI.Application.Services.Utils
 {
-    public static class TokenService
+    public class TokenService : ITokenService
     {
-        public static string GeneratedToken(UserTokenDTO user)
+
+        public readonly IConfiguration _IConfiguration;
+
+        public TokenService(IConfiguration configuration)
+        {
+            _IConfiguration = configuration;
+        }
+        public string GenerateToken(UserTokenDTO user)
         {
             JwtSecurityTokenHandler tokenHandler = new();
-            byte[] key = Encoding.ASCII.GetBytes(Settings.Secret);
+            byte[] key = Encoding.ASCII.GetBytes(_IConfiguration["JwtProperties:key"]!);
             SecurityTokenDescriptor tockenDrecriptor = new()
             {
                 Subject = new ClaimsIdentity(new Claim[]
@@ -25,30 +35,41 @@ namespace UniVerseAPI.Application.Services.Utils
                     new Claim(ClaimTypes.Name, user.Username),
                     new Claim(ClaimTypes.Role, user.Role)
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(5),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature) // Criptografia das informações
+                Expires = DateTime.UtcNow.AddMinutes(Convert.ToInt16(_IConfiguration["JwtProperties:AccessTokenValidity"]!)),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
-            var token = tokenHandler.CreateToken(tockenDrecriptor); // Criando o token se baseando no tockenDrecriptor
-            return tokenHandler.WriteToken(token); // Retornando a string do token
+            var token = tokenHandler.CreateToken(tockenDrecriptor); 
+            return tokenHandler.WriteToken(token);
         }
 
-        public static string GenerateRefreshToken()
+        public string GenerateRefreshToken()
         {
             return "Em desenvolvimento";
         }
-
-        public static string GetClaimsFromExpiredToken(string token)
+        
+        public ClaimsPrincipalDTO GetClaimsFromExpiredToken(string token)
         {
             TokenValidationParameters tokenValidationParameters = new()
             {
                 ValidateIssuer = false,
                 ValidateAudience = false, 
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Settings.Secret)),
-                ValidateLifetime = false
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_IConfiguration["JwtProperties:key"]!)),
             };
 
             JwtSecurityTokenHandler tokenHandler = new();
+            ClaimsPrincipal principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
+
+            if (securityToken is not JwtSecurityToken jwtSecurityToken ||
+                !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
+                StringComparison.InvariantCultureIgnoreCase))
+                return new ClaimsPrincipalDTO
+                {
+                    Message = "Invalid token",
+                    Success = false
+                };
+
+            return new ClaimsPrincipalDTO { Claims = principal };
         }
     }
 }
