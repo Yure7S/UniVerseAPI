@@ -17,7 +17,7 @@ namespace UniVerseAPI.Application.DTOs.Response.StudentsDTO
         {
             Registration = student.Registration;
             FullName = student.People.FullName;
-            Email = student.People.Email;
+            Email = student.People.User.Email;
         }
 
     }

@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using UniVerseAPI.Application.IServices;
@@ -44,7 +46,10 @@ namespace UniVerseAPI.Application.Services.Utils
 
         public string GenerateRefreshToken()
         {
-            return "Em desenvolvimento";
+            byte[] code = new byte[32];
+            var randon = RandomNumberGenerator.Create();
+            randon.GetBytes(code);
+            return Convert.ToBase64String(code);
         }
         
         public ClaimsPrincipalDTO GetClaimsFromExpiredToken(string token)

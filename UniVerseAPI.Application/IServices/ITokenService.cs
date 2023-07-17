@@ -18,6 +18,6 @@ namespace UniVerseAPI.Application.IServices
     {
         public string GenerateToken(UserTokenDTO token);
         public string GenerateRefreshToken();
-        public ClaimsPrincipal GetClaimsFromExpiredToken(string token);
+        public ClaimsPrincipalDTO GetClaimsFromExpiredToken(string token);
     }
 }

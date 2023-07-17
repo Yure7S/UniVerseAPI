@@ -26,7 +26,7 @@ namespace UniVerseAPI.Application.DTOs.Response.TeachersDTO
         {
             FullName = teacher.People.FullName;
             Code = teacher.Code;
-            Email = teacher.People.Email;
+            Email = teacher.People.User.Email;
         }
     }
 }

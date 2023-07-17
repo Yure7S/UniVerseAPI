@@ -14,6 +14,7 @@ using UniVerseAPI;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using UniVerseAPI.Application.Services.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtProperties:key"]);
@@ -58,7 +59,9 @@ builder.Services.AddScoped<ITeacher, TeacherRepository>();
 builder.Services.AddScoped<IAddressEntity, AddressEntityRepository>();
 builder.Services.AddScoped<IClass, ClassRepository>();
 builder.Services.AddScoped<IGrades, GradesRepository>();
+builder.Services.AddScoped<IUser, UserRepository>();
 builder.Services.AddScoped<IGroupStudentClass, GroupStudentClassRepository>();
+builder.Services.AddScoped<IRoles, RoleRepository>();
 
 // Services
 builder.Services.AddScoped<ICourseService, CourseService>();
@@ -67,6 +70,7 @@ builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ITeacherService, TeacherService>();
 builder.Services.AddScoped<IClassService, ClassService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 #endregion
 

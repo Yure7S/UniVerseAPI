@@ -28,14 +28,16 @@ namespace UniVerseAPI.Application.Services
         private readonly ITeacher _teacher;
         private readonly IAddressEntity _addressEntity;
         private readonly IPeople _people;
+        private readonly IUser _user;
         private readonly IMapper _mapper;
 
-        public TeacherService(ITeacher teacher, IAddressEntity addressEntity, IPeople people, IMapper mapper)
+        public TeacherService(ITeacher teacher, IAddressEntity addressEntity, IPeople people, IMapper mapper, IUser user)
         {
             _teacher = teacher;
             _addressEntity = addressEntity;
             _people = people;
             _mapper = mapper;
+            _user = user;
         }
 
         public List<TeacherResponseDTO> GetAllAsync()
@@ -100,7 +102,7 @@ namespace UniVerseAPI.Application.Services
                 Teacher newTeacher = new() { Code = teacher.Code };
 
                 newPeople.AddressId = newAddress.Id;
-                newPeople.Role = Roles.Teacher;
+                // newPeople.Role = Roles.Teacher;
                 newTeacher.PeopleId = newPeople.Id;
 
                 SaveTeacher(newAddress, newPeople, newTeacher);
