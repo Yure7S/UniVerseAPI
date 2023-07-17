@@ -72,7 +72,7 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    AddressResponseDTO addressResponse = _mapper.Map<AddressResponseDTO>(studentFound.People.AddressEntity);
+                    ClaimsPrincipalDTO addressResponse = _mapper.Map<ClaimsPrincipalDTO>(studentFound.People.AddressEntity);
                     PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(studentFound.People);
 
                     response.Registration = registration;
@@ -133,7 +133,7 @@ namespace UniVerseAPI.Application.Services
                     newStudent.CourseId = courseFound.Id;
                     newStudent.Registration = code;
 
-                    AddressResponseDTO addressResponse = _mapper.Map<AddressResponseDTO>(newAddress);
+                    ClaimsPrincipalDTO addressResponse = _mapper.Map<ClaimsPrincipalDTO>(newAddress);
                     PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(newPeople);
                     peopleResponse.AddressEntity = addressResponse;
 

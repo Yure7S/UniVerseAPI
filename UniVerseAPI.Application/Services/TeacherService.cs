@@ -61,7 +61,7 @@ namespace UniVerseAPI.Application.Services
                 {
                     response.Update("Found successfully!", true);
 
-                    AddressResponseDTO addressResponse = _mapper.Map<AddressResponseDTO>(teacherFound);
+                    ClaimsPrincipalDTO addressResponse = _mapper.Map<ClaimsPrincipalDTO>(teacherFound);
                     PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(teacherFound.People);
                     response = _mapper.Map<TeacherResponseDetailsDTO>(teacherFound);
                     response.People = peopleResponse;
