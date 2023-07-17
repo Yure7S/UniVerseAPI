@@ -24,15 +24,17 @@ namespace UniVerseAPI.Application.Services
     {
 
         private readonly IPeople _people;
+        private readonly ITokenService _tokenService;
         private readonly IConfiguration _Configuration;
 
-        public AuthenticationService(IPeople people, IConfiguration configuration) 
+        public AuthenticationService(IPeople people, IConfiguration configuration, ITokenService tokenService) 
         {
             _people = people;
             _Configuration = configuration;
+            _tokenService = tokenService;
         }
 
-        public async Task<LoginResponseDTO> Login(LoginInputDTO login)
+        public async Task<LoginResponseDTO> Login(LoginOrUserInputDTO login)
         {
             try
             {
@@ -49,7 +51,7 @@ namespace UniVerseAPI.Application.Services
                         Role = roleMaster
                     };
 
-                    string token = TokenService.GeneratedToken(user);
+                    string token = _tokenService.GenerateToken(user);
                     response.Token = token;
                     response.Success = true;
 
@@ -67,10 +69,10 @@ namespace UniVerseAPI.Application.Services
                     UserTokenDTO user = new()
                     {
                         Username = peopleFound.Cpf,
-                        Role = peopleFound.Role.ToString()
+                        Role = peopleFound.User.Roles.ToString()
                     };
 
-                    string token = TokenService.GeneratedToken(user);
+                    string token = _tokenService.GenerateToken(user);
                     response.Token = token;
                     response.Success = true;
                 }

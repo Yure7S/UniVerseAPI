@@ -16,6 +16,6 @@ namespace UniVerseAPI.Application.IServices
 {
     public interface IAuthenticationService
     {
-        public Task<LoginResponseDTO> Login(LoginInputDTO login);
+        public Task<LoginResponseDTO> Login(LoginOrUserInputDTO login);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Azure;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -37,18 +37,32 @@ namespace UniVerseAPI.Application.Services
         private readonly IMapper _mapper;
         private readonly IClass _IClass;
         private readonly IGrades _IGrades;
+        private readonly IUser _IUser;
         private readonly ISubject _ISubject;
+        private readonly IRoles _IRoles;
 
-        public StudentService(IStudent iStudent, ICourse iCourse, IAddressEntity iAddressEntity, IPeople iPeople, IMapper mapper, IClass iClass, IGrades grades, ISubject subject)
+        public StudentService(
+            IStudent iStudent, 
+            ICourse iCourse,
+            IAddressEntity iAddressEntity, 
+            IPeople iPeople,
+            IMapper mapper,
+            IClass iClass, 
+            IGrades grades,
+            ISubject subject, 
+            IUser user,
+            IRoles roles)
         {
             _IStudent = iStudent;
             _ICourse = iCourse;
             _IClass = iClass;
             _IAddressEntity = iAddressEntity;
             _IPeople = iPeople;
-            _mapper = mapper;
             _IGrades = grades;
             _ISubject = subject;
+            _IUser = user;
+            _mapper = mapper;
+            _IRoles = roles;
         }
 
         public List<StudentResponseDTO> GetAllAsync()
@@ -95,18 +109,19 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public void SaveStudent(AddressEntity newAddress, People newPeople, Student newStudent)
+        public void SaveStudent(AddressEntity newAddress, People newPeople, Student newStudent, User user)
         {
             _IAddressEntity.CreateAsync(newAddress);
             _IPeople.CreateAsync(newPeople);
             _IStudent.CreateAsync(newStudent);
+            _IUser.CreateAsync(user);
         } 
 
         public async Task<StudentResponseDetailsDTO> CreateAsync(StudentInputDTO student)
         {
             try
             {
-                Student? studentFoundEmail = await _IStudent.GetStudentByEmailAsync(student.People.Email);
+                Student? studentFoundEmail = await _IStudent.GetStudentByEmailAsync(student.User.Email!);
                 Course? courseFound = await _ICourse.GetByCodeAsync(student.CourseCode);
                 StudentResponseDetailsDTO response = new();
 
@@ -115,7 +130,7 @@ namespace UniVerseAPI.Application.Services
                     response.Message = "*** We couldn't find any courses with the given code!";
                     response.Success = false;
                 }
-                else if (studentFoundEmail?.People.Email != null)
+                else if (studentFoundEmail?.People.User.Email != null)
                 {
                     response.Message = "*** This email has already been registered!";
                     response.Success = false;
@@ -123,21 +138,26 @@ namespace UniVerseAPI.Application.Services
                 else
                 {
                     string code = DateTime.Now.Year + courseFound!.FullName[..3].ToUpper() + new Random().Next(100, 999);
+
+                    Roles? roleFound = await _IRoles.GetRoleByRoleValue(RolesEnum.Student);
+
                     AddressEntity newAddress = _mapper.Map<AddressEntity>(student.Address);
                     People newPeople = _mapper.Map<People>(student.People);
+                    User newUser = _mapper.Map<User>(student.User);
                     Student newStudent = new();
 
-                    newPeople.Role = Roles.Student;
                     newPeople.AddressId = newAddress.Id;
+                    newPeople.UserId = newUser.Id;
+                    newUser.RoleId = roleFound!.Id;
                     newStudent.PeopleId = newPeople.Id;
                     newStudent.CourseId = courseFound.Id;
                     newStudent.Registration = code;
 
-                    ClaimsPrincipalDTO addressResponse = _mapper.Map<ClaimsPrincipalDTO>(newAddress);
+                    AddresResponseDTO addressResponse = _mapper.Map<AddresResponseDTO>(newAddress);
                     PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(newPeople);
                     peopleResponse.AddressEntity = addressResponse;
 
-                    SaveStudent(newAddress, newPeople, newStudent);
+                    SaveStudent(newAddress, newPeople, newStudent, newUser);
 
                     response.Registration = code;
                     response.People = peopleResponse;

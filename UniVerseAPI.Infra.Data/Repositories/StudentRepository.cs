@@ -37,7 +37,8 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
         {
             return await _db.Student
                 .Include(s => s.People)
-                .FirstOrDefaultAsync(p => p.People.Email == email);
+                .ThenInclude(s => s.User)
+                .FirstOrDefaultAsync(p => p.People.User.Email == email);
         }
     }
 }

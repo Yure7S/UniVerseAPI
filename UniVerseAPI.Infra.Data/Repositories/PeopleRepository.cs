@@ -20,7 +20,9 @@ namespace UniVerseAPI.Infra.Data.Repositories
 
         public async Task<People?> GetByEmailAndPassword(string email, string password)
         {
-            return await _db.People.FirstOrDefaultAsync(p => p.Email == email && p.Password == password);
+            return await _db.People
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(p => p.User.Email == email && p.User.Password == password);
         }
     }
 }

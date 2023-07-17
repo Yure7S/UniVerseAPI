@@ -24,6 +24,8 @@ namespace UniVerseAPI.Infra.Data.Context
         public virtual DbSet<Course> Course { get; set; }
         public virtual DbSet<Grades> Grades { get; set; }
         public virtual DbSet<People> People { get; set; }
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<Subject> Subject { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }
@@ -129,8 +131,14 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.HasOne(d => d.AddressEntity)
                     .WithMany(p => p.People)
                     .HasForeignKey(d => d.AddressId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.ClientCascade)
                     .HasConstraintName("People_fk0");
+
+                entity.HasOne(p => p.User)
+                    .WithOne(p => p.People)
+                    .HasForeignKey<People>(p => p.UserId)
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .HasConstraintName("People_fk1");
 
                 entity.ToTable("People");
                 entity.HasKey(e => e.Id);
@@ -138,15 +146,44 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.BirthDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.Cpf).HasColumnType("CHAR(11)").IsUnicode(true).IsRequired();
                 entity.Property(e => e.Phone).HasColumnType("CHAR(11)").IsRequired();
-                entity.Property(e => e.Email).HasColumnType("VARCHAR(100)");
-                entity.Property(e => e.Password).HasColumnType("VARCHAR(255)").IsRequired();
-                entity.Property(e => e.Role).HasColumnType("VARCHAR(50)").IsRequired();
                 entity.Property(e => e.Gender).HasColumnType("VARCHAR(50)").IsRequired();
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
                 entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
 
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasOne(d => d.Roles)
+                    .WithMany(p => p.User)
+                    .HasForeignKey(d => d.RoleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("User_fk0");
+
+                entity.ToTable("User");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Email).HasColumnType("VARCHAR(100)").IsRequired();
+                entity.Property(e => e.Password).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.RefreshToken).HasColumnType("CHAR(64)");
+                entity.Property(e => e.RefreshTokenValidity).HasColumnType("DATETIME2");
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
+                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
+            });
+
+            modelBuilder.Entity<Roles>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.ToTable("Roles");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.RoleValue).HasColumnType("VARCHAR(150)").IsRequired();
+                entity.Property(e => e.Description).HasColumnType("VARCHAR(255)").IsRequired();
             });
 
             modelBuilder.Entity<Student>(entity =>

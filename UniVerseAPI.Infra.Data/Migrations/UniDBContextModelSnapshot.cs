@@ -274,9 +274,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .HasColumnType("BIT")
                         .HasDefaultValueSql("0");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("VARCHAR(100)");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("VARCHAR(255)");
@@ -288,23 +285,39 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("DATETIME2");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(255)");
-
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("CHAR(11)");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(50)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
                     b.ToTable("People", (string)null);
+                });
+
+            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Roles", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(255)");
+
+                    b.Property<string>("RoleValue")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Student", b =>
@@ -454,6 +467,53 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.ToTable("Teacher", (string)null);
                 });
 
+            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool?>("Active")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("1");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("DATETIME2");
+
+                    b.Property<bool?>("Deleted")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasDefaultValueSql("0");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(100)");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("DATETIME2");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(255)");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("CHAR(64)");
+
+                    b.Property<DateTime>("RefreshTokenValidity")
+                        .HasColumnType("DATETIME2");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("User", (string)null);
+                });
+
             modelBuilder.Entity("ClassStudent", b =>
                 {
                     b.HasOne("UniVerseAPI.Infra.Data.Context.Class", null)
@@ -495,10 +555,20 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.HasOne("UniVerseAPI.Infra.Data.Context.AddressEntity", "AddressEntity")
                         .WithMany("People")
                         .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired()
                         .HasConstraintName("People_fk0");
 
+                    b.HasOne("UniVerseAPI.Infra.Data.Context.User", "User")
+                        .WithOne("People")
+                        .HasForeignKey("UniVerseAPI.Infra.Data.Context.People", "UserId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired()
+                        .HasConstraintName("People_fk1");
+
                     b.Navigation("AddressEntity");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Student", b =>
@@ -557,6 +627,17 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Navigation("People");
                 });
 
+            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.User", b =>
+                {
+                    b.HasOne("UniVerseAPI.Infra.Data.Context.Roles", "Roles")
+                        .WithMany("User")
+                        .HasForeignKey("RoleId")
+                        .IsRequired()
+                        .HasConstraintName("User_fk0");
+
+                    b.Navigation("Roles");
+                });
+
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.AddressEntity", b =>
                 {
                     b.Navigation("People");
@@ -581,6 +662,11 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Navigation("Teacher");
                 });
 
+            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Roles", b =>
+                {
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Student", b =>
                 {
                     b.Navigation("Grades");
@@ -594,6 +680,11 @@ namespace UniVerseAPI.Infra.Data.Migrations
             modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.Teacher", b =>
                 {
                     b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("UniVerseAPI.Infra.Data.Context.User", b =>
+                {
+                    b.Navigation("People");
                 });
 #pragma warning restore 612, 618
         }

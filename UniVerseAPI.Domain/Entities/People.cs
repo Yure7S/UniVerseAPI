@@ -15,18 +15,20 @@ namespace UniVerseAPI.Infra.Data.Context
         [Key]
         public Guid Id { get; set; }
         public Guid AddressId { get; set; }
+        public Guid UserId { get; set; }
         public string FullName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Cpf { get; set; }
         public string Gender { get; set; }
         public string Phone { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public Roles Role { get; set; }
 
         [ForeignKey("AddressId")]
         [InverseProperty("People")]
         public virtual AddressEntity AddressEntity { get; set; }
+
+        [ForeignKey("UserId")]
+        [InverseProperty("People")]
+        public virtual User User { get; set; }
 
         [InverseProperty("People")]
         public virtual ICollection<Student> Student { get; set; }

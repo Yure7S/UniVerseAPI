@@ -19,7 +19,7 @@ namespace UniVerseAPI.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> Login(LoginInputDTO login)
+        public async Task<IActionResult> Login(LoginOrUserInputDTO login)
         {
             if (ModelState.IsValid)
             {

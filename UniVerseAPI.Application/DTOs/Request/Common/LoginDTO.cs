@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace UniVerseAPI.Application.DTOs.Request.Common
 {
-    public class LoginInputDTO
+    public class LoginOrUserInputDTO
     {
         [Required(ErrorMessage = "*** Email is required")]
         [EmailAddress]

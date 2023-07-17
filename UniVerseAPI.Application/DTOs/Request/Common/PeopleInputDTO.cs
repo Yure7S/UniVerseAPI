@@ -27,12 +27,6 @@ namespace UniVerseAPI.Infra.Data.Context
         [Required]
         [StringLength(11, MinimumLength = 11)]
         public string Phone { get; set; }
-        [Required]
-        [StringLength(255)]
-        public string Email { get; set; }
-        [Required]
-        [StringLength (500, MinimumLength = 8)]
-        public string Password { get; set; }
     }
 
 
