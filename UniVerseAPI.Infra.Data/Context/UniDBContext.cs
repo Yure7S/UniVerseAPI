@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 using NPOI.SS.Formula.Functions;
+using UniVerseAPI.Infra.Data.Context;
 using UniVerseAPI.Infra.Data.Repositories;
 
 namespace UniVerseAPI.Infra.Data.Context
@@ -271,3 +272,32 @@ namespace UniVerseAPI.Infra.Data.Context
 
     }
 }
+
+// SQL Scripts
+
+// Admin:
+/*
+ * 
+     INSERT INTO[User] (
+          [Id],
+          [RoleId]
+          ,[Email]
+          ,[Password]
+          ,[RefreshTokenValidity]
+          ,[Deleted]
+          ,[Active]
+          ,[CreationDate]
+          ,[LastUpdate])
+    VALUES(
+        NEWID(),
+        '650d51f7-f5fc-4eaa-8455-25b4644dec76',
+        'administrator@gmail.com',
+        '87654321',
+        '0001-01-01 00:00:00.0000000',
+        '0',
+        '1',
+        GETDATE(),
+        GETDATE()
+    )
+
+ */
