@@ -13,8 +13,8 @@ namespace UniVerseAPI.Infra.Data.Context
     {
         public Guid Id { get; private set; }
         public Guid RoleId { get; set; }
-        public string Email { get; private set; }
-        public string Password { get; private set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
         public string RefreshToken { get; set; }
         public DateTime RefreshTokenValidity { get; set; }
 

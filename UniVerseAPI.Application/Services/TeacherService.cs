@@ -30,14 +30,16 @@ namespace UniVerseAPI.Application.Services
         private readonly IPeople _people;
         private readonly IUser _user;
         private readonly IMapper _mapper;
+        private readonly IRoles _roles;
 
-        public TeacherService(ITeacher teacher, IAddressEntity addressEntity, IPeople people, IMapper mapper, IUser user)
+        public TeacherService(ITeacher teacher, IAddressEntity addressEntity, IPeople people, IMapper mapper, IUser user, IRoles roles)
         {
             _teacher = teacher;
             _addressEntity = addressEntity;
             _people = people;
             _mapper = mapper;
             _user = user;
+            _roles = roles;
         }
 
         public List<TeacherResponseDTO> GetAllAsync()
@@ -85,34 +87,39 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public void SaveTeacher(AddressEntity newAddress, People newPeople, Teacher newTeacher)
+        public void SaveTeacher(AddressEntity newAddress, People newPeople, Teacher newTeacher, User user)
         {
             _addressEntity.CreateAsync(newAddress);
             _people.CreateAsync(newPeople);
             _teacher.CreateAsync(newTeacher);
+            _user.CreateAsync(user);    
         } 
 
-        public TeacherResponseDetailsDTO Create(TeacherInputDTO teacher)
+        public async Task<TeacherResponseDetailsDTO> Create(TeacherInputDTO teacher)
         {
             try
             {
-                // Inputs do banco
-                AddressEntity newAddress = _mapper.Map<AddressEntity>(teacher.Address);
+                AddressEntity newAddress = _mapper.Map<AddressEntity>(teacher.AddressEntity);
                 People newPeople = _mapper.Map<People>(teacher.People);
+                User newUser = _mapper.Map<User>(teacher.User);
                 Teacher newTeacher = new() { Code = teacher.Code };
 
+                Roles? roleFound = await _roles.GetRoleByRoleValue(RolesEnum.Teacher);
+
                 newPeople.AddressId = newAddress.Id;
-                // newPeople.Role = Roles.Teacher;
+                newPeople.UserId = newUser.Id;
+                newUser.RoleId = roleFound!.Id;
                 newTeacher.PeopleId = newPeople.Id;
 
-                SaveTeacher(newAddress, newPeople, newTeacher);
+                SaveTeacher(newAddress, newPeople, newTeacher, newUser);
 
-                // Response do cliente
-                TeacherResponseDetailsDTO teacherResponse = new() { Code = teacher.Code };
-                teacherResponse.Message = "*** Teacher Created successfully!";
-                teacherResponse.Success = true;
+                TeacherResponseDetailsDTO response = new() { 
+                    Code = teacher.Code,
+                    Message = "*** Teacher Created successfully!",
+                    Success = true
+                };
 
-                return teacherResponse;
+                return response;
             }
             catch (Exception e)
             {
@@ -213,7 +220,7 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    addressFound = _mapper.Map<AddressEntity>(teacher.Address);
+                    addressFound = _mapper.Map<AddressEntity>(teacher.AddressEntity);
                     peopleFound = _mapper.Map<People>(teacher.People);
                     UpdateTeacher(peopleFound, addressFound!);
 

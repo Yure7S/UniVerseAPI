@@ -12,7 +12,7 @@ namespace UniVerseAPI.Application.IServices
     public interface ITeacherService
     {
         public List<TeacherResponseDTO> GetAllAsync();
-        public TeacherResponseDetailsDTO Create(TeacherInputDTO teacher);
+        public Task<TeacherResponseDetailsDTO> Create(TeacherInputDTO teacher);
         public Task<TeacherResponseDetailsDTO> GetTeacherDetailAsync(string code);
         public Task<BaseResponseDTO> EnableOrDisableAsync(string code, bool status);
         public Task<BaseResponseDTO> UpdateAsync(TeacherInputDTO teacher, string code);

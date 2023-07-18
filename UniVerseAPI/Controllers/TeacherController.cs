@@ -51,11 +51,11 @@ namespace UniVerseAPI.Controllers
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult CreateTeacher(TeacherInputDTO teacher)
+        public async Task<IActionResult> CreateTeacher(TeacherInputDTO teacher)
         {
             if (ModelState.IsValid)
             {
-                var response = _ITeacherService.Create(teacher);
+                var response = await _ITeacherService.Create(teacher);
 
                 if (response.Success)
                     return Created("Successfully created!", response);

@@ -22,6 +22,7 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
             return _db.Student
                 .Include(s => s.People)
                 .ThenInclude(s => s.AddressEntity)
+                .Include(s => s.People.User)
                 .ToListAsync();
         }
 
@@ -30,6 +31,7 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
             return await _db.Student.Where(s => s.Registration == registration)
                 .Include(s => s.People)
                 .ThenInclude(s => s.AddressEntity)
+                .Include(s => s.People.User)
                 .FirstAsync();
         }
 
