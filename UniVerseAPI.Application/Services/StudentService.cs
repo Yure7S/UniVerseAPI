@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Azure;
+using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
@@ -86,8 +87,9 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    ClaimsPrincipalDTO addressResponse = _mapper.Map<ClaimsPrincipalDTO>(studentFound.People.AddressEntity);
+                    AddressEntity addressResponse = _mapper.Map<AddressEntity>(studentFound.People.AddressEntity);
                     PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(studentFound.People);
+                    peopleResponse.Email = studentFound.People.User.Email;
 
                     response.Registration = registration;
                     response.People = peopleResponse;
@@ -144,23 +146,20 @@ namespace UniVerseAPI.Application.Services
                     AddressEntity newAddress = _mapper.Map<AddressEntity>(student.Address);
                     People newPeople = _mapper.Map<People>(student.People);
                     User newUser = _mapper.Map<User>(student.User);
-                    Student newStudent = new();
+                    Student newStudent = new()
+                    {
+                        CourseId = courseFound.Id,
+                        Registration = code,
+                        PeopleId = newPeople.Id,
+                    };
 
                     newPeople.AddressId = newAddress.Id;
                     newPeople.UserId = newUser.Id;
                     newUser.RoleId = roleFound!.Id;
-                    newStudent.PeopleId = newPeople.Id;
-                    newStudent.CourseId = courseFound.Id;
-                    newStudent.Registration = code;
-
-                    AddresResponseDTO addressResponse = _mapper.Map<AddresResponseDTO>(newAddress);
-                    PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(newPeople);
-                    peopleResponse.AddressEntity = addressResponse;
 
                     SaveStudent(newAddress, newPeople, newStudent, newUser);
 
-                    response.Registration = code;
-                    response.People = peopleResponse;
+                    response.StudentInput = student;
                     response.Message = "*** Student Created successfully!";
                     response.Success = true;
                 }

@@ -11,17 +11,16 @@ namespace UniVerseAPI.Infra.Data.Context
     public partial class PeopleResponseDTO
     {
  
-        public string FullName { get; private set; }
-        public DateTime BirthDate { get; private set; }
-        public string Cpf { get; private set; }
-        public string Gender { get; private set; }
-        public string Phone { get; private set; }
-        public string Email { get; private set; }
-        public string Password { get; set; }
+        public string FullName { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string Cpf { get; set; }
+        public string Gender { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
         public AddresResponseDTO AddressEntity { get; set; }
 
 
-        public PeopleResponseDTO(string fullName, DateTime birthDate, string cpf, string gender, string phone, string email, string password, AddresResponseDTO addressEntity)
+        public PeopleResponseDTO(string fullName, DateTime birthDate, string cpf, string gender, string phone, string email, AddresResponseDTO addressEntity)
         {
             FullName = fullName;
             BirthDate = birthDate;
@@ -29,8 +28,12 @@ namespace UniVerseAPI.Infra.Data.Context
             Gender = gender;
             Phone = phone;
             Email = email;
-            Password = password;
             AddressEntity = addressEntity;
+        }
+
+        public PeopleResponseDTO()
+        {
+            
         }
     }
 

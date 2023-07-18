@@ -27,6 +27,7 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
             return await _db.Teacher.Where(tchr => true)
                 .Include(s => s.People)
                 .ThenInclude(s => s.AddressEntity)
+                .Include(s => s.People.User)
                 .ToListAsync();
         }
 

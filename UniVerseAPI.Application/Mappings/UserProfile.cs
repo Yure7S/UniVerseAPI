@@ -14,6 +14,7 @@ namespace UniVerseAPI.Application.Mappings
         public UsserProfile()
         {
             CreateMap<LoginOrUserInputDTO, User>();
+            CreateMap<LoginOrUserInputDTO, User>();
         }
     }
 }

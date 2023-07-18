@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using UniVerseAPI.Application.DTOs.Request.Common;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
@@ -15,10 +16,11 @@ namespace UniVerseAPI.Infra.Data.Context
         public string Code { get; set; }
 
         [Required]
-        public AddressInputDTO Address { get; set; }
-
-        [Required]
         public PeopleInputDTO People { get; set; }
+        [Required]
+        public AddressInputDTO AddressEntity { get; set; }
+        [Required]
+        public LoginOrUserInputDTO User { get; set; }
 
     }
 }
