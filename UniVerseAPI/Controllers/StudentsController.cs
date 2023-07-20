@@ -26,7 +26,7 @@ namespace UniVerseAPI.Controllers
         [HttpGet("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetAllAsync()
+        public IActionResult GetAll()
         {
             try
             {
@@ -53,7 +53,7 @@ namespace UniVerseAPI.Controllers
         [HttpGet("subjects-done")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> SubjectsDone(string registration)
+        public async Task<IActionResult> SubjectsDoneAsync(string registration)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace UniVerseAPI.Controllers
         [Authorize(Roles = "Student, Teacher, Director, Administrator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AllGradesForThisStudent(string registration)
+        public async Task<IActionResult> AllGradesForThisStudentAsync(string registration)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace UniVerseAPI.Controllers
         [Authorize(Roles = "Teacher, Director, Administrator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> RegisterNote(GradeInputDTO grade)
+        public async Task<IActionResult> RegisterNoteAsync(GradeInputDTO grade)
         {
             if (ModelState.IsValid)
             {
@@ -105,7 +105,7 @@ namespace UniVerseAPI.Controllers
         [HttpPost("add")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateStudent(StudentInputDTO student)
+        public async Task<IActionResult> CreateStudentAsync(StudentInputDTO student)
         {
             if (ModelState.IsValid)
             {
@@ -121,7 +121,7 @@ namespace UniVerseAPI.Controllers
         [HttpPost("add-student-in-class")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AddStudentInClass(int codeClass,  string registrationStudent)
+        public async Task<IActionResult> AddStudentInClassAsync(int codeClass,  string registrationStudent)
         {
             if (ModelState.IsValid)
             {
@@ -137,7 +137,7 @@ namespace UniVerseAPI.Controllers
         [HttpPut("{registration}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateCourse(StudentUpdateDTO student, string registration)
+        public async Task<IActionResult> UpdateCourseAsync(StudentUpdateDTO student, string registration)
         {
             if (ModelState.IsValid)
             {
@@ -153,7 +153,7 @@ namespace UniVerseAPI.Controllers
         [HttpDelete("delet/{registration}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteCourse(string registration)
+        public async Task<IActionResult> DeleteCourseAsync(string registration)
         {
             if (ModelState.IsValid)
             {

@@ -21,7 +21,7 @@ namespace UniVerseAPI.Controllers
         [HttpGet("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetAllAsync()
+        public IActionResult GetAll()
         {
             try
             {
@@ -51,7 +51,7 @@ namespace UniVerseAPI.Controllers
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateTeacher(TeacherInputDTO teacher)
+        public async Task<IActionResult> CreateTeacherAsync(TeacherInputDTO teacher)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace UniVerseAPI.Controllers
         [HttpPut("enableordisable/{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> EnableOrDisable(string code, bool status)
+        public async Task<IActionResult> EnableOrDisableAsync(string code, bool status)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace UniVerseAPI.Controllers
         [HttpPut("modify/{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateCourse(TeacherInputDTO teacher, string code)
+        public async Task<IActionResult> UpdateCourseAsync(TeacherInputDTO teacher, string code)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace UniVerseAPI.Controllers
         [HttpDelete("delet/{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteCourse(string code)
+        public async Task<IActionResult> DeleteCourseAsync(string code)
         {
             if (ModelState.IsValid)
             {

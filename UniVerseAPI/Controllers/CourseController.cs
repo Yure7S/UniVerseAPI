@@ -28,7 +28,7 @@ namespace UniVerseAPI.Controllers
         [HttpGet("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetAllAsync()
+        public IActionResult GetAll()
         {
             try
             {
@@ -60,7 +60,7 @@ namespace UniVerseAPI.Controllers
         [HttpGet("all-subjects-this-course/{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult AllSubjectsThisCourseAsync(string code)
+        public IActionResult AllSubjectsThisCourse(string code)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +74,7 @@ namespace UniVerseAPI.Controllers
         [Authorize(Roles = "Director, Administrator")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateAsyncCourse(CourseInputDTO course)
+        public async Task<IActionResult> CreateCourseAsync(CourseInputDTO course)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace UniVerseAPI.Controllers
         [Authorize(Roles = "Director, Administrator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateAsyncCourse(CourseInputDTO course, string code)
+        public async Task<IActionResult> UpdateCourseAsync(CourseInputDTO course, string code)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +108,7 @@ namespace UniVerseAPI.Controllers
         [Authorize(Roles = "Director, Administrator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteAsyncCourse(string code)
+        public async Task<IActionResult> DeleteCourseAsync(string code)
         {
             if (ModelState.IsValid)
             {
