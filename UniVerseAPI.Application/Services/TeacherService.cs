@@ -42,7 +42,7 @@ namespace UniVerseAPI.Application.Services
             _roles = roles;
         }
 
-        public List<TeacherResponseDTO> GetAllAsync()
+        public List<TeacherResponseDTO> GetAll()
         {
             return _teacher.GetAllTeacherAsync()
                 .Result
@@ -98,7 +98,7 @@ namespace UniVerseAPI.Application.Services
             _user.CreateAsync(user);    
         } 
 
-        public async Task<TeacherResponseDetailsDTO> Create(TeacherInputDTO teacher)
+        public async Task<TeacherResponseDetailsDTO> CreateAsync(TeacherInputDTO teacher)
         {
             try
             {

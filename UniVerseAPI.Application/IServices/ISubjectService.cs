@@ -12,7 +12,7 @@ namespace UniVerseAPI.Application.IServices
     public interface ISubjectService
     {
         public Task<SubjectResponseDetailsDTO> GetByCodeAsync(string code);
-        public List<SubjectResponseDTO> GetAllAsync();
+        public List<SubjectResponseDTO> GetAll();
         public Task<SubjectResponseDetailsDTO> CreateAsync(SubjectInputDTO subject);
         public Task<BaseResponseDTO> UpdateAsync(SubjectInputDTO subject, string code);
         public Task<BaseResponseDTO> DeleteAsync(string code);

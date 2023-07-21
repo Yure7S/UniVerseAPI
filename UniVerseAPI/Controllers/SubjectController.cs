@@ -57,7 +57,7 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPost("add")]
+        [HttpPost("")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateSubjectAsync(SubjectInputDTO subject)
@@ -73,7 +73,7 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("modify/{code}")]
+        [HttpPut("{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateSubjectAsync(SubjectInputDTO subject, string code)
@@ -89,7 +89,7 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpDelete("delet/{code}")]
+        [HttpDelete("{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteSubjectAsync(string code)

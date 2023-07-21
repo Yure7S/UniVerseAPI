@@ -65,7 +65,7 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPost("add")]
+        [HttpPost("")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateAsyncClass(ClassInputDTO classInput)
@@ -81,7 +81,7 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("modify/{id}")]
+        [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateAsyncClass(ClassInputDTO classInput, Guid id)
@@ -97,7 +97,7 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpDelete("delet/{id}")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteAsyncClass(Guid id)

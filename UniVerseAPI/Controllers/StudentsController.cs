@@ -39,7 +39,7 @@ namespace UniVerseAPI.Controllers
             }
         } 
 
-        [HttpGet("details/{registration}")]
+        [HttpGet("{registration}")]
         public async Task<IActionResult> GetStudentDetailsAsync(string registration)
         {
             if (ModelState.IsValid)
@@ -82,8 +82,6 @@ namespace UniVerseAPI.Controllers
                 return BadRequest(response);
             }
             return StatusCode(500);
-
-            
         }
 
         [HttpPost("grades/add")]
@@ -102,7 +100,7 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPost("add")]
+        [HttpPost("")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateStudentAsync(StudentInputDTO student)
@@ -150,7 +148,7 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpDelete("delet/{registration}")]
+        [HttpDelete("{registration}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteCourseAsync(string registration)

@@ -70,7 +70,7 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPost("add")]
+        [HttpPost("")]
         [Authorize(Roles = "Director, Administrator")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -87,7 +87,7 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("modify/{code}")]
+        [HttpPut("{code}")]
         [Authorize(Roles = "Director, Administrator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -104,7 +104,7 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpDelete("delet/{code}")]
+        [HttpDelete("{code}")]
         [Authorize(Roles = "Director, Administrator")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

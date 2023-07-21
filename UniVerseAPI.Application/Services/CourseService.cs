@@ -33,7 +33,7 @@ namespace UniVerseAPI.Application.Services
             _mapper = mapper;
         }
 
-        public List<CourseResponseDTO> GetAllAsync()
+        public List<CourseResponseDTO> GetAll()
         {
             return _ICourse.GetAllAsync()
                 .Result
@@ -170,7 +170,7 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public List<SubjectResponseDTO> AllSubjectsThisCourseAsync(string code)
+        public List<SubjectResponseDTO> AllSubjectsThisCourse(string code)
         {
             return _ISubject.AllSubjectsThisCourseAsync(code)
                 .Result
