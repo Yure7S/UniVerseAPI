@@ -36,6 +36,7 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
             return await _db.Teacher.Where(s => s.Code == code)
                 .Include(s => s.People)
                 .ThenInclude(s => s.AddressEntity)
+                .Include(s => s.People.User)
                 .FirstAsync();
         }
     }

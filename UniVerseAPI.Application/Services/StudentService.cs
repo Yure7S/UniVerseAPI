@@ -66,7 +66,7 @@ namespace UniVerseAPI.Application.Services
             _IRoles = roles;
         }
 
-        public List<StudentResponseDTO> GetAllAsync()
+        public List<StudentResponseDTO> GetAll()
         {
             return _IStudent.GetAllStudentAsync()
                 .Result
@@ -252,7 +252,7 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<BaseResponseDTO> AddStudentInClass(int codeClass, string registrationStudent )
+        public async Task<BaseResponseDTO> AddStudentInClassAsync(int codeClass, string registrationStudent )
         {
             try
             {
@@ -285,7 +285,7 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<List<SubjectResponseDTO>> GetSubjectsDone(string registration)
+        public async Task<List<SubjectResponseDTO>> GetSubjectsDoneAsync(string registration)
         {
             try
             {
@@ -312,7 +312,7 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<GradesResponseDTO> RegisterGrade(GradeInputDTO grade)
+        public async Task<GradesResponseDTO> RegisterGradeAsync(GradeInputDTO grade)
         {
             try
             {
@@ -352,7 +352,7 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<GradesResponseListsDTO> AllGradesForThisStudent(string registration)
+        public async Task<GradesResponseListsDTO> AllGradesForThisStudentAsync(string registration)
         {
             try
             {

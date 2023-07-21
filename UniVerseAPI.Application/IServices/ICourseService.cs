@@ -13,11 +13,11 @@ namespace UniVerseAPI.Application.IServices
     public interface ICourseService
     {
         public Task<CourseResponseDetailsDTO> GetByCodeAsync(string code);
-        public List<CourseResponseDTO> GetAllAsync();
+        public List<CourseResponseDTO> GetAll();
         public Task<CourseResponseDetailsDTO> CreateAsync(CourseInputDTO course);
         public Task<BaseResponseDTO> UpdateAsync(CourseInputDTO course, string code);
         public Task<BaseResponseDTO> DeleteAsync(string code);
-        public List<SubjectResponseDTO> AllSubjectsThisCourseAsync(string code);
+        public List<SubjectResponseDTO> AllSubjectsThisCourse(string code);
 
     }
 }

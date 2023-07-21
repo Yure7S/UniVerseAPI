@@ -14,14 +14,14 @@ namespace UniVerseAPI.Application.IServices
 {
     public interface IStudentService
     {
-        public List<StudentResponseDTO> GetAllAsync();
+        public List<StudentResponseDTO> GetAll();
         public Task<StudentResponseDetailsDTO> GetByRegistrationAsync(string registration);
         public Task<StudentResponseDetailsDTO> CreateAsync(StudentInputDTO student);
         public Task<BaseResponseDTO> UpdateAsync(StudentUpdateDTO student, string registration);
         public Task<BaseResponseDTO> DeleteAsync(string registration);
-        public Task<BaseResponseDTO> AddStudentInClass(int codeClass, string registrationStudent);
-        public Task<List<SubjectResponseDTO>> GetSubjectsDone(string registration);
-        public Task<GradesResponseListsDTO> AllGradesForThisStudent(string registration);
-        public Task<GradesResponseDTO> RegisterGrade(GradeInputDTO grade);
+        public Task<BaseResponseDTO> AddStudentInClassAsync(int codeClass, string registrationStudent);
+        public Task<List<SubjectResponseDTO>> GetSubjectsDoneAsync(string registration);
+        public Task<GradesResponseListsDTO> AllGradesForThisStudentAsync(string registration);
+        public Task<GradesResponseDTO> RegisterGradeAsync(GradeInputDTO grade);
     }
 }

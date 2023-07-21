@@ -42,7 +42,7 @@ namespace UniVerseAPI.Application.Services
             _roles = roles;
         }
 
-        public List<TeacherResponseDTO> GetAllAsync()
+        public List<TeacherResponseDTO> GetAll()
         {
             return _teacher.GetAllTeacherAsync()
                 .Result
@@ -65,9 +65,12 @@ namespace UniVerseAPI.Application.Services
                 {
                     response.Update("Found successfully!", true);
 
-                    ClaimsPrincipalDTO addressResponse = _mapper.Map<ClaimsPrincipalDTO>(teacherFound);
+                    AddresResponseDTO addressResponse = _mapper.Map<AddresResponseDTO>(teacherFound.People.AddressEntity);
                     PeopleResponseDTO peopleResponse = _mapper.Map<PeopleResponseDTO>(teacherFound.People);
-                    response = _mapper.Map<TeacherResponseDetailsDTO>(teacherFound);
+                    peopleResponse.Email = teacherFound.People.User.Email;
+                    peopleResponse.AddressEntity = addressResponse;
+
+                    response.Code = code;
                     response.People = peopleResponse;
                     response.Message = "Found successfully!";
                     response.Success = true;
@@ -95,7 +98,7 @@ namespace UniVerseAPI.Application.Services
             _user.CreateAsync(user);    
         } 
 
-        public async Task<TeacherResponseDetailsDTO> Create(TeacherInputDTO teacher)
+        public async Task<TeacherResponseDetailsDTO> CreateAsync(TeacherInputDTO teacher)
         {
             try
             {

@@ -37,7 +37,7 @@ namespace UniVerseAPI.Application.Services
             _IClass = iClass;
         }
 
-        public List<SubjectResponseDTO> GetAllAsync()
+        public List<SubjectResponseDTO> GetAll()
         {
             return _ISubject.GetAllSubjects()
                 .Result

@@ -28,7 +28,7 @@ namespace UniVerseAPI.Controllers
         [HttpGet("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetAllAsync()
+        public IActionResult GetAll()
         {
             try
             {
@@ -57,10 +57,10 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPost("add")]
+        [HttpPost("")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateAsyncSubject(SubjectInputDTO subject)
+        public async Task<IActionResult> CreateSubjectAsync(SubjectInputDTO subject)
         {
             if (ModelState.IsValid)
             {
@@ -73,10 +73,10 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("modify/{code}")]
+        [HttpPut("{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateAsyncSubject(SubjectInputDTO subject, string code)
+        public async Task<IActionResult> UpdateSubjectAsync(SubjectInputDTO subject, string code)
         {
             if (ModelState.IsValid)
             {
@@ -89,10 +89,10 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpDelete("delet/{code}")]
+        [HttpDelete("{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteAsyncSubject(string code)
+        public async Task<IActionResult> DeleteSubjectAsync(string code)
         {
             if (ModelState.IsValid)
             {
