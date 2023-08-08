@@ -14,20 +14,28 @@ namespace UniVerseAPI.Infra.Data.Context
     public partial class Course : BaseEntity
     {
         public Guid Id { get; private set; }
-        public string FullName { get; private set; }
-        public string Description { get; private set; }
-        public DateTime StartDate { get; private set; }
-        public DateTime EndDate { get; private set; }
-        public int Seats { get; private set; }
-        public int SpotsAvailable { get; private set; }
-        public int Price { get; private set; }
-        public CourseCategory Category { get; private set; }
-        public string Code { get; private set; }
+        public string FullName { get; set; }
+        public string ShortDescription { get; set; }
+        public string Description { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public int Seats { get; set; }
+        public int SpotsAvailable { get; set; }
+        public int Price { get; set; }
+        public CourseCategory Category { get; set; }
+        public string Code { get; set; }
 
         [InverseProperty("Course")]
         public virtual ICollection<Student> Student { get; set; }
 
         [InverseProperty("Course")]
         public virtual ICollection<Subject> Subject { get; set; }
+
+        public Course()
+        {
+            Id = Guid.NewGuid();
+            CreationDate = DateTime.Now;
+            LastUpdate = DateTime.Now;
+        }
     }
 }

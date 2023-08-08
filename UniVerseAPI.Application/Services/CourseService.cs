@@ -85,6 +85,8 @@ namespace UniVerseAPI.Application.Services
             try
             {
                 Course newCourse = _mapper.Map<Course>(course);
+                string code = new Random().Next(100000, 999999).ToString();
+                newCourse.Code = code;
 
                 CourseDetailsDTO courseDetailsResponse = _mapper.Map<CourseDetailsDTO>(newCourse);
 

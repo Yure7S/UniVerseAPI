@@ -17,9 +17,9 @@ namespace UniVerseAPI.Application.DTOs.Response.CoursesDTO
     public class CourseResponseDTO
     {
         public string? FullName { get; set; }
-        public string? Instructor { get; set; }
         public int? Seats { get; set; }
         public int? SpotsAvailable { get; set; }
+        public string? ShortDescription { get; set; }
         public CourseCategory? Category { get; set; }
         public string? Code { get; set; }
 
@@ -28,6 +28,7 @@ namespace UniVerseAPI.Application.DTOs.Response.CoursesDTO
             FullName = course.FullName;
             Seats = course.Seats;
             SpotsAvailable = course.SpotsAvailable;
+            ShortDescription = course.ShortDescription;
             Category = course.Category;
             Code = course.Code;
         }

@@ -19,6 +19,9 @@ namespace UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO
         public string? FullName { get; set; }
         [Required]
         [StringLength(255)]
+        public string? ShortDescription { get; set; }
+        [Required]
+        [StringLength(2000)]
         public string? Description { get; set; }
         [Column(TypeName = "date")]
         public DateTime StartDate { get; set; }
@@ -30,8 +33,6 @@ namespace UniVerseAPI.Application.DTOs.Request.MasterEntitiesDTO
         public int Price { get; set; }
         [Required]
         public CourseCategory Category { get; set; }
-        [Required]
-        [StringLength(10, MinimumLength = 10)]
-        public string? Code { get; set; }
+
     }
 }

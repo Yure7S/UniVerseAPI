@@ -84,13 +84,14 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).ValueGeneratedNever();
                 entity.Property(e => e.FullName).HasColumnType("VARCHAR(255)").IsRequired();
-                entity.Property(e => e.Description).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.ShortDescription).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.Description).HasColumnType("VARCHAR(2000)").IsRequired();
                 entity.Property(e => e.StartDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.EndDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.SpotsAvailable).HasColumnType("INT").IsRequired();
                 entity.Property(e => e.Price).HasColumnType("INT").IsRequired();
                 entity.Property(e => e.Category).HasColumnType("VARCHAR(100)").IsRequired();
-                entity.Property(e => e.Code).HasColumnType("CHAR(10)").IsRequired();
+                entity.Property(e => e.Code).HasColumnType("CHAR(6)").IsUnicode(true).IsRequired();
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();

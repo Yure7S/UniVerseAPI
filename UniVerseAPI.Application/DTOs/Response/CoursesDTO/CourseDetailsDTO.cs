@@ -16,6 +16,7 @@ namespace UniVerseAPI.Application.DTOs.Response.CoursesDTO
     public class CourseDetailsDTO
     {
         public string? FullName { get; set; }
+        public string? ShortDescription { get; set; }
         public string? Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
