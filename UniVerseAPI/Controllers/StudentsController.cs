@@ -30,7 +30,7 @@ namespace UniVerseAPI.Controllers
         {
             try
             {
-                var response = _IStudentService.GetAllAsync();
+                var response = _IStudentService.GetAll();
                 return Ok(response);
             }
             catch (Exception)
@@ -57,7 +57,7 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _IStudentService.GetSubjectsDone(registration);
+                var response = await _IStudentService.GetSubjectsDoneAsync(registration);
 
                 return Ok(response);
 
@@ -76,7 +76,7 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _IStudentService.AllGradesForThisStudent(registration);
+                var response = await _IStudentService.AllGradesForThisStudentAsync(registration);
                 if (response.Success)
                     return Ok(response);
                 return BadRequest(response);
@@ -92,7 +92,7 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _IStudentService.RegisterGrade(grade);
+                var response = await _IStudentService.RegisterGradeAsync(grade);
                 if (response.Success)
                     return Ok(response);
                 return BadRequest(response);
@@ -123,7 +123,7 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _IStudentService.AddStudentInClass(codeClass, registrationStudent);
+                var response = await _IStudentService.AddStudentInClassAsync(codeClass, registrationStudent);
 
                 if (response.Success)
                     return Ok(response);

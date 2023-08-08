@@ -32,7 +32,7 @@ namespace UniVerseAPI.Controllers
         {
             try
             {
-                var response = _ICourseService.GetAllAsync();
+                var response = _ICourseService.GetAll();
                 return Ok(response);
             }
             catch (Exception)
@@ -64,7 +64,7 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = _ICourseService.AllSubjectsThisCourseAsync(code);
+                var response = _ICourseService.AllSubjectsThisCourse(code);
                 return Ok(response);
             }
             return StatusCode(500);

@@ -25,7 +25,7 @@ namespace UniVerseAPI.Controllers
         {
             try
             {
-                var response = _ITeacherService.GetAllAsync();
+                var response = _ITeacherService.GetAll();
                 return Ok(response);
             }
             catch (Exception)
@@ -55,7 +55,7 @@ namespace UniVerseAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _ITeacherService.Create(teacher);
+                var response = await _ITeacherService.CreateAsync(teacher);
 
                 if (response.Success)
                     return Created("Successfully created!", response);

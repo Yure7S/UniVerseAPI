@@ -338,3 +338,4 @@ C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI\bin\Debug\net6.0\AutoMapper.E
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\UniVerseAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

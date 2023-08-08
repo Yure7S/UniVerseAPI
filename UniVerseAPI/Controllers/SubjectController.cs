@@ -32,7 +32,7 @@ namespace UniVerseAPI.Controllers
         {
             try
             {
-                var response = _ISubjectService.GetAllAsync();
+                var response = _ISubjectService.GetAll();
                 return Ok(response);
             }
             catch (Exception)

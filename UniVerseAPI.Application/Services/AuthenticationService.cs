@@ -34,7 +34,7 @@ namespace UniVerseAPI.Application.Services
             _tokenService = tokenService;
         }
 
-        public async Task<LoginResponseDTO> Login(LoginOrUserInputDTO login)
+        public async Task<LoginResponseDTO> LoginAsync(LoginOrUserInputDTO login)
         {
             try
             {
