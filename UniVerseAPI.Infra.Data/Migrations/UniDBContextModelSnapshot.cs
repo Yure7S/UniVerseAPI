@@ -143,7 +143,8 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("CHAR(10)");
+                        .IsUnicode(true)
+                        .HasColumnType("CHAR(6)");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("DATETIME2");
@@ -156,7 +157,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(255)");
+                        .HasColumnType("VARCHAR(2000)");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("DATETIME2");
@@ -173,6 +174,10 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.Property<int>("Seats")
                         .HasColumnType("int");
+
+                    b.Property<string>("ShortDescription")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(255)");
 
                     b.Property<int>("SpotsAvailable")
                         .HasColumnType("INT");

@@ -24,6 +24,8 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); ;
 
+builder.Services.AddCors();
+
 #region [Autentication]
 
 builder.Services.AddAuthentication(x =>
@@ -133,6 +135,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(c =>
+{
+    c.AllowAnyHeader();
+    c.AllowAnyMethod();
+    c.AllowAnyOrigin();
+});
 
 app.UseHttpsRedirection();
 
