@@ -24,6 +24,7 @@ namespace UniVerseAPI.Application.DTOs.Response.CoursesDTO
         public string? ShortDescription { get; set; }
         public string? Category { get; set; }
         public string? Code { get; set; }
+        public int Price { get; set; }
 
         public CourseResponseDTO(Course course)
         {
@@ -31,8 +32,9 @@ namespace UniVerseAPI.Application.DTOs.Response.CoursesDTO
             Duration = ((course.EndDate - course.StartDate).Days)/180;
             Seats = course.Seats;
             SpotsAvailable = course.SpotsAvailable;
-            ShortDescription = course.ShortDescription;
+            ShortDescription = course.ShortDescription;  
             Category = Enum.GetName(typeof(CourseCategory), course.Category);
+            Price = course.Price;
             Code = course.Code;
         }
     }
