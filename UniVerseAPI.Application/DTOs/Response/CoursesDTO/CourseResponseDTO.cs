@@ -20,7 +20,7 @@ namespace UniVerseAPI.Application.DTOs.Response.CoursesDTO
         public int? Seats { get; set; }
         public int? SpotsAvailable { get; set; }
         public string? ShortDescription { get; set; }
-        public CourseCategory? Category { get; set; }
+        public string? Category { get; set; }
         public string? Code { get; set; }
 
         public CourseResponseDTO(Course course)
@@ -29,7 +29,7 @@ namespace UniVerseAPI.Application.DTOs.Response.CoursesDTO
             Seats = course.Seats;
             SpotsAvailable = course.SpotsAvailable;
             ShortDescription = course.ShortDescription;
-            Category = course.Category;
+            Category = Enum.GetName(typeof(CourseCategory), course.Category);
             Code = course.Code;
         }
     }

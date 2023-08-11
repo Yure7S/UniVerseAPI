@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using UniVerseAPI.Application.Services.Utils;
+using System.Drawing;
 
 var builder = WebApplication.CreateBuilder(args);
 var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtProperties:key"]);
@@ -136,12 +137,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+#region CORS
+
 app.UseCors(c =>
 {
     c.AllowAnyHeader();
     c.AllowAnyMethod();
     c.AllowAnyOrigin();
 });
+
+#endregion
 
 app.UseHttpsRedirection();
 
