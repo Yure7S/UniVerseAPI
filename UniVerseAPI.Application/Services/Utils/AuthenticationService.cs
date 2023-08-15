@@ -14,11 +14,10 @@ using UniVerseAPI.Application.DTOs.Response.ClassDTO;
 using UniVerseAPI.Application.DTOs.Response.CoursesDTO;
 using UniVerseAPI.Application.DTOs.Response.StudentsDTO;
 using UniVerseAPI.Application.IServices;
-using UniVerseAPI.Application.Services.Utils;
 using UniVerseAPI.Domain.Interface;
 using UniVerseAPI.Infra.Data.Context;
 
-namespace UniVerseAPI.Application.Services
+namespace UniVerseAPI.Application.Services.Utils
 {
     public class AuthenticationService : IAuthenticationService
     {
@@ -27,7 +26,7 @@ namespace UniVerseAPI.Application.Services
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _Configuration;
 
-        public AuthenticationService(IPeople people, IConfiguration configuration, ITokenService tokenService) 
+        public AuthenticationService(IPeople people, IConfiguration configuration, ITokenService tokenService)
         {
             _people = people;
             _Configuration = configuration;
