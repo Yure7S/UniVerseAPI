@@ -301,4 +301,9 @@ namespace UniVerseAPI.Infra.Data.Context
         GETDATE()
     )
 
+
+Roles:
+
+INSERT INTO Roles (Id, RoleValue, [Description]) VALUES (NEWID(), 'Administrator', 'Pequena descrição')
+
  */

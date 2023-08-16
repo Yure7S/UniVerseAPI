@@ -16,6 +16,7 @@ using UniVerseAPI.Application.DTOs.Response.StudentsDTO;
 using UniVerseAPI.Application.IServices;
 using UniVerseAPI.Domain.Interface;
 using UniVerseAPI.Infra.Data.Context;
+using IUser = UniVerseAPI.Domain.Interface.IUser;
 
 namespace UniVerseAPI.Application.Services.Utils
 {
@@ -25,50 +26,34 @@ namespace UniVerseAPI.Application.Services.Utils
         private readonly IPeople _people;
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _Configuration;
+        private readonly IUser _user;
 
-        public AuthenticationService(IPeople people, IConfiguration configuration, ITokenService tokenService)
+        public AuthenticationService(IPeople people, IConfiguration configuration, ITokenService tokenService, IUser user)
         {
             _people = people;
             _Configuration = configuration;
             _tokenService = tokenService;
+            _user = user;
         }
 
-        public async Task<LoginResponseDTO> LoginAsync(LoginOrUserInputDTO login)
+        public LoginResponseDTO Login(LoginOrUserInputDTO login)
         {
             try
             {
                 LoginResponseDTO response = new();
-                string userMaster = _Configuration["Administrator:Username"]!;
-                string passwordMaster = _Configuration["Administrator:Password"]!;
-                string roleMaster = _Configuration["Administrator:Role"]!;
+                User? userFound = _user.GetByEmailAndPassword(login.Email!, login.Password!);
 
-                if (userMaster == login.Email && passwordMaster == login.Password)
+                if (userFound == null)
                 {
-                    UserTokenDTO user = new()
-                    {
-                        Username = "SuperUser",
-                        Role = roleMaster
-                    };
-
-                    string token = _tokenService.GenerateToken(user);
-                    response.Token = token;
-                    response.Success = true;
-
-                    return response;
-                }
-                People? peopleFound = await _people.GetByEmailAndPassword(email: login.Email!, password: login.Password!);
-
-                if (peopleFound == null)
-                {
-                    response.Message = "*** *** Invalid email or password";
+                    response.Message = "*** Invalid email or password";
                     response.Success = false;
                 }
                 else
                 {
                     UserTokenDTO user = new()
                     {
-                        Username = peopleFound.Cpf,
-                        Role = peopleFound.User.Roles.ToString()
+                        Username = userFound.Email,
+                        Role = userFound.Roles.RoleValue
                     };
 
                     string token = _tokenService.GenerateToken(user);
