@@ -41,7 +41,6 @@ namespace UniVerseAPI.Application.Services.Utils
         {
             try
             {
-                string adminPassword = Crypto.HashPassword(login.Password); 
                 LoginResponseDTO response = new();
                 User? userFound = _user.GetByEmail(login.Email!);
                 bool passwordCheck = Crypto.VerifyHashedPassword(userFound?.Password, login.Password);
