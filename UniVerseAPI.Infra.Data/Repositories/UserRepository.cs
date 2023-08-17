@@ -21,11 +21,11 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
         {
         }
 
-        public User? GetByEmailAndPassword(string email, string password)
+        public User? GetByEmail(string email)
         {
             return _db.User
                 .Include(user => user.Roles)
-                .FirstOrDefault(user => user.Email == email && user.Password == password);
+                .FirstOrDefault(user => user.Email == email);
         }
     }
 }

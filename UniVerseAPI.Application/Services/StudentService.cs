@@ -16,6 +16,7 @@ using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using UniVerseAPI.Application.DTOs.Request;
 using UniVerseAPI.Application.DTOs.Response.BaseResponse;
 using UniVerseAPI.Application.DTOs.Response.GradesDTO;
@@ -146,6 +147,8 @@ namespace UniVerseAPI.Application.Services
                     AddressEntity newAddress = _mapper.Map<AddressEntity>(student.Address);
                     People newPeople = _mapper.Map<People>(student.People);
                     User newUser = _mapper.Map<User>(student.User);
+                    newUser.Password = Crypto.HashPassword(student.User.Password);
+
                     Student newStudent = new()
                     {
                         CourseId = courseFound.Id,

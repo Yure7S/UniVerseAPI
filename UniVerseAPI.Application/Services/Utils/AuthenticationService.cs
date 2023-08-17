@@ -7,6 +7,7 @@ using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using UniVerseAPI.Application.DTOs.Request.Common;
 using UniVerseAPI.Application.DTOs.Request.MasterInputsDTO;
 using UniVerseAPI.Application.DTOs.Response.BaseResponse;
@@ -40,10 +41,12 @@ namespace UniVerseAPI.Application.Services.Utils
         {
             try
             {
+                string adminPassword = Crypto.HashPassword(login.Password); 
                 LoginResponseDTO response = new();
-                User? userFound = _user.GetByEmailAndPassword(login.Email!, login.Password!);
+                User? userFound = _user.GetByEmail(login.Email!);
+                bool passwordCheck = Crypto.VerifyHashedPassword(userFound?.Password, login.Password);
 
-                if (userFound == null)
+                if (userFound == null || !passwordCheck)
                 {
                     response.Message = "*** Invalid email or password";
                     response.Success = false;

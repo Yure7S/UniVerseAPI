@@ -10,6 +10,6 @@ namespace UniVerseAPI.Domain.Interface
 {
     public interface IUser : IBaseInterface<User>
     {
-        public User? GetByEmailAndPassword(string email, string password);
+        public User? GetByEmail(string email);
     }
 }
