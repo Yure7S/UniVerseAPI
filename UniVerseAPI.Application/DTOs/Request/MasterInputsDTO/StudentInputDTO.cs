@@ -12,7 +12,7 @@ namespace UniVerseAPI.Infra.Data.Context
     public partial class StudentInputDTO
     {
         [Required]
-        [StringLength(10, MinimumLength = 10)]
+        [StringLength(6, MinimumLength = 6)]
         public string CourseCode { get; set; }
         [Required]
         public AddressInputDTO Address { get; set; }

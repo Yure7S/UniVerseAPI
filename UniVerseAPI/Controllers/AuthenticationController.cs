@@ -19,11 +19,11 @@ namespace UniVerseAPI.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> LoginAsync(LoginOrUserInputDTO login)
+        public IActionResult LoginAsync(LoginOrUserInputDTO login)
         {
             if (ModelState.IsValid)
             {
-                var response = await _IAuthenticationService.LoginAsync(login);
+                var response = _IAuthenticationService.Login(login);
 
                 if (response.Success)
                     return Ok(response);

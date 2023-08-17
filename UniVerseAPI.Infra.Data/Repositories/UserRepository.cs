@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using NPOI.OpenXmlFormats;
 using NPOI.OpenXmlFormats.Dml;
 using NPOI.SS.Formula.Functions;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using UniVerseAPI.Application.Interface;
 using UniVerseAPI.Domain.Interface;
 using UniVerseAPI.Infra.Data.Context;
+using IUser = UniVerseAPI.Domain.Interface.IUser;
 
 namespace UniVerseAPI.Infra.Data.Repositoryes
 {
@@ -17,6 +19,13 @@ namespace UniVerseAPI.Infra.Data.Repositoryes
 
         public UserRepository(UniDBContext db) : base(db)
         {
+        }
+
+        public User? GetByEmail(string email)
+        {
+            return _db.User
+                .Include(user => user.Roles)
+                .FirstOrDefault(user => user.Email == email);
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using UniVerseAPI.Application.DTOs.Request;
 using UniVerseAPI.Application.DTOs.Response.BaseResponse;
 using UniVerseAPI.Application.DTOs.Response.TeachersDTO;
@@ -113,6 +114,7 @@ namespace UniVerseAPI.Application.Services
                 newPeople.UserId = newUser.Id;
                 newUser.RoleId = roleFound!.Id;
                 newTeacher.PeopleId = newPeople.Id;
+                newUser.Password = Crypto.HashPassword(teacher.User.Password);
 
                 SaveTeacher(newAddress, newPeople, newTeacher, newUser);
 

@@ -9,12 +9,14 @@
       "UniVerseAPI.Application/1.0.0": {
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "Konscious.Security.Cryptography.Argon2": "1.3.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.19",
           "Microsoft.EntityFrameworkCore": "7.0.5",
           "Microsoft.EntityFrameworkCore.Design": "7.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.5",
           "Newtonsoft.Json": "13.0.3",
+          "System.Web.Helpers.Crypto": "3.2.3",
           "UniVerseAPI.Domain": "1.0.0"
         },
         "runtime": {
@@ -83,6 +85,26 @@
           "lib/net6.0/Humanizer.dll": {
             "assemblyVersion": "2.14.0.0",
             "fileVersion": "2.14.1.48190"
+          }
+        }
+      },
+      "Konscious.Security.Cryptography.Argon2/1.3.0": {
+        "dependencies": {
+          "Konscious.Security.Cryptography.Blake2": "1.1.0",
+          "System.Memory": "4.5.4"
+        },
+        "runtime": {
+          "lib/net6.0/Konscious.Security.Cryptography.Argon2.dll": {
+            "assemblyVersion": "1.3.0.0",
+            "fileVersion": "1.3.0.0"
+          }
+        }
+      },
+      "Konscious.Security.Cryptography.Blake2/1.1.0": {
+        "runtime": {
+          "lib/net6.0/Konscious.Security.Cryptography.Blake2.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           }
         }
       },
@@ -727,6 +749,14 @@
         }
       },
       "System.Threading.Tasks.Extensions/4.5.4": {},
+      "System.Web.Helpers.Crypto/3.2.3": {
+        "runtime": {
+          "lib/net40/System.Web.Helpers.Crypto.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.2.3.0"
+          }
+        }
+      },
       "System.Windows.Extensions/5.0.0": {
         "dependencies": {
           "System.Drawing.Common": "5.0.0"
@@ -749,10 +779,12 @@
       "UniVerseAPI.Domain/1.0.0": {
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "Konscious.Security.Cryptography.Argon2": "1.3.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.19",
           "Microsoft.EntityFrameworkCore": "7.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
-          "Newtonsoft.Json": "13.0.3"
+          "Newtonsoft.Json": "13.0.3",
+          "System.Web.Helpers.Crypto": "3.2.3"
         },
         "runtime": {
           "UniVerseAPI.Domain.dll": {}
@@ -800,6 +832,20 @@
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "Konscious.Security.Cryptography.Argon2/1.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/pNPlNmjx7r7CGvw0WqO8Rk5vHHyUuzAWhB/PRKLZ2cmhQXoM6TYUooJcuES9zE9D+6yTOl+4LmFV2nKtgDyFg==",
+      "path": "konscious.security.cryptography.argon2/1.3.0",
+      "hashPath": "konscious.security.cryptography.argon2.1.3.0.nupkg.sha512"
+    },
+    "Konscious.Security.Cryptography.Blake2/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-enWOzNAlBjFcKoiBNVVLsa1ZzOciExznu+sUURE8dx322GI1LzrBxzEuZqjeOoK9oo9RubLtg96/7Y4JtUk9zA==",
+      "path": "konscious.security.cryptography.blake2/1.1.0",
+      "hashPath": "konscious.security.cryptography.blake2.1.1.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.19": {
       "type": "package",
@@ -1262,6 +1308,13 @@
       "sha512": "sha512-zteT+G8xuGu6mS+mzDzYXbzS7rd3K6Fjb9RiZlYlJPam2/hU7JCBZBVEcywNuR+oZ1ncTvc/cq0faRr3P01OVg==",
       "path": "system.threading.tasks.extensions/4.5.4",
       "hashPath": "system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+    },
+    "System.Web.Helpers.Crypto/3.2.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Kpf+faYrakOcPGMkhyA+jG1D7cyOqIwS9B35cfh8Fc5jf2lVMhxRQpDWhwNGmgZw+PBAQ1TfZMGBRojD1Glp5Q==",
+      "path": "system.web.helpers.crypto/3.2.3",
+      "hashPath": "system.web.helpers.crypto.3.2.3.nupkg.sha512"
     },
     "System.Windows.Extensions/5.0.0": {
       "type": "package",

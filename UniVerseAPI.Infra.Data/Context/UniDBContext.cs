@@ -293,12 +293,17 @@ namespace UniVerseAPI.Infra.Data.Context
         NEWID(),
         '650d51f7-f5fc-4eaa-8455-25b4644dec76',
         'administrator@gmail.com',
-        '87654321',
+        'AG8ucQ6Y8TIvJLxIgxS2slPljvMIHm8HMOZMgPzxz3gAVLlGbGpKxgDrzgUaDNdiQQ==',
         '0001-01-01 00:00:00.0000000',
         '0',
         '1',
         GETDATE(),
         GETDATE()
     )
+
+
+Roles:
+
+INSERT INTO Roles (Id, RoleValue, [Description]) VALUES (NEWID(), 'Administrator', 'Pequena descrição')
 
  */

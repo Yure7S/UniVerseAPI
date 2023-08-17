@@ -468,3 +468,6 @@ C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\bin\Debug\net6.0\Aut
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Yure\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\bin\Debug\net6.0\Konscious.Security.Cryptography.Argon2.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\bin\Debug\net6.0\Konscious.Security.Cryptography.Blake2.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Api.Test\bin\Debug\net6.0\System.Web.Helpers.Crypto.dll

@@ -101,6 +101,36 @@
           }
         }
       },
+      "Konscious.Security.Cryptography.Argon2/1.3.0": {
+        "type": "package",
+        "dependencies": {
+          "Konscious.Security.Cryptography.Blake2": "1.1.0",
+          "System.Memory": "4.5.4"
+        },
+        "compile": {
+          "lib/net6.0/Konscious.Security.Cryptography.Argon2.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Konscious.Security.Cryptography.Argon2.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Konscious.Security.Cryptography.Blake2/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Konscious.Security.Cryptography.Blake2.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Konscious.Security.Cryptography.Blake2.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "MathNet.Numerics.Signed/4.15.0": {
         "type": "package",
         "compile": {
@@ -1395,6 +1425,19 @@
           "lib/netcoreapp2.1/_._": {}
         }
       },
+      "System.Web.Helpers.Crypto/3.2.3": {
+        "type": "package",
+        "compile": {
+          "lib/net40/System.Web.Helpers.Crypto.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net40/System.Web.Helpers.Crypto.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
       "System.Windows.Extensions/6.0.0": {
         "type": "package",
         "dependencies": {
@@ -1422,10 +1465,12 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "Konscious.Security.Cryptography.Argon2": "1.3.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.19",
           "Microsoft.EntityFrameworkCore": "7.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
-          "Newtonsoft.Json": "13.0.3"
+          "Newtonsoft.Json": "13.0.3",
+          "System.Web.Helpers.Crypto": "3.2.3"
         },
         "compile": {
           "bin/placeholder/UniVerseAPI.Domain.dll": {}
@@ -1552,6 +1597,40 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "Konscious.Security.Cryptography.Argon2/1.3.0": {
+      "sha512": "/pNPlNmjx7r7CGvw0WqO8Rk5vHHyUuzAWhB/PRKLZ2cmhQXoM6TYUooJcuES9zE9D+6yTOl+4LmFV2nKtgDyFg==",
+      "type": "package",
+      "path": "konscious.security.cryptography.argon2/1.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "konscious.security.cryptography.argon2.1.3.0.nupkg.sha512",
+        "konscious.security.cryptography.argon2.nuspec",
+        "lib/net46/Konscious.Security.Cryptography.Argon2.dll",
+        "lib/net46/Konscious.Security.Cryptography.Argon2.xml",
+        "lib/net6.0/Konscious.Security.Cryptography.Argon2.dll",
+        "lib/net6.0/Konscious.Security.Cryptography.Argon2.xml",
+        "lib/netstandard1.3/Konscious.Security.Cryptography.Argon2.dll",
+        "lib/netstandard1.3/Konscious.Security.Cryptography.Argon2.xml"
+      ]
+    },
+    "Konscious.Security.Cryptography.Blake2/1.1.0": {
+      "sha512": "enWOzNAlBjFcKoiBNVVLsa1ZzOciExznu+sUURE8dx322GI1LzrBxzEuZqjeOoK9oo9RubLtg96/7Y4JtUk9zA==",
+      "type": "package",
+      "path": "konscious.security.cryptography.blake2/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "konscious.security.cryptography.blake2.1.1.0.nupkg.sha512",
+        "konscious.security.cryptography.blake2.nuspec",
+        "lib/net46/Konscious.Security.Cryptography.Blake2.dll",
+        "lib/net46/Konscious.Security.Cryptography.Blake2.xml",
+        "lib/net6.0/Konscious.Security.Cryptography.Blake2.dll",
+        "lib/net6.0/Konscious.Security.Cryptography.Blake2.xml",
+        "lib/netstandard1.3/Konscious.Security.Cryptography.Blake2.dll",
+        "lib/netstandard1.3/Konscious.Security.Cryptography.Blake2.xml"
       ]
     },
     "MathNet.Numerics.Signed/4.15.0": {
@@ -4073,6 +4152,19 @@
         "version.txt"
       ]
     },
+    "System.Web.Helpers.Crypto/3.2.3": {
+      "sha512": "Kpf+faYrakOcPGMkhyA+jG1D7cyOqIwS9B35cfh8Fc5jf2lVMhxRQpDWhwNGmgZw+PBAQ1TfZMGBRojD1Glp5Q==",
+      "type": "package",
+      "path": "system.web.helpers.crypto/3.2.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/System.Web.Helpers.Crypto.dll",
+        "lib/net40/System.Web.Helpers.Crypto.pdb",
+        "system.web.helpers.crypto.3.2.3.nupkg.sha512",
+        "system.web.helpers.crypto.nuspec"
+      ]
+    },
     "System.Windows.Extensions/6.0.0": {
       "sha512": "IXoJOXIqc39AIe+CIR7koBtRGMiCt/LPM3lI+PELtDIy9XdyeSrwXFdWV9dzJ2Awl0paLWUaknLxFQ5HpHZUog==",
       "type": "package",
@@ -4105,6 +4197,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
+      "Konscious.Security.Cryptography.Argon2 >= 1.3.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.19",
       "Microsoft.EntityFrameworkCore >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.5",
@@ -4112,27 +4205,28 @@
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.5",
       "NPOI >= 2.6.0",
       "Newtonsoft.Json >= 13.0.3",
+      "System.Web.Helpers.Crypto >= 3.2.3",
       "UniVerseAPI.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Yure\\.nuget\\packages\\": {},
+    "C:\\Users\\Servulo\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
+      "projectUniqueName": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
       "projectName": "UniVerseAPI.Infra.Data",
-      "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
-      "packagesPath": "C:\\Users\\Yure\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\obj\\",
+      "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\UniVerseAPI.Infra.Data.csproj",
+      "packagesPath": "C:\\Users\\Servulo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Infra.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Yure\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Servulo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4147,8 +4241,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
-              "projectPath": "C:\\Users\\Yure\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj"
+            "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj": {
+              "projectPath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI.Domain\\UniVerseAPI.Domain.csproj"
             }
           }
         }
@@ -4166,6 +4260,10 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
             "version": "[12.0.1, )"
+          },
+          "Konscious.Security.Cryptography.Argon2": {
+            "target": "Package",
+            "version": "[1.3.0, )"
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
@@ -4198,6 +4296,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
+          },
+          "System.Web.Helpers.Crypto": {
+            "target": "Package",
+            "version": "[3.2.3, )"
           }
         },
         "imports": [
@@ -4216,8 +4318,20 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "O pacote 'System.Web.Helpers.Crypto 3.2.3' foi restaurado usando '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' em vez da estrutura de destino do projeto 'net6.0'. Esse pacote pode não ser totalmente compatível com o seu projeto.",
+      "libraryId": "System.Web.Helpers.Crypto",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }
