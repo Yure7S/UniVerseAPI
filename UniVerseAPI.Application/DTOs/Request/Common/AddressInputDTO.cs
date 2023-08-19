@@ -26,7 +26,7 @@ namespace UniVerseAPI.Infra.Data.Context
         public string Neighborhood { get; set; }
 
         [Required]
-        [StringLength(8)]
+        [StringLength(8, MinimumLength = 8)]
         [Unicode(true)]
         [Display(Name = "Cep", Description = "Enter the zip code for your region")]
         public string Cep { get; set; }
