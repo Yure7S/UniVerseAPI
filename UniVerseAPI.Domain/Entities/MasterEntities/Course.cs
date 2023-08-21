@@ -13,8 +13,13 @@ namespace UniVerseAPI.Infra.Data.Context
 {
     public partial class Course : BaseEntity
     {
+        private string _fullName;
+
         public Guid Id { get; private set; }
-        public string FullName { get; set; }
+        public string FullName {
+            get => _fullName;
+            set { FullName = value == null ? FullName : value; }
+        }
         public string ShortDescription { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
@@ -36,6 +41,23 @@ namespace UniVerseAPI.Infra.Data.Context
             Id = Guid.NewGuid();
             CreationDate = DateTime.Now;
             LastUpdate = DateTime.Now;
+        }
+
+        public Course(Guid id, string fullName, string shortDescription, string description, DateTime startDate, DateTime endDate, int seats, int spotsAvailable, int price, CourseCategory category, string code, ICollection<Student> student, ICollection<Subject> subject)
+        {
+            Id = id;
+            FullName = fullName ?? throw new ArgumentNullException(nameof(fullName));
+            ShortDescription = shortDescription ?? throw new ArgumentNullException(nameof(shortDescription));
+            Description = description ?? throw new ArgumentNullException(nameof(description));
+            StartDate = startDate;
+            EndDate = endDate;
+            Seats = seats;
+            SpotsAvailable = spotsAvailable;
+            Price = price;
+            Category = category;
+            Code = code ?? throw new ArgumentNullException(nameof(code));
+            Student = student ?? throw new ArgumentNullException(nameof(student));
+            Subject = subject ?? throw new ArgumentNullException(nameof(subject));
         }
     }
 }

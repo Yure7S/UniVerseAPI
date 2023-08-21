@@ -1,0 +1,6 @@
+﻿namespace UniVerseAPI
+{
+    public class FodyWeavers
+    {
+    }
+}

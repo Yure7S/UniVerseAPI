@@ -88,6 +88,12 @@
           }
         }
       },
+      "Fody/6.6.4": {
+        "type": "package",
+        "build": {
+          "build/Fody.targets": {}
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -839,6 +845,25 @@
           }
         }
       },
+      "NullGuard.Fody/3.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Fody": "6.6.4"
+        },
+        "compile": {
+          "lib/netstandard2.1/NullGuard.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/NullGuard.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/NullGuard.Fody.props": {}
+        }
+      },
       "Portable.BouncyCastle/1.9.0": {
         "type": "package",
         "compile": {
@@ -1470,6 +1495,7 @@
           "Microsoft.EntityFrameworkCore": "7.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
           "Newtonsoft.Json": "13.0.3",
+          "NullGuard.Fody": "3.1.1",
           "System.Web.Helpers.Crypto": "3.2.3",
           "UniVerseAPI.Domain": "1.0.0"
         },
@@ -1490,6 +1516,7 @@
           "Microsoft.EntityFrameworkCore": "7.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
           "Newtonsoft.Json": "13.0.3",
+          "NullGuard.Fody": "3.1.1",
           "System.Web.Helpers.Crypto": "3.2.3"
         },
         "compile": {
@@ -1510,6 +1537,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
           "NPOI": "2.6.0",
           "Newtonsoft.Json": "13.0.3",
+          "NullGuard.Fody": "3.1.1",
           "System.Web.Helpers.Crypto": "3.2.3",
           "UniVerseAPI.Domain": "1.0.0"
         },
@@ -1620,6 +1648,39 @@
         "lib/netstandard2.1/Enums.NET.dll",
         "lib/netstandard2.1/Enums.NET.pdb",
         "lib/netstandard2.1/Enums.NET.xml"
+      ]
+    },
+    "Fody/6.6.4": {
+      "sha512": "vLZS+oa+ndUHYPlx/8n9bBTT3dHkCF0riml4paKq4D663+cZd47x1uagQo32D/gKFZ/sfmV1oqKaLmH0elxq4A==",
+      "type": "package",
+      "path": "fody/6.6.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "build/Fody.targets",
+        "fody.6.6.4.nupkg.sha512",
+        "fody.nuspec",
+        "netclassictask/Fody.dll",
+        "netclassictask/FodyCommon.dll",
+        "netclassictask/FodyHelpers.dll",
+        "netclassictask/FodyIsolated.dll",
+        "netclassictask/Mono.Cecil.Pdb.dll",
+        "netclassictask/Mono.Cecil.Pdb.pdb",
+        "netclassictask/Mono.Cecil.Rocks.dll",
+        "netclassictask/Mono.Cecil.Rocks.pdb",
+        "netclassictask/Mono.Cecil.dll",
+        "netclassictask/Mono.Cecil.pdb",
+        "netstandardtask/Fody.dll",
+        "netstandardtask/FodyCommon.dll",
+        "netstandardtask/FodyHelpers.dll",
+        "netstandardtask/FodyIsolated.dll",
+        "netstandardtask/Mono.Cecil.Pdb.dll",
+        "netstandardtask/Mono.Cecil.Pdb.pdb",
+        "netstandardtask/Mono.Cecil.Rocks.dll",
+        "netstandardtask/Mono.Cecil.Rocks.pdb",
+        "netstandardtask/Mono.Cecil.dll",
+        "netstandardtask/Mono.Cecil.pdb"
       ]
     },
     "Humanizer.Core/2.14.1": {
@@ -2736,6 +2797,28 @@
         "logo/60_60.jpg",
         "npoi.2.6.0.nupkg.sha512",
         "npoi.nuspec"
+      ]
+    },
+    "NullGuard.Fody/3.1.1": {
+      "sha512": "v3S5KBsTafu8lTlO1eouW8Ly6JLcEXRBZAbXbNJfb4fpehY+iSE8m1o4wJQodaEafkPlhoOM4/BnoePKGp1c4A==",
+      "type": "package",
+      "path": "nullguard.fody/3.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/NullGuard.Fody.props",
+        "lib/net452/NullGuard.dll",
+        "lib/net452/NullGuard.xml",
+        "lib/netstandard1.4/NullGuard.dll",
+        "lib/netstandard1.4/NullGuard.xml",
+        "lib/netstandard2.0/NullGuard.dll",
+        "lib/netstandard2.0/NullGuard.xml",
+        "lib/netstandard2.1/NullGuard.dll",
+        "lib/netstandard2.1/NullGuard.xml",
+        "nullguard.fody.3.1.1.nupkg.sha512",
+        "nullguard.fody.nuspec",
+        "weaver/NullGuard.Fody.dll",
+        "weaver/NullGuard.Fody.xcf"
       ]
     },
     "Portable.BouncyCastle/1.9.0": {
@@ -4255,6 +4338,7 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.5",
       "Newtonsoft.Json >= 13.0.3",
+      "NullGuard.Fody >= 3.1.1",
       "System.Web.Helpers.Crypto >= 3.2.3",
       "UniVerseAPI.Application >= 1.0.0",
       "UniVerseAPI.Domain >= 1.0.0",
@@ -4350,6 +4434,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
+          },
+          "NullGuard.Fody": {
+            "target": "Package",
+            "version": "[3.1.1, )"
           },
           "System.Web.Helpers.Crypto": {
             "target": "Package",

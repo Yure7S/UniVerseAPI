@@ -155,7 +155,16 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    courseFound = _mapper.Map<Course>(course);
+                    courseFound.StartDate = course.StartDate;
+                    courseFound.EndDate = course.EndDate;
+                    courseFound.Description = course.Description;
+                    courseFound.ShortDescription = course.ShortDescription;
+                    courseFound.Category = course.Category;
+                    courseFound.FullName = course.FullName;
+                    courseFound.LastUpdate = DateTime.Now;
+                    courseFound.Seats = course.Seats;
+                    courseFound.SpotsAvailable = course.SpotsAvailable;
+
                     await _ICourse.UpdateAsync(courseFound);
                     response.Update(message: "*** Course UpdateAsyncd successfully!", success: true);
                 }
