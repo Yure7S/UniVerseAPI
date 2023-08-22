@@ -169,41 +169,6 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
-        public async Task<BaseResponseDTO> EnableOrDisableAsync(string code, bool status)
-        {
-            try
-            {
-                Teacher? teacherFound = await _teacher.GetTeacherDetailAsync(code);
-                BaseResponseDTO response = new();
-
-                if (teacherFound == null)
-                {
-                    response.Update("*** We couldn't find the Teacher in our database!", false);
-                }
-                else if (teacherFound.Active == status)
-                {
-                    response.Update("*** This action has already been performed", false);
-                }
-                else
-                {
-                    teacherFound.Activate(status);
-                    await _teacher.UpdateAsync(teacherFound);
-                    response.Update(status ? "*** Successfully enabled" : "*** Successfully disabled", true);
-                }
-
-                return response;
-            }
-            catch (Exception e)
-            {
-                BaseResponseDTO response = new(
-                    message: "*** We encountered an error trying to perform such an action!",
-                    success: false,
-                    error: e.Message);
-
-                return response;
-            }
-        }
-
         public void UpdateTeacher(People people, AddressEntity addressEntity)
         {
             _addressEntity.UpdateAsync(addressEntity);

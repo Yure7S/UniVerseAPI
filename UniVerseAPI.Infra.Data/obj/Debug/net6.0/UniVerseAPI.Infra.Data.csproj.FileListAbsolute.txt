@@ -49,3 +49,5 @@ C:\Users\SEDUC-SUDS\Desktop\UniVerseAPI\UniVerseAPI.Infra.Data\obj\Debug\net6.0\
 C:\Users\SEDUC-SUDS\Desktop\UniVerseAPI\UniVerseAPI.Infra.Data\obj\Debug\net6.0\UniVerseAPI.Infra.Data.pdb
 C:\Users\SEDUC-SUDS\Desktop\UniVerseAPI\UniVerseAPI.Infra.Data\obj\Debug\net6.0\UniVerseAPI.Infra.Data.genruntimeconfig.cache
 C:\Users\SEDUC-SUDS\Desktop\UniVerseAPI\UniVerseAPI.Infra.Data\obj\Debug\net6.0\ref\UniVerseAPI.Infra.Data.dll
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Data\obj\Debug\net6.0\UniVerseAPI.Infra.Data.csproj.Fody.CopyLocal.cache
+C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Data\obj\Debug\net6.0\UniVerseAPI.Infra.Data.csproj.Fody.RuntimeCopyLocal.cache

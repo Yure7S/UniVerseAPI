@@ -10,7 +10,7 @@ using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    public partial class People : BaseEntity
+    public partial class People : DateStamp
     {
         [Key]
         public Guid Id { get; set; }

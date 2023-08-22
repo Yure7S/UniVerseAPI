@@ -17,10 +17,5 @@ namespace UniVerseAPI.Infra.Data.Context
 
         [InverseProperty("Roles")]
         public virtual ICollection<User> User { get; set; }
-
-        public Roles()
-        {
-            Id = Guid.NewGuid();
-        }
     }
 }

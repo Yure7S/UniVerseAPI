@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Azure;
 using System;
+using NullGuard;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -142,6 +143,7 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
+        
         public async Task<BaseResponseDTO> UpdateAsync(CourseInputDTO course, string code)
         {
             try

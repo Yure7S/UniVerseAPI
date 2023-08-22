@@ -8,12 +8,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    public partial class BaseEntity
+    public partial class BaseEntity : DateStamp
     {
         public bool? Deleted { get; protected set; }
         public bool? Active { get; protected set; }
-        public DateTime CreationDate { get; protected set; }
-        public DateTime LastUpdate { get; set; }
 
         public void DeleteAsync()
         {

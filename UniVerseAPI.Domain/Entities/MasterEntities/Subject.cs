@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    public partial class Subject : BaseEntity
+    public partial class Subject : DateStamp
     {
         [Key]
         public Guid Id { get; set; }

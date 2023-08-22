@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace UniVerseAPI.Infra.Data.Context
 {
     [Table("AddressEntity")]
-    public partial class AddressEntity : BaseEntity
+    public partial class AddressEntity : DateStamp
     {
         public Guid Id { get; private set; }
         public string AddressValue { get; private set; }

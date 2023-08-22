@@ -12,9 +12,7 @@ namespace UniVerseAPI.Infra.Data.Context
     public partial class Teacher : BaseEntity
     {
         public Guid Id { get; set; }
-
         public Guid PeopleId { get; set; }
-
         public string Code { get; set; }
 
         [ForeignKey("PeopleId")]
