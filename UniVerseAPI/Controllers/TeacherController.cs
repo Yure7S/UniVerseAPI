@@ -64,21 +64,6 @@ namespace UniVerseAPI.Controllers
             return StatusCode(500);
         }
 
-        [HttpPut("enableordisable/{code}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> EnableOrDisableAsync(string code, bool status)
-        {
-            if (ModelState.IsValid)
-            {
-                var response = await _ITeacherService.EnableOrDisableAsync(code, status);
-                if (response.Success)
-                    return Ok(response);
-                return BadRequest(response);
-            }
-            return StatusCode(500);
-        }
-
         [HttpPut("{code}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

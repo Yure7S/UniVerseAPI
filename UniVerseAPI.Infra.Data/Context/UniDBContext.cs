@@ -94,6 +94,8 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.Code).HasColumnType("CHAR(6)").IsUnicode(true).IsRequired(true);
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired(true);
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired(true);
+                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired(true);
+                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired(true);
                 entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired(true);
 
             });

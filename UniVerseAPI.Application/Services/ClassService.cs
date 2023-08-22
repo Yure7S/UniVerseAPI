@@ -79,8 +79,7 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    classFound!.DeleteAsync();
-                    await _class.UpdateAsync(classFound);
+                    await _class.DeleteAsync(classFound);
                     response.Update(message: "*** Deleted successfully!", success: true);
                 }
 

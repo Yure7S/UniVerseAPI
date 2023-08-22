@@ -11,7 +11,7 @@ using UniVerseAPI.Domain.Enums;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    public partial class Course : DateStamp
+    public partial class Course : BaseEntity
     {
         private string _fullName;
 

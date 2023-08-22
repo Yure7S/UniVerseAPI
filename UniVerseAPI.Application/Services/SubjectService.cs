@@ -22,24 +22,24 @@ namespace UniVerseAPI.Application.Services
 {
     public class SubjectService : ISubjectService
     {
-        private readonly ISubject _ISubject;
-        private readonly ITeacher _ITeacher;
-        private readonly ICourse _ICourse;
-        private readonly IClass _IClass;
+        private readonly ISubject _subject;
+        private readonly ITeacher _teacher;
+        private readonly ICourse _course;
+        private readonly IClass _class;
         private readonly IMapper _mapper;
 
         public SubjectService(ISubject iSubject, IMapper mapper, ITeacher teacher, ICourse course, IClass iClass)
         {
-            _ISubject = iSubject;
+            _subject = iSubject;
             _mapper = mapper;
-            _ITeacher = teacher;
-            _ICourse = course;
-            _IClass = iClass;
+            _teacher = teacher;
+            _course = course;
+            _class = iClass;
         }
 
         public List<SubjectResponseDTO> GetAll()
         {
-            return _ISubject.GetAllSubjects()
+            return _subject.GetAllSubjects()
                 .Result
                 .ConvertAll(subj => new SubjectResponseDTO(subj));
         }
@@ -48,7 +48,7 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
-                Subject? subjectFound =  await _ISubject.GetSubjectDetailAsync(code);
+                Subject? subjectFound =  await _subject.GetSubjectDetailAsync(code);
 
                 if (subjectFound == null)
                 {
@@ -91,9 +91,9 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
-                Teacher? teacherFound = await _ITeacher.GetByCodeAsync(subject.TeacherCode!);
-                Course? courseFound = await _ICourse.GetByCodeAsync(subject.CourseCode!);
-                Class? classFound = await _IClass.GetByCodeAsync(subject.ClassCode);
+                Teacher? teacherFound = await _teacher.GetByCodeAsync(subject.TeacherCode!);
+                Course? courseFound = await _course.GetByCodeAsync(subject.CourseCode!);
+                Class? classFound = await _class.GetByCodeAsync(subject.ClassCode);
                 SubjectResponseDetailsDTO response = new();
 
                 if (courseFound == null)
@@ -113,7 +113,7 @@ namespace UniVerseAPI.Application.Services
                     newSubject.TeacherId = teacherFound.Id;
                     newSubject.ClassId = classFound!.Id;
 
-                    await _ISubject.CreateAsync(newSubject);
+                    await _subject.CreateAsync(newSubject);
 
                     SubjectDetailsDTO subjectDetailsResponse = _mapper.Map<SubjectDetailsDTO>(subject);
                     response.Subject = subjectDetailsResponse;
@@ -139,7 +139,7 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
-                Subject? subjectFound = await _ISubject.GetByCodeAsync(code);
+                Subject? subjectFound = await _subject.GetByCodeAsync(code);
                 BaseResponseDTO response = new();
 
                 if (subjectFound == null)
@@ -148,8 +148,7 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    subjectFound!.DeleteAsync();
-                    await _ISubject.UpdateAsync(subjectFound);
+                    await _subject.DeleteAsync(subjectFound);
                     response.Update(message: "*** Deleted successfully!", success: true);
                 }
 
@@ -169,7 +168,7 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
-                Subject? subjectFound = await _ISubject.GetByCodeAsync(code);
+                Subject? subjectFound = await _subject.GetByCodeAsync(code);
                 BaseResponseDTO response = new();
 
                 if (subjectFound == null)
@@ -179,7 +178,7 @@ namespace UniVerseAPI.Application.Services
                 else
                 {
                     subjectFound = _mapper.Map<Subject>(subject);
-                    await _ISubject.UpdateAsync(subjectFound);
+                    await _subject.UpdateAsync(subjectFound);
                     response.Update(message: "*** Subject UpdateAsyncd successfully!", success: true);
                 }
                 
