@@ -342,5 +342,3 @@ C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\bin\Debug\net6.0\Microsoft
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\bin\Debug\net6.0\Konscious.Security.Cryptography.Argon2.dll
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\bin\Debug\net6.0\Konscious.Security.Cryptography.Blake2.dll
 C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\bin\Debug\net6.0\System.Web.Helpers.Crypto.dll
-C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\UniVerseAPI.csproj.Fody.CopyLocal.cache
-C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI\obj\Debug\net6.0\UniVerseAPI.csproj.Fody.RuntimeCopyLocal.cache

@@ -84,10 +84,6 @@
               "target": "Package",
               "version": "[13.0.3, )"
             },
-            "NullGuard.Fody": {
-              "target": "Package",
-              "version": "[3.1.1, )"
-            },
             "System.Web.Helpers.Crypto": {
               "target": "Package",
               "version": "[3.2.3, )"
@@ -188,10 +184,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
-            },
-            "NullGuard.Fody": {
-              "target": "Package",
-              "version": "[3.1.1, )"
             },
             "System.Web.Helpers.Crypto": {
               "target": "Package",
@@ -301,10 +293,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
-            },
-            "NullGuard.Fody": {
-              "target": "Package",
-              "version": "[3.1.1, )"
             },
             "System.Web.Helpers.Crypto": {
               "target": "Package",
@@ -417,10 +405,6 @@
               "target": "Package",
               "version": "[13.0.3, )"
             },
-            "NullGuard.Fody": {
-              "target": "Package",
-              "version": "[3.1.1, )"
-            },
             "System.Web.Helpers.Crypto": {
               "target": "Package",
               "version": "[3.2.3, )"
@@ -526,10 +510,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
-            },
-            "NullGuard.Fody": {
-              "target": "Package",
-              "version": "[3.1.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

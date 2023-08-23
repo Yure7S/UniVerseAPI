@@ -16,7 +16,6 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.5",
           "Newtonsoft.Json": "13.0.3",
-          "NullGuard.Fody": "3.1.1",
           "Swashbuckle.AspNetCore": "6.2.3",
           "System.Web.Helpers.Crypto": "3.2.3",
           "UniVerseAPI.Infra.Ioc": "1.0.0"
@@ -90,7 +89,6 @@
           }
         }
       },
-      "Fody/6.6.4": {},
       "Humanizer.Core/2.14.1": {
         "runtime": {
           "lib/net6.0/Humanizer.dll": {
@@ -582,11 +580,6 @@
           }
         }
       },
-      "NullGuard.Fody/3.1.1": {
-        "dependencies": {
-          "Fody": "6.6.4"
-        }
-      },
       "Portable.BouncyCastle/1.9.0": {
         "runtime": {
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
@@ -954,7 +947,6 @@
           "Microsoft.EntityFrameworkCore": "7.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
           "Newtonsoft.Json": "13.0.3",
-          "NullGuard.Fody": "3.1.1",
           "System.Web.Helpers.Crypto": "3.2.3",
           "UniVerseAPI.Domain": "1.0.0"
         },
@@ -970,7 +962,6 @@
           "Microsoft.EntityFrameworkCore": "7.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
           "Newtonsoft.Json": "13.0.3",
-          "NullGuard.Fody": "3.1.1",
           "System.Web.Helpers.Crypto": "3.2.3"
         },
         "runtime": {
@@ -986,7 +977,6 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
           "NPOI": "2.6.0",
           "Newtonsoft.Json": "13.0.3",
-          "NullGuard.Fody": "3.1.1",
           "System.Web.Helpers.Crypto": "3.2.3",
           "UniVerseAPI.Domain": "1.0.0"
         },
@@ -1002,7 +992,6 @@
           "Microsoft.EntityFrameworkCore": "7.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.5",
           "Newtonsoft.Json": "13.0.3",
-          "NullGuard.Fody": "3.1.1",
           "System.Web.Helpers.Crypto": "3.2.3",
           "UniVerseAPI.Application": "1.0.0",
           "UniVerseAPI.Domain": "1.0.0",
@@ -1054,13 +1043,6 @@
       "sha512": "sha512-d47SgeuGxKpalKhYoHqFkDPmO9SoE3amSwVNDoUdy4d675/tX7bLyZFHdjfo3Tobth9Y80VnjfasQ/PD4LqUuA==",
       "path": "enums.net/4.0.0",
       "hashPath": "enums.net.4.0.0.nupkg.sha512"
-    },
-    "Fody/6.6.4": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-vLZS+oa+ndUHYPlx/8n9bBTT3dHkCF0riml4paKq4D663+cZd47x1uagQo32D/gKFZ/sfmV1oqKaLmH0elxq4A==",
-      "path": "fody/6.6.4",
-      "hashPath": "fody.6.6.4.nupkg.sha512"
     },
     "Humanizer.Core/2.14.1": {
       "type": "package",
@@ -1376,13 +1358,6 @@
       "sha512": "sha512-Pwjo65CUH3MiRnBEbVo8ff31ZrDGdGyyFJyAEncmbTQ0/gYgDkBUnGKm20aLpdwCpPNLzvapZm8v5tx4S6qAWg==",
       "path": "npoi/2.6.0",
       "hashPath": "npoi.2.6.0.nupkg.sha512"
-    },
-    "NullGuard.Fody/3.1.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-v3S5KBsTafu8lTlO1eouW8Ly6JLcEXRBZAbXbNJfb4fpehY+iSE8m1o4wJQodaEafkPlhoOM4/BnoePKGp1c4A==",
-      "path": "nullguard.fody/3.1.1",
-      "hashPath": "nullguard.fody.3.1.1.nupkg.sha512"
     },
     "Portable.BouncyCastle/1.9.0": {
       "type": "package",

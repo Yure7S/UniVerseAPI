@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Azure;
 using System;
-using NullGuard;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -126,7 +125,7 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    courseFound!.DeleteAsync();
+                    courseFound!.Deleted = true;
                     await _course.UpdateAsync(courseFound);
                     response.Update(message: "*** Deleted successfully!", success: true);
                 }
@@ -166,6 +165,7 @@ namespace UniVerseAPI.Application.Services
                     courseFound.LastUpdate = DateTime.Now;
                     courseFound.Seats = course.Seats;
                     courseFound.SpotsAvailable = course.SpotsAvailable;
+                    courseFound.NumberOfUpdates++;
 
                     await _course.UpdateAsync(courseFound);
                     response.Update(message: "*** Course UpdateAsyncd successfully!", success: true);

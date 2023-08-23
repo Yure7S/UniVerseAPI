@@ -61,5 +61,3 @@ C:\Users\SEDUC-SUDS\Desktop\UniVerseAPI\UniVerseAPI.Infra.Ioc\obj\Debug\net6.0\r
 C:\Users\SEDUC-SUDS\Desktop\UniVerseAPI\UniVerseAPI.Infra.Ioc\obj\Debug\net6.0\UniVerseAPI.Infra.Ioc.pdb
 C:\Users\SEDUC-SUDS\Desktop\UniVerseAPI\UniVerseAPI.Infra.Ioc\obj\Debug\net6.0\UniVerseAPI.Infra.Ioc.genruntimeconfig.cache
 C:\Users\SEDUC-SUDS\Desktop\UniVerseAPI\UniVerseAPI.Infra.Ioc\obj\Debug\net6.0\ref\UniVerseAPI.Infra.Ioc.dll
-C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Ioc\obj\Debug\net6.0\UniVerseAPI.Infra.Ioc.csproj.Fody.CopyLocal.cache
-C:\Users\Servulo\source\repos\UniVerseAPI\UniVerseAPI.Infra.Ioc\obj\Debug\net6.0\UniVerseAPI.Infra.Ioc.csproj.Fody.RuntimeCopyLocal.cache

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    public partial class Grades : DateStamp
+    public partial class Grades : BaseEntity
     {
         public Guid Id { get; set; }
         public Guid StudentId { get; set; }

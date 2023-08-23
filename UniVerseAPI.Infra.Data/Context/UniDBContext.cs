@@ -49,13 +49,13 @@ namespace UniVerseAPI.Infra.Data.Context
 
                 entity.ToTable("AddressEntity");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.AddressValue).HasColumnType("VARCHAR(255)").IsRequired(true);
-                entity.Property(e => e.Number).HasColumnType("INT").IsRequired(true);
-                entity.Property(e => e.Neighborhood).HasColumnType("VARCHAR(255)").IsRequired(true);
-                entity.Property(e => e.Cep).HasColumnType("CHAR(8)").IsRequired(true);
-                entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired(true);
+                entity.Property(e => e.AddressValue).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.Number).HasColumnType("INT").IsRequired();
+                entity.Property(e => e.Neighborhood).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.Cep).HasColumnType("CHAR(8)").IsRequired();
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
 
             });
 
@@ -68,13 +68,13 @@ namespace UniVerseAPI.Infra.Data.Context
 
                 entity.ToTable("Class");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.FullName).HasColumnType("VARCHAR(255)").IsRequired(true);
-                entity.Property(e => e.Code).HasColumnType("CHAR(5)").IsUnicode(true).IsRequired(true);
-                entity.Property(e => e.Shift).HasColumnType("VARCHAR(50)").IsRequired(true);
-                entity.Property(e => e.Room).HasColumnType("VARCHAR(255)").IsRequired(true);
-                entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired(true);
+                entity.Property(e => e.FullName).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.Code).HasColumnType("CHAR(5)").IsUnicode(true).IsRequired();
+                entity.Property(e => e.Shift).HasColumnType("VARCHAR(50)").IsRequired();
+                entity.Property(e => e.Room).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
 
             });
 
@@ -83,20 +83,20 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.ToTable("Course");
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).ValueGeneratedNever();
-                entity.Property(e => e.FullName).HasColumnType("VARCHAR(255)").IsRequired(true);
-                entity.Property(e => e.ShortDescription).HasColumnType("VARCHAR(255)").IsRequired(true);
-                entity.Property(e => e.Description).HasColumnType("VARCHAR(2000)").IsRequired(true);
-                entity.Property(e => e.StartDate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.EndDate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.SpotsAvailable).HasColumnType("INT").IsRequired(true);
-                entity.Property(e => e.Price).HasColumnType("INT").IsRequired(true);
+                entity.Property(e => e.FullName).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.ShortDescription).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.Description).HasColumnType("VARCHAR(2000)").IsRequired();
+                entity.Property(e => e.StartDate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.EndDate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.SpotsAvailable).HasColumnType("INT").IsRequired();
+                entity.Property(e => e.Price).HasColumnType("INT").IsRequired();
                 entity.Property(e => e.Category).HasColumnType("VARCHAR(100)").IsRequired();
-                entity.Property(e => e.Code).HasColumnType("CHAR(6)").IsUnicode(true).IsRequired(true);
-                entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired(true);
-                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired(true);
-                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired(true);
+                entity.Property(e => e.Code).HasColumnType("CHAR(6)").IsUnicode(true).IsRequired();
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
+                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
 
             });
 
@@ -111,9 +111,9 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.TookFinalExame).HasColumnType("BIT").HasDefaultValueSql("0");
                 entity.Property(e => e.FinalExameGrade).HasColumnType("DECIMAL").HasDefaultValueSql("0");
                 entity.Property(e => e.Approved).HasColumnType("BIT").HasDefaultValueSql("0");
-                entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired(true);
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
 
                 entity.HasOne(e => e.Student)
                     .WithMany(e => e.Grades)
@@ -148,14 +148,14 @@ namespace UniVerseAPI.Infra.Data.Context
 
                 entity.ToTable("People");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.FullName).HasColumnType("VARCHAR(255)").IsRequired(true);
-                entity.Property(e => e.BirthDate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.Cpf).HasColumnType("CHAR(11)").IsUnicode(true).IsRequired(true);
-                entity.Property(e => e.Phone).HasColumnType("CHAR(11)").IsRequired(true);
-                entity.Property(e => e.Gender).HasColumnType("VARCHAR(50)").IsRequired(true);
-                entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired(true);
+                entity.Property(e => e.FullName).HasColumnType("VARCHAR(255)").IsRequired();
+                entity.Property(e => e.BirthDate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.Cpf).HasColumnType("CHAR(11)").IsUnicode(true).IsRequired();
+                entity.Property(e => e.Phone).HasColumnType("CHAR(11)").IsRequired();
+                entity.Property(e => e.Gender).HasColumnType("VARCHAR(50)").IsRequired();
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
 
             });
 
@@ -171,15 +171,15 @@ namespace UniVerseAPI.Infra.Data.Context
 
                 entity.ToTable("User");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Email).HasColumnType("VARCHAR(100)").IsRequired(true);
-                entity.Property(e => e.Password).HasColumnType("VARCHAR(255)").IsRequired(true);
+                entity.Property(e => e.Email).HasColumnType("VARCHAR(100)").IsRequired();
+                entity.Property(e => e.Password).HasColumnType("VARCHAR(255)").IsRequired();
                 entity.Property(e => e.RefreshToken).HasColumnType("CHAR(64)");
                 entity.Property(e => e.RefreshTokenValidity).HasColumnType("DATETIME2");
-                entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired(true);
-                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired(true);
-                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired(true);
-                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired(true);
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
+                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
 
             });
 
@@ -216,7 +216,7 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
                 entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
-                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired(true);
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
 
             });
 
@@ -253,7 +253,7 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.Workload).HasColumnType("DATE").IsRequired();
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
-                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired(true);
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
 
             });
 
@@ -274,7 +274,7 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
                 entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
-                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired(true);
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
 
             });
 
@@ -297,17 +297,19 @@ namespace UniVerseAPI.Infra.Data.Context
           ,[Deleted]
           ,[Active]
           ,[CreationDate]
-          ,[LastUpdate])
+          ,[LastUpdate],
+          [NumberOfUpdates])
     VALUES(
         NEWID(),
-        '650d51f7-f5fc-4eaa-8455-25b4644dec76',
+        'd111d842-cde0-4b76-9420-3b636e8defcc',
         'administrator@gmail.com',
         'AG8ucQ6Y8TIvJLxIgxS2slPljvMIHm8HMOZMgPzxz3gAVLlGbGpKxgDrzgUaDNdiQQ==',
         '0001-01-01 00:00:00.0000000',
         '0',
         '1',
         GETDATE(),
-        GETDATE()
+        GETDATE(),
+        0
     )
 
 

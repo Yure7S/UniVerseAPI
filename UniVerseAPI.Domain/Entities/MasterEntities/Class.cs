@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UniVerseAPI.Infra.Data.Context
 {
-    public partial class Class : DateStamp
+    public partial class Class : BaseEntity
     {
         public Class()
         {

@@ -17,6 +17,8 @@ namespace UniVerseAPI.Infra.Data.Context
         public string Password { get; set; }
         public string RefreshToken { get; set; }
         public DateTime RefreshTokenValidity { get; set; }
+        public bool? Deleted { get; set; }
+        public bool? Active { get; set; }
 
         [InverseProperty("User")]
         public virtual People People { get; set; }
