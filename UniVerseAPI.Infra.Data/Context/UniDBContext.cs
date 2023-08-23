@@ -269,7 +269,7 @@ namespace UniVerseAPI.Infra.Data.Context
 
                 entity.ToTable("Teacher");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Code).HasColumnType("CHAR(10)").IsUnicode(true).IsRequired();
+                entity.Property(e => e.Code).HasColumnType("CHAR(6)").IsUnicode(true).IsRequired();
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();

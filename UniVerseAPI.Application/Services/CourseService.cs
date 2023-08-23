@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using NullGuard;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.ConstrainedExecution;
@@ -119,7 +120,7 @@ namespace UniVerseAPI.Application.Services
                 Course? courseFound = await _course.GetByCodeAsync(code);
                 BaseResponseDTO response = new();
 
-                if (courseFound == null)
+                if (courseFound == null || courseFound.Deleted)
                 {
                     response.Update(message: "*** We couldn't find the course in our database!", success: false);
                 }

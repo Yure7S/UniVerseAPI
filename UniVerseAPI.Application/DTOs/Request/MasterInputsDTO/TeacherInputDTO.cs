@@ -12,10 +12,6 @@ namespace UniVerseAPI.Infra.Data.Context
     public partial class TeacherInputDTO
     {
         [Required]
-        [StringLength(255)]
-        public string Code { get; set; }
-
-        [Required]
         public PeopleInputDTO People { get; set; }
         [Required]
         public AddressInputDTO AddressEntity { get; set; }

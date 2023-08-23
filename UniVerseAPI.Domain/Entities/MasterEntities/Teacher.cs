@@ -14,7 +14,7 @@ namespace UniVerseAPI.Infra.Data.Context
         public Guid Id { get; set; }
         public Guid PeopleId { get; set; }
         public string Code { get; set; }
-        public bool? Deleted { get; set; }
+        public bool Deleted { get; set; }
         public bool? Active { get; set; }
 
         [ForeignKey("PeopleId")]

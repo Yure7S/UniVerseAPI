@@ -323,7 +323,7 @@ namespace UniVerseAPI.Application.Services
                 Subject? subjectFound = await _subject.GetSubjectDetailAsync(grade.SubjectCode);
                 GradesResponseDTO response = new();
 
-                if (studentFound == null)
+                if (studentFound == null || studentFound.Deleted)
                 {
                     response.Message = $"*** We did not find this student in our database.";
                     response.Success = false;

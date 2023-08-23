@@ -103,10 +103,12 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
+                string code = new Random().Next(100000, 999999).ToString();
+
                 AddressEntity newAddress = _mapper.Map<AddressEntity>(teacher.AddressEntity);
                 People newPeople = _mapper.Map<People>(teacher.People);
                 User newUser = _mapper.Map<User>(teacher.User);
-                Teacher newTeacher = new() { Code = teacher.Code };
+                Teacher newTeacher = new() { Code = code };
 
                 Roles? roleFound = await _roles.GetRoleByRoleValue(RolesEnum.Teacher);
 
@@ -119,7 +121,7 @@ namespace UniVerseAPI.Application.Services
                 SaveTeacher(newAddress, newPeople, newTeacher, newUser);
 
                 TeacherResponseDetailsDTO response = new() { 
-                    Code = teacher.Code,
+                    Code = code,
                     Message = "*** Teacher Created successfully!",
                     Success = true
                 };
@@ -184,7 +186,7 @@ namespace UniVerseAPI.Application.Services
                 AddressEntity? addressFound = await _addressEntity.GetByIdAsync(peopleFound!.AddressId);
                 BaseResponseDTO response = new();
 
-                if (teacherFound == null)
+                if (teacherFound == null || teacherFound.Deleted)
                 {
                     response.Update(message: "*** We couldn't find the Teacher in our database!", success: false);
                 }

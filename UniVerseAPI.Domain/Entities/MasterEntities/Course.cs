@@ -26,7 +26,7 @@ namespace UniVerseAPI.Infra.Data.Context
         public int Price { get; set; }
         public CourseCategory Category { get; set; }
         public string Code { get; set; }
-        public bool? Deleted { get; set; }
+        public bool Deleted { get; set; }
         public bool? Active { get; set; }
 
         [InverseProperty("Course")]
