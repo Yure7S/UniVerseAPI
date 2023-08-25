@@ -55,8 +55,8 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.Cep).HasColumnType("CHAR(8)").IsRequired();
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
-                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
-                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
+
             });
 
             modelBuilder.Entity<Class>(entity =>
@@ -74,8 +74,8 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.Room).HasColumnType("VARCHAR(255)").IsRequired();
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
-                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
-                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
+
             });
 
             modelBuilder.Entity<Course>(entity =>
@@ -95,7 +95,8 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
-                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();   
+                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
 
             });
 
@@ -110,6 +111,9 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.TookFinalExame).HasColumnType("BIT").HasDefaultValueSql("0");
                 entity.Property(e => e.FinalExameGrade).HasColumnType("DECIMAL").HasDefaultValueSql("0");
                 entity.Property(e => e.Approved).HasColumnType("BIT").HasDefaultValueSql("0");
+                entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
 
                 entity.HasOne(e => e.Student)
                     .WithMany(e => e.Grades)
@@ -151,8 +155,7 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.Gender).HasColumnType("VARCHAR(50)").IsRequired();
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
-                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
-                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
 
             });
 
@@ -176,6 +179,8 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
                 entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
+
             });
 
             modelBuilder.Entity<Roles>(entity =>
@@ -211,6 +216,8 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
                 entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
+
             });
 
             modelBuilder.Entity<Subject>(entity =>
@@ -246,8 +253,8 @@ namespace UniVerseAPI.Infra.Data.Context
                 entity.Property(e => e.Workload).HasColumnType("DATE").IsRequired();
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
-                entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
-                entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
+
             });
 
             modelBuilder.Entity<Teacher>(entity =>
@@ -262,11 +269,13 @@ namespace UniVerseAPI.Infra.Data.Context
 
                 entity.ToTable("Teacher");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Code).HasColumnType("CHAR(10)").IsUnicode(true).IsRequired();
+                entity.Property(e => e.Code).HasColumnType("CHAR(6)").IsUnicode(true).IsRequired();
                 entity.Property(e => e.CreationDate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.LastUpdate).HasColumnType("DATETIME2").IsRequired();
                 entity.Property(e => e.Deleted).HasColumnType("BIT").HasDefaultValueSql("0").IsRequired();
                 entity.Property(e => e.Active).HasColumnType("BIT").HasDefaultValueSql("1").IsRequired();
+                entity.Property(e => e.NumberOfUpdates).HasColumnType("INT").IsRequired();
+
             });
 
         }
@@ -288,17 +297,19 @@ namespace UniVerseAPI.Infra.Data.Context
           ,[Deleted]
           ,[Active]
           ,[CreationDate]
-          ,[LastUpdate])
+          ,[LastUpdate],
+          [NumberOfUpdates])
     VALUES(
         NEWID(),
-        '650d51f7-f5fc-4eaa-8455-25b4644dec76',
+        'd111d842-cde0-4b76-9420-3b636e8defcc',
         'administrator@gmail.com',
         'AG8ucQ6Y8TIvJLxIgxS2slPljvMIHm8HMOZMgPzxz3gAVLlGbGpKxgDrzgUaDNdiQQ==',
         '0001-01-01 00:00:00.0000000',
         '0',
         '1',
         GETDATE(),
-        GETDATE()
+        GETDATE(),
+        0
     )
 
 

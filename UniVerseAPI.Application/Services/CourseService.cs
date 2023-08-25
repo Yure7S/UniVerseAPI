@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using NullGuard;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.ConstrainedExecution;
@@ -22,20 +23,20 @@ namespace UniVerseAPI.Application.Services
 {
     public class CourseService : ICourseService
     {
-        private readonly ICourse _ICourse;
-        private readonly ISubject _ISubject;
+        private readonly ICourse _course;
+        private readonly ISubject _subject;
         private readonly IMapper _mapper;
 
         public CourseService(ICourse iCourse, IMapper mapper, ISubject subject)
         {
-            _ICourse = iCourse;
-            _ISubject = subject;
+            _course = iCourse;
+            _subject = subject;
             _mapper = mapper;
         }
 
         public List<CourseResponseDTO> GetAll()
         {
-            return _ICourse.GetAllAsync()
+            return _course.GetAllAsync()
                 .Result
                 .ConvertAll(crs => new CourseResponseDTO(crs));
         }
@@ -44,7 +45,7 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
-                Course? courseFound =  await _ICourse.GetByCodeAsync(code);
+                Course? courseFound =  await _course.GetByCodeAsync(code);
 
                 if (courseFound == null)
                 {
@@ -96,7 +97,7 @@ namespace UniVerseAPI.Application.Services
                     Message = "*** Successfully registered course",
                     Success = true
                 };
-                await _ICourse.CreateAsync(newCourse);
+                await _course.CreateAsync(newCourse);
 
                 return response;
             }
@@ -116,17 +117,17 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
-                Course? courseFound = await _ICourse.GetByCodeAsync(code);
+                Course? courseFound = await _course.GetByCodeAsync(code);
                 BaseResponseDTO response = new();
 
-                if (courseFound == null)
+                if (courseFound == null || courseFound.Deleted)
                 {
                     response.Update(message: "*** We couldn't find the course in our database!", success: false);
                 }
                 else
                 {
-                    courseFound!.DeleteAsync();
-                    await _ICourse.UpdateAsync(courseFound);
+                    courseFound!.Deleted = true;
+                    await _course.UpdateAsync(courseFound);
                     response.Update(message: "*** Deleted successfully!", success: true);
                 }
 
@@ -142,11 +143,12 @@ namespace UniVerseAPI.Application.Services
             }
         }
 
+        
         public async Task<BaseResponseDTO> UpdateAsync(CourseInputDTO course, string code)
         {
             try
             {
-                Course? courseFound = await _ICourse.GetByCodeAsync(code);
+                Course? courseFound = await _course.GetByCodeAsync(code);
                 BaseResponseDTO response = new();
 
                 if (courseFound == null)
@@ -155,8 +157,18 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    courseFound = _mapper.Map<Course>(course);
-                    await _ICourse.UpdateAsync(courseFound);
+                    courseFound.StartDate = course.StartDate;
+                    courseFound.EndDate = course.EndDate;
+                    courseFound.Description = course.Description;
+                    courseFound.ShortDescription = course.ShortDescription;
+                    courseFound.Category = course.Category;
+                    courseFound.FullName = course.FullName;
+                    courseFound.LastUpdate = DateTime.Now;
+                    courseFound.Seats = course.Seats;
+                    courseFound.SpotsAvailable = course.SpotsAvailable;
+                    courseFound.NumberOfUpdates++;
+
+                    await _course.UpdateAsync(courseFound);
                     response.Update(message: "*** Course UpdateAsyncd successfully!", success: true);
                 }
                 
@@ -174,7 +186,7 @@ namespace UniVerseAPI.Application.Services
 
         public List<SubjectResponseDTO> AllSubjectsThisCourse(string code)
         {
-            return _ISubject.AllSubjectsThisCourseAsync(code)
+            return _subject.AllSubjectsThisCourseAsync(code)
                 .Result
                 .ConvertAll(subj => new SubjectResponseDTO(subj));
         }

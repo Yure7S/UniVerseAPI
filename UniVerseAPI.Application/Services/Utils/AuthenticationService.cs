@@ -24,15 +24,11 @@ namespace UniVerseAPI.Application.Services.Utils
     public class AuthenticationService : IAuthenticationService
     {
 
-        private readonly IPeople _people;
         private readonly ITokenService _tokenService;
-        private readonly IConfiguration _Configuration;
         private readonly IUser _user;
 
-        public AuthenticationService(IPeople people, IConfiguration configuration, ITokenService tokenService, IUser user)
+        public AuthenticationService(ITokenService tokenService, IUser user)
         {
-            _people = people;
-            _Configuration = configuration;
             _tokenService = tokenService;
             _user = user;
         }

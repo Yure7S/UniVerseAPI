@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GLP4BO9ykPb/ztmNN4seP/gXnqmlEbQcbedDT3QgkZK/8zFwSh3Mb5OhPriWquuXb4y29UYICP0VLet9jMpk+w==",
+  "dgSpecHash": "kdE/b4WNfYJnJL0rQnAIQYp5pA5/xErEfDA7TIN5EsSCdb3RZihwqFX0wOxi8UaoXhjaifxREzs3VIhO5hOupQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Servulo\\source\\repos\\UniVerseAPI\\UniVerseAPI\\UniVerseAPI.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\Servulo\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\enums.net\\4.0.0\\enums.net.4.0.0.nupkg.sha512",
+    "C:\\Users\\Servulo\\.nuget\\packages\\fody\\6.6.4\\fody.6.6.4.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\konscious.security.cryptography.argon2\\1.3.0\\konscious.security.cryptography.argon2.1.3.0.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\konscious.security.cryptography.blake2\\1.1.0\\konscious.security.cryptography.blake2.1.1.0.nupkg.sha512",
@@ -54,6 +55,7 @@
     "C:\\Users\\Servulo\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\npoi\\2.6.0\\npoi.2.6.0.nupkg.sha512",
+    "C:\\Users\\Servulo\\.nuget\\packages\\nullguard.fody\\3.1.1\\nullguard.fody.3.1.1.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\sharpziplib\\1.3.3\\sharpziplib.1.3.3.nupkg.sha512",
     "C:\\Users\\Servulo\\.nuget\\packages\\sixlabors.fonts\\1.0.0-beta18\\sixlabors.fonts.1.0.0-beta18.nupkg.sha512",

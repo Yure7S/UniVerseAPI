@@ -81,6 +81,12 @@
           "build/netstandard1.0/coverlet.collector.targets": {}
         }
       },
+      "Fody/6.6.4": {
+        "type": "package",
+        "build": {
+          "build/Fody.targets": {}
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -1119,6 +1125,25 @@
           "lib/netstandard2.0/NuGet.Frameworks.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "NullGuard.Fody/3.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Fody": "6.6.4"
+        },
+        "compile": {
+          "lib/netstandard2.1/NullGuard.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/NullGuard.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/NullGuard.Fody.props": {}
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -2871,6 +2896,39 @@
         "coverlet.collector.nuspec"
       ]
     },
+    "Fody/6.6.4": {
+      "sha512": "vLZS+oa+ndUHYPlx/8n9bBTT3dHkCF0riml4paKq4D663+cZd47x1uagQo32D/gKFZ/sfmV1oqKaLmH0elxq4A==",
+      "type": "package",
+      "path": "fody/6.6.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "build/Fody.targets",
+        "fody.6.6.4.nupkg.sha512",
+        "fody.nuspec",
+        "netclassictask/Fody.dll",
+        "netclassictask/FodyCommon.dll",
+        "netclassictask/FodyHelpers.dll",
+        "netclassictask/FodyIsolated.dll",
+        "netclassictask/Mono.Cecil.Pdb.dll",
+        "netclassictask/Mono.Cecil.Pdb.pdb",
+        "netclassictask/Mono.Cecil.Rocks.dll",
+        "netclassictask/Mono.Cecil.Rocks.pdb",
+        "netclassictask/Mono.Cecil.dll",
+        "netclassictask/Mono.Cecil.pdb",
+        "netstandardtask/Fody.dll",
+        "netstandardtask/FodyCommon.dll",
+        "netstandardtask/FodyHelpers.dll",
+        "netstandardtask/FodyIsolated.dll",
+        "netstandardtask/Mono.Cecil.Pdb.dll",
+        "netstandardtask/Mono.Cecil.Pdb.pdb",
+        "netstandardtask/Mono.Cecil.Rocks.dll",
+        "netstandardtask/Mono.Cecil.Rocks.pdb",
+        "netstandardtask/Mono.Cecil.dll",
+        "netstandardtask/Mono.Cecil.pdb"
+      ]
+    },
     "Humanizer.Core/2.14.1": {
       "sha512": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "type": "package",
@@ -4208,6 +4266,28 @@
         "lib/netstandard2.0/NuGet.Frameworks.xml",
         "nuget.frameworks.5.11.0.nupkg.sha512",
         "nuget.frameworks.nuspec"
+      ]
+    },
+    "NullGuard.Fody/3.1.1": {
+      "sha512": "v3S5KBsTafu8lTlO1eouW8Ly6JLcEXRBZAbXbNJfb4fpehY+iSE8m1o4wJQodaEafkPlhoOM4/BnoePKGp1c4A==",
+      "type": "package",
+      "path": "nullguard.fody/3.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/NullGuard.Fody.props",
+        "lib/net452/NullGuard.dll",
+        "lib/net452/NullGuard.xml",
+        "lib/netstandard1.4/NullGuard.dll",
+        "lib/netstandard1.4/NullGuard.xml",
+        "lib/netstandard2.0/NullGuard.dll",
+        "lib/netstandard2.0/NullGuard.xml",
+        "lib/netstandard2.1/NullGuard.dll",
+        "lib/netstandard2.1/NullGuard.xml",
+        "nullguard.fody.3.1.1.nupkg.sha512",
+        "nullguard.fody.nuspec",
+        "weaver/NullGuard.Fody.dll",
+        "weaver/NullGuard.Fody.xcf"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -8308,6 +8388,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.5",
       "Microsoft.NET.Test.Sdk >= 17.5.0",
       "Newtonsoft.Json >= 13.0.3",
+      "NullGuard.Fody >= 3.1.1",
       "System.Web.Helpers.Crypto >= 3.2.3",
       "coverlet.collector >= 3.2.0",
       "xunit >= 2.4.2",
@@ -8397,6 +8478,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
+          },
+          "NullGuard.Fody": {
+            "target": "Package",
+            "version": "[3.1.1, )"
           },
           "System.Web.Helpers.Crypto": {
             "target": "Package",

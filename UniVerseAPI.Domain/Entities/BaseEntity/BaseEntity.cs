@@ -10,21 +10,8 @@ namespace UniVerseAPI.Infra.Data.Context
 {
     public partial class BaseEntity
     {
-        public bool? Deleted { get; protected set; }
-        public bool? Active { get; protected set; }
-        public DateTime CreationDate { get; protected set; }
-        public DateTime LastUpdate { get; protected set; }
-
-        public void DeleteAsync()
-        {
-            Deleted = true;
-            LastUpdate = DateTime.Now;
-        }
-
-        public void Activate(bool active)
-        {
-            LastUpdate = DateTime.Now;
-            Active = active;
-        }
+        public int NumberOfUpdates { get; set; }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastUpdate { get; set; }
     }
 }

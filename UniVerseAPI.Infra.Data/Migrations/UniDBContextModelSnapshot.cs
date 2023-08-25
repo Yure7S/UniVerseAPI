@@ -42,12 +42,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("BIT")
-                        .HasDefaultValueSql("1");
-
                     b.Property<string>("AddressValue")
                         .IsRequired()
                         .HasColumnType("VARCHAR(255)");
@@ -60,12 +54,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("DATETIME2");
 
-                    b.Property<bool?>("Deleted")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("BIT")
-                        .HasDefaultValueSql("0");
-
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("DATETIME2");
 
@@ -74,6 +62,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .HasColumnType("VARCHAR(255)");
 
                     b.Property<int>("Number")
+                        .HasColumnType("INT");
+
+                    b.Property<int>("NumberOfUpdates")
                         .HasColumnType("INT");
 
                     b.HasKey("Id");
@@ -86,12 +77,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("BIT")
-                        .HasDefaultValueSql("1");
-
                     b.Property<string>("Code")
                         .IsRequired()
                         .IsUnicode(true)
@@ -100,18 +85,15 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("DATETIME2");
 
-                    b.Property<bool?>("Deleted")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("BIT")
-                        .HasDefaultValueSql("0");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("VARCHAR(255)");
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("DATETIME2");
+
+                    b.Property<int>("NumberOfUpdates")
+                        .HasColumnType("INT");
 
                     b.Property<string>("Room")
                         .IsRequired()
@@ -169,6 +151,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("DATETIME2");
 
+                    b.Property<int>("NumberOfUpdates")
+                        .HasColumnType("INT");
+
                     b.Property<int>("Price")
                         .HasColumnType("INT");
 
@@ -195,19 +180,13 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool?>("Active")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("Approved")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("BIT")
                         .HasDefaultValueSql("0");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("Deleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("DATETIME2");
 
                     b.Property<decimal?>("FinalExameGrade")
                         .ValueGeneratedOnAdd()
@@ -220,7 +199,10 @@ namespace UniVerseAPI.Infra.Data.Migrations
                         .HasDefaultValueSql("0");
 
                     b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME2");
+
+                    b.Property<int>("NumberOfUpdates")
+                        .HasColumnType("INT");
 
                     b.Property<decimal?>("SecondNote")
                         .ValueGeneratedOnAdd()
@@ -252,12 +234,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("BIT")
-                        .HasDefaultValueSql("1");
-
                     b.Property<Guid>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
@@ -273,12 +249,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("DATETIME2");
 
-                    b.Property<bool?>("Deleted")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("BIT")
-                        .HasDefaultValueSql("0");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("VARCHAR(255)");
@@ -289,6 +259,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("DATETIME2");
+
+                    b.Property<int>("NumberOfUpdates")
+                        .HasColumnType("INT");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -351,6 +324,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("DATETIME2");
 
+                    b.Property<int>("NumberOfUpdates")
+                        .HasColumnType("INT");
+
                     b.Property<Guid>("PeopleId")
                         .HasColumnType("uniqueidentifier");
 
@@ -376,12 +352,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool?>("Active")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("BIT")
-                        .HasDefaultValueSql("1");
-
                     b.Property<Guid>("ClassId")
                         .HasColumnType("uniqueidentifier");
 
@@ -397,12 +367,6 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("DATETIME2");
 
-                    b.Property<bool?>("Deleted")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("BIT")
-                        .HasDefaultValueSql("0");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("VARCHAR(255)");
@@ -413,6 +377,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("DATETIME2");
+
+                    b.Property<int>("NumberOfUpdates")
+                        .HasColumnType("INT");
 
                     b.Property<Guid?>("PeriodId")
                         .HasColumnType("uniqueidentifier");
@@ -462,6 +429,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("DATETIME2");
 
+                    b.Property<int>("NumberOfUpdates")
+                        .HasColumnType("INT");
+
                     b.Property<Guid>("PeopleId")
                         .HasColumnType("uniqueidentifier");
 
@@ -498,6 +468,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("DATETIME2");
+
+                    b.Property<int>("NumberOfUpdates")
+                        .HasColumnType("INT");
 
                     b.Property<string>("Password")
                         .IsRequired()

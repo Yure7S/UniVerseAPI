@@ -32,16 +32,16 @@ namespace UniVerseAPI.Application.Services
 {
     public class StudentService : IStudentService 
     {
-        private readonly IStudent _IStudent;
-        private readonly ICourse _ICourse;
-        private readonly IAddressEntity _IAddressEntity;
-        private readonly IPeople _IPeople;
+        private readonly IStudent _student;
+        private readonly ICourse _course;
+        private readonly IAddressEntity _addressEntity;
+        private readonly IPeople _people;
         private readonly IMapper _mapper;
-        private readonly IClass _IClass;
-        private readonly IGrades _IGrades;
-        private readonly IUser _IUser;
-        private readonly ISubject _ISubject;
-        private readonly IRoles _IRoles;
+        private readonly IClass _class;
+        private readonly IGrades _grades;
+        private readonly IUser _user;
+        private readonly ISubject _subject;
+        private readonly IRoles _roles;
 
         public StudentService(
             IStudent iStudent, 
@@ -55,21 +55,21 @@ namespace UniVerseAPI.Application.Services
             IUser user,
             IRoles roles)
         {
-            _IStudent = iStudent;
-            _ICourse = iCourse;
-            _IClass = iClass;
-            _IAddressEntity = iAddressEntity;
-            _IPeople = iPeople;
-            _IGrades = grades;
-            _ISubject = subject;
-            _IUser = user;
+            _student = iStudent;
+            _course = iCourse;
+            _class = iClass;
+            _addressEntity = iAddressEntity;
+            _people = iPeople;
+            _grades = grades;
+            _subject = subject;
+            _user = user;
             _mapper = mapper;
-            _IRoles = roles;
+            _roles = roles;
         }
 
         public List<StudentResponseDTO> GetAll()
         {
-            return _IStudent.GetAllStudentAsync()
+            return _student.GetAllStudentAsync()
                 .Result
                 .ConvertAll(std => new StudentResponseDTO(std));
         }
@@ -78,7 +78,7 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
-                Student? studentFound =  await _IStudent.GetStudentDetailAsync(registration);
+                Student? studentFound =  await _student.GetStudentDetailAsync(registration);
                 StudentResponseDetailsDTO response = new();
 
                 if (studentFound == null)
@@ -114,18 +114,18 @@ namespace UniVerseAPI.Application.Services
 
         public void SaveStudent(AddressEntity newAddress, People newPeople, Student newStudent, User user)
         {
-            _IAddressEntity.CreateAsync(newAddress);
-            _IPeople.CreateAsync(newPeople);
-            _IStudent.CreateAsync(newStudent);
-            _IUser.CreateAsync(user);
+            _addressEntity.CreateAsync(newAddress);
+            _people.CreateAsync(newPeople);
+            _student.CreateAsync(newStudent);
+            _user.CreateAsync(user);
         } 
 
         public async Task<StudentResponseDetailsDTO> CreateAsync(StudentInputDTO student)
         {
             try
             {
-                Student? studentFoundEmail = await _IStudent.GetStudentByEmailAsync(student.User.Email!);
-                Course? courseFound = await _ICourse.GetByCodeAsync(student.CourseCode);
+                Student? studentFoundEmail = await _student.GetStudentByEmailAsync(student.User.Email!);
+                Course? courseFound = await _course.GetByCodeAsync(student.CourseCode);
                 StudentResponseDetailsDTO response = new();
 
                 if (courseFound == null)
@@ -142,7 +142,7 @@ namespace UniVerseAPI.Application.Services
                 {
                     string code = DateTime.Now.Year + courseFound!.FullName[..3].ToUpper() + new Random().Next(100, 999);
 
-                    Roles? roleFound = await _IRoles.GetRoleByRoleValue(RolesEnum.Student);
+                    Roles? roleFound = await _roles.GetRoleByRoleValue(RolesEnum.Student);
 
                     AddressEntity newAddress = _mapper.Map<AddressEntity>(student.Address);
                     People newPeople = _mapper.Map<People>(student.People);
@@ -185,7 +185,7 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
-                Student? studentFound = await _IStudent.GetStudentDetailAsync(registration);
+                Student? studentFound = await _student.GetStudentDetailAsync(registration);
                 BaseResponseDTO response = new();
 
                 if (studentFound == null)
@@ -194,8 +194,8 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    studentFound.DeleteAsync();
-                    await _IStudent.UpdateAsync(studentFound);
+                    studentFound.Deleted = true;
+                    await _student.UpdateAsync(studentFound);
                     response.Update("*** Deleted successfully!", true);
                 }
 
@@ -213,15 +213,15 @@ namespace UniVerseAPI.Application.Services
 
         public async Task UpdateStudent(People people, AddressEntity addressEntity)
         {
-            await _IAddressEntity.UpdateAsync(addressEntity);
-            await _IPeople.UpdateAsync(people);
+            await _addressEntity.UpdateAsync(addressEntity);
+            await _people.UpdateAsync(people);
         }
 
         public async Task<BaseResponseDTO> UpdateAsync(StudentUpdateDTO student, string registration)
         {
             try
             {
-                Student studentFound = await _IStudent.GetStudentDetailAsync(registration);
+                Student studentFound = await _student.GetStudentDetailAsync(registration);
 
                 BaseResponseDTO response = new();
 
@@ -231,8 +231,8 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    People? peopleFound = await _IPeople.GetByIdAsync(studentFound.PeopleId);
-                    AddressEntity? addressFound = await _IAddressEntity.GetByIdAsync(studentFound.People.AddressId);
+                    People? peopleFound = await _people.GetByIdAsync(studentFound.PeopleId);
+                    AddressEntity? addressFound = await _addressEntity.GetByIdAsync(studentFound.People.AddressId);
 
                     peopleFound = _mapper.Map<People>(student.People);
                     addressFound = _mapper.Map<AddressEntity>(student.Address);
@@ -261,8 +261,8 @@ namespace UniVerseAPI.Application.Services
             {
                 BaseResponseDTO response = new();
 
-                Student studentFound = await _IStudent.GetStudentDetailAsync(registrationStudent);
-                Class? classFound = await _IClass.GetByCodeAsync(codeClass);
+                Student studentFound = await _student.GetStudentDetailAsync(registrationStudent);
+                Class? classFound = await _class.GetByCodeAsync(codeClass);
 
                 if (studentFound == null || classFound == null)
                     response.Update(message: "*** We couldn't find the information you entered in our database!", success: false);
@@ -270,7 +270,7 @@ namespace UniVerseAPI.Application.Services
                 {
 
                     classFound.Students.Add(studentFound);
-                    await _IClass.UpdateAsync(classFound);
+                    await _class.UpdateAsync(classFound);
 
                     response.Update(message: $"*** The student has been entered into the class that contains the code: {codeClass}", success: true);
                 }
@@ -293,7 +293,7 @@ namespace UniVerseAPI.Application.Services
             try
             {
                 
-                Student studentFound = await _IStudent.GetStudentDetailAsync(registration);
+                Student studentFound = await _student.GetStudentDetailAsync(registration);
                 //return _IGroupStudentClass.GetAllByStudentId(studentFound.Id)
                 //    .Result
                 //    .ConvertAll(std => new SubjectResponseDTO(std));
@@ -319,11 +319,11 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
-                Student? studentFound = await _IStudent.GetStudentDetailAsync(grade.StudentRegistration);
-                Subject? subjectFound = await _ISubject.GetSubjectDetailAsync(grade.SubjectCode);
+                Student? studentFound = await _student.GetStudentDetailAsync(grade.StudentRegistration);
+                Subject? subjectFound = await _subject.GetSubjectDetailAsync(grade.SubjectCode);
                 GradesResponseDTO response = new();
 
-                if (studentFound == null)
+                if (studentFound == null || studentFound.Deleted)
                 {
                     response.Message = $"*** We did not find this student in our database.";
                     response.Success = false;
@@ -334,7 +334,7 @@ namespace UniVerseAPI.Application.Services
                     newGrade.SubjectId = subjectFound.Id;
                     newGrade.StudentId = studentFound.Id;
 
-                    await _IGrades.CreateAsync(newGrade);
+                    await _grades.CreateAsync(newGrade);
                     response = _mapper.Map<GradesResponseDTO>(grade);
 
                     response.Message = "*** Note registered successfully";
@@ -359,7 +359,7 @@ namespace UniVerseAPI.Application.Services
         {
             try
             {
-                Student? studentFound = await _IStudent.GetStudentDetailAsync(registration);
+                Student? studentFound = await _student.GetStudentDetailAsync(registration);
                 GradesResponseListsDTO response = new();
 
                 if (studentFound == null)
@@ -369,7 +369,7 @@ namespace UniVerseAPI.Application.Services
                 }
                 else
                 {
-                    response.Grade = _IGrades.AllGradesForThisStudent(studentFound.Registration)
+                    response.Grade = _grades.AllGradesForThisStudent(studentFound.Registration)
                         .Result
                         .ConvertAll(grades => new GradesResponseDTO(grades));
                 }

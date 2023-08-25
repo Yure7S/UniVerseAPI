@@ -20,16 +20,16 @@ namespace UniVerseAPI.Application.Services.Utils
     public class TokenService : ITokenService
     {
 
-        public readonly IConfiguration _IConfiguration;
+        public readonly IConfiguration _configuration;
 
         public TokenService(IConfiguration configuration)
         {
-            _IConfiguration = configuration;
+            _configuration = configuration;
         }
         public string GenerateToken(UserTokenDTO user)
         {
             JwtSecurityTokenHandler tokenHandler = new();
-            byte[] key = Encoding.ASCII.GetBytes(_IConfiguration["JwtProperties:key"]!);
+            byte[] key = Encoding.ASCII.GetBytes(_configuration["JwtProperties:key"]!);
             SecurityTokenDescriptor tockenDrecriptor = new()
             {
                 Subject = new ClaimsIdentity(new Claim[]
@@ -37,7 +37,7 @@ namespace UniVerseAPI.Application.Services.Utils
                     new Claim(ClaimTypes.Name, user.Username),
                     new Claim(ClaimTypes.Role, user.Role)
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(Convert.ToInt16(_IConfiguration["JwtProperties:AccessTokenValidity"]!)),
+                Expires = DateTime.UtcNow.AddMinutes(Convert.ToInt16(_configuration["JwtProperties:AccessTokenValidity"]!)),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tockenDrecriptor); 
@@ -59,7 +59,7 @@ namespace UniVerseAPI.Application.Services.Utils
                 ValidateIssuer = false,
                 ValidateAudience = false, 
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_IConfiguration["JwtProperties:key"]!)),
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["JwtProperties:key"]!)),
             };
 
             JwtSecurityTokenHandler tokenHandler = new();

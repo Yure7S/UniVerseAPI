@@ -14,7 +14,6 @@ namespace UniVerseAPI.Application.IServices
         public List<TeacherResponseDTO> GetAll();
         public Task<TeacherResponseDetailsDTO> CreateAsync(TeacherInputDTO teacher);
         public Task<TeacherResponseDetailsDTO> GetTeacherDetailAsync(string code);
-        public Task<BaseResponseDTO> EnableOrDisableAsync(string code, bool status);
         public Task<BaseResponseDTO> UpdateAsync(TeacherInputDTO teacher, string code);
         public Task<BaseResponseDTO> DeleteAsync(string code);
 

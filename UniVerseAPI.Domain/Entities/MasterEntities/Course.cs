@@ -13,6 +13,8 @@ namespace UniVerseAPI.Infra.Data.Context
 {
     public partial class Course : BaseEntity
     {
+        private string _fullName;
+
         public Guid Id { get; private set; }
         public string FullName { get; set; }
         public string ShortDescription { get; set; }
@@ -24,6 +26,8 @@ namespace UniVerseAPI.Infra.Data.Context
         public int Price { get; set; }
         public CourseCategory Category { get; set; }
         public string Code { get; set; }
+        public bool Deleted { get; set; }
+        public bool? Active { get; set; }
 
         [InverseProperty("Course")]
         public virtual ICollection<Student> Student { get; set; }

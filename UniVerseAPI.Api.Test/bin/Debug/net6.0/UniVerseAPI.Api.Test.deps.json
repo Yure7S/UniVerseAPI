@@ -17,6 +17,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "7.0.5",
           "Microsoft.NET.Test.Sdk": "17.5.0",
           "Newtonsoft.Json": "13.0.3",
+          "NullGuard.Fody": "3.1.1",
           "System.Web.Helpers.Crypto": "3.2.3",
           "coverlet.collector": "3.2.0",
           "xunit": "2.4.2",
@@ -84,6 +85,7 @@
         }
       },
       "coverlet.collector/3.2.0": {},
+      "Fody/6.6.4": {},
       "Humanizer.Core/2.14.1": {
         "runtime": {
           "lib/net6.0/Humanizer.dll": {
@@ -843,6 +845,11 @@
             "assemblyVersion": "5.11.0.10",
             "fileVersion": "5.11.0.10"
           }
+        }
+      },
+      "NullGuard.Fody/3.1.1": {
+        "dependencies": {
+          "Fody": "6.6.4"
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
@@ -1714,6 +1721,13 @@
       "path": "coverlet.collector/3.2.0",
       "hashPath": "coverlet.collector.3.2.0.nupkg.sha512"
     },
+    "Fody/6.6.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vLZS+oa+ndUHYPlx/8n9bBTT3dHkCF0riml4paKq4D663+cZd47x1uagQo32D/gKFZ/sfmV1oqKaLmH0elxq4A==",
+      "path": "fody/6.6.4",
+      "hashPath": "fody.6.6.4.nupkg.sha512"
+    },
     "Humanizer.Core/2.14.1": {
       "type": "package",
       "serviceable": true,
@@ -2042,6 +2056,13 @@
       "sha512": "sha512-eaiXkUjC4NPcquGWzAGMXjuxvLwc6XGKMptSyOGQeT0X70BUZObuybJFZLA0OfTdueLd3US23NBPTBb6iF3V1Q==",
       "path": "nuget.frameworks/5.11.0",
       "hashPath": "nuget.frameworks.5.11.0.nupkg.sha512"
+    },
+    "NullGuard.Fody/3.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-v3S5KBsTafu8lTlO1eouW8Ly6JLcEXRBZAbXbNJfb4fpehY+iSE8m1o4wJQodaEafkPlhoOM4/BnoePKGp1c4A==",
+      "path": "nullguard.fody/3.1.1",
+      "hashPath": "nullguard.fody.3.1.1.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",

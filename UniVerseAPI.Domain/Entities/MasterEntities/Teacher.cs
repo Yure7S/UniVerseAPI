@@ -12,10 +12,10 @@ namespace UniVerseAPI.Infra.Data.Context
     public partial class Teacher : BaseEntity
     {
         public Guid Id { get; set; }
-
         public Guid PeopleId { get; set; }
-
         public string Code { get; set; }
+        public bool Deleted { get; set; }
+        public bool? Active { get; set; }
 
         [ForeignKey("PeopleId")]
         [InverseProperty("Teacher")]

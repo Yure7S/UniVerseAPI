@@ -20,8 +20,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     Number = table.Column<int>(type: "INT", nullable: false),
                     Neighborhood = table.Column<string>(type: "VARCHAR(255)", nullable: false),
                     Cep = table.Column<string>(type: "CHAR(8)", fixedLength: true, nullable: false),
-                    Deleted = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "0"),
-                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1"),
+                    NumberOfUpdates = table.Column<int>(type: "INT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
                     LastUpdate = table.Column<DateTime>(type: "DATETIME2", nullable: false)
                 },
@@ -39,8 +38,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     Code = table.Column<string>(type: "CHAR(5)", nullable: false),
                     Shift = table.Column<string>(type: "VARCHAR(50)", nullable: false),
                     Room = table.Column<string>(type: "VARCHAR(255)", nullable: false),
-                    Deleted = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "0"),
-                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1"),
+                    NumberOfUpdates = table.Column<int>(type: "INT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
                     LastUpdate = table.Column<DateTime>(type: "DATETIME2", nullable: false)
                 },
@@ -63,11 +61,12 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     SpotsAvailable = table.Column<int>(type: "INT", nullable: false),
                     Price = table.Column<int>(type: "INT", nullable: false),
                     Category = table.Column<string>(type: "VARCHAR(100)", nullable: false),
-                    Code = table.Column<string>(type: "CHAR(10)", nullable: false),
-                    Deleted = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "0"),
-                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1"),
+                    Code = table.Column<string>(type: "CHAR(6)", nullable: false),
+                    NumberOfUpdates = table.Column<int>(type: "INT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
-                    LastUpdate = table.Column<DateTime>(type: "DATETIME2", nullable: false)
+                    LastUpdate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
+                    Deleted = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "0"),
+                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1")
                 },
                 constraints: table =>
                 {
@@ -97,10 +96,11 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     Password = table.Column<string>(type: "VARCHAR(255)", nullable: false),
                     RefreshToken = table.Column<string>(type: "CHAR(64)", nullable: true),
                     RefreshTokenValidity = table.Column<DateTime>(type: "DATETIME2", nullable: false),
-                    Deleted = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "0"),
-                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1"),
+                    NumberOfUpdates = table.Column<int>(type: "INT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
-                    LastUpdate = table.Column<DateTime>(type: "DATETIME2", nullable: false)
+                    LastUpdate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
+                    Deleted = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "0"),
+                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1")
                 },
                 constraints: table =>
                 {
@@ -124,8 +124,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     Cpf = table.Column<string>(type: "CHAR(11)", fixedLength: true, nullable: false),
                     Gender = table.Column<string>(type: "VARCHAR(50)", nullable: false),
                     Phone = table.Column<string>(type: "CHAR(11)", nullable: false),
-                    Deleted = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "0"),
-                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1"),
+                    NumberOfUpdates = table.Column<int>(type: "INT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
                     LastUpdate = table.Column<DateTime>(type: "DATETIME2", nullable: false)
                 },
@@ -153,10 +152,11 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     PeopleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Registration = table.Column<string>(type: "CHAR(10)", nullable: false),
-                    Deleted = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "0"),
-                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1"),
+                    NumberOfUpdates = table.Column<int>(type: "INT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
-                    LastUpdate = table.Column<DateTime>(type: "DATETIME2", nullable: false)
+                    LastUpdate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
+                    Deleted = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "0"),
+                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1")
                 },
                 constraints: table =>
                 {
@@ -180,10 +180,11 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PeopleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Code = table.Column<string>(type: "CHAR(10)", nullable: false),
-                    Deleted = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "0"),
-                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1"),
+                    NumberOfUpdates = table.Column<int>(type: "INT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
-                    LastUpdate = table.Column<DateTime>(type: "DATETIME2", nullable: false)
+                    LastUpdate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
+                    Deleted = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "0"),
+                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1")
                 },
                 constraints: table =>
                 {
@@ -232,8 +233,7 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     Description = table.Column<string>(type: "VARCHAR(255)", nullable: false),
                     Code = table.Column<string>(type: "CHAR(10)", fixedLength: true, nullable: false),
                     Workload = table.Column<DateTime>(type: "DATE", nullable: false),
-                    Deleted = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "0"),
-                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1"),
+                    NumberOfUpdates = table.Column<int>(type: "INT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
                     LastUpdate = table.Column<DateTime>(type: "DATETIME2", nullable: false)
                 },
@@ -269,10 +269,9 @@ namespace UniVerseAPI.Infra.Data.Migrations
                     TookFinalExame = table.Column<bool>(type: "BIT", nullable: true, defaultValueSql: "0"),
                     FinalExameGrade = table.Column<decimal>(type: "DECIMAL(18,0)", nullable: true, defaultValueSql: "0"),
                     Approved = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "0"),
-                    Deleted = table.Column<bool>(type: "bit", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    NumberOfUpdates = table.Column<int>(type: "INT", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "DATETIME2", nullable: false),
+                    LastUpdate = table.Column<DateTime>(type: "DATETIME2", nullable: false)
                 },
                 constraints: table =>
                 {
